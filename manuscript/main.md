@@ -236,6 +236,8 @@ We assessed whether semantic networks exhibit scale-free topology using the rigo
 
 **Interpretation**: Semantic networks exhibit **"broad-scale"** rather than strict **"scale-free"** topology. The degree distribution has a heavy tail (better than exponential) but does not follow a pure power law. **Lognormal distributions fit significantly better** (mean R = -168.7).
 
+**Figure 8** displays comprehensive scale-free diagnostics: (A) log-log degree distributions, (B) complementary CDFs with theoretical fits, and (C) likelihood ratio comparisons, confirming lognormal superiority over power-law.
+
 **Why does this matter?** 
 - Early work (Steyvers & Tenenbaum, 2005 [1]) suggested scale-free semantic networks
 - Recent re-analyses (Voorspoels et al., 2015 [21]) found similar deviations from strict power-laws
@@ -296,6 +298,8 @@ We assessed whether semantic networks exhibit scale-free topology using the rigo
 | Alpha parameter (0.1-1.0) | -0.166 | 10.2% | ROBUST |
 
 **Overall CV = 11.5%** across all parameters. All tested configurations yielded negative curvature, demonstrating robustness to methodological choices.
+
+**Figure 7** shows sensitivity heatmaps across all parameter × language combinations, confirming consistent negative curvature regardless of methodological decisions.
 
 ### 3.5 Curvature Distribution
 
