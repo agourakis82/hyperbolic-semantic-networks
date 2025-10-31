@@ -3,8 +3,8 @@
 
 **Manuscrito - Paper 1**  
 **Target Journal**: *Network Science* (Cambridge) - IF: 2.8  
-**Status**: Draft v1.0  
-**Date**: 2025-10-27
+**Status**: Draft v1.5 (Major Revisions)  
+**Date**: 2025-10-31
 
 ---
 
@@ -473,7 +473,8 @@ We provide cross-linguistic evidence that **semantic networks consistently exhib
 ---
 
 *Manuscript prepared for submission to Network Science*  
-*Word count: ~3,500 (main text)*  
-*Figures: 7 panels*  
-*Tables: 2*
+*Word count: 3,227 words (main text)*  
+*Tables: 3 (Language comparison, Degree distribution, Null models)*  
+*Figures: 6 panels (A-F)*  
+*Version: v1.5 (Major Revisions - 6/8 issues resolved)*
 
