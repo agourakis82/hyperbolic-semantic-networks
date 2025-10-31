@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using the metadata from this file."
+type: dataset
+title: "Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence"
+version: 1.0.0
+date-released: 2025-10-30
+authors:
+  - family-names: "Agourakis"
+    given-names: "Demetrios"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    affiliation: "[To be added]"
+keywords:
+  - semantic networks
+  - hyperbolic geometry
+  - Ricci curvature
+  - cross-linguistic
+  - scale-free networks
+  - word associations
+  - network science
+  - computational linguistics
+license: CC-BY-4.0
+repository-code: "https://github.com/YOUR_USERNAME/pcs-v6.4-hyperbolic-geometry"
+abstract: |
+  Semantic networks, representing word associations, exhibit complex topological
+  properties. This study provides cross-linguistic evidence that semantic networks
+  universally exhibit hyperbolic geometry (negative Ricci curvature), independent
+  of language family. Analysis of word association data from four languages
+  (Spanish, Dutch, Chinese, English) shows consistent negative mean curvature
+  (κ = -0.166 ± 0.042), with all networks exhibiting scale-free topology.
+  This geometric signature may reflect fundamental organizational principles of
+  human semantic memory, supporting hierarchical and exponentially branching
+  conceptual structures.
+preferred-citation:
+  type: article
+  title: "Universal Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence"
+  authors:
+    - family-names: "Agourakis"
+      given-names: "Demetrios"
+      orcid: "https://orcid.org/0000-0000-0000-0000"
+  journal: "Network Science"
+  year: 2025
+  publisher: "Cambridge University Press"
+  doi: "10.XXXX/XXXXX"
+
