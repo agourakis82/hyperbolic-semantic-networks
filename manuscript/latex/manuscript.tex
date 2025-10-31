@@ -1,0 +1,94 @@
+% Network Science LaTeX Template
+% Manuscript: Consistent Evidence for Hyperbolic Geometry in Semantic Networks
+
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Metadata
+\title{Consistent Evidence for Hyperbolic Geometry in Semantic Networks Across Four Languages}
+\author{Demetrios Chiuratto Agourakis\\
+  \small Pontifical Catholic University of São Paulo (PUC-SP)\\
+  \small Faculdade São Leopoldo Mandic\\
+  \small \texttt{demetrios@agourakis.med.br}\\
+  \small ORCID: 0000-0002-8596-5097
+}
+\date{October 2025}
+
+\begin{document}
+
+\maketitle
+
+% Abstract
+\begin{abstract}
+\textbf{Background}: Semantic networks, representing word associations, exhibit complex topological properties. Recent theoretical work suggests that many real-world networks possess hyperbolic geometry, characterized by negative curvature.
+
+\textbf{Methods}: We computed Ollivier-Ricci curvature on word association networks from four languages (Spanish, Dutch, Chinese, English; N=500 nodes each) using the Small World of Words (SWOW) dataset. We compared real networks against null models (Erdős-Rényi, Barabási-Albert, Watts-Strogatz, Lattice) and assessed degree distributions using the Clauset et al. (2009) protocol.
+
+\textbf{Results}: All four languages exhibited robust hyperbolic geometry (mean $\kappa = -0.166 \pm 0.042$). Null model analysis revealed real networks significantly differ from all baseline models ($p < 0.0001$, Cohen's $d > 10$). Parameter sensitivity analysis demonstrated high robustness (CV = 11.5\%). Rigorous power-law analysis revealed broad-scale ($\alpha = 1.90 \pm 0.03$) rather than strict scale-free topology, with lognormal distributions fitting better.
+
+\textbf{Conclusion}: Semantic networks consistently exhibit hyperbolic geometry across four tested languages, spanning three language families. This geometric signature may reflect fundamental organizational principles of human semantic memory. Further cross-linguistic replication is needed to assess generalizability.
+
+\noindent\textbf{Keywords}: semantic networks, hyperbolic geometry, Ricci curvature, cross-linguistic, broad-scale networks, null models
+\end{abstract}
+
+% Main Sections
+\section{Introduction}
+
+\subsection{Background}
+
+Semantic memory—the structured knowledge of concepts and their relationships—is fundamental to human cognition. Network science provides powerful tools to characterize the organization of semantic memory, treating words as nodes and associations as edges \citep{steyvers2005, dedeyne2019, siew2019}.
+
+Recent advances in geometric network theory suggest that many complex networks, including social, biological, and information networks, possess intrinsic hyperbolic geometry \citep{krioukov2010, boguna2021, muscoloni2018}. Hyperbolic spaces naturally accommodate hierarchical structures and exponential growth—properties prevalent in semantic networks \citep{barabasi1999}.
+
+\subsection{Hyperbolic Geometry and Semantic Networks}
+
+Hyperbolic geometry, characterized by \textbf{negative curvature} ($\kappa < 0$), naturally accommodates hierarchical and exponentially branching structures. Key properties include:
+\begin{itemize}
+\item Space grows exponentially with distance
+\item Hierarchical trees embed with low distortion
+\item Triangle angle sums $< 180°$
+\end{itemize}
+
+These properties align with semantic organization: concepts form taxonomies (e.g., ``animal'' $\rightarrow$ ``mammal'' $\rightarrow$ ``dog'') with exponential branching at each level \citep{barabasi1999, watts1998}.
+
+% ... [Continue with all sections] ...
+
+% NOTE: Full conversion from markdown to LaTeX
+% This is a TEMPLATE/STRUCTURE
+% Complete conversion requires manual formatting of:
+% - All sections
+% - All tables (tabular environment)
+% - All figures (includegraphics)
+% - All math formulas
+% - Bibliography (BibTeX)
+
+\section{Methods}
+% TODO: Convert from main.md
+
+\section{Results}
+% TODO: Convert from main.md
+
+\section{Discussion}
+% TODO: Convert from main.md
+
+\section{Conclusion}
+% TODO: Convert from main.md
+
+% Bibliography
+\bibliographystyle{apalike}
+\bibliography{references}
+
+% Note: Create references.bib with all 25 references
+
+\end{document}
+
