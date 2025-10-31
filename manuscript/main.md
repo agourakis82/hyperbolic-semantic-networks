@@ -470,10 +470,15 @@ We provide cross-linguistic evidence that **semantic networks consistently exhib
 
 ---
 
-**Author Contributions**: [TBD]  
-**Funding**: [TBD]  
-**Data Availability**: SWOW data available at smallworldofwords.org. Analysis code: [GitHub link]  
-**Conflict of Interest**: None declared
+**Author Contributions**: D.C.A. conceived and designed the study, performed all analyses, generated figures, interpreted results, and wrote the manuscript.
+
+**Funding**: This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
+
+**Data Availability**: SWOW data publicly available at smallworldofwords.org (De Deyne et al., 2019). Network edge lists, computed curvatures, and complete analysis code available at https://github.com/agourakis82/hyperbolic-semantic-networks (DOI: 10.5281/zenodo.17489685).
+
+**Conflict of Interest**: The author declares no competing interests.
+
+**Acknowledgments**: The author acknowledges the use of AI language assistance (Claude Sonnet 4.5, Anthropic) for manuscript preparation, including text structuring and clarity refinement. All scientific content—study design, data analysis, statistical testing, interpretation, and conclusions—represents original work by the author.
 
 ---
 
