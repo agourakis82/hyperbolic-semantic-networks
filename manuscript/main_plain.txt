@@ -1,0 +1,56 @@
+Semantic memory—the structured knowledge of concepts and their relationships—is fundamental to human cognition. Network science provides powerful tools to characterize the organization of semantic memory, treating words as nodes and associations as edges [1-3].
+Recent advances in geometric network theory suggest that many complex networks, including social, biological, and information networks, possess intrinsic hyperbolic geometry [4-6]. Hyperbolic spaces naturally accommodate hierarchical structures and exponential growth—properties prevalent in semantic networks [7].
+Hyperbolic geometry, characterized by **negative curvature** (κ < 0), naturally accommodates hierarchical and exponentially branching structures. Key properties include:
+These properties align with semantic organization: concepts form taxonomies ("animal" → "mammal" → "dog") with exponential branching at each level [7,8].
+We use **Ollivier-Ricci curvature** [9], a discrete curvature measure for networks based on optimal transport between neighborhoods. For an edge, κ < 0 indicates hyperbolic geometry, κ = 0 Euclidean, κ > 0 spherical. This approach has successfully characterized geometry in biological, social, and technological networks [10-12].
+1. Do semantic networks exhibit hyperbolic geometry?
+2. Is this property **consistent** across diverse languages?
+3. How does semantic network geometry relate to degree distribution topology?
+4. Is the effect robust to network size and sampling variations?
+```
+cue → response (strength)
+dog → cat (0.35)
+dog → animal (0.28)
+...
+```
+For each language:
+1. **Nodes**: Top 500 most frequent cue words
+2. **Edges**: Directed edges from cue → response
+3. **Weights**: Association strength (0-1)
+1. Maximum likelihood estimation of power-law exponent α
+2. Estimation of xmin (lower bound of power-law regime)
+3. Kolmogorov-Smirnov goodness-of-fit test (p-value)
+4. Likelihood ratio tests: power-law vs. lognormal, vs. exponential
+3. Competitive with lognormal (p > 0.05)
+1. **Erdős-Rényi (ER)**: Random graph (p = 0.006)
+2. **Barabási-Albert (BA)**: Preferential attachment (m = 2)
+3. **Watts-Strogatz (WS)**: Small-world (k = 4, p = 0.1)
+4. **Lattice**: Regular 2D grid
+All matched to SWOW network size (N = 500)
+We assessed whether semantic networks exhibit scale-free topology using the rigorous Clauset, Shalizi, Newman (2009) protocol [14], which includes:
+1. Maximum likelihood estimation of power-law exponent (α)
+2. Goodness-of-fit test via Kolmogorov-Smirnov statistic
+3. Likelihood ratio tests comparing power-law vs. alternative distributions
+Our primary finding is robust: **semantic networks consistently exhibit hyperbolic geometry across all four tested languages** (Spanish, Dutch, Chinese, English), spanning three language families. This cross-linguistic consistency suggests that hyperbolic structure is not an artifact of a specific language or culture, but may reflect a fundamental organizational principle of human semantic memory. However, replication with additional languages from diverse families is needed before claiming universality.
+1. **Hierarchical organization**: Concepts naturally organize in taxonomies (e.g., biological classification, object categories). Hyperbolic spaces embed hierarchies efficiently [16].
+2. **Exponential branching**: High-level concepts (e.g., "furniture") connect to exponentially many specifics (e.g., "chair," "table," "desk," "sofa"...). Hyperbolic geometry accommodates exponential growth naturally.
+3. **Greedy routing**: In hyperbolic networks, simple greedy routing (moving toward the target) is highly efficient [17]. This may facilitate rapid semantic retrieval.
+This finding:
+1. **Corrects prior assumptions** (Steyvers & Tenenbaum, 2005 [1])
+2. **Aligns with recent re-analyses** (Voorspoels et al., 2015 [21])
+3. **Does NOT contradict hyperbolic geometry**: Our null model analysis (Section 3.3) shows robust negative curvature independent of degree distribution
+The strongly negative curvature of Erdős-Rényi graphs (κ = -0.349) contradicts classical expectations (κ ≈ 0). Possible explanations:
+1. **Parameter sensitivity**: OR curvature with α=0.5 may bias toward negative in sparse random graphs
+2. **Component structure**: Using largest connected component may select for more clustered subgraphs
+3. **Novel finding**: ER graphs may indeed have slight negative curvature in the OR framework
+The bootstrap CV of 10.1% indicates **high stability** of the hyperbolic effect. The persistence across network sizes (250-750 nodes) suggests the effect is not a sampling artifact.
+We provide cross-linguistic evidence that **semantic networks consistently exhibit hyperbolic geometry across four tested languages**. This finding:
+✅ Replicates across 4 languages (3 language families)  
+✅ Differs significantly from all null models (p < 0.0001)  
+✅ Is robust to parameter variations (CV = 11.5%)  
+✅ Persists independently of degree distribution (broad-scale, not scale-free)
+*Manuscript prepared for submission to Network Science*  
+*Word count: 3,227 words (main text)*  
+*Tables: 3 (Language comparison, Degree distribution, Null models)*  
+*Figures: 6 panels (A-F)*  
+*Version: v1.5 (Major Revisions - 6/8 issues resolved)*
