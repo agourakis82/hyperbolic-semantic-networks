@@ -40,7 +40,7 @@ Hyperbolic geometry is characterized by **negative curvature** (κ < 0), contras
 These properties align with semantic network phenomenology:
 - **Hierarchical organization**: Concepts organize in taxonomies (e.g., "animal" → "mammal" → "dog")
 - **Exponential branching**: High-level concepts connect to exponentially many specifics
-- **Scale-free distribution**: Few hubs, many peripherals [8]
+- **Heavy-tailed degree distribution**: Few highly connected hubs, many peripheral nodes [8]
 
 ### 1.3 Ollivier-Ricci Curvature
 
@@ -111,14 +111,21 @@ For each language:
 
 **Output**: Curvature value κ ∈ [-1, 1] for each edge
 
-### 2.4 Scale-Free Analysis
+### 2.4 Degree Distribution Analysis
 
 **Tool**: `powerlaw` Python library [14]  
-**Method**: Maximum likelihood estimation of power-law exponent α
+**Method**: Clauset, Shalizi, Newman (2009) protocol
 
-**Criteria for scale-free**:
-1. α ∈ [2, 3] (typical range)
-2. Power-law fits better than exponential (p < 0.05)
+**Analysis steps**:
+1. Maximum likelihood estimation of power-law exponent α
+2. Estimation of xmin (lower bound of power-law regime)
+3. Kolmogorov-Smirnov goodness-of-fit test (p-value)
+4. Likelihood ratio tests: power-law vs. lognormal, vs. exponential
+
+**Interpretation**:
+- α ∈ [2, 3] + p > 0.1: Classical scale-free
+- α < 2 or p < 0.1: Broad-scale (heavy-tailed but not power-law)
+- Lognormal R < 0: Lognormal fits better
 3. Competitive with lognormal (p > 0.05)
 
 ### 2.5 Baseline Comparisons
@@ -280,13 +287,19 @@ Our primary finding is robust: **semantic networks consistently exhibit hyperbol
 
 3. **Greedy routing**: In hyperbolic networks, simple greedy routing (moving toward the target) is highly efficient [17]. This may facilitate rapid semantic retrieval.
 
-### 4.2 Scale-Free → Hyperbolic Link
+### 4.2 Degree Distribution and Hyperbolic Geometry
 
-Our results support the theoretical link between scale-free topology and hyperbolic geometry [18]:
-- 3/4 languages showed power-law degree distributions (α ∈ [2,3])
-- BA model (canonical scale-free) exhibited strong hyperbolic geometry (κ = -0.345)
+**Revised understanding**: Our rigorous analysis (Clauset et al., 2009 protocol) revealed that semantic networks are **broad-scale** rather than strictly **scale-free**:
+- α = 1.90 ± 0.03 (below classical range [2,3])
+- Poor power-law fit (all p < 0.001)
+- Lognormal distributions fit significantly better (mean R = -168.7)
 
-**Mechanism**: Preferential attachment (rich-get-richer) naturally generates hierarchies, which embed in hyperbolic space.
+This finding:
+1. **Corrects prior assumptions** (Steyvers & Tenenbaum, 2005)
+2. **Aligns with recent re-analyses** (Voorspoels et al., 2014)
+3. **Does NOT contradict hyperbolic geometry**: Our null model analysis (Section 3.3) shows robust negative curvature independent of degree distribution
+
+**Key insight**: Hyperbolic geometry does NOT require scale-free topology. The hierarchical and branching structure of semantic networks—not the specific degree distribution—drives hyperbolic embedding.
 
 ### 4.3 Unexpected ER Result
 
@@ -303,9 +316,10 @@ The strongly negative curvature of Erdős-Rényi graphs (κ = -0.349) contradict
 The bootstrap CV of 10.1% indicates **high stability** of the hyperbolic effect. The persistence across network sizes (250-750 nodes) suggests the effect is not a sampling artifact.
 
 **Limitations**:
-- Only tested on word association data (SWOW)
-- Network size limited to ≤ 750 nodes (computational constraints)
-- English scale-free analysis incomplete
+- Only tested on word association data (SWOW); other semantic network types (e.g., WordNet, ConceptNet) not included
+- Limited to 4 languages (3 language families); broader cross-linguistic sampling needed
+- Network size limited to ≤ 1000 nodes (computational constraints for curvature)
+- Degree distribution analysis revealed broad-scale rather than scale-free topology, requiring updated theoretical interpretation
 
 **Future work**:
 - Test on other semantic network types (co-occurrence, semantic similarity)
