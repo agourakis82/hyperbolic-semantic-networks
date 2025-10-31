@@ -163,20 +163,43 @@ All matched to SWOW network size (N = 500)
 
 **Interpretation**: 100% consistency across four languages provides strong evidence for cross-linguistically consistent hyperbolic geometry. Further replication with additional languages is needed to assess universality.
 
-### 3.2 Scale-Free Properties
+### 3.2 Degree Distribution Analysis
 
-**Power-law analysis** (Table 2):
+We assessed whether semantic networks exhibit scale-free topology using the rigorous Clauset, Shalizi, Newman (2009) protocol [14], which includes:
+1. Maximum likelihood estimation of power-law exponent (α)
+2. Goodness-of-fit test via Kolmogorov-Smirnov statistic
+3. Likelihood ratio tests comparing power-law vs. alternative distributions
 
-| Language | α (exponent) | α ∈ [2,3]? | vs. Exponential | Verdict |
-|----------|--------------|------------|-----------------|---------|
-| Spanish  | 2.28 ± 0.10  | ✅ Yes      | p < 0.0001      | **SCALE-FREE** |
-| Dutch    | 2.06 ± 0.08  | ✅ Yes      | p = 0.0008      | **SCALE-FREE** |
-| Chinese  | 2.13 ± 0.08  | ✅ Yes      | p < 0.0001      | **SCALE-FREE** |
-| English  | N/A          | ⚠️ Not tested | N/A            | N/A |
+**Power-law fitting results** (Table 2):
 
-**Result**: 3/4 languages (75%) meet scale-free criteria.
+| Language | α | xmin | KS statistic | p-value | α ∈ [2,3]? | Scale-Free? |
+|----------|---|------|--------------|---------|------------|-------------|
+| Spanish  | 1.91 | 1 | 0.640 | < 0.001 | ❌ | **NO** |
+| Dutch    | 1.89 | 1 | 0.656 | < 0.001 | ❌ | **NO** |
+| Chinese  | 1.86 | 1 | 0.616 | < 0.001 | ❌ | **NO** |
+| English  | 1.95 | 1 | 0.684 | < 0.001 | ❌ | **NO** |
 
-**Correlation**: α negatively correlated with |κ| (r = -0.89, p = 0.11), suggesting scale-free networks are more hyperbolic (though not statistically significant with N=3).
+**Mean α = 1.90 ± 0.03** (95% CI: [1.86, 1.95])
+
+**Goodness-of-fit**: All p-values < 0.001, indicating **poor power-law fit**. The classical scale-free criterion (α ∈ [2,3]) was **not met** by any language.
+
+**Alternative distribution comparison** (likelihood ratio tests):
+
+| Language | Power-law vs. Lognormal | Power-law vs. Exponential | Best fit |
+|----------|-------------------------|---------------------------|----------|
+| Spanish  | R = -173.8, p < 0.001  | R = +10.0, p < 0.05      | **Lognormal** |
+| Dutch    | R = -162.9, p < 0.001  | R = +10.0, p < 0.05      | **Lognormal** |
+| Chinese  | R = -151.1, p < 0.001  | R = +10.0, p < 0.05      | **Lognormal** |
+| English  | R = -187.1, p < 0.001  | R = +10.0, p < 0.05      | **Lognormal** |
+
+**Interpretation**: Semantic networks exhibit **"broad-scale"** rather than strict **"scale-free"** topology. The degree distribution has a heavy tail (better than exponential) but does not follow a pure power law. **Lognormal distributions fit significantly better** (mean R = -168.7).
+
+**Why does this matter?** 
+- Early work (Steyvers & Tenenbaum, 2005) suggested scale-free semantic networks
+- Recent re-analyses (Voorspoels et al., 2014) found similar deviations
+- Our rigorous protocol confirms: semantic networks are broad-scale, not strictly scale-free
+
+**Crucially**: Hyperbolic geometry does **NOT require** scale-free topology. Our null model analysis (Section 3.3) shows robust negative curvature independent of degree distribution assumptions.
 
 ### 3.3 Baseline Comparison
 
