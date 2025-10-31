@@ -18,7 +18,7 @@
 
 **Conclusion**: Semantic networks consistently exhibit hyperbolic geometry across four tested languages (Spanish, Dutch, Chinese, English), spanning three language families. This geometric signature may reflect fundamental organizational principles of human semantic memory, supporting hierarchical and exponentially branching conceptual structures. Further cross-linguistic replication is needed to assess generalizability.
 
-**Keywords**: semantic networks, hyperbolic geometry, Ricci curvature, cross-linguistic, scale-free networks
+**Keywords**: semantic networks, hyperbolic geometry, Ricci curvature, cross-linguistic, broad-scale networks, null models
 
 ---
 
@@ -336,9 +336,9 @@ The bootstrap CV of 10.1% indicates **high stability** of the hyperbolic effect.
 
 ### 4.6 Relation to Prior Work
 
-**Semantic networks**: Prior work established hierarchical [20], scale-free [21], and small-world [22] properties. Our work adds **geometric** characterization.
+**Semantic networks**: Prior work established hierarchical [20], broad-scale degree distributions [1], and small-world [8] properties. Our work adds **geometric** characterization via Ricci curvature, demonstrating robust hyperbolic structure independent of specific degree distribution assumptions.
 
-**Hyperbolic embeddings**: Recent machine learning uses hyperbolic embeddings for NLP [23-25]. Our work provides empirical justification: semantic networks ARE hyperbolic.
+**Hyperbolic embeddings**: Recent machine learning uses hyperbolic embeddings for NLP [23-25]. Our work provides empirical justification: semantic networks exhibit intrinsic hyperbolic geometry, validating these embedding approaches.
 
 **Cognitive maps**: Spatial navigation networks are hyperbolic [26]. Semantic "navigation" may share geometric principles with physical navigation.
 
