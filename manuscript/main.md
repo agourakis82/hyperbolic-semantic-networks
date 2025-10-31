@@ -373,9 +373,9 @@ The bootstrap CV of 10.1% indicates **high stability** of the hyperbolic effect.
 
 **Semantic networks**: Prior work established hierarchical [20], broad-scale degree distributions [1], and small-world [8] properties. Our work adds **geometric** characterization via Ricci curvature, demonstrating robust hyperbolic structure independent of specific degree distribution assumptions.
 
-**Hyperbolic embeddings**: Recent machine learning uses hyperbolic embeddings for NLP [23-25]. Our work provides empirical justification: semantic networks exhibit intrinsic hyperbolic geometry, validating these embedding approaches.
+**Hyperbolic embeddings**: Recent machine learning uses hyperbolic embeddings for NLP [21-23]. Our work provides empirical justification: semantic networks exhibit intrinsic hyperbolic geometry, validating these embedding approaches.
 
-**Cognitive maps**: Spatial navigation networks are hyperbolic [26]. Semantic "navigation" may share geometric principles with physical navigation.
+**Cognitive maps**: Spatial navigation networks are hyperbolic [24]. Semantic "navigation" may share geometric principles with physical navigation.
 
 ---
 
@@ -444,14 +444,13 @@ We provide cross-linguistic evidence that **semantic networks consistently exhib
 
 [20] Collins, A. M., & Quillian, M. R. (1969). Retrieval time from semantic memory. *Journal of Verbal Learning*, 8(2), 240-247.
 
+[21] Nickel, M., & Kiela, D. (2017). Poincaré Embeddings for Learning Hierarchical Representations. *NeurIPS*, 6338-6347.
 
-[23] Nickel, M., & Kiela, D. (2017). Poincaré Embeddings for Learning Hierarchical Representations. *NeurIPS*, 6338-6347.
+[22] Nickel, M., & Kiela, D. (2018). Learning Continuous Hierarchies in the Lorentz Model of Hyperbolic Geometry. *ICML*, 3779-3788.
 
-[24] Nickel, M., & Kiela, D. (2018). Learning Continuous Hierarchies in the Lorentz Model of Hyperbolic Geometry. *ICML*, 3779-3788.
+[23] Sala, F., et al. (2018). Representation Tradeoffs for Hyperbolic Embeddings. *ICML*, 4460-4469.
 
-[25] Sala, F., et al. (2018). Representation Tradeoffs for Hyperbolic Embeddings. *ICML*, 4460-4469.
-
-[26] Bellmund, J. L., et al. (2018). Navigating cognition: Spatial codes for human thinking. *Science*, 362(6415), eaat6766.
+[24] Bellmund, J. L., et al. (2018). Navigating cognition: Spatial codes for human thinking. *Science*, 362(6415), eaat6766.
 
 ---
 
