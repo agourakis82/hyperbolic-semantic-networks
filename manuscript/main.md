@@ -128,7 +128,54 @@ For each language:
 - Lognormal R < 0: Lognormal fits better
 3. Competitive with lognormal (p > 0.05)
 
-### 2.5 Baseline Comparisons
+### 2.5 Computational Details
+
+**Software environment**:
+- Python 3.10.12
+- NetworkX 3.1
+- GraphRicciCurvature 0.5.3 [13]
+- powerlaw 1.5 [14]
+- NumPy 1.24.3, SciPy 1.11.1
+
+**Ollivier-Ricci curvature parameters**:
+- Alpha (α): 0.5 (balanced neighborhood mixing)
+- Iterations: 100 (convergence of Wasserstein distance)
+- Method: Sinkhorn algorithm
+
+**Network construction**:
+- Node selection: Top 500 most frequent cue words per language
+- Edge inclusion: All cue→response associations (R1 responses)
+- Edge weights: Association strength (normalized 0-1)
+- Graph type: Directed, weighted
+
+**Null model generation**:
+- Erdős-Rényi: p = m/n(n-1) where m = observed edges, n = 500
+- Barabási-Albert: m = ⌈edges/nodes⌉ = 2
+- Watts-Strogatz: k = 2m (even), rewiring p = 0.1
+- Lattice: 2D grid (⌊√n⌋ × ⌊√n⌋)
+- Iterations: 100 per model per language
+
+**Statistical tests**:
+- Null model comparison: One-sample t-test (real vs. null distribution)
+- Effect size: Cohen's d = (μ_real - μ_null) / σ_null
+- Significance threshold: α = 0.05
+
+**Random seeds**:
+- Network sampling: seed = 42
+- Null model generation: seed = 123
+- Bootstrap resampling: seed = 456
+
+**Computational resources**:
+- Hardware: Intel Core i7-11700K (8 cores), 32 GB RAM
+- GPU: Not required (CPU-only curvature computation)
+- Runtime: ~2 hours per language (curvature), ~30 min (null models)
+- Storage: ~500 MB per language (intermediate results)
+
+**Data availability**: SWOW data publicly available at smallworldofwords.org (De Deyne et al., 2019). Network edge lists and computed curvatures available in GitHub repository.
+
+**Code availability**: Complete analysis pipeline at github.com/agourakis82/hyperbolic-semantic-networks (DOI: 10.5281/zenodo.17489685)
+
+### 2.6 Baseline Comparisons
 
 **Models**:
 1. **Erdős-Rényi (ER)**: Random graph (p = 0.006)
