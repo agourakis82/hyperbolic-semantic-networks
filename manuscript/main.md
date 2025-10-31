@@ -163,7 +163,31 @@ For each language:
 
 **Code availability**: Complete analysis pipeline at github.com/agourakis82/hyperbolic-semantic-networks (DOI: 10.5281/zenodo.17489685)
 
-### 2.6 Baseline Comparisons
+### 2.6 Methodological Limitations
+
+**Network construction limitations**:
+- **Node selection bias**: Top 500 frequent words may over-represent common concepts, under-represent rare specialized terms
+- **Edge definition**: R1 responses only (first response); does not capture full association strength distribution
+- **Directionality**: Asymmetric associations (A→B ≠ B→A) analyzed as directed network; undirected analysis may yield different results
+
+**Curvature computation limitations**:
+- **α parameter sensitivity**: OR curvature with α=0.5 is one choice; different α values may shift absolute curvature (tested in sensitivity analysis, Section 3.4)
+- **Computational complexity**: O(n³) limits analysis to networks <1000 nodes; larger networks infeasible with current implementation
+- **Approximation**: Sinkhorn algorithm converges within tolerance 1e-6; exact Wasserstein distance computationally prohibitive
+
+**Null model limitations**:
+- **Model choice**: ER, BA, WS, Lattice chosen based on literature; other null models (e.g., configuration model, exponential random graph) not tested
+- **Parameter matching**: Matched n and m, but not higher-order properties (clustering, degree distribution)
+- **Iteration count**: 100 iterations balances computation vs. precision; 1000+ would be more robust but prohibitively slow
+
+**Statistical limitations**:
+- **Sample size**: N=4 languages limits power for cross-linguistic generalizations
+- **Language families**: 3 families represented (Indo-European, Sino-Tibetan), but uneven (2 IE, 1 ST, 1 isolate)
+- **Independence**: Languages not fully independent (cultural exchange, historical contact)
+
+These limitations do not invalidate our findings but contextualize their scope and suggest directions for future work.
+
+### 2.7 Baseline Comparisons
 
 **Models**:
 1. **Erdős-Rényi (ER)**: Random graph (p = 0.006)
@@ -273,7 +297,7 @@ We assessed whether semantic networks exhibit scale-free topology using the rigo
 | Chinese  | -0.189 | -0.998 | -1.000 | -0.688 | -1.000 | <0.0001 |
 | English  | -0.151 | -0.998 | -1.000 | -0.694 | -1.000 | <0.0001 |
 
-**Statistical comparison** (one-sample t-tests): Real semantic networks differ significantly from ALL null models (p < 0.0001, Cohen's d > 10 for all comparisons). This demonstrates that hyperbolic geometry is **not a trivial consequence** of network sparsity or common topological features.
+**Statistical comparison** (one-sample t-tests): Real semantic networks differ significantly from ALL null models (all p < 0.0001 before correction, Cohen's d > 10). After applying False Discovery Rate (FDR) correction for multiple comparisons (Benjamini-Hochberg method, 16 tests), **all comparisons remained significant** (adjusted p < 0.01). This demonstrates that hyperbolic geometry is **not a trivial consequence** of network sparsity or common topological features, even under conservative multiple testing correction.
 
 ### 3.4 Robustness
 
