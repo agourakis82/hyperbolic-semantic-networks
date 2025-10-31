@@ -1,15 +1,30 @@
 {
   "title": "Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence",
   "description": "This repository contains the manuscript, data, code, and supplementary materials for the paper 'Universal Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence'. Analysis of word association networks from four languages (Spanish, Dutch, Chinese, English) demonstrates universal hyperbolic geometry, with implications for understanding human semantic memory organization.",
-  "upload_type": "publication",
-  "publication_type": "article",
+  "resource_type": {
+    "type": "publication",
+    "subtype": "article"
+  },
   "access_right": "open",
   "license": "CC-BY-4.0",
   "creators": [
     {
-      "name": "Agourakis, Demetrios",
-      "affiliation": "[To be added]",
-      "orcid": "0000-0000-0000-0000"
+      "person_or_org": {
+        "type": "personal",
+        "given_name": "Demetrios",
+        "family_name": "Chiuratto Agourakis",
+        "identifiers": [
+          {
+            "scheme": "orcid",
+            "identifier": "0000-0002-8596-5097"
+          }
+        ]
+      },
+      "affiliations": [
+        {
+          "name": "PUC-SP; Faculdade São Leopoldo Mandic"
+        }
+      ]
     }
   ],
   "keywords": [

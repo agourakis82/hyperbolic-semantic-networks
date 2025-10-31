@@ -5,10 +5,11 @@ title: "Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence"
 version: 1.0.0
 date-released: 2025-10-30
 authors:
-  - family-names: "Agourakis"
+  - family-names: "Chiuratto Agourakis"
     given-names: "Demetrios"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-    affiliation: "[To be added]"
+    orcid: "https://orcid.org/0000-0002-8596-5097"
+    affiliation: "PUC-SP; Faculdade São Leopoldo Mandic"
+    email: "demetrios@agourakis.med.br"
 keywords:
   - semantic networks
   - hyperbolic geometry
@@ -34,9 +35,10 @@ preferred-citation:
   type: article
   title: "Universal Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence"
   authors:
-    - family-names: "Agourakis"
+    - family-names: "Chiuratto Agourakis"
       given-names: "Demetrios"
-      orcid: "https://orcid.org/0000-0000-0000-0000"
+      orcid: "https://orcid.org/0000-0002-8596-5097"
+      email: "demetrios@agourakis.med.br"
   journal: "Network Science"
   year: 2025
   publisher: "Cambridge University Press"

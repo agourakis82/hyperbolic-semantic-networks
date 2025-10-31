@@ -13,8 +13,8 @@ This repository contains the manuscript, data, code, and supplementary materials
 
 **"Universal Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence"**
 
-**Authors**: Demetrios Agourakis (ORCID: 0000-0000-0000-0000)  
-**Institution**: [To be added]  
+**Authors**: Demetrios Chiuratto Agourakis (ORCID: 0000-0002-8596-5097)  
+**Institution**: PUC-SP; Faculdade São Leopoldo Mandic  
 **Submitted to**: *Network Science* (Cambridge University Press)  
 **Date**: 2025-10-30
 
@@ -139,9 +139,9 @@ See `LICENSE` for details.
 
 ## Contact
 
-**Demetrios Agourakis**  
-Email: [to be added]  
-ORCID: [0000-0000-0000-0000]
+**Demetrios Chiuratto Agourakis**  
+Email: demetrios@agourakis.med.br  
+ORCID: 0000-0002-8596-5097
 
 ---
 
