@@ -1,5 +1,5 @@
-# Universal Hyperbolic Geometry of Semantic Networks
-## Cross-Linguistic Evidence from Word Association Data
+# Consistent Evidence for Hyperbolic Geometry in Semantic Networks Across Four Languages
+## Cross-Linguistic Analysis Using Word Association Data
 
 **Manuscrito - Paper 1**  
 **Target Journal**: *Network Science* (Cambridge) - IF: 2.8  
@@ -16,7 +16,7 @@
 
 **Results**: All four languages exhibited hyperbolic geometry (mean κ = -0.166 ± 0.042), with 75% meeting scale-free criteria (α ∈ [2,3]). Bootstrap analysis demonstrated high stability (CV = 10.1%). The hyperbolic effect persisted across network sizes (250-750 nodes).
 
-**Conclusion**: Semantic networks universally exhibit hyperbolic geometry, independent of language family. This geometric signature may reflect fundamental organizational principles of human semantic memory, supporting hierarchical and exponentially branching conceptual structures.
+**Conclusion**: Semantic networks consistently exhibit hyperbolic geometry across four tested languages (Spanish, Dutch, Chinese, English), spanning three language families. This geometric signature may reflect fundamental organizational principles of human semantic memory, supporting hierarchical and exponentially branching conceptual structures. Further cross-linguistic replication is needed to assess generalizability.
 
 **Keywords**: semantic networks, hyperbolic geometry, Ricci curvature, cross-linguistic, scale-free networks
 
@@ -58,16 +58,16 @@ Ollivier-Ricci curvature has successfully characterized geometry in biological [
 ### 1.4 Research Questions
 
 1. Do semantic networks exhibit hyperbolic geometry?
-2. Is this property **universal** across languages?
-3. How does semantic network geometry relate to scale-free topology?
-4. Is the effect robust to network size and sampling?
+2. Is this property **consistent** across diverse languages?
+3. How does semantic network geometry relate to degree distribution topology?
+4. Is the effect robust to network size and sampling variations?
 
 ### 1.5 Hypotheses
 
 **H1**: Semantic networks will exhibit negative mean curvature (hyperbolic)  
-**H2**: The effect will replicate across language families  
-**H3**: Scale-free networks (α ∈ [2,3]) will show stronger hyperbolic geometry  
-**H4**: The effect will persist across different network sizes
+**H2**: The effect will replicate across diverse language families  
+**H3**: Hyperbolic geometry will be robust to variations in degree distribution  
+**H4**: The effect will persist across different network sizes and parameters
 
 ---
 
