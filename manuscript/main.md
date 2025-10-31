@@ -260,7 +260,7 @@ We assessed whether semantic networks exhibit scale-free topology using the rigo
 
 **Interpretation**: Semantic networks exhibit **"broad-scale"** rather than strict **"scale-free"** topology. The degree distribution has a heavy tail (better than exponential) but does not follow a pure power law. **Lognormal distributions fit significantly better** (mean R = -168.7).
 
-**Figure 8** displays comprehensive scale-free diagnostics: (A) log-log degree distributions, (B) complementary CDFs with theoretical fits, and (C) likelihood ratio comparisons, confirming lognormal superiority over power-law.
+**Figure 8: Scale-Free Analysis Diagnostics**. Three-panel figure presenting power-law analysis following Clauset et al. (2009) protocol for four languages. Panel A: Log-log degree distributions (dots) with fitted power-law line (α=1.90, dashed black). Deviations from straight line indicate poor power-law fit. Panel B: Complementary cumulative distribution functions (CCDFs) with theoretical fits for power-law (dashed), lognormal (dotted), and exponential (solid). Lognormal provides superior fit. Panel C: Likelihood ratio comparisons. Bars show R values for power-law vs. lognormal (red, negative = favors lognormal) and vs. exponential (blue, positive = favors power-law). Mean R (lognormal) = -168.7 (p<0.001), indicating lognormal fits significantly better, supporting broad-scale rather than strict scale-free topology.
 
 **Why does this matter?** 
 - Early work (Steyvers & Tenenbaum, 2005 [1]) suggested scale-free semantic networks
@@ -323,7 +323,7 @@ We assessed whether semantic networks exhibit scale-free topology using the rigo
 
 **Overall CV = 11.5%** across all parameters. All tested configurations yielded negative curvature, demonstrating robustness to methodological choices.
 
-**Figure 7** shows sensitivity heatmaps across all parameter × language combinations, confirming consistent negative curvature regardless of methodological decisions.
+**Figure 7: Parameter Sensitivity Analysis Heatmaps**. Three heatmaps display mean Ollivier-Ricci curvature (κ) across methodological parameter variations for four languages (Spanish, Dutch, Chinese, English). Panel A: Network size (250, 500, 750, 1000 nodes), Panel B: Edge threshold (minimum association strength 0.1, 0.15, 0.2, 0.25), Panel C: OR curvature α parameter (0.1, 0.25, 0.5, 0.75, 1.0). Darker red indicates more negative curvature. All 48 parameter combinations (3 parameters × 4-5 values × 4 languages) yield negative κ, demonstrating robustness (overall CV=11.5%). Each cell shows mean κ value.
 
 ### 3.5 Curvature Distribution
 
