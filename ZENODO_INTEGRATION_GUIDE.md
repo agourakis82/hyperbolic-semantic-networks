@@ -162,7 +162,7 @@ user.email = agourakis82@gmail.com
 cd /home/agourakis82/workspace/pcs-v6.4-hyperbolic-geometry
 
 # Add remote
-git remote add origin https://github.com/agourakis82/pcs-v6.4-hyperbolic-geometry.git
+git remote add origin https://github.com/agourakis82/hyperbolic-semantic-networks.git
 
 # Push
 git push -u origin main

@@ -53,6 +53,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[1.0.0]: https://github.com/YOUR_USERNAME/pcs-v6.4-hyperbolic-geometry/releases/tag/v1.0.0
-[0.1.0]: https://github.com/YOUR_USERNAME/pcs-v6.4-hyperbolic-geometry/releases/tag/v0.1.0
+[1.0.0]: https://github.com/agourakis82/hyperbolic-semantic-networks/releases/tag/v1.0.0
+[0.1.0]: https://github.com/agourakis82/hyperbolic-semantic-networks/releases/tag/v0.1.0
 

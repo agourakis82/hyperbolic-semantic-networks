@@ -20,7 +20,7 @@ keywords:
   - network science
   - computational linguistics
 license: CC-BY-4.0
-repository-code: "https://github.com/YOUR_USERNAME/pcs-v6.4-hyperbolic-geometry"
+repository-code: "https://github.com/agourakis82/hyperbolic-semantic-networks"
 abstract: |
   Semantic networks, representing word associations, exhibit complex topological
   properties. This study provides cross-linguistic evidence that semantic networks

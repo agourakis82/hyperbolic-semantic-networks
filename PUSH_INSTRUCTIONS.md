@@ -11,7 +11,7 @@
 1. Ir para: https://github.com/new
 
 2. Configurar:
-   - **Repository name**: `pcs-v6.4-hyperbolic-geometry`
+   - **Repository name**: `hyperbolic-semantic-networks`
    - **Description**: `Cross-linguistic evidence for hyperbolic geometry in semantic networks`
    - **Public**: ✓ (marcar)
    - **Initialize**: ✗ NÃO marcar README, gitignore, license (já temos!)
@@ -25,10 +25,10 @@
 ## PASSO 2: Push para GitHub (2 min)
 
 ```bash
-cd /home/agourakis82/workspace/pcs-v6.4-hyperbolic-geometry
+cd /home/agourakis82/workspace/hyperbolic-semantic-networks
 
 # Adicionar remote
-git remote add origin https://github.com/agourakis82/pcs-v6.4-hyperbolic-geometry.git
+git remote add origin https://github.com/agourakis82/hyperbolic-semantic-networks.git
 
 # Push branch main
 git push -u origin main
@@ -64,7 +64,7 @@ To https://github.com/agourakis82/pcs-v6.4-hyperbolic-geometry.git
    - Se diferente: Update em Settings
 
 4. Na lista de repositórios, encontrar:
-   `agourakis82/pcs-v6.4-hyperbolic-geometry`
+   `agourakis82/hyperbolic-semantic-networks`
 
 5. Toggle **ON** (switch para verde)
 
@@ -92,7 +92,7 @@ git push origin v0.1.0-test
 
 1. Aguardar 5 minutos
 
-2. Ir para: https://zenodo.org/search?q=pcs-v6.4-hyperbolic-geometry
+2. Ir para: https://zenodo.org/search?q=hyperbolic-semantic-networks
 
 3. **Se aparecer record**:
    - ✅ SUCCESS!
@@ -111,7 +111,7 @@ git push origin v0.1.0-test
 ### Se test foi bem-sucedido:
 
 ```bash
-cd /home/agourakis82/workspace/pcs-v6.4-hyperbolic-geometry
+cd /home/agourakis82/workspace/hyperbolic-semantic-networks
 
 # Deletar test tag (local e remote)
 git tag -d v0.1.0-test
