@@ -148,9 +148,9 @@ All matched to SWOW network size (N = 500)
 
 ## 3. RESULTS
 
-### 3.1 Universal Hyperbolic Geometry
+### 3.1 Consistent Hyperbolic Geometry Across Languages
 
-**All four languages exhibited negative mean curvature** (Table 1):
+**All four tested languages exhibited negative mean curvature** (Table 1):
 
 | Language | N Nodes | N Edges | κ (mean) | κ (median) | κ (std) | Geometry |
 |----------|---------|---------|----------|------------|---------|----------|
@@ -161,7 +161,7 @@ All matched to SWOW network size (N = 500)
 
 **Overall**: κ_mean = -0.166 ± 0.042 (mean ± SD across languages)
 
-**Interpretation**: 100% cross-linguistic consistency supports **universal** hyperbolic geometry.
+**Interpretation**: 100% consistency across four languages provides strong evidence for cross-linguistically consistent hyperbolic geometry. Further replication with additional languages is needed to assess universality.
 
 ### 3.2 Scale-Free Properties
 
@@ -224,9 +224,9 @@ All matched to SWOW network size (N = 500)
 
 ## 4. DISCUSSION
 
-### 4.1 Universal Hyperbolic Geometry
+### 4.1 Cross-Linguistic Consistency of Hyperbolic Geometry
 
-Our primary finding is unequivocal: **semantic networks exhibit hyperbolic geometry across all tested languages**. This universality suggests that hyperbolic structure is not an artifact of a specific language or culture, but a fundamental property of human semantic organization.
+Our primary finding is robust: **semantic networks consistently exhibit hyperbolic geometry across all four tested languages** (Spanish, Dutch, Chinese, English), spanning three language families. This cross-linguistic consistency suggests that hyperbolic structure is not an artifact of a specific language or culture, but may reflect a fundamental organizational principle of human semantic memory. However, replication with additional languages from diverse families is needed before claiming universality.
 
 **Why hyperbolic?**
 
@@ -288,14 +288,14 @@ The bootstrap CV of 10.1% indicates **high stability** of the hyperbolic effect.
 
 ## 5. CONCLUSION
 
-We provide the first cross-linguistic evidence that **semantic networks universally exhibit hyperbolic geometry**. This finding:
+We provide cross-linguistic evidence that **semantic networks consistently exhibit hyperbolic geometry across four tested languages**. This finding:
 
 ✅ Replicates across 4 languages (3 language families)  
 ✅ Aligns with scale-free topology (3/4 languages)  
 ✅ Is robust to network size (250-750 nodes)  
 ✅ Is stable under bootstrap resampling (CV = 10%)
 
-**Significance**: Hyperbolic geometry may be a **universal organizational principle** of human semantic memory, reflecting hierarchical and exponentially branching conceptual structures.
+**Significance**: Hyperbolic geometry may be a **fundamental organizational principle** of human semantic memory, reflecting hierarchical and exponentially branching conceptual structures, though broader cross-linguistic validation is needed.
 
 **Impact**:
 - **Theory**: Supports hierarchical theories of semantic memory
@@ -339,7 +339,7 @@ We provide the first cross-linguistic evidence that **semantic networks universa
 
 [14] Alstott, J., et al. (2014). powerlaw: A Python package. *PLoS ONE*, 9(1), e85777.
 
-[15] [Future investigation needed]
+[15] Jost, J., & Liu, S. (2014). Ollivier's Ricci curvature, local clustering and curvature-dimension inequalities on graphs. *Discrete & Computational Geometry*, 51(2), 300-322.
 
 [16] Sarkar, R. (2011). Low Distortion Delaunay Embedding of Trees in Hyperbolic Plane. *Graph Drawing*, 355-366.
 
@@ -351,9 +351,6 @@ We provide the first cross-linguistic evidence that **semantic networks universa
 
 [20] Collins, A. M., & Quillian, M. R. (1969). Retrieval time from semantic memory. *Journal of Verbal Learning*, 8(2), 240-247.
 
-[21] Steyvers & Tenenbaum (2005) [duplicate - already cited]
-
-[22] Watts & Strogatz (1998) [duplicate - already cited]
 
 [23] Nickel, M., & Kiela, D. (2017). Poincaré Embeddings for Learning Hierarchical Representations. *NeurIPS*, 6338-6347.
 
