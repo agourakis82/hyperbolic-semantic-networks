@@ -12,9 +12,9 @@
 
 **Background**: Semantic networks, representing word associations, exhibit complex topological properties. Recent theoretical work suggests that many real-world networks possess hyperbolic geometry, characterized by negative curvature.
 
-**Methods**: We computed Ollivier-Ricci curvature on word association networks from four languages (Spanish, Dutch, Chinese, English; N=500 nodes each) using the Small World of Words (SWOW) dataset. We verified scale-free properties using power-law fitting and compared with baseline network models.
+**Methods**: We computed Ollivier-Ricci curvature on word association networks from four languages (Spanish, Dutch, Chinese, English; N=500 nodes each) using the Small World of Words (SWOW) dataset. We compared real networks against null models (Erdős-Rényi, Barabási-Albert, Watts-Strogatz, Lattice) and assessed degree distributions using the Clauset et al. (2009) protocol.
 
-**Results**: All four languages exhibited hyperbolic geometry (mean κ = -0.166 ± 0.042), with 75% meeting scale-free criteria (α ∈ [2,3]). Bootstrap analysis demonstrated high stability (CV = 10.1%). The hyperbolic effect persisted across network sizes (250-750 nodes).
+**Results**: All four languages exhibited robust hyperbolic geometry (mean κ = -0.166 ± 0.042). Null model analysis revealed real networks significantly differ from all baseline models (p < 0.0001, Cohen's d > 10). Parameter sensitivity analysis demonstrated high robustness (CV = 11.5%). Rigorous power-law analysis revealed broad-scale (α = 1.90 ± 0.03) rather than strict scale-free topology, with lognormal distributions fitting better.
 
 **Conclusion**: Semantic networks consistently exhibit hyperbolic geometry across four tested languages (Spanish, Dutch, Chinese, English), spanning three language families. This geometric signature may reflect fundamental organizational principles of human semantic memory, supporting hierarchical and exponentially branching conceptual structures. Further cross-linguistic replication is needed to assess generalizability.
 
@@ -335,9 +335,9 @@ The bootstrap CV of 10.1% indicates **high stability** of the hyperbolic effect.
 We provide cross-linguistic evidence that **semantic networks consistently exhibit hyperbolic geometry across four tested languages**. This finding:
 
 ✅ Replicates across 4 languages (3 language families)  
-✅ Aligns with scale-free topology (3/4 languages)  
-✅ Is robust to network size (250-750 nodes)  
-✅ Is stable under bootstrap resampling (CV = 10%)
+✅ Differs significantly from all null models (p < 0.0001)  
+✅ Is robust to parameter variations (CV = 11.5%)  
+✅ Persists independently of degree distribution (broad-scale, not scale-free)
 
 **Significance**: Hyperbolic geometry may be a **fundamental organizational principle** of human semantic memory, reflecting hierarchical and exponentially branching conceptual structures, though broader cross-linguistic validation is needed.
 
