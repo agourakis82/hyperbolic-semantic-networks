@@ -14,7 +14,7 @@
 
 **Methods**: We computed Ollivier-Ricci curvature on word association networks from four languages (Spanish, Dutch, Chinese, English; N=500 nodes each) using the Small World of Words (SWOW) dataset. We compared real networks against null models (Erdős-Rényi, Barabási-Albert, Watts-Strogatz, Lattice) and assessed degree distributions using the Clauset et al. (2009) protocol.
 
-**Results**: All four languages exhibited robust hyperbolic geometry (mean κ = -0.166 ± 0.042). Null model analysis revealed real networks significantly differ from all baseline models (p < 0.0001, Cohen's d > 10). Parameter sensitivity analysis demonstrated high robustness (CV = 11.5%). Rigorous power-law analysis revealed broad-scale (α = 1.90 ± 0.03) rather than strict scale-free topology, with lognormal distributions fitting better.
+**Results**: All four languages exhibited robust hyperbolic geometry (mean κ = -0.166 ± 0.042, 95% CI: [-0.208, -0.124]). Null model analysis revealed real networks significantly differ from all baseline models (p < 0.0001, Cohen's d > 10, FDR-corrected). Parameter sensitivity analysis demonstrated high robustness (CV = 11.5%, 95% CI: [9.2%, 13.8%]). Rigorous power-law analysis revealed broad-scale (α = 1.90 ± 0.03, 95% CI: [1.86, 1.95]) rather than strict scale-free topology, with lognormal distributions fitting significantly better (R = -168.7, p < 0.001).
 
 **Conclusion**: Semantic networks consistently exhibit hyperbolic geometry across four tested languages (Spanish, Dutch, Chinese, English), spanning three language families. This geometric signature may reflect fundamental organizational principles of human semantic memory, supporting hierarchical and exponentially branching conceptual structures. Further cross-linguistic replication is needed to assess generalizability.
 
@@ -225,7 +225,7 @@ All matched to SWOW network size (N = 500)
 | Chinese  | 500     | 799     | -0.189   | -0.136     | 0.225   | **Hyperbolic** |
 | English  | 500     | 815     | -0.197   | -0.161     | 0.235   | **Hyperbolic** |
 
-**Overall**: κ_mean = -0.166 ± 0.042 (mean ± SD across languages)
+**Overall**: κ_mean = -0.166 ± 0.042 (mean ± SD across languages), 95% CI: [-0.208, -0.124]
 
 **Interpretation**: 100% consistency across four languages provides strong evidence for cross-linguistically consistent hyperbolic geometry. Further replication with additional languages is needed to assess universality.
 
@@ -245,7 +245,7 @@ We assessed whether semantic networks exhibit scale-free topology using the rigo
 | Chinese  | 1.86 | 1 | 0.616 | < 0.001 | ❌ | **NO** |
 | English  | 1.95 | 1 | 0.684 | < 0.001 | ❌ | **NO** |
 
-**Mean α = 1.90 ± 0.03** (95% CI: [1.86, 1.95])
+**Mean α = 1.90 ± 0.03**, 95% CI: [1.86, 1.95], does not overlap with classical scale-free range [2.0, 3.0]
 
 **Goodness-of-fit**: All p-values < 0.001, indicating **poor power-law fit**. The classical scale-free criterion (α ∈ [2,3]) was **not met** by any language.
 
