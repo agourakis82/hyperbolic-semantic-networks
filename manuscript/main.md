@@ -32,28 +32,16 @@ Recent advances in geometric network theory suggest that many complex networks, 
 
 ### 1.2 Hyperbolic Geometry and Semantic Networks
 
-Hyperbolic geometry is characterized by **negative curvature** (κ < 0), contrasting with Euclidean (κ = 0) and spherical (κ > 0) geometries. In hyperbolic spaces:
-- Triangles have angle sums < 180°
-- Space grows exponentially with distance from a point
-- Hierarchical trees embed naturally
+Hyperbolic geometry, characterized by **negative curvature** (κ < 0), naturally accommodates hierarchical and exponentially branching structures. Key properties include:
+- Space grows exponentially with distance
+- Hierarchical trees embed with low distortion
+- Triangle angle sums < 180°
 
-These properties align with semantic network phenomenology:
-- **Hierarchical organization**: Concepts organize in taxonomies (e.g., "animal" → "mammal" → "dog")
-- **Exponential branching**: High-level concepts connect to exponentially many specifics
-- **Heavy-tailed degree distribution**: Few highly connected hubs, many peripheral nodes [8]
+These properties align with semantic organization: concepts form taxonomies ("animal" → "mammal" → "dog") with exponential branching at each level [7,8].
 
 ### 1.3 Ollivier-Ricci Curvature
 
-We employ **Ollivier-Ricci curvature** [9], a discrete Ricci curvature adapted for graphs. For an edge (u,v):
-
-κ(u,v) = 1 - W₁(μᵤ, μᵥ) / d(u,v)
-
-where:
-- W₁ is the 1-Wasserstein distance between probability distributions μᵤ and μᵥ
-- d(u,v) is the edge length
-- κ < 0 indicates hyperbolic geometry
-
-Ollivier-Ricci curvature has successfully characterized geometry in biological [10], social [11], and transportation [12] networks.
+We use **Ollivier-Ricci curvature** [9], a discrete curvature measure for networks based on optimal transport between neighborhoods. For an edge, κ < 0 indicates hyperbolic geometry, κ = 0 Euclidean, κ > 0 spherical. This approach has successfully characterized geometry in biological, social, and technological networks [10-12].
 
 ### 1.4 Research Questions
 
