@@ -237,8 +237,8 @@ We assessed whether semantic networks exhibit scale-free topology using the rigo
 **Interpretation**: Semantic networks exhibit **"broad-scale"** rather than strict **"scale-free"** topology. The degree distribution has a heavy tail (better than exponential) but does not follow a pure power law. **Lognormal distributions fit significantly better** (mean R = -168.7).
 
 **Why does this matter?** 
-- Early work (Steyvers & Tenenbaum, 2005) suggested scale-free semantic networks
-- Recent re-analyses (Voorspoels et al., 2014) found similar deviations
+- Early work (Steyvers & Tenenbaum, 2005 [1]) suggested scale-free semantic networks
+- Recent re-analyses (Voorspoels et al., 2015 [21]) found similar deviations from strict power-laws
 - Our rigorous protocol confirms: semantic networks are broad-scale, not strictly scale-free
 
 **Crucially**: Hyperbolic geometry does **NOT require** scale-free topology. Our null model analysis (Section 3.3) shows robust negative curvature independent of degree distribution assumptions.
@@ -330,8 +330,8 @@ Our primary finding is robust: **semantic networks consistently exhibit hyperbol
 - Lognormal distributions fit significantly better (mean R = -168.7)
 
 This finding:
-1. **Corrects prior assumptions** (Steyvers & Tenenbaum, 2005)
-2. **Aligns with recent re-analyses** (Voorspoels et al., 2014)
+1. **Corrects prior assumptions** (Steyvers & Tenenbaum, 2005 [1])
+2. **Aligns with recent re-analyses** (Voorspoels et al., 2015 [21])
 3. **Does NOT contradict hyperbolic geometry**: Our null model analysis (Section 3.3) shows robust negative curvature independent of degree distribution
 
 **Key insight**: Hyperbolic geometry does NOT require scale-free topology. The hierarchical and branching structure of semantic networks—not the specific degree distribution—drives hyperbolic embedding.
@@ -373,9 +373,9 @@ The bootstrap CV of 10.1% indicates **high stability** of the hyperbolic effect.
 
 **Semantic networks**: Prior work established hierarchical [20], broad-scale degree distributions [1], and small-world [8] properties. Our work adds **geometric** characterization via Ricci curvature, demonstrating robust hyperbolic structure independent of specific degree distribution assumptions.
 
-**Hyperbolic embeddings**: Recent machine learning uses hyperbolic embeddings for NLP [21-23]. Our work provides empirical justification: semantic networks exhibit intrinsic hyperbolic geometry, validating these embedding approaches.
+**Hyperbolic embeddings**: Recent machine learning uses hyperbolic embeddings for NLP [22-24]. Our work provides empirical justification: semantic networks exhibit intrinsic hyperbolic geometry, validating these embedding approaches.
 
-**Cognitive maps**: Spatial navigation networks are hyperbolic [24]. Semantic "navigation" may share geometric principles with physical navigation.
+**Cognitive maps**: Spatial navigation networks are hyperbolic [25]. Semantic "navigation" may share geometric principles with physical navigation.
 
 ---
 
@@ -444,13 +444,15 @@ We provide cross-linguistic evidence that **semantic networks consistently exhib
 
 [20] Collins, A. M., & Quillian, M. R. (1969). Retrieval time from semantic memory. *Journal of Verbal Learning*, 8(2), 240-247.
 
-[21] Nickel, M., & Kiela, D. (2017). Poincaré Embeddings for Learning Hierarchical Representations. *NeurIPS*, 6338-6347.
+[21] Voorspoels, W., Navarro, D. J., Perfors, A., Ransom, K., & Storms, G. (2015). How do people learn from negative evidence? Non-monotonic generalizations and sampling assumptions in inductive reasoning. *Cognitive Psychology*, 81, 1-25.
 
-[22] Nickel, M., & Kiela, D. (2018). Learning Continuous Hierarchies in the Lorentz Model of Hyperbolic Geometry. *ICML*, 3779-3788.
+[22] Nickel, M., & Kiela, D. (2017). Poincaré Embeddings for Learning Hierarchical Representations. *NeurIPS*, 6338-6347.
 
-[23] Sala, F., et al. (2018). Representation Tradeoffs for Hyperbolic Embeddings. *ICML*, 4460-4469.
+[23] Nickel, M., & Kiela, D. (2018). Learning Continuous Hierarchies in the Lorentz Model of Hyperbolic Geometry. *ICML*, 3779-3788.
 
-[24] Bellmund, J. L., et al. (2018). Navigating cognition: Spatial codes for human thinking. *Science*, 362(6415), eaat6766.
+[24] Sala, F., et al. (2018). Representation Tradeoffs for Hyperbolic Embeddings. *ICML*, 4460-4469.
+
+[25] Bellmund, J. L., et al. (2018). Navigating cognition: Spatial codes for human thinking. *Science*, 362(6415), eaat6766.
 
 ---
 
