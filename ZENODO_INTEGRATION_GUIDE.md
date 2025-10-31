@@ -159,7 +159,7 @@ user.email = agourakis82@gmail.com
 ### 2. Push para GitHub
 
 ```bash
-cd /home/agourakis82/workspace/pcs-v6.4-hyperbolic-geometry
+cd /home/agourakis82/workspace/hyperbolic-semantic-networks
 
 # Add remote
 git remote add origin https://github.com/agourakis82/hyperbolic-semantic-networks.git
@@ -185,7 +185,7 @@ git tag v0.1.0-test -m "Test release for Zenodo integration"
 git push origin v0.1.0-test
 
 # Wait 5-10 minutes
-# Check: https://zenodo.org/search?q=pcs-v6.4-hyperbolic-geometry
+# Check: https://zenodo.org/search?q=hyperbolic-semantic-networks
 
 # If DOI appears → SUCCESS!
 # If not → Check errors in Zenodo account
