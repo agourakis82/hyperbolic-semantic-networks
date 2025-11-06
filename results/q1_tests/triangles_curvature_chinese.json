@@ -1,0 +1,31 @@
+{
+  "language": "chinese",
+  "alpha": 0.5,
+  "n_edges": 762,
+  "n_edges_with_triangles": 338,
+  "pct_edges_with_triangles": 44.35695538057743,
+  "tests": {
+    "logistic_regression": {
+      "coef_kappa": 1.212095498593198,
+      "coef_deg_min": 1.7977582269879002,
+      "coef_deg_max": 0.5973082754948191,
+      "coef_betweenness": -0.5566913407314712,
+      "accuracy": 0.7860892388451444
+    },
+    "distribution_test": {
+      "mean_with_triangles": -0.07131305499240757,
+      "mean_without_triangles": -0.3277083582863554,
+      "difference": 0.25639530329394783,
+      "ks_statistic": 0.23877972535447137,
+      "ks_pvalue": 6.5631297397385e-10,
+      "mann_whitney_u": 93746.0,
+      "mann_whitney_p": 2.523089408813143e-13
+    },
+    "correlation": {
+      "pearson_r": 0.30192383350323515,
+      "pearson_p": 1.590642557974348e-17,
+      "spearman_rho": 0.2954806139606913,
+      "spearman_p": 8.094012834782105e-17
+    }
+  }
+}

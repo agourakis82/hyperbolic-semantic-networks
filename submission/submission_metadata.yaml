@@ -59,7 +59,7 @@ data_availability: |
   SWOW data publicly available at https://smallworldofwords.org (De Deyne et al., 2019). 
   Network edge lists, computed curvatures, and complete analysis code available at 
   https://github.com/agourakis82/hyperbolic-semantic-networks 
-  (DOI: 10.5281/zenodo.17489685).
+  (DOI: 10.5281/zenodo.17531773).
 
 code_availability: |
   Complete Python analysis pipeline publicly available at 

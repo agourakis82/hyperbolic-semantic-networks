@@ -31,7 +31,7 @@ This manuscript aligns perfectly with *Network Science*'s scope, combining rigor
 
 ## **Transparency and Reproducibility**
 
-We transparently acknowledge computational limitations (triadic nulls completed only for 2/4 languages, estimated 5 days per language for remaining analyses). All data come from publicly available SWOW datasets, and complete analysis code is available on GitHub with DOI (10.5281/zenodo.17489685). We provide comprehensive sensitivity analyses and detailed methodological transparency throughout.
+We transparently acknowledge computational limitations (triadic nulls completed only for 2/4 languages, estimated 5 days per language for remaining analyses). All data come from publicly available SWOW datasets, and complete analysis code is available on GitHub with DOI (10.5281/zenodo.17531773). We provide comprehensive sensitivity analyses and detailed methodological transparency throughout.
 
 ## **Significance**
 

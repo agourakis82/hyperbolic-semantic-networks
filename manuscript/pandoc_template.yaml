@@ -1,0 +1,7 @@
+---
+header-includes: |
+  \usepackage{unicode-math}
+  \usepackage{fontspec}
+  \setmainfont{DejaVu Serif}
+  \setmathfont{DejaVu Math TeX Gyre}
+---

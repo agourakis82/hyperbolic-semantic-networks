@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: structural-nulls-analysis
+  namespace: research
+spec:
+  parallelism: 4  # 4 línguas em paralelo
+  completions: 4
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: structural-nulls
+        job-name: structural-nulls-analysis
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: null-analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            apt-get update && apt-get install -y git
+            pip install networkx numpy scipy pandas tqdm
+            pip install GraphRicciCurvature
+            
+            # Clone repo
+            git clone https://github.com/agourakis82/hyperbolic-semantic-networks.git /work
+            cd /work
+            
+            # Run analysis
+            python code/analysis/07_structural_nulls.py
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2"
+          limits:
+            memory: "8Gi"
+            cpu: "4"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: results
+          mountPath: /results
+      volumes:
+      - name: data
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks/data
+          type: Directory
+      - name: results
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks/results
+          type: Directory

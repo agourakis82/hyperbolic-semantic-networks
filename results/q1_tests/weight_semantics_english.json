@@ -1,0 +1,15 @@
+{
+  "C_affinity": 0.026285895679457893,
+  "C_metric_direct": 0.07555717790691094,
+  "C_metric_converted": 0.026285895679457893,
+  "C_binary": 0.14418891610672432,
+  "interpretation": {
+    "affinity": "Onnela/Barrat formula, w = strength",
+    "metric_direct": "Computed on d = 1/w (inverse weights)",
+    "metric_converted": "d = 1/w, then clustering on w_new = 1/d",
+    "binary": "Unweighted (ignore edge weights)"
+  },
+  "language": "english",
+  "n_nodes": 438,
+  "n_edges": 640
+}

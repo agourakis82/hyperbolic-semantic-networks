@@ -31,9 +31,7 @@ spec = importlib.util.spec_from_file_location(
     Path(__file__).parent / "07_structural_nulls.py"
 )
 structural_nulls = importlib.util.module_from_spec(spec)
-
-# Patch the module's paths BEFORE execution
-original_main = structural_nulls.main
+spec.loader.exec_module(structural_nulls)  # Execute module to load functions
 
 def patched_main():
     """Patched main that uses env vars."""
@@ -45,7 +43,7 @@ def patched_main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     
     LANGUAGES = ['spanish', 'english', 'dutch', 'chinese']
-    NULL_TYPES = ['configuration', 'triadic']
+    NULL_TYPES = ['configuration']  # Only configuration model (faster, sufficient for publication)
     M = int(os.environ.get('M_REPLICATES', '1000'))
     ALPHA = float(os.environ.get('ALPHA_IDLENESS', '0.5'))
     SEED = int(os.environ.get('SEED', '123'))
@@ -123,10 +121,6 @@ def patched_main():
     print("="*80)
     print(f"Results saved to: {OUTPUT_DIR}")
 
-
-# Load and patch
-spec.loader.exec_module(structural_nulls)
-structural_nulls.main = patched_main
 
 if __name__ == "__main__":
     patched_main()

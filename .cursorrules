@@ -1,0 +1,79 @@
+# DARWIN CLUSTER - HYPERBOLIC SEMANTIC NETWORKS
+# Multi-repo synchronization via ~/.darwin-global/
+# Date: 2025-11-02
+
+## 🚨 MANDATORY ACTION ON WORKSPACE OPEN
+
+**ALWAYS execute FIRST:**
+```bash
+~/.darwin-global/darwin-omniscient-agent.sh
+```
+
+---
+
+## 📊 YOUR REPOSITORY: hyperbolic-semantic-networks
+
+**Namespace:** hyperbolic-semantic  
+**ClusterQueue:** hyperbolic-semantic  
+**Resources:** 30% (fMRI/EEG analysis heavy!)
+
+**Allocation:**
+- RAM: 150Gi nominal (borrowing up to 300Gi)
+- CPU: 18 cores nominal (borrowing up to 36)
+- GPU: 1x L4 (shared, for hyperbolic embeddings + fMRI)
+- Storage: 2TB (1TB nvme-fast + 1TB hdd-bulk)
+
+**Workloads:**
+- fMRI analysis (4D volumes, GLM, connectivity)
+- EEG analysis (if integrated with pcs-meta-repo)
+- Hyperbolic embeddings (Poincaré, Lorentz - GPU accelerated!)
+- Large-scale graph processing
+- Statistical bootstrap (permutation tests)
+
+---
+
+## 💾 STORAGE
+
+**Active fMRI/EEG datasets:**
+```yaml
+storageClassName: t560-nvme-fast  # 7000 MB/s!
+```
+
+**Archives, results:**
+```yaml
+storageClassName: t560-hdd-bulk  # 500 MB/s
+```
+
+**Semantic graphs (shared):**
+```yaml
+storageClassName: nfs-shared  # 3TB Pegasus R4
+```
+
+---
+
+## 🎯 GPU USAGE
+
+**Hyperbolic embeddings (Poincaré disk, Lorentz):**
+- Riemannian optimization benefits from GPU (10-100x speedup!)
+- Request GPU in job manifest:
+```yaml
+resources:
+  requests:
+    nvidia.com/gpu: 1
+    memory: 64Gi
+```
+
+---
+
+## 📚 DOCUMENTATION
+
+- `CLUSTER_QUICKSTART.md` - Quick start guide
+- `WORKFLOW_DARWIN_GUIDE.md` - Workflow guide
+- `MULTI_REPO_OPTIMIZATION_GUIDE.md` - Multi-repo coordination
+
+**Grafana:** http://100.112.110.114:30000
+
+---
+
+**ALWAYS RESPOND IN PORTUGUESE TO USER!**
+

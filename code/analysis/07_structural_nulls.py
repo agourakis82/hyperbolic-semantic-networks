@@ -323,7 +323,7 @@ def main():
     OUTPUT_DIR = Path("/home/agourakis82/workspace/hyperbolic-semantic-networks/results/structural_nulls")
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     
-    LANGUAGES = ['spanish', 'dutch', 'chinese', 'english']
+    LANGUAGES = ['spanish', 'english', 'dutch', 'chinese']  # All 4 languages!
     NULL_TYPES = ['configuration', 'triadic']
     M = 1000  # Number of replicates
     ALPHA = 0.5  # Idleness parameter
@@ -407,4 +407,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 

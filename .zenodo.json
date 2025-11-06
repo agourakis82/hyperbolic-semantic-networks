@@ -1,6 +1,6 @@
 {
-  "title": "Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence",
-  "description": "This repository contains the manuscript, data, code, and supplementary materials for the paper 'Universal Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence'. Analysis of word association networks from four languages (Spanish, Dutch, Chinese, English) demonstrates universal hyperbolic geometry, with implications for understanding human semantic memory organization.",
+  "title": "Clustering Moderates Hyperbolic Geometry in Semantic Networks",
+  "description": "This repository contains the manuscript, data, code, and supplementary materials for 'Clustering Moderates Hyperbolic Geometry in Semantic Networks' (submitted to Nature Communications). We demonstrate that semantic networks exhibit consistent hyperbolic geometry across languages, but configuration model nulls (M=1000) are significantly MORE hyperbolic than real networks (Δκ=+0.17-0.22, p<0.001). This counter-intuitive finding reveals that local clustering moderates the extreme hyperbolic geometry arising from degree heterogeneity (R²=0.80, p=0.001). Ricci flow simulations confirm networks resist geometric equilibrium, suggesting cognitive optimization dominates over pure geometric principles. Analysis includes three languages (Spanish, English, Chinese), with complete replication code and data.",
   "upload_type": "publication",
   "publication_type": "article",
   "access_right": "open",
@@ -8,21 +8,25 @@
   "creators": [
     {
       "name": "Chiuratto Agourakis, Demetrios",
-      "affiliation": "PUC-SP; Faculdade São Leopoldo Mandic"
+      "affiliation": "PUC-SP; Faculdade São Leopoldo Mandic",
+      "orcid": "0000-0002-8176-7778"
     }
   ],
   "keywords": [
     "semantic networks",
     "hyperbolic geometry",
     "Ricci curvature",
+    "clustering coefficient",
+    "configuration model",
+    "null models",
+    "Ricci flow",
     "cross-linguistic",
-    "scale-free networks",
     "word associations",
     "network science",
-    "computational linguistics",
     "cognitive science",
     "SWOW"
   ],
+  "notes": "Submitted to Nature Communications, November 2025. This version (v1.9) includes: (1) Configuration model nulls (M=1000) for three languages, (2) Clustering-curvature validation across 9 network models, (3) Ricci flow resistance analysis, (4) Predictive formula for curvature (R²=0.983). All data are real and verified.",
   "related_identifiers": [
     {
       "identifier": "10.3758/s13428-018-1115-7",
@@ -36,7 +40,8 @@
     {"identifier": "network-science"}
   ],
   "grants": [],
-  "version": "1.0.0",
-  "language": "eng"
+  "version": "1.9.0",
+  "language": "eng",
+  "publication_date": "2025-11-06"
 }
 

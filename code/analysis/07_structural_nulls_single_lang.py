@@ -33,36 +33,39 @@ def load_real_network(edge_file):
             G.add_edge(source, target, weight=float(weight))
     
     logger.info(f"Loaded {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
-    return G
+    return G  # Return DIRECTED for null generation
 
 
 def generate_configuration_null(G, alpha=0.5):
     """
     Generate configuration model null preserving degree sequence.
-    Uses weighted configuration model with idleness parameter.
+    CRITICAL FIX: If G is directed, convert to undirected FIRST,
+    then generate undirected configuration model.
+    This ensures null has same edge density as real network.
     """
     try:
-        # Get degree sequence
-        in_deg = dict(G.in_degree())
-        out_deg = dict(G.out_degree())
+        # Convert to undirected if directed
+        if G.is_directed():
+            G_work = G.to_undirected()
+        else:
+            G_work = G
         
-        # Create directed configuration model
-        G_null = nx.directed_configuration_model(
-            list(in_deg.values()),
-            list(out_deg.values()),
-            create_using=nx.DiGraph()
-        )
+        # Get degree sequence from UNDIRECTED graph
+        degrees = [d for n, d in G_work.degree()]
+        
+        # Create UNDIRECTED configuration model
+        G_null = nx.configuration_model(degrees, create_using=nx.Graph())
         
         # Remove self-loops and parallel edges
-        G_null = nx.DiGraph(G_null)
+        G_null = nx.Graph(G_null)
         G_null.remove_edges_from(nx.selfloop_edges(G_null))
         
         # Relabel nodes to match original
-        mapping = dict(zip(G_null.nodes(), G.nodes()))
+        mapping = dict(zip(G_null.nodes(), G_work.nodes()))
         G_null = nx.relabel_nodes(G_null, mapping)
         
         # Assign random weights from original distribution
-        weights = [d['weight'] for _, _, d in G.edges(data=True)]
+        weights = [d['weight'] for _, _, d in G_work.edges(data=True)]
         for u, v in G_null.edges():
             G_null[u][v]['weight'] = np.random.choice(weights)
         
@@ -153,11 +156,18 @@ def compute_or_curvature(G, alpha=0.5, weight='weight'):
     """
     Compute network-level Ollivier-Ricci curvature.
     Returns mean curvature across all edges.
+    Converts to UNDIRECTED before computation (standard practice).
     """
     try:
         from GraphRicciCurvature.OllivierRicci import OllivierRicci
         
-        orc = OllivierRicci(G, alpha=alpha, weight=weight, verbose="INFO")
+        # Convert to undirected for curvature (standard practice)
+        if G.is_directed():
+            G_compute = G.to_undirected()
+        else:
+            G_compute = G
+        
+        orc = OllivierRicci(G_compute, alpha=alpha, weight=weight, verbose="ERROR")
         orc.compute_ricci_curvature()
         
         curvatures = [d['ricciCurvature'] for _, _, d in orc.G.edges(data=True)]

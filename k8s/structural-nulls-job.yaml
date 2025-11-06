@@ -1,0 +1,406 @@
+---
+# Job Array for Structural Null Analysis
+# 8 jobs total: 4 languages x 2 null types
+# Each job runs independently for maximum parallelization
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-spanish-config
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+spec:
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: spanish
+        null-type: configuration
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --quiet numpy scipy networkx tqdm GraphRicciCurvature
+            cd /workspace/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language spanish \
+              --null-type configuration \
+              --edge-file /workspace/data/processed/swow_edges_spanish.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 123
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-spanish-triadic
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+spec:
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: spanish
+        null-type: triadic
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --quiet numpy scipy networkx tqdm GraphRicciCurvature
+            cd /workspace/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language spanish \
+              --null-type triadic \
+              --edge-file /workspace/data/processed/swow_edges_spanish.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 124
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-english-config
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+spec:
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: english
+        null-type: configuration
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --quiet numpy scipy networkx tqdm GraphRicciCurvature
+            cd /workspace/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language english \
+              --null-type configuration \
+              --edge-file /workspace/data/processed/swow_edges_english.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 125
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-english-triadic
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+spec:
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: english
+        null-type: triadic
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --quiet numpy scipy networkx tqdm GraphRicciCurvature
+            cd /workspace/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language english \
+              --null-type triadic \
+              --edge-file /workspace/data/processed/swow_edges_english.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 126
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-dutch-config
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+spec:
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: dutch
+        null-type: configuration
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --quiet numpy scipy networkx tqdm GraphRicciCurvature
+            cd /workspace/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language dutch \
+              --null-type configuration \
+              --edge-file /workspace/data/processed/swow_edges_dutch.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 127
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-dutch-triadic
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+spec:
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: dutch
+        null-type: triadic
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --quiet numpy scipy networkx tqdm GraphRicciCurvature
+            cd /workspace/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language dutch \
+              --null-type triadic \
+              --edge-file /workspace/data/processed/swow_edges_dutch.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 128
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-chinese-config
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+spec:
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: chinese
+        null-type: configuration
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --quiet numpy scipy networkx tqdm GraphRicciCurvature
+            cd /workspace/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language chinese \
+              --null-type configuration \
+              --edge-file /workspace/data/processed/swow_edges_chinese.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 129
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-chinese-triadic
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+spec:
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: chinese
+        null-type: triadic
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --quiet numpy scipy networkx tqdm GraphRicciCurvature
+            cd /workspace/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language chinese \
+              --null-type triadic \
+              --edge-file /workspace/data/processed/swow_edges_chinese.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 130
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+
+

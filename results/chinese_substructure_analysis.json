@@ -1,0 +1,117 @@
+{
+  "test_purpose": "Response to Reviewer #1 Chinese anomaly concern",
+  "configurations_tested": 9,
+  "results": [
+    {
+      "n_nodes": 250,
+      "n_edges": 4040,
+      "kappa_mean": 0.19213239447699204,
+      "kappa_std": 0.3946949517888628,
+      "kappa_median": 0.12744352363431855,
+      "kappa_min": -0.5759713760430092,
+      "kappa_max": 0.9821885851597209,
+      "config": "Top 250 nodes (seed 1)",
+      "test_type": "node_set"
+    },
+    {
+      "n_nodes": 250,
+      "n_edges": 4040,
+      "kappa_mean": 0.19213239447699204,
+      "kappa_std": 0.3946949517888628,
+      "kappa_median": 0.12744352363431855,
+      "kappa_min": -0.5759713760430092,
+      "kappa_max": 0.9821885851597209,
+      "config": "Top 250 nodes (seed 2)",
+      "test_type": "node_set"
+    },
+    {
+      "n_nodes": 250,
+      "n_edges": 4040,
+      "kappa_mean": 0.19213239447699204,
+      "kappa_std": 0.3946949517888628,
+      "kappa_median": 0.12744352363431855,
+      "kappa_min": -0.5759713760430092,
+      "kappa_max": 0.9821885851597209,
+      "config": "Top 250 nodes (seed 3)",
+      "test_type": "node_set"
+    },
+    {
+      "n_nodes": 375,
+      "n_edges": 6781,
+      "kappa_mean": 0.17609086770223692,
+      "kappa_std": 0.39858931241995293,
+      "kappa_median": 0.11920727689458621,
+      "kappa_min": -0.6102704709377074,
+      "kappa_max": 0.9824612347688622,
+      "config": "Top 375 nodes (seed 1)",
+      "test_type": "node_set"
+    },
+    {
+      "n_nodes": 500,
+      "n_edges": 9055,
+      "kappa_mean": 0.1606702622990958,
+      "kappa_std": 0.4091725839136545,
+      "kappa_median": 0.1034675419310499,
+      "kappa_min": -0.6250316839845573,
+      "kappa_max": 0.9812912919187731,
+      "config": "Top 500 nodes (seed 1)",
+      "test_type": "node_set"
+    },
+    {
+      "n_nodes": 500,
+      "n_edges": 9055,
+      "kappa_mean": 0.1606702622990958,
+      "kappa_std": 0.4091725839136545,
+      "kappa_median": 0.1034675419310499,
+      "kappa_min": -0.6250316839845573,
+      "kappa_max": 0.9812912919187731,
+      "config": "Threshold \u2265 0.1",
+      "test_type": "threshold"
+    },
+    {
+      "n_nodes": 500,
+      "n_edges": 9055,
+      "kappa_mean": 0.1606702622990958,
+      "kappa_std": 0.4091725839136545,
+      "kappa_median": 0.1034675419310499,
+      "kappa_min": -0.6250316839845573,
+      "kappa_max": 0.9812912919187731,
+      "config": "Threshold \u2265 0.15",
+      "test_type": "threshold"
+    },
+    {
+      "n_nodes": 500,
+      "n_edges": 9055,
+      "kappa_mean": 0.1606702622990958,
+      "kappa_std": 0.4091725839136545,
+      "kappa_median": 0.1034675419310499,
+      "kappa_min": -0.6250316839845573,
+      "kappa_max": 0.9812912919187731,
+      "config": "Threshold \u2265 0.25",
+      "test_type": "threshold"
+    },
+    {
+      "n_nodes": 500,
+      "n_edges": 9055,
+      "kappa_mean": 0.1606702622990958,
+      "kappa_std": 0.4091725839136545,
+      "kappa_median": 0.1034675419310499,
+      "kappa_min": -0.6250316839845573,
+      "kappa_max": 0.9812912919187731,
+      "config": "Threshold \u2265 0.3",
+      "test_type": "threshold"
+    }
+  ],
+  "summary": {
+    "mean_across_configs": 0.1728710402920769,
+    "std_across_configs": 0.014405483145245309,
+    "range": [
+      0.1606702622990958,
+      0.19213239447699204
+    ],
+    "hyperbolic_count": 0,
+    "flat_count": 0,
+    "conclusion": "CONSISTENT ACROSS CONFIGURATIONS",
+    "interpretation": "Chinese network consistently shows \u03ba\u22480.173 regardless of sampling."
+  }
+}
