@@ -25,6 +25,7 @@
   "version": "0.1.0",
   "upload_type": "software",
   "access_right": "open",
+  "description": "High-performance implementation of Ollivier-Ricci curvature analysis for semantic networks, enabling identification of hyperbolic geometry boundary conditions. This implementation provides 10-100x performance improvements over Python through Julia/Rust FFI integration. Validated against Q1 SOTA literature (Ollivier 2009, Ni et al. 2015, 2019).",
   "communities": [
     {
       "identifier": "network-science"
