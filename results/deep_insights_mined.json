@@ -1,0 +1,122 @@
+{
+  "insights": [
+    {
+      "type": "effect_homogeneity",
+      "priority": 0.9,
+      "finding": "Effect sizes are homogeneous across languages (Q=0.000, p=1.000, I\u00b2=0.0%)",
+      "implication": "Hyperbolic geometry is a consistent cross-linguistic phenomenon with uniform effect magnitude"
+    },
+    {
+      "type": "triadic_preservation",
+      "priority": 0.8,
+      "finding": "Spanish: Triadic nulls have 51.6% less variance than configuration (0.0017 vs 0.0035)",
+      "implication": "Triadic-rewire preserves significantly more structure, reducing null variance"
+    },
+    {
+      "type": "triadic_preservation",
+      "priority": 0.8,
+      "finding": "English: Triadic nulls have 59.0% less variance than configuration (0.0012 vs 0.0029)",
+      "implication": "Triadic-rewire preserves significantly more structure, reducing null variance"
+    },
+    {
+      "type": "cross_language",
+      "priority": 0.7,
+      "finding": "Spanish and English configuration null distributions differ significantly (p=0.000e+00, d=-22.025)",
+      "implication": "Language-specific topological properties affect null models"
+    }
+  ],
+  "n_total": 4,
+  "n_high_priority": 4,
+  "distribution_properties": {
+    "spanish_configuration": {
+      "mean": 0.02621855917212357,
+      "median": 0.02616964192363015,
+      "std": 0.0035426613612114183,
+      "min": 0.015079368851286891,
+      "max": 0.035905124609293335,
+      "range": 0.020825755758006444,
+      "skewness": -0.021585286174962436,
+      "kurtosis": -0.1505935486562886,
+      "cv": 13.512036790252345,
+      "q25": 0.02386838564117372,
+      "q75": 0.028684921021499134,
+      "iqr": 0.004816535380325414,
+      "ci_width": 0.014066143922703434
+    },
+    "english_triadic": {
+      "mean": 0.10958402697277128,
+      "median": 0.10957868583037536,
+      "std": 0.0011681005741508395,
+      "min": 0.10634049584293824,
+      "max": 0.11339141088222762,
+      "range": 0.007050915039289382,
+      "skewness": 0.004322831732372941,
+      "kurtosis": -0.05864363664922312,
+      "cv": 1.065940544821447,
+      "q25": 0.10879510517567725,
+      "q75": 0.1104190430007947,
+      "iqr": 0.0016239378251174524,
+      "ci_width": 0.004621451286841355
+    },
+    "english_configuration": {
+      "mean": 0.09704957206963104,
+      "median": 0.09707648176415458,
+      "std": 0.002851912138000821,
+      "min": 0.08832643508486944,
+      "max": 0.10618880195237523,
+      "range": 0.017862366867505794,
+      "skewness": -0.02728854522669755,
+      "kurtosis": -0.18475282167430862,
+      "cv": 2.9386138209395027,
+      "q25": 0.09512570395724594,
+      "q75": 0.09908580328610526,
+      "iqr": 0.003960099328859323,
+      "ci_width": 0.010951776857048526
+    },
+    "spanish_triadic": {
+      "mean": 0.03866513024884308,
+      "median": 0.038676965726840824,
+      "std": 0.0017131379660815249,
+      "min": 0.033361488522718634,
+      "max": 0.04348848411036056,
+      "range": 0.010126995587641928,
+      "skewness": 0.028145023816031862,
+      "kurtosis": -0.16827637647682092,
+      "cv": 4.430705276449404,
+      "q25": 0.03755369957615241,
+      "q75": 0.039799223594816975,
+      "iqr": 0.0022455240186645617,
+      "ci_width": 0.006875226224862786
+    },
+    "dutch_configuration": {
+      "mean": 0.09599051323146916,
+      "median": 0.0959840633546794,
+      "std": 0.001967440818838034,
+      "min": 0.08844399649223265,
+      "max": 0.10095235790737692,
+      "range": 0.012508361415144262,
+      "skewness": -0.10727488982779226,
+      "kurtosis": -0.07053016992282224,
+      "cv": 2.049620064113831,
+      "q25": 0.09468143651845418,
+      "q75": 0.09738463434477476,
+      "iqr": 0.002703197826320586,
+      "ci_width": 0.007735872319524745
+    },
+    "chinese_configuration": {
+      "mean": -0.02695064934865531,
+      "median": -0.026950263966499487,
+      "std": 0.004078360267858784,
+      "min": -0.041568726725110666,
+      "max": -0.01252537157604412,
+      "range": 0.029043355149066544,
+      "skewness": 0.02441363561352143,
+      "kurtosis": 0.13292458805461305,
+      "cv": 15.132697602561743,
+      "q25": -0.029730991951798326,
+      "q75": -0.02421549240521998,
+      "iqr": 0.005515499546578345,
+      "ci_width": 0.016283566209437664
+    }
+  }
+}

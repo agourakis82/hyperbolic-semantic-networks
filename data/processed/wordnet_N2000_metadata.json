@@ -1,0 +1,14 @@
+{
+  "dataset": "WordNet",
+  "n_nodes_target": 2000,
+  "n_nodes_lcc": 2000,
+  "n_edges_lcc": 4150,
+  "density": 0.0010380190095047523,
+  "edge_types": {
+    "hypernym": 2017,
+    "hyponym": 2017,
+    "meronym": 58,
+    "holonym": 58
+  },
+  "selection_method": "multi-root BFS (20 roots)"
+}

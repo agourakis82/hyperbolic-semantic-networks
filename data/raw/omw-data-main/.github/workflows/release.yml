@@ -1,0 +1,47 @@
+name: Upload Assets
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      DTD: etc/WN-LMF-1.3.dtd
+
+    steps:
+    - name: Get release tag
+      run: |
+        tagname=${GITHUB_REF##*/}
+        echo "TAGNAME=$tagname" >> $GITHUB_ENV
+        echo "VERSION=${tagname#v}" >> $GITHUB_ENV
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ env.TAGNAME }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        sudo apt install xmlstarlet
+        python -m pip install -r requirements.txt
+
+    - name: Build
+      run: |
+        ./build.sh "$VERSION"
+
+    - name: Validate
+      run: |
+        ./validate.sh "$VERSION"
+
+    - name: Package and Publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        ./package.sh --publish "$VERSION" "$TAGNAME"

@@ -1,0 +1,4 @@
+language,source,population,n_nodes,n_edges,clustering_weighted,clustering_binary
+Spanish,SWOW,Healthy,443,583,0.031465558105871656,0.15795867037402028
+English,SWOW,Healthy,467,661,0.02847206061120223,0.14023143166612118
+Chinese,SWOW,Healthy,476,768,0.02765146999063174,0.17603596217041595

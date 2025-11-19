@@ -1,0 +1,5 @@
+method,n_nodes,n_edges,clustering,in_sweet_spot
+all_words,4852,89710,0.0033546270951053335,False
+no_stopwords,4740,75164,0.004461234300354483,False
+long_words,3962,53054,0.019586086871288686,False
+content_only,4484,67679,0.00444499972854426,False

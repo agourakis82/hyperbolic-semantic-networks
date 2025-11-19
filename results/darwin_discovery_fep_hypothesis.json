@@ -1,0 +1,118 @@
+{
+  "hypothesis": "\nFEP (First Episode Psychosis) shows ELEVATED clustering (hyperconnectivity)\nvs. healthy baseline, despite literature reporting FRAGMENTATION.\n\nPossible reconciliations:\n1. Edge-level vs. Network-level clustering (different metrics)\n2. Early FEP vs. Chronic schizophrenia (stage-dependent)\n3. Methodological differences (speech parsing vs. word associations)\n4. Local vs. Global connectivity (preserved local, fragmented global)\n5. Compensatory mechanism (hyperconnectivity coexists with fragmentation)\n",
+  "pro_evidence": [
+    {
+      "source": "Aberrant Salience Theory (Kapur 2003)",
+      "finding": "Early psychosis characterized by HYPER-salience (too much attention to stimuli)",
+      "mechanism": "Dopaminergic hyperactivity \u2192 increased associations",
+      "implication": "Could manifest as elevated semantic connectivity",
+      "strength": "Theoretical (not empirical network data)",
+      "confidence": 0.6
+    },
+    {
+      "source": "Literature on prodromal/CHR-P",
+      "finding": "Some studies show INCREASED brain connectivity before onset",
+      "mechanism": "Compensatory hyperactivation before breakdown",
+      "implication": "Network hyperconnectivity as early marker?",
+      "strength": "Mixed evidence (neuroimaging, not semantic networks)",
+      "confidence": 0.4
+    },
+    {
+      "source": "Our PMC10031728 clustering values",
+      "finding": "Extracted values [0.04-0.14] higher than SWOW [0.028-0.032]",
+      "mechanism": "May reflect EDGE-level clustering (local triangles preserved)",
+      "implication": "Local clustering \u2260 global connectivity",
+      "strength": "Methodologically uncertain",
+      "confidence": 0.3
+    }
+  ],
+  "contra_evidence": [
+    {
+      "source": "Nettekoven 2023 (PMC10031728)",
+      "finding": "FEP has MORE connected components (fragmented)",
+      "mechanism": "Semantic speech networks more fragmented in FEP",
+      "implication": "CONTRA hyperconnectivity",
+      "strength": "Direct empirical evidence",
+      "confidence": 0.9
+    },
+    {
+      "source": "Pintos 2022 (Longitudinal)",
+      "finding": "Patients have LOWER clustering, improves with treatment",
+      "mechanism": "Network disruption in psychosis",
+      "implication": "CONTRA hyperconnectivity",
+      "strength": "Longitudinal data",
+      "confidence": 0.85
+    },
+    {
+      "source": "Disconnection Hypothesis (Friston)",
+      "finding": "Schizophrenia as disconnection syndrome",
+      "mechanism": "Reduced effective connectivity",
+      "implication": "CONTRA hyperconnectivity",
+      "strength": "Theoretical framework, widely accepted",
+      "confidence": 0.8
+    }
+  ],
+  "reconciliations": [
+    {
+      "explanation": "LOCAL-GLOBAL DISSOCIATION",
+      "mechanism": "Local clustering (triangles) can be HIGH while global connectivity (components) is FRAGMENTED",
+      "evidence": "Network can have dense local neighborhoods but poor long-range connections",
+      "mathematical": "High C (local triangles) + Many components (global fragmentation) = COMPATIBLE!",
+      "plausibility": 0.8,
+      "testable": "Compute both metrics on same data",
+      "our_data": "We have clustering values, PMC has component counts - BOTH can be true!"
+    },
+    {
+      "explanation": "EDGE vs NETWORK CLUSTERING",
+      "mechanism": "PMC may report edge-level clustering (triangles around edges), we computed network-level",
+      "evidence": "Different clustering definitions in network science",
+      "mathematical": "C_edge \u2260 C_network (different normalizations)",
+      "plausibility": 0.7,
+      "testable": "Re-extract PMC values, clarify which clustering type",
+      "our_data": "Need to verify our extraction method"
+    },
+    {
+      "explanation": "STAGE-DEPENDENT TRAJECTORY",
+      "mechanism": "EARLY: Hyperconnectivity (compensation) \u2192 CHRONIC: Fragmentation (breakdown)",
+      "evidence": "Pintos 2022 shows clustering INCREASES with stabilization",
+      "mathematical": "U-shaped or inverted-U trajectory across illness progression",
+      "plausibility": 0.6,
+      "testable": "Compare FEP (early) vs chronic schizophrenia",
+      "our_data": "PMC is FEP (early), literature may be chronic - different stages!"
+    },
+    {
+      "explanation": "METHODOLOGICAL ARTIFACT",
+      "mechanism": "Speech NLP (entities + relations) vs word associations (direct) = incomparable",
+      "evidence": "Different network types, different baselines",
+      "mathematical": "SWOW baseline invalid for speech networks",
+      "plausibility": 0.9,
+      "testable": "Need matched healthy speech baseline from PMC",
+      "our_data": "We compared incompatible methodologies - this is the error!"
+    }
+  ],
+  "bayesian_analysis": {
+    "posterior_probability": 0.2,
+    "decision": "REJECT hypothesis (strong contra evidence)",
+    "best_reconciliation": {
+      "explanation": "METHODOLOGICAL ARTIFACT",
+      "mechanism": "Speech NLP (entities + relations) vs word associations (direct) = incomparable",
+      "evidence": "Different network types, different baselines",
+      "mathematical": "SWOW baseline invalid for speech networks",
+      "plausibility": 0.9,
+      "testable": "Need matched healthy speech baseline from PMC",
+      "our_data": "We compared incompatible methodologies - this is the error!"
+    },
+    "recommendation": {
+      "action": "REMOVE hyperconnectivity claim from manuscript",
+      "rationale": "Evidence strongly favors fragmentation",
+      "alternative": "Focus on robust findings (curvature, sweet spot, depression)",
+      "risk": "Low (safe, conservative)"
+    }
+  },
+  "final_recommendation": {
+    "action": "REMOVE hyperconnectivity claim from manuscript",
+    "rationale": "Evidence strongly favors fragmentation",
+    "alternative": "Focus on robust findings (curvature, sweet spot, depression)",
+    "risk": "Low (safe, conservative)"
+  }
+}

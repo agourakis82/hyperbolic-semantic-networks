@@ -1,0 +1,7 @@
+disorder,stage,metric,value,n_subjects,paper_id,method
+First Episode Psychosis,FEP,clustering_coefficient,0.04,1,PMC10031728,PDF_manual_extraction
+First Episode Psychosis,FEP,clustering_coefficient,0.05,1,PMC10031728,PDF_manual_extraction
+First Episode Psychosis,FEP,clustering_coefficient,0.09,1,PMC10031728,PDF_manual_extraction
+First Episode Psychosis,FEP,clustering_coefficient,0.1,1,PMC10031728,PDF_manual_extraction
+First Episode Psychosis,FEP,clustering_coefficient,0.12,1,PMC10031728,PDF_manual_extraction
+First Episode Psychosis,FEP,clustering_coefficient,0.14,1,PMC10031728,PDF_manual_extraction

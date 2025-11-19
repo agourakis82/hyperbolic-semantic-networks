@@ -1,0 +1,89 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Data (large files tracked in releases, not git)
+data/raw/*.csv
+data/raw/*.parquet
+data/raw/*.zip
+data/raw/*.tar.gz
+
+# Temporary
+*.log
+*.tmp
+*.bak
+*.cache
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Keep directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+*.xlsx
+*.zip
+data/external/**/*.xlsx
+data/external/**/*.zip
+*.csv
+*.csv.gz
+data/raw/conceptnet/conceptnet-assertions-5.7.0.csv.gz
+data/raw/SWOW-ZH24/*.csv

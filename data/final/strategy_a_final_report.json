@@ -1,0 +1,58 @@
+{
+  "paper_id": "PMC10031728",
+  "clustering_values": [
+    {
+      "value": 0.14,
+      "group": "FEP",
+      "confidence": "medium"
+    },
+    {
+      "value": 0.12,
+      "group": "FEP",
+      "confidence": "medium"
+    },
+    {
+      "value": 0.1,
+      "group": "General",
+      "confidence": "medium"
+    },
+    {
+      "value": 0.08,
+      "group": "FEP",
+      "confidence": "medium"
+    },
+    {
+      "value": 0.07,
+      "group": "FEP",
+      "confidence": "medium"
+    },
+    {
+      "value": 0.04,
+      "group": "FEP",
+      "confidence": "medium"
+    }
+  ],
+  "statistics": {
+    "FEP": {
+      "n": 5,
+      "mean": 0.09,
+      "std": 0.04,
+      "min": 0.04,
+      "max": 0.14,
+      "in_sweet_spot": true
+    },
+    "General": {
+      "n": 1,
+      "mean": 0.1,
+      "std": 0.0,
+      "min": 0.1,
+      "max": 0.1,
+      "in_sweet_spot": true
+    }
+  },
+  "sweet_spot_range": [
+    0.02,
+    0.15
+  ],
+  "interpretation": "FEP patients are WITHIN sweet spot, not outside. This contradicts initial hypothesis."
+}

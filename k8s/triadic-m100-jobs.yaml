@@ -1,0 +1,141 @@
+---
+# NOTA: Triadic-rewire é computacionalmente intensivo!
+# Tempo estimado: 12-24h por job (M=100)
+# Deploy no T560 (maria) com 32 cores
+#
+# Correções aplicadas ao código:
+# - n_swaps reduzido de edges*10 para edges*1
+# - Cache de to_undirected() para evitar conversões repetidas
+# - Speedup esperado: 10-50x vs código original
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-dutch-triadic-m100
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+    analysis: structural-nulls-fixed
+    language: dutch
+    null-type: triadic
+    M: "100"
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 172800  # 48h timeout
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: dutch
+        null-type: triadic
+    spec:
+      restartPolicy: Never
+      nodeSelector:
+        kubernetes.io/hostname: maria  # T560 32 cores!
+      priorityClassName: normal-priority
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            echo "=== Installing dependencies ==="
+            pip install --quiet --no-cache-dir numpy scipy networkx tqdm GraphRicciCurvature
+            
+            echo "=== Starting Dutch triadic M=100 ==="
+            cd /workspace/code/analysis
+            
+            python 07_structural_nulls_single_lang.py \
+              --language dutch \
+              --null-type triadic \
+              --edge-file /workspace/data/processed/dutch_edges.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 100 \
+              --alpha 0.5 \
+              --seed 127
+            
+            echo "=== Dutch triadic M=100 COMPLETED ==="
+            ls -lh /workspace/results/structural_nulls/dutch_triadic-rewire_nulls.json
+        resources:
+          requests:
+            memory: "16Gi"
+            cpu: "8"
+          limits:
+            memory: "32Gi"
+            cpu: "16"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nulls-chinese-triadic-m100
+  namespace: pcs-meta-repo
+  labels:
+    kueue.x-k8s.io/queue-name: pcs-meta-repo
+    analysis: structural-nulls-fixed
+    language: chinese
+    null-type: triadic
+    M: "100"
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 172800  # 48h timeout
+  template:
+    metadata:
+      labels:
+        analysis: structural-nulls
+        language: chinese
+        null-type: triadic
+    spec:
+      restartPolicy: Never
+      nodeSelector:
+        kubernetes.io/hostname: maria  # T560 32 cores!
+      priorityClassName: normal-priority
+      containers:
+      - name: analysis
+        image: python:3.10-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            echo "=== Installing dependencies ==="
+            pip install --quiet --no-cache-dir numpy scipy networkx tqdm GraphRicciCurvature
+            
+            echo "=== Starting Chinese triadic M=100 ==="
+            cd /workspace/code/analysis
+            
+            python 07_structural_nulls_single_lang.py \
+              --language chinese \
+              --null-type triadic \
+              --edge-file /workspace/data/processed/chinese_edges.csv \
+              --output-dir /workspace/results/structural_nulls \
+              --M 100 \
+              --alpha 0.5 \
+              --seed 129
+            
+            echo "=== Chinese triadic M=100 COMPLETED ==="
+            ls -lh /workspace/results/structural_nulls/chinese_triadic-rewire_nulls.json
+        resources:
+          requests:
+            memory: "16Gi"
+            cpu: "8"
+          limits:
+            memory: "32Gi"
+            cpu: "16"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+

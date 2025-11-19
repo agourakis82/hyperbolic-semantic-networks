@@ -1,0 +1,15 @@
+{
+  "dataset": "WordNet",
+  "type": "hierarchical_taxonomy",
+  "n_nodes_total": 500,
+  "n_edges_total": 1054,
+  "n_nodes_lcc": 500,
+  "n_edges_lcc": 1054,
+  "density": 0.004224448897795591,
+  "relations": [
+    "hypernym",
+    "hyponym",
+    "meronym",
+    "holonym"
+  ]
+}

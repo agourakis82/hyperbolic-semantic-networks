@@ -1,0 +1,9 @@
+{
+  "dataset": "BabelNet Russian",
+  "language": "ru",
+  "kappa_mean": -0.02992914918202271,
+  "kappa_std": 0.25949672531394574,
+  "kappa_min": -0.8090909090909097,
+  "kappa_max": 0.16666666666666674,
+  "verdict": "EUCLIDEAN"
+}

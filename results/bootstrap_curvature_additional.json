@@ -1,0 +1,42 @@
+{
+  "ConceptNet (EN)":{
+    "mean_full":-0.2107635535,
+    "bootstrap_mean":-0.2240196211,
+    "ci_low":-0.2406445931,
+    "ci_high":-0.2060398878,
+    "std":0.0093826951,
+    "n_samples":50
+  },
+  "ConceptNet (PT)":{
+    "mean_full":-0.1650932162,
+    "bootstrap_mean":-0.1369784709,
+    "ci_low":-0.1542692807,
+    "ci_high":-0.1215226437,
+    "std":0.0090601305,
+    "n_samples":50
+  },
+  "WordNet (EN)":{
+    "mean_full":-0.0015320866,
+    "bootstrap_mean":0.0055063037,
+    "ci_low":-0.0043638736,
+    "ci_high":0.0172272382,
+    "std":0.006082002,
+    "n_samples":50
+  },
+  "BabelNet (RU)":{
+    "mean_full":-0.0299291492,
+    "bootstrap_mean":-0.0178376351,
+    "ci_low":-0.0339779339,
+    "ci_high":-0.0014288396,
+    "std":0.008438762,
+    "n_samples":50
+  },
+  "BabelNet (AR)":{
+    "mean_full":-0.0123620309,
+    "bootstrap_mean":0.009878982,
+    "ci_low":-0.0093820348,
+    "ci_high":0.0471320346,
+    "std":0.017365664,
+    "n_samples":50
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "iteration": 2,
+  "focus": "Distributional properties",
+  "insights": [
+    {
+      "insight": "ASYMMETRIC null distribution",
+      "evidence": "Skewness = +0.525",
+      "implication": "Null model generates systematically biased geometries",
+      "novelty_score": 8
+    },
+    {
+      "insight": "LIGHT tails in null distribution",
+      "evidence": "Kurtosis = -1.255",
+      "implication": "Fewer extreme configurations than Gaussian",
+      "novelty_score": 7
+    },
+    {
+      "insight": "HIGH cross-language homogeneity",
+      "evidence": "CV(means) = 0.091",
+      "implication": "Universal null model behavior across languages",
+      "novelty_score": 9
+    }
+  ],
+  "data": {
+    "pooled_skew": 0.5247994295929772,
+    "pooled_kurtosis": -1.254959082972614,
+    "cv_means": 0.09070992747287836,
+    "cv_stds": 0.1470005094275129,
+    "extreme_values_pct": 0.0
+  }
+}

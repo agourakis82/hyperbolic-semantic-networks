@@ -1,0 +1,14 @@
+{
+  "dataset": "ConceptNet Portuguese",
+  "language": "pt",
+  "n_nodes": 489,
+  "n_edges": 1578,
+  "density": 0.013225384692748667,
+  "kappa_mean": -0.16509321618641049,
+  "kappa_std": 0.3348608751499133,
+  "kappa_min": -0.7414349510130913,
+  "kappa_max": 1.0,
+  "kappa_median": -0.21362193698691767,
+  "verdict": "HYPERBOLIC",
+  "computation_time_seconds": 0.2812681198120117
+}

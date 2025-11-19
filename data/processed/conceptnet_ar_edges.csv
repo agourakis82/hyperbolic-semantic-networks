@@ -1,0 +1,5 @@
+source,target,weight,relation
+ياء,ي,2.828,/r/RelatedTo
+ء,ا,2.0,/r/RelatedTo
+ء,و,2.0,/r/RelatedTo
+ء,ي,2.0,/r/RelatedTo

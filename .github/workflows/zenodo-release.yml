@@ -1,0 +1,56 @@
+name: Zenodo DOI Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  zenodo-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Create release archive
+        run: |
+          tar -czf release-archive.tar.gz \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='*.tar.gz' \
+            .
+      
+      - name: Get release info
+        id: release
+        run: |
+          echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      
+      - name: Verify Zenodo metadata
+        run: |
+          if [ ! -f .zenodo.json ]; then
+            echo "Error: .zenodo.json not found"
+            exit 1
+          fi
+          cat .zenodo.json
+      
+      - name: Comment on release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const release = context.payload.release;
+            if (release) {
+              github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.name,
+                issue_number: release.id,
+                body: `🎉 Release ${release.tag_name} created!\n\n` +
+                      `Zenodo will automatically create a DOI for this release.\n\n` +
+                      `**Next steps:**\n` +
+                      `1. Wait for Zenodo webhook (5-10 minutes)\n` +
+                      `2. Check https://zenodo.org/search?q=${context.repo.repo}\n` +
+                      `3. Update README.md and CITATION.cff with DOI`
+              });
+            }
+

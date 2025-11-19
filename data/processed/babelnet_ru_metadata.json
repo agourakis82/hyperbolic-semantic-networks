@@ -1,0 +1,9 @@
+{
+  "dataset": "BabelNet",
+  "language": "ru",
+  "source": "BabelNet API v9",
+  "api_queries": 120,
+  "n_nodes": 493,
+  "n_edges": 523,
+  "density": 0.0021562031036131864
+}

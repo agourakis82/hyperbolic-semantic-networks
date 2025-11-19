@@ -1,0 +1,527 @@
+{
+  "paper_id": "PMC10031728",
+  "clustering_values": [
+    {
+      "value": 0.14,
+      "group": "Unknown",
+      "page": 7,
+      "context_snippet": "are novel and clinical imple-\nmentation hinges on appropriate reliability, we probed the \nreliability of our network measures within subjects. For \nthis, we calculated the intraclass correlation coefficient \n(ICC) of the main variables of interest across all subjects \nin the clinical dataset, exclud...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.14,
+      "group": "Unknown",
+      "page": 1,
+      "context_snippet": "\n\n=== PAGE 1 ===\n\nS142\nSchizophrenia Bulletin vol. 49 suppl. 2 pp. S142\u2013S152, 2023 \nhttps://doi.org/10.1093/schbul/sbac056\n\u00a9 The Author(s) 2023. Published by Oxford University Press on behalf of the Maryland Psychiatric Research Center.\nThis is an Open Access article distributed under the terms of t...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.14,
+      "group": "Unknown",
+      "page": 2,
+      "context_snippet": "se \nextracted relations, netts creates an initial list of network \nedges.\nNext, netts uses the previously identified part of \nspeech tags and dependency structure to extract addi-\ntional edges defined by prepositions or adjectives: For \ninstance, a man on the picture contains a preposition edge \nwhe...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.14,
+      "group": "General",
+      "page": 3,
+      "context_snippet": "econds processing time per 1 minute speech tran-\nscript. We then calculated the number of nodes and edges. \nFig. 1.\u2002 Netts processing pipeline. Netts takes as input a speech transcript and outputs a network representing the semantic content of the \ntranscript: a semantic speech network. Netts combin...",
+      "all_group_mentions": [
+        "General"
+      ]
+    },
+    {
+      "value": 0.14,
+      "group": "Control",
+      "page": 4,
+      "context_snippet": "group differences (see supplementary table 1).\nFig. 2.\u2002 Example speech network. Semantic speech networks map the semantic content of transcribed speech engendered by the \ngrammatical structure. Nodes in the network represent entities mentioned by the speaker (eg, I, man). Edges represent relations b...",
+      "all_group_mentions": [
+        "Control"
+      ]
+    },
+    {
+      "value": 0.14,
+      "group": "FEP",
+      "page": 5,
+      "context_snippet": "\nthe general public. Each datapoint in the scatter plot represents one subject. Values were obtained by averaging across network measures \nfrom the eight TAT picture descriptions. (B) Top row shows number, mean size, and median size of the connected components in the \nspeech graphs (blue bars) and a...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.14,
+      "group": "FEP",
+      "page": 6,
+      "context_snippet": "ontrols (z = 0.13, \nP = .90).\nWe also calculated the median connected component \nsize, which should be less influenced than mean size by \nthe 1 or 2 very large connected components speech net-\nworks often contain. The median connected component \nsize should hence give a better indication of the size...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.14,
+      "group": "Unknown",
+      "page": 10,
+      "context_snippet": "l conflict of interest.\nFunding\nS.E.M. was supported by the Accelerate Programme for \nScientific Discovery, funded by Schmidt Futures and a \nFellowship from The Alan Turing Institute, London. P.E.V. \nis supported by a fellowship from MQ: Transforming \nMental Health (MQF17_24). This work was supporte...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.14,
+      "group": "Unknown",
+      "page": 11,
+      "context_snippet": "of the net-\nwork algorithm and toolbox. All authors discussed \nthe data interpretation and reviewed and revised the \nmanuscript.\n\n\n=== PAGE 11 ===\n\nS152\nC. R. Nettekoven et al\nReferences\n\t 1.\t Liddle PF, Ngan ET, Caissie SL, et al. Thought and language \nindex: an instrument for assessing thought and...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.12,
+      "group": "Unknown",
+      "page": 7,
+      "context_snippet": "ntraclass correlation of ICC = 0.04, \nF(50,350) = 1.37; P = .058). These results indicate that \nthe semantic speech network measures assessed were rela-\ntively consistent within subjects of the clinical sample. We \nalso calculated the ICC for the general public networks \nand found that all variables...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.12,
+      "group": "CHR-P",
+      "page": 3,
+      "context_snippet": "high risk \nof psychosis (CHR-P), collected in person (total N = \n53).30 CHR-P participants met the ultra high risk criteria \nfrom the Comprehensive Assessment of At-Risk Mental \nStates (CAARMS31). Controls had no history of psychi-\natric illness. Further recruitment and demographic details \nare give...",
+      "all_group_mentions": [
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.12,
+      "group": "General",
+      "page": 4,
+      "context_snippet": "their mean and median size. \nHere, a connected component is a subgraph of the orig-\ninal graph where all nodes are connected to each other by \na path, ignoring edge directions. We decided to focus our \nanalysis on connected components because when visual-\nizing networks from the general population d...",
+      "all_group_mentions": [
+        "General"
+      ]
+    },
+    {
+      "value": 0.12,
+      "group": "FEP",
+      "page": 5,
+      "context_snippet": " = 23.19, P = < .00001; \nMedian: t = 35.0, P = < .00001; figure 3).\nNetworks in the Clinical Dataset\nThe clinical dataset consisted of 415 transcripts. FEP pa-\ntients spoke trendwise fewer words and more sentences \nthan controls, resulting in shorter sentences (words: \nz = 1.73, P = .08; sentences: ...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.12,
+      "group": "Unknown",
+      "page": 8,
+      "context_snippet": "s measures were number of connected components (CC Number), mean \nconnected component size (CC Mean Size), and median connected component size (CC Median Size). Basic transcript measures were \nnumber of words, number of sentences, and mean sentence length. Established NLP measures included Tangentia...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.12,
+      "group": "Unknown",
+      "page": 9,
+      "context_snippet": "icture description task showing group \ndifferences and the story recall task not showing differ-\nences could be due to a type I or type II error. In light of \nthis, these results should be interpreted cautiously when \ngeneralizing to other tasks and further work is required \nto fully understand thes...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.12,
+      "group": "Unknown",
+      "page": 10,
+      "context_snippet": "hat the research was conducted in the absence of \nany commercial or financial relationships that could be \nconstrued as a potential conflict of interest.\nFunding\nS.E.M. was supported by the Accelerate Programme for \nScientific Discovery, funded by Schmidt Futures and a \nFellowship from The Alan Turi...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.12,
+      "group": "Unknown",
+      "page": 11,
+      "context_snippet": "e \nindex: an instrument for assessing thought and language in \nschizophrenia. Br J Psychiatry. 2002;181:326\u2013330.\n\t 2.\t Pfohl B, Winokur G. The evolution of symptoms in insti-\ntutionalized hebephrenic/catatonic schizophrenics. Br J \nPsychiatry. 1982;141:567\u201372. doi:10.1192/bjp.141.6.567.\n\t 3.\t Roche ...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.1,
+      "group": "Unknown",
+      "page": 1,
+      "context_snippet": "\n\n=== PAGE 1 ===\n\nS142\nSchizophrenia Bulletin vol. 49 suppl. 2 pp. S142\u2013S152, 2023 \nhttps://doi.org/10.1093/schbul/sbac056\n\u00a9 The Author(s) 2023. Published by Oxford University Press on behalf of the Maryland Psychiatric Research Center.\nThis is an Open Access article distributed under the terms of t...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.1,
+      "group": "Unknown",
+      "page": 7,
+      "context_snippet": " = 0.08, F(50,350) = 1.69; P < .01), while \nthe median number of connected components showed a \ntrendwise significant intraclass correlation of ICC = 0.04, \nF(50,350) = 1.37; P = .058). These results indicate that \nthe semantic speech network measures assessed were rela-\ntively consistent within sub...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.1,
+      "group": "Unknown",
+      "page": 11,
+      "context_snippet": "ought and language \nindex: an instrument for assessing thought and language in \nschizophrenia. Br J Psychiatry. 2002;181:326\u2013330.\n\t 2.\t Pfohl B, Winokur G. The evolution of symptoms in insti-\ntutionalized hebephrenic/catatonic schizophrenics. Br J \nPsychiatry. 1982;141:567\u201372. doi:10.1192/bjp.141.6....",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.1,
+      "group": "General",
+      "page": 4,
+      "context_snippet": "nnected component is a subgraph of the orig-\ninal graph where all nodes are connected to each other by \na path, ignoring edge directions. We decided to focus our \nanalysis on connected components because when visual-\nizing networks from the general population dataset it was \nclear the networks often...",
+      "all_group_mentions": [
+        "General"
+      ]
+    },
+    {
+      "value": 0.1,
+      "group": "Unknown",
+      "page": 9,
+      "context_snippet": "netheless, semantic speech networks \nalso include additional information. For example, netts \nrecords temporal information about the order in which \nedges were formed in the networks, which could be used \nto give an indication of network coherence or staying on \ntopic. Furthermore, the edges include...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.1,
+      "group": "Unknown",
+      "page": 10,
+      "context_snippet": " that the research was conducted in the absence of \nany commercial or financial relationships that could be \nconstrued as a potential conflict of interest.\nFunding\nS.E.M. was supported by the Accelerate Programme for \nScientific Discovery, funded by Schmidt Futures and a \nFellowship from The Alan Tu...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.08,
+      "group": "Unknown",
+      "page": 7,
+      "context_snippet": "iate reliability, we probed the \nreliability of our network measures within subjects. For \nthis, we calculated the intraclass correlation coefficient \n(ICC) of the main variables of interest across all subjects \nin the clinical dataset, excluding 1 participant who had \nno speech excerpt for TAT pict...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.08,
+      "group": "Unknown",
+      "page": 1,
+      "context_snippet": ", University of Cambridge, Cambridge, UK; 2Department of Psychosis Studies, \nInstitute of Psychiatry, Psychology and Neuroscience, King\u2019s College London, London, UK; 3The Alan Turing Institute, London, \nUK; 4Theoretical and Applied Linguistics, Faculty of Modern and Medieval Languages, University of...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.08,
+      "group": "Control",
+      "page": 2,
+      "context_snippet": "ssessments using the TLI. For example,13 created \nnetworks to measure disorganized speech, in which nodes \nwere represented as words, and edges connected words \nin the order in which they were spoken. These word-\ntrajectory networks showed patient-control differences \nin speech and predicted diagnos...",
+      "all_group_mentions": [
+        "Control"
+      ]
+    },
+    {
+      "value": 0.08,
+      "group": "Unknown",
+      "page": 3,
+      "context_snippet": "ng the speech graph \nmeasures proposed by Mota et al,12,13 the results of which \nare reported in Morgan et al22 and Spencer et al.32 Here, \nwe used this clinical dataset to investigate differences in \nour novel semantic speech network measures. We used \nthe established NLP measures solely to context...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.08,
+      "group": "Control",
+      "page": 5,
+      "context_snippet": "between the netts meas-\nures and other speech measures, we calculated Pearson\u2019s \ncorrelation coefficients between all measures. The re-\nsulting correlation matrix was clustered using the popular \nLouvain method for community detection.36\nFinally, we investigated the relationships between the \nnetts ...",
+      "all_group_mentions": [
+        "Control"
+      ]
+    },
+    {
+      "value": 0.08,
+      "group": "FEP",
+      "page": 6,
+      "context_snippet": "ed components in the \nspeech graphs (blue bars) and a randomly chosen subset of the size-matched random graphs (gray bars). Bottom row shows normalized \nnumber, mean size, and median size of the connected components in speech graphs.\n\n\n=== PAGE 6 ===\n\nS147\nSemantic Speech Networks in Early Psychosis...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.08,
+      "group": "FEP",
+      "page": 8,
+      "context_snippet": " Early Psychosis\nThis difference between FEP patients and CHR-P \nparticipants in the amount of speech was reflected in \nthe semantic speech networks. FEP patient networks \nconsisted of fewer nodes (z = \u22122.44, P = .01) and \nfewer edges (z = \u22122.9, P < .01) than CHR-P networks. \nNetwork size did not di...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.08,
+      "group": "Unknown",
+      "page": 9,
+      "context_snippet": "ontrols. The pre-\ncise nature of this connecting mechanism and how it is \naltered in patients could be investigated in future research \nusing the semantic speech networks generated by netts.\nRelationships between the network connectivity meas-\nures and the TLI and PANSS scores were strongest for \nth...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.08,
+      "group": "CHR-P",
+      "page": 10,
+      "context_snippet": "nsitivity analyses \ncontrolling for potential confounds (number of words \nand mean sentence length) concluded that the overall \npattern of patient-control differences was robust, we \ncannot rule out the possibility that group differences in \nthe semantic speech network measures might be driven \nby o...",
+      "all_group_mentions": [
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.08,
+      "group": "Unknown",
+      "page": 11,
+      "context_snippet": "nt of the net-\nwork algorithm and toolbox. All authors discussed \nthe data interpretation and reviewed and revised the \nmanuscript.\n\n\n=== PAGE 11 ===\n\nS152\nC. R. Nettekoven et al\nReferences\n\t 1.\t Liddle PF, Ngan ET, Caissie SL, et al. Thought and language \nindex: an instrument for assessing thought ...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.07,
+      "group": "Unknown",
+      "page": 7,
+      "context_snippet": "er of connected components showed a \ntrendwise significant intraclass correlation of ICC = 0.04, \nF(50,350) = 1.37; P = .058). These results indicate that \nthe semantic speech network measures assessed were rela-\ntively consistent within subjects of the clinical sample. We \nalso calculated the ICC f...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.07,
+      "group": "Control",
+      "page": 2,
+      "context_snippet": "ared early in the \ndisorder, was present in the majority of cases, and did \nnot resolve over 30 years of investigation.2 More gen-\nerally, FTD has been related to more severe forms of \n\n\n=== PAGE 2 ===\n\nS143\nSemantic Speech Networks in Early Psychosis\npsychosis,3,4 lower quality of life5 and has bee...",
+      "all_group_mentions": [
+        "Control"
+      ]
+    },
+    {
+      "value": 0.07,
+      "group": "Control",
+      "page": 5,
+      "context_snippet": "e \nnetts measures and symptom and TLI scores, using linear \nregression, controlling for group membership as covariates.\nResults\nGeneral Public Networks\nWe first constructed semantic speech networks from the \n2861 speech transcripts obtained from 436 members of \nthe general public. 16 of the resultin...",
+      "all_group_mentions": [
+        "Control"
+      ]
+    },
+    {
+      "value": 0.07,
+      "group": "FEP",
+      "page": 6,
+      "context_snippet": "he connected components in the \nspeech graphs (blue bars) and a randomly chosen subset of the size-matched random graphs (gray bars). Bottom row shows normalized \nnumber, mean size, and median size of the connected components in speech graphs.\n\n\n=== PAGE 6 ===\n\nS147\nSemantic Speech Networks in Early...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.07,
+      "group": "FEP",
+      "page": 8,
+      "context_snippet": "Early Psychosis\nThis difference between FEP patients and CHR-P \nparticipants in the amount of speech was reflected in \nthe semantic speech networks. FEP patient networks \nconsisted of fewer nodes (z = \u22122.44, P = .01) and \nfewer edges (z = \u22122.9, P < .01) than CHR-P networks. \nNetwork size did not dif...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.07,
+      "group": "Control",
+      "page": 9,
+      "context_snippet": "speech compared with controls. The pre-\ncise nature of this connecting mechanism and how it is \naltered in patients could be investigated in future research \nusing the semantic speech networks generated by netts.\nRelationships between the network connectivity meas-\nures and the TLI and PANSS scores ...",
+      "all_group_mentions": [
+        "Control"
+      ]
+    },
+    {
+      "value": 0.07,
+      "group": "Unknown",
+      "page": 10,
+      "context_snippet": "erate Science\u2019s Machine Learning \nClinic for their help in packaging netts. The authors de-\nclare that the research was conducted in the absence of \nany commercial or financial relationships that could be \nconstrued as a potential conflict of interest.\nFunding\nS.E.M. was supported by the Accelerate ...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.07,
+      "group": "Unknown",
+      "page": 11,
+      "context_snippet": " net-\nwork algorithm and toolbox. All authors discussed \nthe data interpretation and reviewed and revised the \nmanuscript.\n\n\n=== PAGE 11 ===\n\nS152\nC. R. Nettekoven et al\nReferences\n\t 1.\t Liddle PF, Ngan ET, Caissie SL, et al. Thought and language \nindex: an instrument for assessing thought and langu...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.04,
+      "group": "Unknown",
+      "page": 7,
+      "context_snippet": "nt \n(ICC) of the main variables of interest across all subjects \nin the clinical dataset, excluding 1 participant who had \nno speech excerpt for TAT picture 8. Both number of \nconnected components and mean size of connected \ncomponents had a significant intraclass correlation (CC \nNumber: ICC = 0.14...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.04,
+      "group": "Unknown",
+      "page": 1,
+      "context_snippet": "\n\n=== PAGE 1 ===\n\nS142\nSchizophrenia Bulletin vol. 49 suppl. 2 pp. S142\u2013S152, 2023 \nhttps://doi.org/10.1093/schbul/sbac056\n\u00a9 The Author(s) 2023. Published by Oxford University Press on behalf of the Maryland Psychiatric Research Center.\nThis is an Open Access article distributed under the terms of t...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.04,
+      "group": "Unknown",
+      "page": 2,
+      "context_snippet": "where the connection between \nideas is tenuous or extraneous ideas intrude into the \ntrain of thought.1 Several studies have highlighted the \nimportance of FTD. A large longitudinal study showed \nloosening of associations in speech appeared early in the \ndisorder, was present in the majority of case...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.04,
+      "group": "FEP",
+      "page": 3,
+      "context_snippet": "ords \nsuch as determiners, eg, replacing a man with man.\nConstructing Network.\u2003  Finally, netts constructs a se-\nmantic speech network from the edge list using the \nnetworkX library29 and the network is plotted. The \nnetworkX object and the network image are saved for \nlater analysis. The resulting ...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control",
+        "General"
+      ]
+    },
+    {
+      "value": 0.04,
+      "group": "Control",
+      "page": 4,
+      "context_snippet": "roup differences (see supplementary table 1).\nFig. 2.\u2002 Example speech network. Semantic speech networks map the semantic content of transcribed speech engendered by the \ngrammatical structure. Nodes in the network represent entities mentioned by the speaker (eg, I, man). Edges represent relations be...",
+      "all_group_mentions": [
+        "Control"
+      ]
+    },
+    {
+      "value": 0.04,
+      "group": "Control",
+      "page": 5,
+      "context_snippet": "r speech measures, we calculated Pearson\u2019s \ncorrelation coefficients between all measures. The re-\nsulting correlation matrix was clustered using the popular \nLouvain method for community detection.36\nFinally, we investigated the relationships between the \nnetts measures and symptom and TLI scores, ...",
+      "all_group_mentions": [
+        "Control"
+      ]
+    },
+    {
+      "value": 0.04,
+      "group": "FEP",
+      "page": 6,
+      "context_snippet": "ted components in the \nspeech graphs (blue bars) and a randomly chosen subset of the size-matched random graphs (gray bars). Bottom row shows normalized \nnumber, mean size, and median size of the connected components in speech graphs.\n\n\n=== PAGE 6 ===\n\nS147\nSemantic Speech Networks in Early Psychosi...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.04,
+      "group": "FEP",
+      "page": 8,
+      "context_snippet": " \nparticipants (z = \u22122.16, P = .03), but did not differ in \nnumber of sentences (z = 0.7, P = .49). There was no dif-\nference in the number of words and sentences or mean \nsentence length between CHR-P participants and con-\ntrols (all P > .37).\n\n\n=== PAGE 8 ===\n\nS149\nSemantic Speech Networks in Earl...",
+      "all_group_mentions": [
+        "FEP",
+        "CHR-P",
+        "Control"
+      ]
+    },
+    {
+      "value": 0.04,
+      "group": "Unknown",
+      "page": 10,
+      "context_snippet": "te Science\u2019s Machine Learning \nClinic for their help in packaging netts. The authors de-\nclare that the research was conducted in the absence of \nany commercial or financial relationships that could be \nconstrued as a potential conflict of interest.\nFunding\nS.E.M. was supported by the Accelerate Pro...",
+      "all_group_mentions": []
+    },
+    {
+      "value": 0.04,
+      "group": "Unknown",
+      "page": 11,
+      "context_snippet": "f the net-\nwork algorithm and toolbox. All authors discussed \nthe data interpretation and reviewed and revised the \nmanuscript.\n\n\n=== PAGE 11 ===\n\nS152\nC. R. Nettekoven et al\nReferences\n\t 1.\t Liddle PF, Ngan ET, Caissie SL, et al. Thought and language \nindex: an instrument for assessing thought and ...",
+      "all_group_mentions": []
+    }
+  ],
+  "table_mentions": [
+    {
+      "table": "table 1",
+      "context": "ilk test. Because some measures were not nor-\nmally distributed and to mitigate the presence of poten-\ntial outliers, we used the Mann-Whitney U-test to test for \ngroup differences (see supplementary table 1).\nFig. 2.\u2002 Example speech network. Semantic speech networks map the semantic content of transcribed speech engendered by the \ngrammatical structure. Nodes in the network represent entities mentioned by the speaker (eg, I, man). Edges represent relations between \nnodes mentioned by the speaker (eg, "
+    },
+    {
+      "table": "table 2",
+      "context": "d their own community and did not cluster \nwith number of words, number of sentences, measures of \nnetwork size, or any other NLP measures.\nComponent Size Was Associated With TLI Scores\nSupplementary table 2 shows the relationships of the \nnetwork measures with the PANSS symptom scores and \nthe TLI. Median connected component size was nega-\ntively related to TLI Negative scores (t = \u22122.02, P = .049, \nstandardized \u03b2 = \u22120.29). The number of connected com-\nponents and the mean size of connected components"
+    },
+    {
+      "table": "table 3",
+      "context": "sons: P = .0028).\nInspecting the TLI subscales, we observed a relation-\nship between median connected component size and \npoverty of speech (t = \u22122.33, P = .02, standardized \n\u03b2 = \u22120.34; supplementary table 3). Number of con-\nnected components and mean connected component \nsize were related to peculiar logic (CC Number: t = 2.6, \nP = .01, standardized \u03b2 = 0.37; CC Mean Size: t = \u22122.09, \nP = .04, standardized \u03b2 = \u22120.30). However, none of \nthese relationships survived Bonferroni-correction (sig-\nnificance"
+    },
+    {
+      "table": "table 1",
+      "context": "cal dataset \nscored zero for looseness of associations. We note, how-\never, that there were significant group differences in the \nTLI scores in this sample, specifically in the TLI Total \n(P = .0029, table 1 in Morgan et al22) and the TLI Positive \nscale (P < .001; table 1 in Morgan et al22)\nThe increased fragmentation in FEP patient networks \ncompared to controls was not observed with the story \nrecall task. This could be a result of the differing cogni-\ntive demands of the two tasks and the probing o"
+    },
+    {
+      "table": "table 1",
+      "context": "ow-\never, that there were significant group differences in the \nTLI scores in this sample, specifically in the TLI Total \n(P = .0029, table 1 in Morgan et al22) and the TLI Positive \nscale (P < .001; table 1 in Morgan et al22)\nThe increased fragmentation in FEP patient networks \ncompared to controls was not observed with the story \nrecall task. This could be a result of the differing cogni-\ntive demands of the two tasks and the probing of distinct \nmental processes. For example, story re-telling relies"
+    }
+  ],
+  "figure_mentions": [
+    {
+      "figure": "figure 1",
+      "context": "an) \nand outputs a semantic speech network, where nodes are \nentities (eg, I, man) and edges are relations between nodes \n(eg, see).\nIn the following, we describe the netts pipeline, illus-\ntrated in figure 1.\nPreprocessing.\u2003 Netts first cleans the text by expanding \ncommon contractions (eg, I\u2019m becomes I am), and re-\nmoving interjections (eg, Mh, Uhm) and any transcrip-\ntion notes (eg, timestamps). Netts then uses the CoreNLP \nlibrary to perform sentence splitting, tokenization, part \nof speech tagging"
+    },
+    {
+      "figure": "figure 2",
+      "context": "nd the network is plotted. The \nnetworkX object and the network image are saved for \nlater analysis. The resulting graphs are directed and \nunweighted.\nAn example semantic speech network is shown in \nfigure 2.\nData\nWe applied netts to transcribed speech data from two \nstudies: (1) a general population cohort (N = 436), col-\nlected online, and (2) a clinical dataset including N = 16 \nfirst episode psychosis (FEP) patients, N = 13 healthy \ncontrol subjects and N = 24 subjects at clinical high risk \nof psy"
+    },
+    {
+      "figure": "figure 6",
+      "context": "n-\ntactic speech graphs proposed by Mota et al.11,12 In these \nsyntactic speech graphs proposed by Mota et al, words are \nnodes and words spoken consecutively are connected by \nan edge. Supplementary figure 6 illustrates the difference \nbetween syntactic speech graphs and semantic speech \nnetworks derived from the same speech transcript: While \nin syntactic speech graphs11,12 each node is a word (eg, \nI, see, a, man) and words spoken in succession are con-\nnected, semantic speech networks represent the "
+    },
+    {
+      "figure": "figure 3",
+      "context": "er analysis. Our \nfinal general public sample, therefore, consisted of 2845 \nnetworks. The resulting semantic speech networks con-\nsisted of 15.77\u00a0\u00b1\u00a05.03 nodes and 15.04\u00a0\u00b1\u00a05.61 edges on \naverage; see figure 3.\nSpeech Networks Had Fewer and Larger Components \nThan Random Networks\nCompared to size-matched random networks, the speech \nnetworks had fewer connected components (t =\u221228.51, \nP = < .00001, Mean \u00b1 Std: \u22120.55\u00a0\u00b1\u00a00.41); see figure 3. \nThese connected components were also significantly \nlarger than t"
+    },
+    {
+      "figure": "figure 3",
+      "context": "wer and Larger Components \nThan Random Networks\nCompared to size-matched random networks, the speech \nnetworks had fewer connected components (t =\u221228.51, \nP = < .00001, Mean \u00b1 Std: \u22120.55\u00a0\u00b1\u00a00.41); see figure 3. \nThese connected components were also significantly \nlarger than the connected components of size-matched \nrandom networks (Mean: t = 23.19, P = < .00001; \nMedian: t = 35.0, P = < .00001; figure 3).\nNetworks in the Clinical Dataset\nThe clinical dataset consisted of 415 transcripts. FEP pa-\ntients "
+    },
+    {
+      "figure": "figure 3",
+      "context": "e figure 3. \nThese connected components were also significantly \nlarger than the connected components of size-matched \nrandom networks (Mean: t = 23.19, P = < .00001; \nMedian: t = 35.0, P = < .00001; figure 3).\nNetworks in the Clinical Dataset\nThe clinical dataset consisted of 415 transcripts. FEP pa-\ntients spoke trendwise fewer words and more sentences \nthan controls, resulting in shorter sentences (words: \nz = 1.73, P = .08; sentences: z = \u22122.39, P = .02, mean \nsentence length: z = 2.83, P < .01).\nTh"
+    },
+    {
+      "figure": "figure 4",
+      "context": "es \n4D and 4E.\nPatient Networks Had More and Smaller Components\nThe normalized number of connected components was \nhigher for FEP patient networks than healthy control \nnetworks (z = \u22122.00, P = .046; figure 4A). FEP patients \nalso had a trendwise higher number of connected compo-\nnents than CHR-P participants (z = 1.81, P = .07). There \nwas no significant difference in the normalized number of \nconnected components between CHR-P participants and \ncontrols (z = \u22120.79, P = .43)).\nMean connected component "
+    },
+    {
+      "figure": "figure 4",
+      "context": " \nconnected components between CHR-P participants and \ncontrols (z = \u22120.79, P = .43)).\nMean connected component size was trendwise smaller \nfor FEP patients than healthy controls (z = 1.73, P = .08; \nfigure 4B) and smaller for FEP patients than CHR-P \nparticipants (z = \u22122.01, P = .04). There was no signif-\nicant difference in mean connected component size be-\ntween CHR-P participants and healthy controls (z = 0.13, \nP = .90).\nWe also calculated the median connected component \nsize, which should be less "
+    },
+    {
+      "figure": "figure 4",
+      "context": "onents. Both FEP patients \nand CHR-P participants had significantly smaller me-\ndian connected component size compared to controls \n(z = 2.70, P < .01 for FEPs, z = 2.14, P = .03 for CHR-P \nsubjects; figure 4C). There was no difference in median \nconnected component size between CHR-P participants \nand FEP patients (z = \u22121.16, P = .25).\nSensitivity and Reliability Analyses\nOur normalization procedure controls for network size. \nHowever, to ensure that semantic speech networks cap-\nture signal over and a"
+    },
+    {
+      "figure": "Figure 5",
+      "context": "1918) = 1.93; P < .0001; CC Mean Size: ICC = \n0.07, F(274,1918) = 1.57; P < .0001; CC Median Size: \nICC = 0.12, F(274,1918) = 2.05, P < .0001).\nSemantic Speech Networks May Capture Novel \nInformation\nFigure 5 shows a heatmap of the correlations between \nthe semantic speech network measures and other NLP \nmeasures, calculated using the clinical dataset. The black \nlines denote communities detected using the Louvain \nmethod.36\nAs expected, the number of nodes and number of \nedges of the semantic speech ne"
+    }
+  ],
+  "sample_sizes": [
+    {
+      "n": 436,
+      "context": "etwork, then applied  netts to construct semantic speech networks for a general  population sample (N = 436), and a clinical sample com- prising patients with first episode psychosis (FEP), people  at"
+    },
+    {
+      "n": 53,
+      "context": "e psychosis (FEP), people  at clinical high risk of psychosis (CHR-P), and healthy  controls (total N = 53).  Study Results:  Semantic speech  networks from the general population were more connected "
+    },
+    {
+      "n": 16,
+      "context": "(1) a general population cohort (N = 436), col- lected online, and (2) a clinical dataset including N = 16  first episode psychosis (FEP) patients, N = 13 healthy  control subjects and N = 24 subjects"
+    },
+    {
+      "n": 13,
+      "context": "lected online, and (2) a clinical dataset including N = 16  first episode psychosis (FEP) patients, N = 13 healthy  control subjects and N = 24 subjects at clinical high risk  of psychosis (CHR-P), co"
+    },
+    {
+      "n": 24,
+      "context": "aset including N = 16  first episode psychosis (FEP) patients, N = 13 healthy  control subjects and N = 24 subjects at clinical high risk  of psychosis (CHR-P), collected in person (total N =  53).30 "
+    }
+  ],
+  "summary": {
+    "n_clustering_values": 51,
+    "groups_identified": {
+      "FEP": 10,
+      "CHR-P": 2,
+      "Control": 8,
+      "General": 3,
+      "Unknown": 28
+    }
+  }
+}

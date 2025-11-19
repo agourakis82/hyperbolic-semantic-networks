@@ -1,0 +1,24 @@
+[package]
+name = "hyperbolic-curvature"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[lib]
+name = "hyperbolic_curvature"
+crate-type = ["cdylib", "rlib"]  # For FFI
+
+[dependencies]
+ndarray.workspace = true
+rayon.workspace = true
+libc.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+
+# [[bench]]
+# name = "wasserstein_bench"
+# harness = false
+# TODO: Add benchmarks later
+

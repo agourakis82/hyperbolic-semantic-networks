@@ -1,0 +1,7 @@
+{
+  "dataset": "ConceptNet",
+  "language": "ar",
+  "n_nodes": 5,
+  "n_edges": 4,
+  "density": 0.2
+}

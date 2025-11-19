@@ -1,0 +1,82 @@
+{
+  "test_purpose": "Response to Reviewer #1 ER anomaly concern",
+  "parameters": {
+    "N": 500,
+    "p": 0.006,
+    "alphas": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "seed": 42
+  },
+  "results": {
+    "0.1": {
+      "alpha": 0.1,
+      "n_nodes": 464,
+      "n_edges": 718,
+      "kappa_mean": -0.612198567449264,
+      "kappa_std": 0.39260548421513003,
+      "kappa_median": -0.75,
+      "kappa_min": -1.2428571428571433,
+      "kappa_max": 0.4999999999999999,
+      "geometry": "HYPERBOLIC",
+      "computation_time": 0.38373279571533203
+    },
+    "0.25": {
+      "alpha": 0.25,
+      "n_nodes": 464,
+      "n_edges": 718,
+      "kappa_mean": -0.48759865366759514,
+      "kappa_std": 0.3782041386628966,
+      "kappa_median": -0.625,
+      "kappa_min": -1.0357142857142856,
+      "kappa_max": 0.625,
+      "geometry": "HYPERBOLIC",
+      "computation_time": 0.2859320640563965
+    },
+    "0.5": {
+      "alpha": 0.5,
+      "n_nodes": 464,
+      "n_edges": 718,
+      "kappa_mean": -0.3232087588981739,
+      "kappa_std": 0.25753440555173496,
+      "kappa_median": -0.4166666666666665,
+      "kappa_min": -0.6904761904761905,
+      "kappa_max": 0.5,
+      "geometry": "HYPERBOLIC",
+      "computation_time": 0.31047558784484863
+    },
+    "0.75": {
+      "alpha": 0.75,
+      "n_nodes": 464,
+      "n_edges": 718,
+      "kappa_mean": -0.16160437944908693,
+      "kappa_std": 0.12876720277586748,
+      "kappa_median": -0.20833333333333304,
+      "kappa_min": -0.34523809523809534,
+      "kappa_max": 0.25,
+      "geometry": "HYPERBOLIC",
+      "computation_time": 0.38149547576904297
+    },
+    "1.0": {
+      "alpha": 1.0,
+      "n_nodes": 464,
+      "n_edges": 718,
+      "kappa_mean": 0.0,
+      "kappa_std": 0.0,
+      "kappa_median": 0.0,
+      "kappa_min": 0.0,
+      "kappa_max": 0.0,
+      "geometry": "FLAT/EUCLIDEAN",
+      "computation_time": 0.2983710765838623
+    }
+  },
+  "summary": {
+    "all_negative": false,
+    "any_zero": true,
+    "recommendation": "Use \u03b1=1.0"
+  }
+}

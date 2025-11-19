@@ -1,0 +1,223 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: spanish-config-null-corrected
+  namespace: pcs-meta-repo
+spec:
+  parallelism: 1
+  completions: 1
+  template:
+    metadata:
+      labels:
+        kueue.x-k8s.io/queue-name: pcs-meta-repo
+    spec:
+      restartPolicy: Never
+      nodeSelector:
+        kubernetes.io/hostname: maria
+      containers:
+      - name: spanish-null
+        image: python:3.11-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            pip install --quiet networkx pandas numpy scipy tqdm GraphRicciCurvature
+            cd /workspace/hyperbolic-semantic-networks/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language spanish \
+              --null-type configuration \
+              --edge-file /workspace/hyperbolic-semantic-networks/data/processed/spanish_edges_FINAL.csv \
+              --output-dir /workspace/hyperbolic-semantic-networks/results/nulls_corrected \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 123
+        resources:
+          requests:
+            cpu: "8"
+            memory: "32Gi"
+          limits:
+            cpu: "12"
+            memory: "48Gi"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace
+          type: Directory
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: english-config-null-corrected
+  namespace: pcs-meta-repo
+spec:
+  parallelism: 1
+  completions: 1
+  template:
+    metadata:
+      labels:
+        kueue.x-k8s.io/queue-name: pcs-meta-repo
+    spec:
+      restartPolicy: Never
+      nodeSelector:
+        kubernetes.io/hostname: maria
+      containers:
+      - name: english-null
+        image: python:3.11-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            pip install --quiet networkx pandas numpy scipy tqdm GraphRicciCurvature
+            cd /workspace/hyperbolic-semantic-networks/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language english \
+              --null-type configuration \
+              --edge-file /workspace/hyperbolic-semantic-networks/data/processed/english_edges_FINAL.csv \
+              --output-dir /workspace/hyperbolic-semantic-networks/results/nulls_corrected \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 456
+        resources:
+          requests:
+            cpu: "8"
+            memory: "32Gi"
+          limits:
+            cpu: "12"
+            memory: "48Gi"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace
+          type: Directory
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: chinese-config-null-corrected
+  namespace: pcs-meta-repo
+spec:
+  parallelism: 1
+  completions: 1
+  template:
+    metadata:
+      labels:
+        kueue.x-k8s.io/queue-name: pcs-meta-repo
+    spec:
+      restartPolicy: Never
+      nodeSelector:
+        kubernetes.io/hostname: maria
+      containers:
+      - name: chinese-null
+        image: python:3.11-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            pip install --quiet networkx pandas numpy scipy tqdm GraphRicciCurvature
+            cd /workspace/hyperbolic-semantic-networks/code/analysis
+            python 07_structural_nulls_single_lang.py \
+              --language chinese \
+              --null-type configuration \
+              --edge-file /workspace/hyperbolic-semantic-networks/data/processed/chinese_edges_FINAL.csv \
+              --output-dir /workspace/hyperbolic-semantic-networks/results/nulls_corrected \
+              --M 1000 \
+              --alpha 0.5 \
+              --seed 789
+        resources:
+          requests:
+            cpu: "8"
+            memory: "32Gi"
+          limits:
+            cpu: "12"
+            memory: "48Gi"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace
+          type: Directory
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bootstrap-analysis-corrected
+  namespace: pcs-meta-repo
+spec:
+  parallelism: 1
+  completions: 1
+  template:
+    metadata:
+      labels:
+        kueue.x-k8s.io/queue-name: pcs-meta-repo
+    spec:
+      restartPolicy: Never
+      nodeSelector:
+        kubernetes.io/hostname: maria
+      containers:
+      - name: bootstrap
+        image: python:3.11-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            pip install --quiet networkx pandas numpy scipy GraphRicciCurvature
+            cd /workspace/hyperbolic-semantic-networks/code/analysis
+            python -c "
+import pandas as pd
+import networkx as nx
+from GraphRicciCurvature.OllivierRicci import OllivierRicci
+import numpy as np
+import json
+
+# Bootstrap for all 3 languages
+results = {}
+for lang in ['spanish', 'english', 'chinese']:
+    df = pd.read_csv(f'../../data/processed/{lang}_edges_FINAL.csv')
+    kappas = []
+    
+    for i in range(50):
+        # Subsample 80% of edges
+        df_boot = df.sample(frac=0.8, replace=True, random_state=i)
+        
+        G = nx.DiGraph()
+        for _, row in df_boot.iterrows():
+            G.add_edge(row['source'], row['target'], weight=row['weight'])
+        
+        G_undir = G.to_undirected()
+        if not nx.is_connected(G_undir):
+            largest = max(nx.connected_components(G_undir), key=len)
+            G_undir = G_undir.subgraph(largest).copy()
+        
+        orc = OllivierRicci(G_undir, alpha=0.5, verbose='ERROR')
+        orc.compute_ricci_curvature()
+        
+        curvs = [orc.G[u][v]['ricciCurvature'] for u, v in orc.G.edges()]
+        kappas.append(np.mean(curvs))
+    
+    results[lang] = {
+        'mean': float(np.mean(kappas)),
+        'std': float(np.std(kappas)),
+        'cv': float(np.std(kappas) / abs(np.mean(kappas)) * 100)
+    }
+
+with open('../../results/bootstrap_corrected.json', 'w') as f:
+    json.dump(results, f, indent=2)
+print('✅ Bootstrap complete')
+"
+        resources:
+          requests:
+            cpu: "16"
+            memory: "64Gi"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace
+          type: Directory
+

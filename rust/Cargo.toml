@@ -1,0 +1,24 @@
+[workspace]
+members = ["curvature", "null_models"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Dr. Demetrios Agourakis"]
+license = "MIT OR Apache-2.0"
+
+[workspace.dependencies]
+# Numerical computation
+ndarray = "0.16"
+rayon = "1.8"  # Parallel processing
+
+# Graph library
+petgraph = "0.6"
+
+# FFI
+libc = "0.2"
+
+# Testing
+criterion = { version = "0.5", features = ["html_reports"] }
+

@@ -1,0 +1,102 @@
+{
+  "all_networks": [
+    {
+      "network": "spanish",
+      "n_nodes": 500,
+      "n_edges": 10820,
+      "clustering": 0.20305517403374423,
+      "n_components": 1,
+      "H_shannon_transition": 5.3085881523754415,
+      "H_shannon_degree": 5.8755984579604865,
+      "H_spectral": 8.946956436379159,
+      "H_von_neumann": 8.817392776832614
+    },
+    {
+      "network": "english",
+      "n_nodes": 500,
+      "n_edges": 13495,
+      "clustering": 0.19451324667343528,
+      "n_components": 1,
+      "H_shannon_transition": 5.666906184314834,
+      "H_shannon_degree": 5.85649177346061,
+      "H_spectral": 8.950598547528804,
+      "H_von_neumann": 8.860745229454288
+    },
+    {
+      "network": "chinese",
+      "n_nodes": 500,
+      "n_edges": 9055,
+      "clustering": 0.21459632390407082,
+      "n_components": 1,
+      "H_shannon_transition": 5.0238866988017055,
+      "H_shannon_degree": 5.661942080108761,
+      "H_spectral": 8.943211143720996,
+      "H_von_neumann": 8.780765840445758
+    },
+    {
+      "network": "depression_minimum",
+      "n_nodes": 310,
+      "n_edges": 15078,
+      "clustering": 0.005558033228950405,
+      "n_components": 1,
+      "H_shannon_transition": 6.005610224604483,
+      "H_shannon_degree": 6.775485172891962,
+      "H_spectral": 8.267577723356133,
+      "H_von_neumann": 7.431098727089834
+    },
+    {
+      "network": "depression_mild",
+      "n_nodes": 851,
+      "n_edges": 70717,
+      "clustering": 0.002041381770111582,
+      "n_components": 1,
+      "H_shannon_transition": 6.547812147789005,
+      "H_shannon_degree": 7.716851004725568,
+      "H_spectral": 9.729519970937218,
+      "H_von_neumann": 8.281762017661013
+    },
+    {
+      "network": "depression_moderate",
+      "n_nodes": 628,
+      "n_edges": 44060,
+      "clustering": 0.0031266015597246457,
+      "n_components": 1,
+      "H_shannon_transition": 6.393964170396871,
+      "H_shannon_degree": 7.579156014829436,
+      "H_spectral": 9.289570858307222,
+      "H_von_neumann": 8.1622730237149
+    },
+    {
+      "network": "depression_severe",
+      "n_nodes": 711,
+      "n_edges": 55420,
+      "clustering": 0.0027500493757555873,
+      "n_components": 1,
+      "H_shannon_transition": 6.485091867163095,
+      "H_shannon_degree": 7.615309647413657,
+      "H_spectral": 9.46971168079413,
+      "H_von_neumann": 8.134689282701043
+    }
+  ],
+  "depression_analysis": {
+    "correlations": {
+      "shannon_transition": {
+        "rho": 0.39999999999999997,
+        "p": 0.6
+      },
+      "shannon_degree": {
+        "rho": 0.39999999999999997,
+        "p": 0.6
+      },
+      "spectral": {
+        "rho": 0.39999999999999997,
+        "p": 0.6
+      },
+      "von_neumann": {
+        "rho": 0.19999999999999998,
+        "p": 0.8
+      }
+    },
+    "best": "Shannon (transition)"
+  }
+}

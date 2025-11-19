@@ -1,0 +1,89 @@
+{
+  "es": {
+    "n_nodes": 500,
+    "n_edges": 776,
+    "degree_mean": 3.104,
+    "degree_median": 1.0,
+    "degree_std": 10.97876058578563,
+    "degree_min": 1,
+    "degree_max": 104,
+    "powerlaw": {
+      "alpha": 2.28039013445495,
+      "sigma": 0.09937754759664116,
+      "xmin": 2
+    },
+    "comparison_exponential": {
+      "R": 7.055222094465493,
+      "p": 1.7232526032766717e-12,
+      "better": true
+    },
+    "comparison_lognormal": {
+      "R": -1.2682471789168923,
+      "p": 0.20470969362135405,
+      "better": false,
+      "competitive": true
+    },
+    "scale_free_score": 3,
+    "verdict": "LIKELY SCALE-FREE",
+    "success": true,
+    "n_degrees": 500
+  },
+  "nl": {
+    "n_nodes": 500,
+    "n_edges": 817,
+    "degree_mean": 3.268,
+    "degree_median": 1.0,
+    "degree_std": 11.081163115846639,
+    "degree_min": 1,
+    "degree_max": 156,
+    "powerlaw": {
+      "alpha": 2.0565243276645333,
+      "sigma": 0.07918984637796146,
+      "xmin": 2
+    },
+    "comparison_exponential": {
+      "R": 3.3436050905660943,
+      "p": 0.0008269736549412527,
+      "better": true
+    },
+    "comparison_lognormal": {
+      "R": -0.5739544238262178,
+      "p": 0.5659986430087457,
+      "better": false,
+      "competitive": true
+    },
+    "scale_free_score": 3,
+    "verdict": "LIKELY SCALE-FREE",
+    "success": true,
+    "n_degrees": 500
+  },
+  "zh": {
+    "n_nodes": 500,
+    "n_edges": 799,
+    "degree_mean": 3.196,
+    "degree_median": 1.0,
+    "degree_std": 7.685413716905551,
+    "degree_min": 1,
+    "degree_max": 72,
+    "powerlaw": {
+      "alpha": 2.1276172130861974,
+      "sigma": 0.0799346648800685,
+      "xmin": 2
+    },
+    "comparison_exponential": {
+      "R": 6.315148803971161,
+      "p": 2.699016476614401e-10,
+      "better": true
+    },
+    "comparison_lognormal": {
+      "R": -1.1979140464828788,
+      "p": 0.2309504808013989,
+      "better": false,
+      "competitive": true
+    },
+    "scale_free_score": 3,
+    "verdict": "LIKELY SCALE-FREE",
+    "success": true,
+    "n_degrees": 500
+  }
+}

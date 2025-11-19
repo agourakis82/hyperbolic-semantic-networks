@@ -1,0 +1,31 @@
+{
+  "language": "english",
+  "alpha": 0.5,
+  "n_edges": 640,
+  "n_edges_with_triangles": 199,
+  "pct_edges_with_triangles": 31.093749999999996,
+  "tests": {
+    "logistic_regression": {
+      "coef_kappa": 1.4776565067475587,
+      "coef_deg_min": 1.5849867166546698,
+      "coef_deg_max": 0.4132440626978107,
+      "coef_betweenness": -0.5416513410509476,
+      "accuracy": 0.8234375
+    },
+    "distribution_test": {
+      "mean_with_triangles": -0.002140635249312932,
+      "mean_without_triangles": -0.3729637288802904,
+      "difference": 0.3708230936309775,
+      "ks_statistic": 0.304971569867478,
+      "ks_pvalue": 8.813774521774595e-12,
+      "mann_whitney_u": 60668.0,
+      "mann_whitney_p": 8.918097835868298e-15
+    },
+    "correlation": {
+      "pearson_r": 0.3057350772037887,
+      "pearson_p": 2.5821346629691722e-15,
+      "spearman_rho": 0.3145784816434034,
+      "spearman_p": 3.623046440355478e-16
+    }
+  }
+}

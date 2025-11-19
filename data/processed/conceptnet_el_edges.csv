@@ -1,0 +1,13 @@
+source,target,weight,relation
+οι,ο,2.0,/r/FormOf
+τουσ,ο,2.0,/r/FormOf
+ο,όμικρον,2.0,/r/DerivedFrom
+τα,ο,2.0,/r/FormOf
+το,ο,2.0,/r/FormOf
+των,ο,2.0,/r/FormOf
+ευθυμίασ,τησ,2.0,/r/RelatedTo
+του,ο,2.0,/r/FormOf
+όμικρον,ο,2.0,/r/RelatedTo
+τησ,ο,2.0,/r/FormOf
+ό,ο,2.0,/r/FormOf
+τισ,ο,2.0,/r/FormOf

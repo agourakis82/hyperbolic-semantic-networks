@@ -1,0 +1,25 @@
+[package]
+name = "hyperbolic-null-models"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[lib]
+name = "hyperbolic_null_models"
+crate-type = ["cdylib", "rlib"]  # For FFI
+
+[dependencies]
+petgraph.workspace = true
+rayon.workspace = true
+libc.workspace = true
+rand = "0.8"
+
+[dev-dependencies]
+criterion.workspace = true
+
+# [[bench]]
+# name = "null_models_bench"
+# harness = false
+# TODO: Add benchmarks later
+
