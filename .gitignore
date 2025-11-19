@@ -1,89 +1,82 @@
+
+!data/processed/.gitkeep
+!data/raw/.gitkeep
+# Data (large files tracked in releases, not git)
+# Environments
+# IDEs
+# Jupyter Notebook
+# Keep directory structure
+# LaTeX
+# OS
 # Python
-__pycache__/
-*.py[cod]
+# Temporary
+# pyenv
 *$py.class
+*.aux
+*.bak
+*.bbl
+*.blg
+*.cache
+*.csv
+*.csv.gz
+*.egg
+*.egg-info/
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.py[cod]
 *.so
+*.swo
+*.swp
+*.synctex.gz
+*.tmp
+*.toc
+*.xlsx
+*.zip
+*~
+.DS_Store
+.DS_Store?
 .Python
+.Spotlight-V100
+.Trashes
+._*
+.eggs/
+.env
+.idea/
+.installed.cfg
+.ipynb_checkpoints
+.python-version
+.venv
+.vscode/
+ENV/
+MANIFEST
+Thumbs.db
+__pycache__/
 build/
+data/external/**/*.xlsx
+data/external/**/*.zip
+data/raw/*.csv
+data/raw/*.parquet
+data/raw/*.tar.gz
+data/raw/*.zip
+data/raw/SWOW-ZH24/*.csv
+data/raw/conceptnet/conceptnet-assertions-5.7.0.csv.gz
 develop-eggs/
 dist/
 downloads/
 eggs/
-.eggs/
+ehthumbs.db
+env.bak/
+env/
 lib/
 lib64/
 parts/
 sdist/
 var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
 venv.bak/
-
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Data (large files tracked in releases, not git)
-data/raw/*.csv
-data/raw/*.parquet
-data/raw/*.zip
-data/raw/*.tar.gz
-
-# Temporary
-*.log
-*.tmp
-*.bak
-*.cache
-
-# LaTeX
-*.aux
-*.bbl
-*.blg
-*.fdb_latexmk
-*.fls
-*.log
-*.out
-*.synctex.gz
-*.toc
-
-# Keep directory structure
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-
-*.xlsx
-*.zip
-data/external/**/*.xlsx
-data/external/**/*.zip
-*.csv
+venv/
+wheels/
 *.csv.gz
-data/raw/conceptnet/conceptnet-assertions-5.7.0.csv.gz
-data/raw/SWOW-ZH24/*.csv
+data/raw/conceptnet/*
+data/raw/SWOW-ZH24/*
