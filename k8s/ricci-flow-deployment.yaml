@@ -1,0 +1,354 @@
+# RICCI FLOW - KUBERNETES DEPLOYMENT
+# Real Ollivier-Ricci flow on Darwin Cluster
+# 6 Jobs: 3 languages × 2 types (real + config null)
+
+---
+# Job 1: Spanish Real Network
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ricci-flow-spanish-real
+  namespace: hyperbolic-semantic
+  labels:
+    app: ricci-flow
+    language: spanish
+    network-type: real
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: ricci-flow
+        language: spanish
+        network-type: real
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: maria  # T560 with L4 24GB
+      restartPolicy: Never
+      
+      containers:
+      - name: ricci-flow
+        image: python:3.11-slim
+        
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            echo "Installing dependencies..."
+            pip install --no-cache-dir networkx pandas numpy scipy GraphRicciCurvature tqdm
+            
+            echo "Running Ricci flow analysis..."
+            cd /workspace/code/analysis
+            python ricci_flow_real.py \
+              --language spanish \
+              --network-type real \
+              --edge-file /workspace/data/processed/spanish_edges_FINAL.csv \
+              --output-dir /workspace/results/ricci_flow \
+              --iterations 200 \
+              --step 0.5 \
+              --alpha 0.5
+        
+        resources:
+          requests:
+            memory: "12Gi"
+            cpu: "2"
+          limits:
+            memory: "24Gi"
+            cpu: "4"
+        
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+          type: Directory
+
+---
+# Job 2: Spanish Config Null
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ricci-flow-spanish-config
+  namespace: hyperbolic-semantic
+  labels:
+    app: ricci-flow
+    language: spanish
+    network-type: config
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: ricci-flow
+        language: spanish
+        network-type: config
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: maria
+      restartPolicy: Never
+      
+      containers:
+      - name: ricci-flow
+        image: python:3.11-slim
+        
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --no-cache-dir networkx pandas numpy scipy GraphRicciCurvature tqdm
+            cd /workspace/code/analysis
+            python ricci_flow_real.py \
+              --language spanish \
+              --network-type config \
+              --edge-file /workspace/data/processed/spanish_edges_FINAL.csv \
+              --output-dir /workspace/results/ricci_flow \
+              --iterations 200 \
+              --step 0.5 \
+              --alpha 0.5 \
+              --seed 123
+        
+        resources:
+          requests:
+            memory: "12Gi"
+            cpu: "2"
+          limits:
+            memory: "24Gi"
+            cpu: "4"
+        
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+
+---
+# Job 3: English Real Network
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ricci-flow-english-real
+  namespace: hyperbolic-semantic
+  labels:
+    app: ricci-flow
+    language: english
+    network-type: real
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: ricci-flow
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: maria  # T560 com 32 cores!
+      restartPolicy: Never
+      
+      containers:
+      - name: ricci-flow
+        image: python:3.11-slim
+        
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --no-cache-dir networkx pandas numpy scipy GraphRicciCurvature tqdm
+            cd /workspace/code/analysis
+            python ricci_flow_real.py \
+              --language english \
+              --network-type real \
+              --edge-file /workspace/data/processed/english_edges_FINAL.csv \
+              --output-dir /workspace/results/ricci_flow \
+              --iterations 200 \
+              --step 0.5 \
+              --alpha 0.5
+        
+        resources:
+          requests:
+            memory: "12Gi"
+            cpu: "2"
+          limits:
+            memory: "24Gi"
+            cpu: "4"
+        
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+
+---
+# Job 4: English Config Null
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ricci-flow-english-config
+  namespace: hyperbolic-semantic
+  labels:
+    app: ricci-flow
+    language: english
+    network-type: config
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: maria  # T560 com 32 cores!
+      restartPolicy: Never
+      
+      containers:
+      - name: ricci-flow
+        image: python:3.11-slim
+        
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --no-cache-dir networkx pandas numpy scipy GraphRicciCurvature tqdm
+            cd /workspace/code/analysis
+            python ricci_flow_real.py \
+              --language english \
+              --network-type config \
+              --edge-file /workspace/data/processed/english_edges_FINAL.csv \
+              --output-dir /workspace/results/ricci_flow \
+              --iterations 200 \
+              --step 0.5 \
+              --alpha 0.5 \
+              --seed 456
+        
+        resources:
+          requests:
+            memory: "12Gi"
+            cpu: "2"
+          limits:
+            memory: "24Gi"
+            cpu: "4"
+        
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+
+---
+# Job 5: Chinese Real Network
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ricci-flow-chinese-real
+  namespace: hyperbolic-semantic
+  labels:
+    app: ricci-flow
+    language: chinese
+    network-type: real
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: maria  # T560 L4
+      restartPolicy: Never
+      
+      containers:
+      - name: ricci-flow
+        image: python:3.11-slim
+        
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --no-cache-dir networkx pandas numpy scipy GraphRicciCurvature tqdm
+            cd /workspace/code/analysis
+            python ricci_flow_real.py \
+              --language chinese \
+              --network-type real \
+              --edge-file /workspace/data/processed/chinese_edges_FINAL.csv \
+              --output-dir /workspace/results/ricci_flow \
+              --iterations 200 \
+              --step 0.5 \
+              --alpha 0.5
+        
+        resources:
+          requests:
+            memory: "12Gi"
+            cpu: "2"
+          limits:
+            memory: "24Gi"
+            cpu: "4"
+        
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+
+---
+# Job 6: Chinese Config Null
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ricci-flow-chinese-config
+  namespace: hyperbolic-semantic
+  labels:
+    app: ricci-flow
+    language: chinese
+    network-type: config
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: maria  # T560 com 32 cores - rodar TUDO aqui!
+      restartPolicy: Never
+      
+      containers:
+      - name: ricci-flow
+        image: python:3.11-slim
+        
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            set -e
+            pip install --no-cache-dir networkx pandas numpy scipy GraphRicciCurvature tqdm
+            cd /workspace/code/analysis
+            python ricci_flow_real.py \
+              --language chinese \
+              --network-type config \
+              --edge-file /workspace/data/processed/chinese_edges_FINAL.csv \
+              --output-dir /workspace/results/ricci_flow \
+              --iterations 200 \
+              --step 0.5 \
+              --alpha 0.5 \
+              --seed 789
+        
+        resources:
+          requests:
+            memory: "12Gi"
+            cpu: "2"
+          limits:
+            memory: "24Gi"
+            cpu: "4"
+        
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /home/agourakis82/workspace/hyperbolic-semantic-networks
+

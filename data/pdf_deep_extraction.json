@@ -1,0 +1,83 @@
+[
+  {
+    "file": "PMC10031728.pdf",
+    "pmid": "10031728",
+    "disorder": "schizophrenia",
+    "clustering_values": [
+      0.14,
+      0.1,
+      0.08,
+      0.07,
+      0.12,
+      0.04
+    ],
+    "path_length_values": [],
+    "patient_control_pairs": [],
+    "n_values": [
+      436,
+      53
+    ],
+    "p_values": [],
+    "has_edge_data_hint": true,
+    "n_tables": 0,
+    "text_length": 51549
+  },
+  {
+    "file": "PMC10221724.pdf",
+    "pmid": "10221724",
+    "disorder": "schizophrenia",
+    "clustering_values": [],
+    "path_length_values": [],
+    "patient_control_pairs": [],
+    "n_values": [],
+    "p_values": [
+      0.05
+    ],
+    "has_edge_data_hint": true,
+    "n_tables": 0,
+    "text_length": 49802
+  },
+  {
+    "file": "PMC11836185.pdf",
+    "pmid": "11836185",
+    "disorder": "unknown",
+    "clustering_values": [],
+    "path_length_values": [],
+    "patient_control_pairs": [],
+    "n_values": [],
+    "p_values": [],
+    "has_edge_data_hint": true,
+    "n_tables": 2,
+    "text_length": 229413
+  },
+  {
+    "file": "PMC5737538.pdf",
+    "pmid": "5737538",
+    "disorder": "schizophrenia",
+    "clustering_values": [],
+    "path_length_values": [],
+    "patient_control_pairs": [],
+    "n_values": [],
+    "p_values": [],
+    "has_edge_data_hint": true,
+    "n_tables": 0,
+    "text_length": 72478
+  },
+  {
+    "file": "PMC6866568.pdf",
+    "pmid": "6866568",
+    "disorder": "schizophrenia",
+    "clustering_values": [],
+    "path_length_values": [],
+    "patient_control_pairs": [],
+    "n_values": [
+      79
+    ],
+    "p_values": [
+      0.001
+    ],
+    "has_edge_data_hint": false,
+    "n_tables": 3,
+    "text_length": 69129
+  }
+]

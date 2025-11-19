@@ -1,0 +1,21 @@
+{
+  "paper_id": "PMC10031728",
+  "path_length": [],
+  "degree": [],
+  "modularity": [],
+  "connected_components": [],
+  "network_size": [
+    {
+      "metric": "nodes",
+      "value": 15.77,
+      "group": "General",
+      "context": " from the  2861 speech transcripts obtained from 436 members of  the general public. 16 of the resulting networks were  empty and therefore excluded from further analysis. Our  final general public sa"
+    },
+    {
+      "metric": "edges",
+      "value": 15.04,
+      "group": "General",
+      "context": "transcripts obtained from 436 members of  the general public. 16 of the resulting networks were  empty and therefore excluded from further analysis. Our  final general public sample, therefore, consis"
+    }
+  ]
+}

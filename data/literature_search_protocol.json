@@ -1,0 +1,137 @@
+{
+  "date_created": "2025-11-06T17:49:53.893882",
+  "purpose": "Pre-submission validation - find ALL related work",
+  "timeline": "4 weeks (Week 1: Literature review)",
+  "search_queries": [
+    {
+      "id": "Q1",
+      "query": "\"Ricci curvature\" AND \"semantic network\"",
+      "rationale": "Direct overlap - most critical!",
+      "databases": [
+        "Google Scholar",
+        "Web of Science",
+        "Scopus"
+      ],
+      "expected_n": "0-10",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "Q2",
+      "query": "\"Ollivier-Ricci\" AND \"language\"",
+      "rationale": "OR curvature applied to linguistic data",
+      "databases": [
+        "Google Scholar",
+        "arXiv"
+      ],
+      "expected_n": "0-20",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "Q3",
+      "query": "\"geometric\" AND \"word association\" AND \"network\"",
+      "rationale": "Geometric analysis of word networks",
+      "databases": [
+        "Google Scholar",
+        "PubMed"
+      ],
+      "expected_n": "10-50",
+      "priority": "HIGH"
+    },
+    {
+      "id": "Q4",
+      "query": "\"clustering coefficient\" AND \"curvature\" AND \"psychopathology\"",
+      "rationale": "Clustering-curvature in disorders",
+      "databases": [
+        "PubMed",
+        "PsyArXiv"
+      ],
+      "expected_n": "0-10",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "Q5",
+      "query": "\"hyperbolic geometry\" AND \"semantic\"",
+      "rationale": "Hyperbolic geometry in semantic networks",
+      "databases": [
+        "Google Scholar",
+        "arXiv"
+      ],
+      "expected_n": "10-30",
+      "priority": "HIGH"
+    },
+    {
+      "id": "Q6",
+      "query": "\"network geometry\" AND (\"mental disorder\" OR \"psychopathology\")",
+      "rationale": "Geometric network analysis in psychiatry",
+      "databases": [
+        "PubMed",
+        "bioRxiv"
+      ],
+      "expected_n": "20-50",
+      "priority": "HIGH"
+    },
+    {
+      "id": "Q7",
+      "query": "\"speech graph\" AND (\"curvature\" OR \"geometry\")",
+      "rationale": "Geometric analysis of speech graphs",
+      "databases": [
+        "Google Scholar",
+        "PubMed"
+      ],
+      "expected_n": "0-5",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "Q8",
+      "query": "\"semantic fluency\" AND \"network topology\" AND \"schizophrenia\"",
+      "rationale": "Topology of semantic networks in disorders",
+      "databases": [
+        "PubMed"
+      ],
+      "expected_n": "20-50",
+      "priority": "HIGH"
+    }
+  ],
+  "key_papers_identified": {
+    "Kenett": [
+      "Kenett et al. (2011) - Global and local features Hebrew lexicon",
+      "Kenett et al. (2014) - Creative semantic networks",
+      "Kenett et al. (2016) - Asperger associative mind",
+      "Kenett et al. (2018) - Schizophrenia semantic networks"
+    ],
+    "Siew": [
+      "Siew et al. (2019) - Cognitive network science review (READ ALL REFS!)",
+      "Siew (empirical papers on disorders)"
+    ],
+    "Mota": [
+      "Mota et al. (2012) - Speech graphs in psychosis",
+      "Mota et al. (2014, 2017) - Follow-up work"
+    ],
+    "Network_Geometry": [
+      "Krioukov et al. (2010) - Hyperbolic geometry of complex networks",
+      "Bianconi papers on network geometry",
+      "Ni et al. (2015, 2019) - Ricci curvature applications"
+    ]
+  },
+  "screening_criteria": {
+    "Must have ONE of:": [
+      "Ricci curvature OR geometric analysis",
+      "Semantic networks OR word associations",
+      "Psychiatric disorders + network analysis",
+      "Clustering-curvature relationship"
+    ],
+    "Relevance levels:": {
+      "HIGH": "Direct overlap (curvature + semantics + disorders)",
+      "MEDIUM": "Two of three components",
+      "LOW": "One component only"
+    }
+  },
+  "deliverables": [
+    "Complete bibliography (50-100 papers)",
+    "Categorized by relevance",
+    "Read 20-30 most relevant",
+    "Literature matrix (papers \u00d7 our contributions)",
+    "Gap analysis (what we did that others didn't)",
+    "Positioning statement"
+  ]
+}

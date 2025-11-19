@@ -1,0 +1,38 @@
+{
+  "healthy_controls": [
+    {
+      "language": "Spanish",
+      "source": "SWOW",
+      "population": "Healthy",
+      "n_nodes": 443,
+      "n_edges": 583,
+      "clustering_weighted": 0.031465558105871656,
+      "clustering_binary": 0.15795867037402028
+    },
+    {
+      "language": "English",
+      "source": "SWOW",
+      "population": "Healthy",
+      "n_nodes": 467,
+      "n_edges": 661,
+      "clustering_weighted": 0.02847206061120223,
+      "clustering_binary": 0.14023143166612118
+    },
+    {
+      "language": "Chinese",
+      "source": "SWOW",
+      "population": "Healthy",
+      "n_nodes": 476,
+      "n_edges": 768,
+      "clustering_weighted": 0.02765146999063174,
+      "clustering_binary": 0.17603596217041595
+    }
+  ],
+  "statistics": {
+    "mean_clustering": 0.02919636290256854,
+    "std_clustering": 0.002007555078861464,
+    "min_clustering": 0.02765146999063174,
+    "max_clustering": 0.031465558105871656,
+    "n_languages": 3
+  }
+}

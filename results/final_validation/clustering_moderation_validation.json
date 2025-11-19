@@ -1,0 +1,104 @@
+{
+  "test_performed": "clustering_moderation_validation",
+  "timestamp": "2025-11-05",
+  "n_models": 9,
+  "models": [
+    {
+      "clustering": 0.011141580641580643,
+      "kappa": -0.5157709203713232,
+      "kappa_std": 0.12549621687661833,
+      "n_nodes": 500,
+      "n_edges": 1489,
+      "model": "ER"
+    },
+    {
+      "clustering": 0.5754285714285713,
+      "kappa": 0.13748730158730157,
+      "kappa_std": 0.17455637764651366,
+      "n_nodes": 500,
+      "n_edges": 1500,
+      "model": "WS(p=0.01)",
+      "p_rewire": 0.01
+    },
+    {
+      "clustering": 0.5065285714285713,
+      "kappa": 0.05186917989417996,
+      "kappa_std": 0.24542892854846268,
+      "n_nodes": 500,
+      "n_edges": 1500,
+      "model": "WS(p=0.05)",
+      "p_rewire": 0.05
+    },
+    {
+      "clustering": 0.46676666666666666,
+      "kappa": -0.010638888888888781,
+      "kappa_std": 0.2708677281782204,
+      "n_nodes": 500,
+      "n_edges": 1500,
+      "model": "WS(p=0.1)",
+      "p_rewire": 0.1
+    },
+    {
+      "clustering": 0.22206060606060607,
+      "kappa": -0.3002984607984607,
+      "kappa_std": 0.264340399377367,
+      "n_nodes": 500,
+      "n_edges": 1500,
+      "model": "WS(p=0.3)",
+      "p_rewire": 0.3
+    },
+    {
+      "clustering": 0.07275339105339106,
+      "kappa": -0.4677725829725829,
+      "kappa_std": 0.17497039469746856,
+      "n_nodes": 500,
+      "n_edges": 1500,
+      "model": "WS(p=0.5)",
+      "p_rewire": 0.5
+    },
+    {
+      "clustering": 0.055927757322361105,
+      "kappa": -0.36763374769634477,
+      "kappa_std": 0.13880871093707142,
+      "n_nodes": 500,
+      "n_edges": 1491,
+      "model": "BA"
+    },
+    {
+      "clustering": 0.00022107132995806904,
+      "kappa": -0.36106888316192476,
+      "kappa_std": 0.4858019223500321,
+      "n_nodes": 409,
+      "n_edges": 562,
+      "model": "Config(Spanish)"
+    },
+    {
+      "clustering": 0.033790114851135686,
+      "kappa": -0.15486317690498427,
+      "kappa_std": 0.4995051761160085,
+      "n_nodes": 422,
+      "n_edges": 571,
+      "model": "Real(Spanish)"
+    }
+  ],
+  "statistical_tests": {
+    "pearson": {
+      "r": 0.8927048735940956,
+      "p": 0.0011977653601645817
+    },
+    "spearman": {
+      "rho": 0.75,
+      "p": 0.019942126131992522
+    },
+    "linear_regression": {
+      "slope": 0.8951174161357003,
+      "intercept": -0.41437243499260934,
+      "R2": 0.7969219913386499
+    }
+  },
+  "effect_size": {
+    "cohen_d": 2.931928324102469,
+    "interpretation": "large"
+  },
+  "conclusion": "Clustering significantly moderates hyperbolic geometry"
+}

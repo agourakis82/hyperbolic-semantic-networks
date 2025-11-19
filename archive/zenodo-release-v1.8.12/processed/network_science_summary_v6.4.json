@@ -1,0 +1,9 @@
+{
+  "languages_analyzed": 4,
+  "all_hyperbolic": true,
+  "mean_curvature_overall": -0.16576616984777018,
+  "std_curvature_overall": 0.042394903760117265,
+  "scale_free_count": 3,
+  "bootstrap_cv": 10.118221344562556,
+  "effect_persistent": true
+}

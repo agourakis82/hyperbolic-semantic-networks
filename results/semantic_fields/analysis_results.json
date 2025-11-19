@@ -1,0 +1,135 @@
+{
+  "timestamp": "2025-11-05T19:34:22.359772",
+  "summary": [
+    {
+      "language": "spanish",
+      "category": "concrete_physical",
+      "n": 27,
+      "C_mean": 0.0510148796839282,
+      "C_std": 0.09019426977006904,
+      "kappa_mean": -0.5820514410747022,
+      "kappa_std": 2.71033129885873
+    },
+    {
+      "language": "spanish",
+      "category": "abstract_concepts",
+      "n": 19,
+      "C_mean": 0.041644004996072514,
+      "C_std": 0.07366837558535876,
+      "kappa_mean": 0.1341457755045813,
+      "kappa_std": 2.3852098893154974
+    },
+    {
+      "language": "spanish",
+      "category": "emotions",
+      "n": 7,
+      "C_mean": 0.04148671231307547,
+      "C_std": 0.03974212792295814,
+      "kappa_mean": 0.04600212221171723,
+      "kappa_std": 1.6836509293147695
+    },
+    {
+      "language": "spanish",
+      "category": "actions",
+      "n": 13,
+      "C_mean": 0.028100493256952137,
+      "C_std": 0.045365260023538745,
+      "kappa_mean": 0.9573795125152562,
+      "kappa_std": 0.9810846720486147
+    },
+    {
+      "language": "english",
+      "category": "concrete_physical",
+      "n": 46,
+      "C_mean": 0.03451899651594057,
+      "C_std": 0.060717373910819224,
+      "kappa_mean": 0.14271582162387011,
+      "kappa_std": 2.4195659890033534
+    },
+    {
+      "language": "english",
+      "category": "abstract_concepts",
+      "n": 20,
+      "C_mean": 0.028613006142771548,
+      "C_std": 0.0626698438406564,
+      "kappa_mean": 0.22737793170361104,
+      "kappa_std": 1.4738967310225761
+    },
+    {
+      "language": "english",
+      "category": "emotions",
+      "n": 7,
+      "C_mean": 0.0,
+      "C_std": 0.0,
+      "kappa_mean": 1.0,
+      "kappa_std": 0.9258200997725514
+    },
+    {
+      "language": "english",
+      "category": "actions",
+      "n": 20,
+      "C_mean": 0.023729183606469254,
+      "C_std": 0.04851872233132242,
+      "kappa_mean": 0.030727922292690602,
+      "kappa_std": 1.767409715559563
+    },
+    {
+      "language": "chinese",
+      "category": "concrete_physical",
+      "n": 38,
+      "C_mean": 0.01809730747404017,
+      "C_std": 0.024624407013019628,
+      "kappa_mean": 0.006583420820302581,
+      "kappa_std": 1.7174165719595818
+    },
+    {
+      "language": "chinese",
+      "category": "abstract_concepts",
+      "n": 18,
+      "C_mean": 0.017557608490568862,
+      "C_std": 0.030954210887390636,
+      "kappa_mean": 0.5796765891222855,
+      "kappa_std": 1.477161758231142
+    },
+    {
+      "language": "chinese",
+      "category": "emotions",
+      "n": 6,
+      "C_mean": 0.06727172792158424,
+      "C_std": 0.07777704058717631,
+      "kappa_mean": 0.5783628250212874,
+      "kappa_std": 1.218531085679011
+    },
+    {
+      "language": "chinese",
+      "category": "actions",
+      "n": 5,
+      "C_mean": 0.00867461946907427,
+      "C_std": 0.007210526165812047,
+      "kappa_mean": -2.5671835527906737,
+      "kappa_std": 2.8436446126815857
+    }
+  ],
+  "aggregate": {
+    "concrete_physical": {
+      "n": 111,
+      "C_mean": 0.03290966914606174,
+      "kappa_mean": -0.08018280291123817
+    },
+    "abstract_concepts": {
+      "n": 57,
+      "C_mean": 0.029465494221246457,
+      "kappa_mean": 0.30755275390983167
+    },
+    "emotions": {
+      "n": 20,
+      "C_mean": 0.03470186768605169,
+      "kappa_mean": 0.5396095902804874
+    },
+    "actions": {
+      "n": 38,
+      "C_mean": 0.023243767942503536,
+      "kappa_mean": 0.005909851173651924
+    }
+  }
+}

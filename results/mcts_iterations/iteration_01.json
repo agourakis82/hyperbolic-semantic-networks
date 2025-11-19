@@ -1,0 +1,28 @@
+{
+  "iteration": 1,
+  "focus": "Nonlinear patterns in C-\u03ba",
+  "insights": [
+    {
+      "insight": "LINEAR relationship confirmed",
+      "evidence": "Linear R\u00b2=0.797, F-test p=0.3766",
+      "implication": "Simple 1:1 relationship between C and \u03ba",
+      "novelty_score": 7
+    },
+    {
+      "insight": "HETEROGENEOUS effect across C range",
+      "evidence": "Low C: r=0.340, High C: r=1.000",
+      "implication": "Clustering moderation may be stronger in certain regimes",
+      "novelty_score": 8
+    }
+  ],
+  "data": {
+    "r2_linear": 0.7969219913386499,
+    "r2_quadratic": 0.8237012631471352,
+    "f_test_p": 0.3766110533317799,
+    "outliers": 0,
+    "segmented_correlations": {
+      "low_C": 0.33956607203343664,
+      "high_C": 0.9995233595316231
+    }
+  }
+}

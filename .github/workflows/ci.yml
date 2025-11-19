@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  julia-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v1
+        with:
+          version: '1.9'
+      
+      - name: Install dependencies
+        run: |
+          julia --project=julia -e 'using Pkg; Pkg.instantiate()'
+      
+      - name: Run tests
+        run: |
+          julia --project=julia -e 'using Pkg; Pkg.test()'
+      
+      - name: Code coverage
+        run: |
+          julia --project=julia --code-coverage=user -e 'using Pkg; Pkg.test(coverage=true)'
+
+  rust-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      
+      - name: Run tests
+        run: |
+          cd rust
+          cargo test --workspace
+      
+      - name: Run benchmarks
+        run: |
+          cd rust
+          cargo bench --workspace
+
+  python-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r code/analysis/requirements.txt
+      
+      - name: Run baseline tests
+        run: |
+          python -m pytest code/analysis/tests/ -v
+

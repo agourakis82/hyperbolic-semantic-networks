@@ -1,0 +1,9 @@
+{
+  "dataset": "BabelNet Arabic",
+  "language": "ar",
+  "kappa_mean": -0.01236203090507727,
+  "kappa_std": 0.23516704140213882,
+  "kappa_min": -0.8090909090909097,
+  "kappa_max": 0.5,
+  "verdict": "EUCLIDEAN"
+}

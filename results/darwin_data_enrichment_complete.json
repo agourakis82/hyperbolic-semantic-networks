@@ -1,0 +1,118 @@
+{
+  "execution_summary": {
+    "total_agents": 4,
+    "successful": 2,
+    "failed": 2,
+    "total_execution_time": 1.1024491786956787,
+    "results": [
+      {
+        "agent_id": "AGENT-001",
+        "task": "Extract Healthy Controls from SWOW",
+        "status": "FAILED",
+        "time": 0.001001119613647461,
+        "data_keys": [
+          "healthy_controls",
+          "statistics"
+        ]
+      },
+      {
+        "agent_id": "AGENT-003",
+        "task": "Patient vs Control Statistics",
+        "status": "FAILED",
+        "time": 0.0007894039154052734,
+        "data_keys": [
+          "error"
+        ]
+      },
+      {
+        "agent_id": "AGENT-004",
+        "task": "Literature Data Mining",
+        "status": "SUCCESS",
+        "time": 0.09728813171386719,
+        "data_keys": [
+          "pdf_catalog",
+          "n_pdfs"
+        ]
+      },
+      {
+        "agent_id": "AGENT-002",
+        "task": "Expand Depression to 10 Bins",
+        "status": "SUCCESS",
+        "time": 1.0033705234527588,
+        "data_keys": [
+          "n_bins",
+          "total_posts",
+          "bin_counts",
+          "mean_per_bin",
+          "std_per_bin"
+        ]
+      }
+    ]
+  },
+  "agent_results": {
+    "AGENT-001": {
+      "task": "Extract Healthy Controls from SWOW",
+      "status": "FAILED",
+      "data": {
+        "healthy_controls": [],
+        "statistics": {}
+      },
+      "execution_time": 0.001001119613647461
+    },
+    "AGENT-003": {
+      "task": "Patient vs Control Statistics",
+      "status": "FAILED",
+      "data": {
+        "error": "No healthy baseline"
+      },
+      "execution_time": 0.0007894039154052734
+    },
+    "AGENT-004": {
+      "task": "Literature Data Mining",
+      "status": "SUCCESS",
+      "data": {
+        "pdf_catalog": [
+          {
+            "filename": "PMC10031728.pdf",
+            "size_mb": 13.957715034484863
+          },
+          {
+            "filename": "PMC10221724.pdf",
+            "size_mb": 1.1454343795776367
+          },
+          {
+            "filename": "PMC11836185.pdf",
+            "size_mb": 1.5269784927368164
+          },
+          {
+            "filename": "PMC5737538.pdf",
+            "size_mb": 10.011630058288574
+          },
+          {
+            "filename": "PMC6866568.pdf",
+            "size_mb": 1.6710023880004883
+          }
+        ],
+        "n_pdfs": 5
+      },
+      "execution_time": 0.09728813171386719
+    },
+    "AGENT-002": {
+      "task": "Expand Depression to 10 Bins",
+      "status": "SUCCESS",
+      "data": {
+        "n_bins": 10,
+        "total_posts": 41873,
+        "bin_counts": {
+          "0": 10556,
+          "3": 10661,
+          "6": 9480,
+          "9": 11176
+        },
+        "mean_per_bin": 10468,
+        "std_per_bin": 712
+      },
+      "execution_time": 1.0033705234527588
+    }
+  }
+}

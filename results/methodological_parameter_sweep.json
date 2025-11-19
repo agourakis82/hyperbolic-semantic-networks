@@ -1,0 +1,112 @@
+{
+  "window_size_sweep": [
+    {
+      "window_size": 2,
+      "n_nodes": 4852,
+      "n_edges": 26816,
+      "clustering": 0.004044265779336856,
+      "density": 0.002278620109264321,
+      "in_sweet_spot": false
+    },
+    {
+      "window_size": 3,
+      "n_nodes": 4852,
+      "n_edges": 50336,
+      "clustering": 0.006236508969228788,
+      "density": 0.004277171159752717,
+      "in_sweet_spot": false
+    },
+    {
+      "window_size": 4,
+      "n_nodes": 4852,
+      "n_edges": 70955,
+      "clustering": 0.004230563010154964,
+      "density": 0.006029217252865822,
+      "in_sweet_spot": false
+    },
+    {
+      "window_size": 5,
+      "n_nodes": 4852,
+      "n_edges": 89710,
+      "clustering": 0.0033546270951053335,
+      "density": 0.007622874776331378,
+      "in_sweet_spot": false
+    },
+    {
+      "window_size": 7,
+      "n_nodes": 4852,
+      "n_edges": 122834,
+      "clustering": 0.0024956379453903903,
+      "density": 0.010437500839102535,
+      "in_sweet_spot": false
+    },
+    {
+      "window_size": 10,
+      "n_nodes": 4852,
+      "n_edges": 165391,
+      "clustering": 0.0018024189470609699,
+      "density": 0.01405367163228428,
+      "in_sweet_spot": false
+    },
+    {
+      "window_size": 15,
+      "n_nodes": 4852,
+      "n_edges": 223931,
+      "clustering": 0.0013169703475949016,
+      "density": 0.019027956432266877,
+      "in_sweet_spot": false
+    },
+    {
+      "window_size": 20,
+      "n_nodes": 4852,
+      "n_edges": 273002,
+      "clustering": 0.0010732924123707268,
+      "density": 0.023197637495128955,
+      "in_sweet_spot": false
+    },
+    {
+      "window_size": 50,
+      "n_nodes": 4852,
+      "n_edges": 465378,
+      "clustering": 0.0005856463703706477,
+      "density": 0.039544289573732516,
+      "in_sweet_spot": false
+    }
+  ],
+  "node_selection": [
+    {
+      "method": "all_words",
+      "n_nodes": 4852,
+      "n_edges": 89710,
+      "clustering": 0.0033546270951053335,
+      "in_sweet_spot": false
+    },
+    {
+      "method": "no_stopwords",
+      "n_nodes": 4740,
+      "n_edges": 75164,
+      "clustering": 0.004461234300354483,
+      "in_sweet_spot": false
+    },
+    {
+      "method": "long_words",
+      "n_nodes": 3962,
+      "n_edges": 53054,
+      "clustering": 0.019586086871288686,
+      "in_sweet_spot": false
+    },
+    {
+      "method": "content_only",
+      "n_nodes": 4484,
+      "n_edges": 67679,
+      "clustering": 0.00444499972854426,
+      "in_sweet_spot": false
+    }
+  ],
+  "sentence_level": {
+    "clustering": 0.004568718950541187,
+    "n_nodes": 4437,
+    "n_edges": 100633,
+    "in_sweet_spot": false
+  }
+}

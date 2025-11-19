@@ -1,0 +1,127 @@
+[
+  {
+    "file": "PMC10031728.pdf",
+    "title": "S142\nSchizophrenia Bulletin vol",
+    "first_author": "Schizophrenia Bulletin",
+    "year": "2023",
+    "disorders": [
+      "schizophrenia"
+    ],
+    "has_patients": true,
+    "has_data_hint": true,
+    "metrics_found": {
+      "clustering": true,
+      "path_length": false,
+      "degree": true,
+      "modularity": true,
+      "small_world": false,
+      "centrality": false
+    },
+    "clustering_values": [],
+    "path_length_values": [],
+    "n_patients": [
+      "436"
+    ],
+    "n_controls": [],
+    "text_snippet": "S142\nSchizophrenia Bulletin vol. 49 suppl. 2 pp. S142\u2013S152, 2023 \nhttps://doi.org/10.1093/schbul/sbac056\n\u00a9 The Author(s) 2023. Published by Oxford University Press on behalf of the Maryland Psychiatric Research Center.\nThis is an Open Access article distributed under the terms of the Creative Commons Attribution-NonCommercial License (https://creativecommons.org/\nlicenses/by-nc/4.0/), which permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is"
+  },
+  {
+    "file": "PMC10221724.pdf",
+    "title": "Citation: Vecchio, D",
+    "first_author": "Brain Network Topology",
+    "year": "2023",
+    "disorders": [
+      "schizophrenia"
+    ],
+    "has_patients": true,
+    "has_data_hint": false,
+    "metrics_found": {
+      "clustering": true,
+      "path_length": true,
+      "degree": true,
+      "modularity": true,
+      "small_world": true,
+      "centrality": true
+    },
+    "clustering_values": [],
+    "path_length_values": [],
+    "n_patients": [],
+    "n_controls": [],
+    "text_snippet": "Citation: Vecchio, D.; Piras, F.; Ciullo,\nV.; Piras, F.; Natalizi, F.; Ducci, G.;\nAmbrogi, S.; Spalletta, G.; Banaj, N.\nBrain Network Topology in De\ufb01cit\nand Non-De\ufb01cit Schizophrenia:\nApplication of Graph Theory to Local\nand Global Indices. J. Pers. Med. 2023,\n13, 799. https://doi.org/10.3390/\njpm13050799\nAcademic Editor: Toshiaki Onitsuka\nReceived: 29 March 2023\nRevised: 27 April 2023\nAccepted: 3 May 2023\nPublished: 6 May 2023\nCopyright:\n\u00a9 2023 by the authors.\nLicensee MDPI, Basel, Switzerland.\n"
+  },
+  {
+    "file": "PMC11836185.pdf",
+    "title": "Psychonomic Bulletin & Review (2025) 32:243\u2013280 \nhttps://doi",
+    "first_author": "Psychonomic Bulletin",
+    "year": "2025",
+    "disorders": [],
+    "has_patients": true,
+    "has_data_hint": true,
+    "metrics_found": {
+      "clustering": true,
+      "path_length": false,
+      "degree": true,
+      "modularity": true,
+      "small_world": false,
+      "centrality": false
+    },
+    "clustering_values": [],
+    "path_length_values": [],
+    "n_patients": [],
+    "n_controls": [],
+    "text_snippet": "Vol.:(0123456789)\nPsychonomic Bulletin & Review (2025) 32:243\u2013280 \nhttps://doi.org/10.3758/s13423-024-02556-7\nTHEORETICAL/REVIEW\nWhat we mean when\u00a0we say semantic: Toward a\u00a0multidisciplinary \nsemantic glossary\nJamie\u00a0Reilly1\u200a \u00a0\u00b7 Cory\u00a0Shain2\u00a0\u00b7 Valentina\u00a0Borghesani3\u00a0\u00b7 Philipp\u00a0Kuhnke4,41\u00a0\u00b7 Gabriella\u00a0Vigliocco5\u00a0\u00b7 Jonathan\u00a0E.\u00a0Peelle6\u00a0\u00b7 \nBradford\u00a0Z.\u00a0Mahon7\u00a0\u00b7 Laurel\u00a0J.\u00a0Buxbaum8\u00a0\u00b7 Asifa\u00a0Majid9\u00a0\u00b7 Marc\u00a0Brysbaert10\u00a0\u00b7 Anna\u00a0M.\u00a0Borghi11\u00a0\u00b7 Simon\u00a0De\u00a0Deyne12\u00a0\u00b7 \nGuy\u00a0Dove13\u00a0\u00b7 Liuba\u00a0Papeo14\u00a0\u00b7 Penny\u00a0M.\u00a0Pexman15\u00a0\u00b7 Dav"
+  },
+  {
+    "file": "PMC5737538.pdf",
+    "title": "Schizophrenia Bulletin vol",
+    "first_author": "Schizophrenia Bulletin",
+    "year": "2017",
+    "disorders": [
+      "schizophrenia"
+    ],
+    "has_patients": true,
+    "has_data_hint": true,
+    "metrics_found": {
+      "clustering": true,
+      "path_length": true,
+      "degree": true,
+      "modularity": true,
+      "small_world": true,
+      "centrality": true
+    },
+    "clustering_values": [],
+    "path_length_values": [],
+    "n_patients": [],
+    "n_controls": [],
+    "text_snippet": "1315\nSchizophrenia Bulletin vol. 43 no. 6 pp. 1315\u20131328, 2017 \ndoi:10.1093/schbul/sbx014\nAdvance Access publication July 20, 2017\n\u00a9 The Author 2017. Published by Oxford University Press on behalf of the Maryland Psychiatric Research Center. \nAll rights reserved. For permissions, please email: journals.permissions@oup.com\nConvergence and Divergence of Brain Network Dysfunction in Deficit and  \nNon-deficit Schizophrenia\nMiao\u00a0Yu1,10, Zhengjia\u00a0Dai2,3,10, Xiaowei\u00a0Tang4,10, Xiang\u00a0Wang5, Xiaobin\u00a0Zhang4"
+  },
+  {
+    "file": "PMC6866568.pdf",
+    "title": "R E S E A R C H A R T I C L E\nRelations between structural and EEG-based graph metrics in\nhealthy controls and schizophrenia patients\nJavier Gomez-Pil",
+    "first_author": "Javier Gomez",
+    "year": "Unknown",
+    "disorders": [
+      "schizophrenia",
+      "alzheimer"
+    ],
+    "has_patients": true,
+    "has_data_hint": true,
+    "metrics_found": {
+      "clustering": true,
+      "path_length": true,
+      "degree": true,
+      "modularity": false,
+      "small_world": true,
+      "centrality": false
+    },
+    "clustering_values": [],
+    "path_length_values": [],
+    "n_patients": [
+      "2",
+      "3",
+      "4"
+    ],
+    "n_controls": [],
+    "text_snippet": "R E S E A R C H A R T I C L E\nRelations between structural and EEG-based graph metrics in\nhealthy controls and schizophrenia patients\nJavier Gomez-Pilar1\n|\nRodrigo de Luis-Garc\u00eda2\n|\nAlba Lubeiro3\n|\nHenar de la Red4\n|\nJes\u001fus Poza1,4,5,6\n|\nPablo N\u001fu~nez1\n|\nRoberto Hornero1,5,6\n|\nVicente Molina3,4,5\n1Biomedical Engineering Group, University of Valladolid, Paseo de Bel\u001fen, 15, 47011 Valladolid, Spain\n2Imaging Processing Laboratory, University of Valladolid, Paseo de Bel\u001fen, 15, 47011 Valladolid, Spa"
+  }
+]

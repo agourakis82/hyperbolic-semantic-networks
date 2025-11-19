@@ -1,0 +1,68 @@
+{
+  "random_corrected": {
+    "n_nodes": 471,
+    "n_edges": 764,
+    "target_edges": 800,
+    "probability_p": 0.006412825651302605,
+    "degree_mean": 3.2441613588110405,
+    "degree_std": 1.625775296832018,
+    "curvature_mean": -0.34884432394249143,
+    "curvature_std": 0.24996669614211176,
+    "curvature_min": -0.714285714285714,
+    "curvature_max": 0.5,
+    "success": true,
+    "n_curvature_values": 764
+  },
+  "lattice": {
+    "n_nodes": 484,
+    "n_edges": 924,
+    "curvature_mean": 0.008658008658008668,
+    "curvature_std": 0.027690968344005064,
+    "success": true,
+    "n_curvature_values": 924
+  },
+  "scalefree_corrected": {
+    "n_nodes": 500,
+    "selected_m": 2,
+    "n_edges": 996,
+    "curvature_mean": -0.3449951014273974,
+    "curvature_std": 0.21167146887794241,
+    "hyperbolic": true,
+    "all_m_tested": {
+      "1": {
+        "n_edges": 499,
+        "curvature_mean": 0.0020040080160321355,
+        "curvature_std": 0.3778630370111355,
+        "hyperbolic": false
+      },
+      "2": {
+        "n_edges": 996,
+        "curvature_mean": -0.3449951014273974,
+        "curvature_std": 0.21167146887794241,
+        "hyperbolic": true
+      },
+      "3": {
+        "n_edges": 1491,
+        "curvature_mean": -0.36763374769634477,
+        "curvature_std": 0.13880871093707142,
+        "hyperbolic": true
+      },
+      "5": {
+        "n_edges": 2475,
+        "curvature_mean": -0.27420752789074565,
+        "curvature_std": 0.08959868723129386,
+        "hyperbolic": true
+      }
+    },
+    "success": true,
+    "n_curvature_values": 996
+  },
+  "smallworld": {
+    "n_nodes": 500,
+    "n_edges": 1000,
+    "curvature_mean": -0.001183333333333337,
+    "curvature_std": 0.23523183540687873,
+    "success": true,
+    "n_curvature_values": 1000
+  }
+}

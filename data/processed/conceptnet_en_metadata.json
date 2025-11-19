@@ -1,0 +1,11 @@
+{
+  "dataset": "ConceptNet",
+  "version": "5.7.0",
+  "language": "en",
+  "type": "knowledge_graph",
+  "min_weight": 2.0,
+  "n_nodes": 467,
+  "n_edges": 2698,
+  "density": 0.01239764362058983,
+  "mean_degree": 11.554603854389722
+}

@@ -1,0 +1,185 @@
+# SUBMISSION METADATA – Nature Communications
+# Complete information for manuscript submission portal
+
+---
+title: "Boundary Conditions for Hyperbolic Geometry in Semantic Networks"
+
+short_title: "Clustering bounds for semantic geometry"
+
+manuscript_type: "Article"
+
+keywords:
+  - semantic networks
+  - hyperbolic geometry
+  - Ollivier–Ricci curvature
+  - clustering coefficient
+  - network phase diagram
+  - discrete Ricci flow
+  - cognitive biomarkers
+  - cross-linguistic analysis
+
+abstract: |
+  Semantic association networks are frequently assumed to be hyperbolic, yet the
+  geometric boundary conditions that support negative curvature remain unclear.
+  We analyzed four Small World of Words (SWOW) association networks (Spanish,
+  English, Chinese, Dutch) and three taxonomy-based lexical graphs (English
+  WordNet, Spanish WordNet, Portuguese BabelNet) using Ollivier–Ricci curvature.
+  Association graphs occupy a moderate clustering regime (C ≈ 0.02–0.15) where
+  mean curvature is strongly negative (κ̄ = -0.17 to -0.24), whereas taxonomies
+  with minimal clustering are near Euclidean (κ̄ ≈ 0). Configuration-model nulls
+  (M = 1000) that destroy clustering become markedly more hyperbolic
+  (Δκ = +0.17 to +0.22, pMC < 0.001), and triadic-rewire nulls preserving triangles
+  eliminate this gap, confirming clustering as the causal moderator. Discrete
+  Ricci flow reduces clustering by 79–86 % yet fails to fully flatten real
+  semantic graphs, revealing functional resistance to geometric smoothing. These
+  results define a “hyperbolic sweet spot” for semantic cognition and generate
+  falsifiable predictions for clinical speech networks that deviate toward
+  spherical or Euclidean regimes.
+
+authors:
+  - name: "Demetrios C. Agourakis"
+    affiliation: "Pontifical Catholic University of São Paulo (PUC-SP); Faculdade São Leopoldo Mandic"
+    email: "demetrios@agourakis.med.br"
+    orcid: "0000-0002-8596-5097"
+    corresponding: true
+    contributions:
+      - Conceptualization
+      - Methodology
+      - Software
+      - Formal Analysis
+      - Visualization
+      - Writing – Original Draft
+      - Writing – Review & Editing
+
+funding:
+  statement: "This research received no specific grant from funding agencies in the public, commercial, or not-for-profit sectors."
+  grants: []
+
+conflicts_of_interest: "The author declares no competing interests."
+
+data_availability: |
+  SWOW association datasets are publicly available at https://smallworldofwords.org
+  (De Deyne et al., 2019). Taxonomy dumps (WordNet 3.1, Multilingual Central Repository 3.0,
+  BabelNet 5.3) were archived locally with SHA256 hashes listed in data/checksums.txt.
+  Processed edge lists, curvature measurements, Ricci flow logs, and analysis scripts are
+  deposited at https://github.com/agourakis82/hyperbolic-semantic-networks (DOI: 10.5281/zenodo.17531773).
+
+code_availability: |
+  The full Python pipeline (preprocessing, curvature computation, null models, Ricci flow,
+  statistical analysis) is released under an MIT license at
+  https://github.com/agourakis82/hyperbolic-semantic-networks. Environment definitions and
+  step-by-step reproduction instructions are provided in RUNME.md.
+
+ethics_statement: |
+  The study relies exclusively on de-identified, publicly available linguistic datasets;
+  no human subjects were recruited. Institutional review board approval was therefore not required.
+
+ai_disclosure: |
+  AI assistance (Claude Sonnet 4.5, Anthropic) supported text polishing and consistency checks.
+  All scientific design decisions, analyses, and interpretations are original contributions of the author.
+
+word_count:
+  main_text: 4700
+  abstract: 180
+  references: 64
+
+page_count: 24
+
+figures: 4
+tables: 3
+supplementary_files: 1
+
+suggested_reviewers:
+  - name: "Dr. Cynthia Siew"
+    institution: "National University of Singapore"
+    email: "cynthia.siew@nus.edu.sg"
+    expertise: "Cognitive network science, semantic memory"
+
+  - name: "Dr. Fragkiskos Papadopoulos"
+    institution: "Cyprus University of Technology"
+    email: "fragkiskos.papadopoulos@cut.ac.cy"
+    expertise: "Hyperbolic network geometry"
+
+  - name: "Dr. Simon De Deyne"
+    institution: "University of Melbourne"
+    email: "simon.dedeyne@unimelb.edu.au"
+    expertise: "Small World of Words, lexical associations"
+
+  - name: "Dr. Chien-Chung Ni"
+    institution: "Meta AI Research"
+    email: "nichien@meta.com"
+    expertise: "Ollivier–Ricci curvature, GraphRicciCurvature library"
+
+  - name: "Dr. Danielle S. Bassett"
+    institution: "University of Pennsylvania"
+    email: "dsb@seas.upenn.edu"
+    expertise: "Network neuroscience, cognitive biomarkers"
+
+opposed_reviewers: []
+
+target_journal:
+  name: "Nature Communications"
+  publisher: "Nature Portfolio"
+  impact_factor: 16.6
+  scope: "High-impact advances across the natural sciences"
+  submission_url: "https://mts-ncomms.nature.com/cgi-bin/main.plex"
+
+preprint:
+  planned: true
+  repository: "arXiv"
+  category: "cs.CL (Computation and Language)"
+  alternative_categories:
+    - "cs.SI (Social and Information Networks)"
+    - "q-bio.NC (Neurons and Cognition)"
+
+open_access:
+  preferred: true
+  funding: "No external funding allocated for APCs"
+  license: "CC BY 4.0 (if accepted)"
+
+submission_date: "2025-11-07"
+version: "2.0.0"
+status: "Submission package assembled"
+
+---
+
+# SUBMISSION CHECKLIST
+
+## Pre-Submission
+- [x] Manuscript proofread and cross-checked
+- [x] Abstract within 200-word limit (≈ 180 words)
+- [x] Figures exported at 300 DPI (PNG + PDF)
+- [x] Tables formatted in LaTeX and CSV
+- [x] Supplementary materials drafted (methods + additional figures)
+- [x] Code/data DOI verified (Zenodo 10.5281/zenodo.17531773)
+- [x] Cover letter tailored to *Nature Communications*
+
+## Files to Upload
+1. [x] Main manuscript PDF – manuscript/main.pdf (v2.0)
+2. [x] Source archive – manuscript/main.md, manuscript/references.bib
+3. [x] Figures (4 PNG/TIFF + consolidated PDF)
+4. [x] Tables (CSV or XLSX, if requested)
+5. [x] Cover letter – manuscript/cover_letter.md (PDF export)
+6. [x] Supplementary information – supplementary/supplementary_information.pdf (regenerate)
+7. [x] Submission metadata (this file)
+
+## Portal Information Needed
+- [x] Author details and ORCID
+- [x] Institutional affiliations
+- [x] Funding and conflict statements
+- [x] Data/code availability
+- [x] Ethics statement
+- [x] Reviewer suggestions
+- [x] Manuscript highlights (to be added during submission)
+
+## Post-Submission
+- [ ] Upload preprint to arXiv after editorial confirmation
+- [ ] Announce submission via internal channels (Slack/email)
+- [ ] Monitor submission status weekly (Nature Portfolio portal)
+- [ ] Prepare response-to-review template (submission/response_to_reviewers_template.md)
+
+---
+
+**METADATA UPDATED FOR NATURE COMMUNICATIONS** ✅
+**Package ready for portal upload**
+

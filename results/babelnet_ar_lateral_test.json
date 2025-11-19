@@ -1,0 +1,20 @@
+{
+  "language": "ar",
+  "original": {
+    "clustering": 0.0,
+    "transitivity": 0,
+    "kappa": -0.01236203090507727
+  },
+  "augmented": {
+    "clustering": 0.32695963519176796,
+    "transitivity": 0.3228858663512714,
+    "kappa": 0.0823901081093595,
+    "lateral_edges_added": 124
+  },
+  "delta": {
+    "clustering": 0.32695963519176796,
+    "transitivity": 0.3228858663512714,
+    "kappa": 0.09475213901443677
+  },
+  "verdict": "\u274c NOT CONFIRMED: No significant change"
+}

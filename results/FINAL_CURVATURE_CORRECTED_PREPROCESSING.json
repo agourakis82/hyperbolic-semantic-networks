@@ -1,0 +1,35 @@
+{
+  "spanish": {
+    "language": "Spanish",
+    "n_nodes": 422,
+    "n_edges": 571,
+    "kappa_mean": -0.15486317690498427,
+    "kappa_median": -0.08315552015505734,
+    "kappa_std": 0.4995051761160085,
+    "kappa_min": -1.7358291752129769,
+    "kappa_max": 0.8128707217406358,
+    "geometry": "HYPERBOLIC (\u03ba < 0)"
+  },
+  "english": {
+    "language": "English",
+    "n_nodes": 438,
+    "n_edges": 640,
+    "kappa_mean": -0.25766092320440837,
+    "kappa_median": -0.1888000481956582,
+    "kappa_std": 0.556303513743878,
+    "kappa_min": -2.2980124097178694,
+    "kappa_max": 0.8839743395977593,
+    "geometry": "HYPERBOLIC (\u03ba < 0)"
+  },
+  "chinese": {
+    "language": "Chinese",
+    "n_nodes": 465,
+    "n_edges": 762,
+    "kappa_mean": -0.21397920800636283,
+    "kappa_median": -0.1665893831891404,
+    "kappa_std": 0.47012419391802024,
+    "kappa_min": -1.5369903560115832,
+    "kappa_max": 0.8349245036505364,
+    "geometry": "HYPERBOLIC (\u03ba < 0)"
+  }
+}
