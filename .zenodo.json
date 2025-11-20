@@ -4,7 +4,16 @@
   "creators": [
     {
       "name": "Agourakis, Demetrios C.",
-      "orcid": "0000-0002-8596-5097",
+      "person_or_org": {
+        "name": "Agourakis, Demetrios C.",
+        "type": "personal",
+        "identifiers": [
+          {
+            "scheme": "orcid",
+            "identifier": "0000-0002-8596-5097"
+          }
+        ]
+      },
       "affiliation": "Independent Researcher"
     }
   ],
