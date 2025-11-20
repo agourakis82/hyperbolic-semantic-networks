@@ -2,7 +2,7 @@
 
 **Cross-Linguistic Evidence from Word Association Data**
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17489685.svg)](https://doi.org/10.5281/zenodo.17489685)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17655231.svg)](https://doi.org/10.5281/zenodo.17655231)
 [![GitHub](https://img.shields.io/github/stars/agourakis82/hyperbolic-semantic-networks?style=social)](https://github.com/agourakis82/hyperbolic-semantic-networks)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
@@ -138,13 +138,13 @@ python generate_all_figures.py
 If you use this code or data, please cite:
 
 ```bibtex
-@article{agourakis2025hyperbolic,
-  title={Universal Hyperbolic Geometry of Semantic Networks: Cross-Linguistic Evidence},
-  author={Agourakis, Demetrios},
-  journal={Network Science},
-  year={2025},
-  publisher={Cambridge University Press},
-  doi={10.XXXX/XXXXX}
+@software{hyperbolic_semantic_networks_julia_rust,
+  title = {Hyperbolic Semantic Networks: Julia/Rust Implementation},
+  author = {Agourakis, Demetrios C.},
+  year = {2025},
+  doi = {10.5281/zenodo.17655231},
+  url = {https://zenodo.org/records/17655231},
+  version = {0.1.0}
 }
 ```
 
