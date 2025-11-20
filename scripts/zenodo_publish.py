@@ -27,6 +27,26 @@ ZENODO_SANDBOX_URL = "https://sandbox.zenodo.org/api"
 ZENODO_PRODUCTION_URL = "https://zenodo.org/api"
 
 
+def get_token_from_file() -> Optional[str]:
+    """Try to load token from common locations."""
+    token_locations = [
+        Path.home() / ".zenodo_token",
+        Path("/home/agourakis82/.zenodo_token"),
+        Path(".zenodo_token"),
+    ]
+    
+    for token_file in token_locations:
+        if token_file.exists():
+            try:
+                token = token_file.read_text().strip()
+                if len(token) > 20:
+                    return token
+            except Exception:
+                pass
+    
+    return None
+
+
 def load_zenodo_metadata(repo_root: Path) -> Dict:
     """Load metadata from .zenodo.json."""
     zenodo_file = repo_root / ".zenodo.json"
@@ -183,7 +203,7 @@ def upload_file(
             data=f
         )
     
-    if response.status_code != 200:
+    if response.status_code not in (200, 201):
         raise Exception(f"Failed to upload file: {response.status_code} - {response.text}")
     
     print("✅ File uploaded successfully")
@@ -246,9 +266,21 @@ def main():
     
     args = parser.parse_args()
     
+    # Try to get token from various sources
+    if not args.token:
+        # Try environment variable
+        args.token = os.getenv("ZENODO_ACCESS_TOKEN")
+        
+        # Try file
+        if not args.token:
+            args.token = get_token_from_file()
+            if args.token:
+                print(f"✅ Token loaded from file: ~/.zenodo_token")
+    
     if not args.token:
         print("❌ Error: Zenodo access token required")
         print("   Set ZENODO_ACCESS_TOKEN environment variable or use --token")
+        print("   Or save token to: ~/.zenodo_token")
         sys.exit(1)
     
     # Determine API URL
