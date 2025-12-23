@@ -19,6 +19,11 @@ petgraph = "0.6"
 # FFI
 libc = "0.2"
 
+# Logging and error handling
+log = "0.4"
+env_logger = "0.11"
+thiserror = "1.0"
+
 # Testing
 criterion = { version = "0.5", features = ["html_reports"] }
 

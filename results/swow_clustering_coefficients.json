@@ -1,0 +1,34 @@
+{
+  "spanish": {
+    "n_nodes": 422,
+    "n_edges": 571,
+    "clustering": 0.1658191729281777,
+    "avg_degree": 2.706161137440758,
+    "degree_min": 1,
+    "degree_max": 13
+  },
+  "english": {
+    "n_nodes": 438,
+    "n_edges": 640,
+    "clustering": 0.14418891610672432,
+    "avg_degree": 2.922374429223744,
+    "degree_min": 1,
+    "degree_max": 13
+  },
+  "chinese": {
+    "n_nodes": 465,
+    "n_edges": 762,
+    "clustering": 0.18020025374864085,
+    "avg_degree": 3.2774193548387096,
+    "degree_min": 1,
+    "degree_max": 16
+  },
+  "dutch": {
+    "n_nodes": 500,
+    "n_edges": 15408,
+    "clustering": 0.2693901818354406,
+    "avg_degree": 61.632,
+    "degree_min": 20,
+    "degree_max": 458
+  }
+}

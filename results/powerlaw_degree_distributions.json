@@ -1,0 +1,46 @@
+{
+  "spanish": {
+    "n_nodes": 422,
+    "n_edges": 571,
+    "degree_mean": 2.706161137440758,
+    "degree_std": 1.7372173513102764,
+    "degree_min": 1,
+    "degree_max": 13,
+    "alpha": 2.9967096542530034,
+    "r_squared": 0.9739461082395433,
+    "stderr": 0.16337750190362793
+  },
+  "english": {
+    "n_nodes": 438,
+    "n_edges": 640,
+    "degree_mean": 2.922374429223744,
+    "degree_std": 1.8415304897650389,
+    "degree_min": 1,
+    "degree_max": 13,
+    "alpha": 2.843127294895579,
+    "r_squared": 0.9374567951391936,
+    "stderr": 0.24478763992891456
+  },
+  "chinese": {
+    "n_nodes": 465,
+    "n_edges": 762,
+    "degree_mean": 3.2774193548387096,
+    "degree_std": 2.027346856301216,
+    "degree_min": 1,
+    "degree_max": 16,
+    "alpha": 2.88707286114302,
+    "r_squared": 0.8876477686959389,
+    "stderr": 0.30969337846249273
+  },
+  "dutch": {
+    "n_nodes": 500,
+    "n_edges": 15408,
+    "degree_mean": 61.632,
+    "degree_std": 30.795333672490056,
+    "degree_min": 20,
+    "degree_max": 458,
+    "alpha": 0.8686262809736699,
+    "r_squared": 0.2535017395927057,
+    "stderr": 0.1468717538051532
+  }
+}

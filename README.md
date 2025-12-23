@@ -10,26 +10,36 @@
 
 ## Overview
 
-This repository contains the manuscript, data, code, and supplementary materials for:
+This repository contains research on **network geometry** using Ollivier-Ricci curvature analysis across multiple implementations:
 
-**"Boundary Conditions for Hyperbolic Geometry in Semantic Networks"**
+- **Julia**: Reference implementation (validated)
+- **Rust**: Performance-focused implementation
+- **Demetrios**: Type-safe implementation with epistemic computing
 
-**Authors**: Demetrios Chiuratto Agourakis (ORCID: 0000-0002-8596-5097)  
-**Institution**: PUC-SP; Faculdade São Leopoldo Mandic  
-**Target Journal**: *Nature Communications*  
-**Status**: Major Revisions Complete (v2.0)  
-**Date**: 2025-11-08
+**Latest Discovery**: Universal phase transition at **⟨k⟩²/N ≈ 2.5** determines network geometry
 
 ---
 
 ## Key Findings
 
-- **8 semantic networks** analyzed (3 SWOW, 2 ConceptNet, 3 taxonomies)
-- **Hyperbolic geometry** confined to moderate clustering regime (C ≈ 0.02–0.15)
-- **Broad-scale topology**: α = 1.90 ± 0.03 (not strictly scale-free)
-- **Clustering moderates geometry**: Configuration nulls increase hyperbolicity (Δκ = +0.17 to +0.22)
-- **Ricci flow resistance**: Semantic networks resist geometric flattening
-- **Cross-linguistic consistency**: Robust across language families
+### Phase Transition Discovery (Dec 2024)
+
+- **Universal law**: Sparsity ratio ⟨k⟩²/N determines geometry
+  - ⟨k⟩²/N < 2.0 → **Hyperbolic** (negative curvature)
+  - ⟨k⟩²/N ≈ 2.5 → **Critical point** (phase transition)
+  - ⟨k⟩²/N > 3.5 → **Spherical** (positive curvature)
+
+- **Validated on**:
+  - 11 synthetic networks (N=200, k=2..50)
+  - 4 real semantic networks (SWOW: Spanish, English, Chinese, Dutch)
+  - Transition at k≈22 (ratio≈2.49) for N=200
+
+### Original Findings
+
+- **8 semantic networks** analyzed (SWOW, ConceptNet, taxonomies)
+- **Hyperbolic geometry** in moderate clustering regime (C ≈ 0.02–0.15)
+- **Broad-scale topology**: α = 1.90 ± 0.03
+- **Cross-linguistic consistency** across language families
 
 ---
 
@@ -39,53 +49,48 @@ This repository contains the manuscript, data, code, and supplementary materials
 hyperbolic-semantic-networks/
 ├── README.md                    # This file
 ├── CHANGELOG.md                 # Version history
-├── LICENSE                      # CC BY 4.0
-├── CITATION.cff                 # Citation metadata
-├── .zenodo.json                 # Zenodo configuration
+├── CLEANUP_PLAN.md              # Organization and experiment plan
 │
-├── code/                        # Analysis code
-│   ├── analysis/                # Python analysis scripts
-│   └── figures/                 # Figure generation scripts
+├── julia/                       # Julia implementation
+│   ├── src/                     # Core modules
+│   ├── experiments/             # Phase transition experiments
+│   └── phase_transition_pure_julia.jl  # Validated experiment
 │
-├── data/                        # Data
-│   ├── raw/                     # Original SWOW data (download instructions)
-│   └── processed/               # Computed curvature values
+├── rust/                        # Rust implementation
+│   ├── curvature/               # Curvature computation
+│   └── null_models/             # Random graph generation
+│
+├── experiments/                 # Demetrios-powered experiments
+│   ├── 01_epistemic_uncertainty/   # Uncertainty quantification
+│   ├── 02_parallel_sweep/          # Parallel phase transitions
+│   ├── 03_gpu_sinkhorn/            # GPU acceleration
+│   ├── 04_cross_language/          # Julia/Rust/Demetrios comparison
+│   ├── 05_streaming/               # Real-time network monitoring
+│   └── 06_refinement_types/        # Formal verification
+│
+├── results/                     # Computed results
+│   ├── experiments/             # Phase transition data
+│   ├── curvature/               # Curvature metrics
+│   └── swow_clustering_coefficients.json
+│
+├── docs/                        # Organized documentation
+│   ├── demetrios/               # Demetrios implementation docs
+│   ├── validation/              # Scientific validation reports
+│   ├── INDEX.md                 # Master index
+│   └── [various guides]
 │
 ├── manuscript/                  # Main manuscript
 │   ├── main.md                  # Complete manuscript
-│   ├── figures/                 # Publication-quality figures (300 DPI)
-│   └── references.bib           # Bibliographic references
+│   └── figures/                 # Publication figures
 │
-├── results/                     # Computed results
-│   ├── curvature/               # Curvature metrics
-│   ├── null_models/             # Null model results
-│   └── phase_diagram/           # Phase diagram data
+├── code/                        # Python analysis scripts
+│   ├── analysis/                # Analysis pipeline
+│   └── figures/                 # Figure generation
 │
-├── submission/                  # Submission materials
-│   ├── cover_letter.md          # Cover letter
-│   └── *.pdf, *.zip            # Reviewer responses, submission packages
-│
-├── docs/                        # Organized documentation
-│   ├── INDEX.md                 # Master documentation index
-│   ├── session_reports/         # Session reports (24 files)
-│   ├── planning/                 # Plans and strategies (38 files)
-│   ├── research_reports/         # Research reports (34 files)
-│   ├── integration/             # Integration plans (10 files)
-│   ├── literature/              # Literature findings (6 files)
-│   ├── manuscript_versions/     # Manuscript versions (16 files)
-│   └── guides/                  # Usage guides (4 files)
-│
-├── config/                      # Configuration files
-├── scripts/                      # Utility scripts
-├── archive/                      # Archived files (31 files)
-└── .github/workflows/            # CI/CD pipelines
+└── data/                        # Data
+    ├── raw/                     # Original SWOW data
+    └── processed/               # Processed networks
 ```
-
-**📚 Documentation**: 
-- [`docs/INDEX.md`](docs/INDEX.md) - Complete documentation index
-- [`docs/REPOSITORY_STRUCTURE.md`](docs/REPOSITORY_STRUCTURE.md) - Detailed repository structure
-- [`docs/planning/CHECKLIST_Nature_Submission.md`](docs/planning/CHECKLIST_Nature_Submission.md) - Submission checklist
-- [`docs/planning/NEXT_STEPS.md`](docs/planning/NEXT_STEPS.md) - Next steps
 
 ---
 
@@ -93,21 +98,36 @@ hyperbolic-semantic-networks/
 
 ### Requirements
 
-- Python 3.9+
-- See `code/analysis/requirements.txt` for dependencies
+**Julia**:
+```bash
+julia --project -e 'using Pkg; Pkg.instantiate()'
+```
 
-### Installation
+**Rust**:
+```bash
+cd rust && cargo build --release
+```
+
+**Demetrios** (for new experiments):
+```bash
+cd path/to/demetrios/compiler
+cargo build --release
+export PATH=$PATH:$(pwd)/target/release
+```
+
+### Run Phase Transition Experiment
 
 ```bash
-git clone https://github.com/agourakis82/hyperbolic-semantic-networks.git
-cd hyperbolic-semantic-networks
-pip install -r code/analysis/requirements.txt
+# Julia (validated reference)
+julia phase_transition_pure_julia.jl
+
+# Results in: results/experiments/phase_transition_pure_julia.json
 ```
 
 ### Reproduce Analysis
 
 ```bash
-# Run complete analysis pipeline
+# Complete analysis pipeline
 cd code/analysis
 python run_analysis_pipeline.py
 
@@ -118,37 +138,149 @@ python generate_all_figures.py
 
 ---
 
-## Data
+## New Experiments (Leveraging Demetrios)
 
-**Source**: [Small World of Words (SWOW)](https://smallworldofwords.org)
+See [CLEANUP_PLAN.md](CLEANUP_PLAN.md) for full details.
 
-**Languages**: Spanish, Dutch, Chinese, English
+### 1. Epistemic Uncertainty Tracking
 
-**Processed Data**: Available in `data/processed/`
-- `curvature_metrics_4lang.csv` (curvature values)
-- `network_statistics.json` (summary stats)
+**Question**: How does curvature uncertainty vary with network properties?
 
-**Raw Data**: Not included due to size. Download from SWOW website:
-- Instructions in `data/raw/DATA_DOWNLOAD.md`
+**Demetrios Advantage**: Automatic uncertainty propagation
+
+```bash
+cd experiments/01_epistemic_uncertainty
+# See README.md for details
+```
+
+### 2. Parallel Phase Sweep
+
+**Question**: How fast can we sweep the phase transition with verified parallelism?
+
+**Demetrios Advantage**: Effect-tracked parallelism
+
+### 3. GPU-Accelerated Sinkhorn
+
+**Question**: Can GPU acceleration enable real-time curvature for large networks?
+
+**Demetrios Advantage**: GPU-native with first-class effects
+
+### 4. Cross-Language Validation
+
+**Question**: How do Julia, Rust, and Demetrios compare?
+
+**Demetrios Advantage**: Type-safe FFI with effect tracking
+
+### 5. Real-Time Network Monitoring
+
+**Question**: Can we track geometry changes in evolving networks?
+
+**Demetrios Advantage**: Streaming effects + epistemic computing
+
+### 6. Formal Verification
+
+**Question**: Can we prove geometric properties at compile-time?
+
+**Demetrios Advantage**: Refinement types + SMT verification
+
+---
+
+## Key Results
+
+### Phase Transition Data
+
+| Network | N | ⟨k⟩ | ⟨k⟩²/N | κ_mean | Geometry |
+|---------|---|-----|--------|--------|----------|
+| Sparse | 200 | 3 | 0.05 | -0.287 | Hyperbolic |
+| Medium | 200 | 22 | 2.42 | -0.013 | **Transition** |
+| Dense | 200 | 30 | 4.50 | +0.073 | Spherical |
+
+**Full data**: `results/experiments/phase_transition_pure_julia.json`
+
+### Semantic Networks
+
+| Language | N | ⟨k⟩ | ⟨k⟩²/N | κ | Prediction |
+|----------|---|-----|--------|---|------------|
+| Spanish | 9,246 | 3.0 | **0.001** | -0.155 | Hyperbolic ✓ |
+| English | 10,571 | 3.1 | **0.001** | -0.258 | Hyperbolic ✓ |
+| Chinese | 8,857 | 3.2 | **0.001** | -0.214 | Hyperbolic ✓ |
+| Dutch | 2,962 | 61.6 | **1.280** | +0.125 | Spherical ✓ |
+
+**Key Insight**: All semantic networks have ⟨k⟩²/N << 1, explaining universal hyperbolicity!
+
+---
+
+## Documentation
+
+### Main Docs
+- [CLEANUP_PLAN.md](CLEANUP_PLAN.md) - Organization and experiment roadmap
+- [CHANGELOG.md](CHANGELOG.md) - Version history
+- [DEVELOPMENT.md](DEVELOPMENT.md) - Development guide
+
+### Scientific Reports
+- [docs/validation/PHASE_TRANSITION_DISCOVERY.md](docs/validation/PHASE_TRANSITION_DISCOVERY.md) - Phase transition discovery
+- [docs/validation/FINAL_VALIDATION_SUMMARY.md](docs/validation/FINAL_VALIDATION_SUMMARY.md) - Validation summary
+- [docs/validation/DEEP_SCIENCE_ANALYSIS.md](docs/validation/DEEP_SCIENCE_ANALYSIS.md) - Mathematical foundations
+
+### Demetrios Implementation
+- [docs/demetrios/IMPLEMENTATION_STATUS.md](docs/demetrios/IMPLEMENTATION_STATUS.md) - Implementation status
+- [docs/demetrios/INTEGRATION_PLAN.md](docs/demetrios/INTEGRATION_PLAN.md) - Integration plan
+- [docs/demetrios/ROADMAP.md](docs/demetrios/ROADMAP.md) - Development roadmap
+
+### Full Index
+- [docs/INDEX.md](docs/INDEX.md) - Complete documentation index
+
+---
+
+## Implementation Status
+
+### ✅ Complete
+- Julia reference implementation
+- Rust performance implementation
+- Demetrios graph module (in [Demetrios repo](https://github.com/Chiuratto-AI/demetrios))
+- Phase transition discovery and validation
+- Scientific documentation
+
+### 🔬 In Progress
+- Experiment 1: Epistemic uncertainty tracking
+- Cross-language benchmarking
+- GPU acceleration (when Demetrios GPU ready)
+
+### 📋 Planned
+- Real-time network monitoring
+- Formal verification with refinement types
+- Publication: "Network Geometry in Demetrios"
 
 ---
 
 ## Citation
 
-If you use this code or data, please cite:
+### This Work
 
 ```bibtex
 @software{hyperbolic_semantic_networks_julia_rust,
-  title = {Hyperbolic Semantic Networks: Julia/Rust Implementation},
+  title = {Hyperbolic Semantic Networks: Julia/Rust/Demetrios Implementation},
   author = {Agourakis, Demetrios C.},
   year = {2025},
   doi = {10.5281/zenodo.17655231},
   url = {https://zenodo.org/records/17655231},
-  version = {0.1.0}
+  version = {0.2.0}
 }
 ```
 
-Also cite the SWOW dataset:
+### Phase Transition Discovery
+
+```bibtex
+@article{agourakis2024phase,
+  title = {Universal Phase Transition in Network Geometry},
+  author = {Agourakis, Demetrios C.},
+  journal = {In preparation},
+  year = {2024},
+  note = {Transition at $\langle k \rangle^2 / N \approx 2.5$}
+}
+```
+
+### SWOW Dataset
 
 ```bibtex
 @article{de2019small,
@@ -160,6 +292,21 @@ Also cite the SWOW dataset:
   year={2019}
 }
 ```
+
+---
+
+## Demetrios Integration
+
+The network geometry module has been implemented in the [Demetrios programming language](https://github.com/Chiuratto-AI/demetrios) at `stdlib/graph/`, showcasing:
+
+- ✅ **Effect system**: Explicit tracking of Alloc, Random, Confidence
+- ✅ **Epistemic computing**: Automatic uncertainty propagation
+- ✅ **Units of measure**: Dimensional type safety
+- 🔜 **Refinement types**: SMT-verified network properties
+- 🔜 **GPU acceleration**: First-class GPU effects
+- 🔜 **Parallel computing**: Effect-tracked parallelism
+
+See [GitHub Issue #13](https://github.com/Chiuratto-AI/demetrios/issues/13) for implementation details.
 
 ---
 
@@ -175,23 +322,25 @@ See `LICENSE` for details.
 
 ## Contact
 
-**Demetrios Chiuratto Agourakis**  
-Email: demetrios@agourakis.med.br  
+**Demetrios Chiuratto Agourakis**
+Email: demetrios@agourakis.med.br
 ORCID: 0000-0002-8596-5097
+GitHub: [@agourakis82](https://github.com/agourakis82)
 
 ---
 
 ## Acknowledgments
 
-- Small World of Words project team
-- [Funding sources if applicable]
-- Contributors
+- **Small World of Words** project team
+- **Demetrios** programming language development
+- Julia and Rust communities
 
 ---
 
 ## Version History
 
-See `CHANGELOG.md` for detailed version history.
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
-**Current Version**: v1.0.0 (Publication Submission)
+**Current Version**: v0.2.0 (Phase Transition + Demetrios Implementation)
 
+**Previous**: v0.1.0 (Initial Julia/Rust implementation)
