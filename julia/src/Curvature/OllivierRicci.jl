@@ -5,7 +5,7 @@ High-level Julia API for computing Ollivier-Ricci curvature.
 Uses Rust backend for performance-critical Wasserstein-1 computation.
 """
 
-using LightGraphs
+using Graphs  # Replaces deprecated LightGraphs
 using LinearAlgebra
 using Statistics
 using SparseArrays
@@ -78,24 +78,38 @@ function compute_graph_curvature(
     weights::Union{Dict{Tuple{Int, Int}, Float64}, Nothing} = nothing,
     parallel::Bool = true
 )::Dict{Tuple{Int, Int}, Float64}
-    curvatures = Dict{Tuple{Int, Int}, Float64}()
-    
     edges_list = collect(edges(graph))
-    
-    if parallel
-        # TODO: Use ThreadsX for parallel processing
-        for edge in edges_list
+
+    if parallel && Threads.nthreads() > 1
+        # Use multi-threading for parallel processing
+        # Pre-allocate result arrays
+        n_edges = length(edges_list)
+        edge_pairs = Vector{Tuple{Int, Int}}(undef, n_edges)
+        kappa_values = Vector{Float64}(undef, n_edges)
+
+        Threads.@threads for i in 1:n_edges
+            edge = edges_list[i]
             u, v = src(edge), dst(edge)
-            curvatures[(u, v)] = compute_curvature(graph, u, v; alpha=alpha, weights=weights)
+            edge_pairs[i] = (u, v)
+            kappa_values[i] = compute_curvature(graph, u, v; alpha=alpha, weights=weights)
         end
+
+        # Combine into dictionary
+        curvatures = Dict{Tuple{Int, Int}, Float64}()
+        for i in 1:n_edges
+            curvatures[edge_pairs[i]] = kappa_values[i]
+        end
+
+        return curvatures
     else
+        # Serial processing
+        curvatures = Dict{Tuple{Int, Int}, Float64}()
         for edge in edges_list
             u, v = src(edge), dst(edge)
             curvatures[(u, v)] = compute_curvature(graph, u, v; alpha=alpha, weights=weights)
         end
+        return curvatures
     end
-    
-    return curvatures
 end
 
 """
@@ -227,10 +241,9 @@ function shortest_path_distance(
     if u == v
         return 0.0
     end
-    
-    # Use BFS for unweighted, Dijkstra for weighted
+
     if weights === nothing
-        # BFS
+        # BFS for unweighted graphs
         try
             path = a_star(graph, u, v)
             return Float64(length(path) - 1)
@@ -238,7 +251,67 @@ function shortest_path_distance(
             return Inf
         end
     else
-        # TODO: Implement Dijkstra with weights
-        return 1.0  # Placeholder
+        # Dijkstra for weighted graphs
+        return dijkstra_distance(graph, u, v, weights)
     end
+end
+
+"""
+Dijkstra's algorithm for weighted shortest path.
+
+# Arguments
+- `graph`: Input graph
+- `source`: Source node
+- `target`: Target node
+- `weights`: Edge weights dictionary
+
+# Returns
+- Shortest path distance from source to target
+"""
+function dijkstra_distance(
+    graph::SimpleGraph,
+    source::Int,
+    target::Int,
+    weights::Dict{Tuple{Int, Int}, Float64}
+)::Float64
+    n = nv(graph)
+    dist = fill(Inf, n)
+    visited = falses(n)
+    dist[source] = 0.0
+
+    # Priority queue: (distance, node)
+    pq = [(0.0, source)]
+
+    while !isempty(pq)
+        # Get node with minimum distance
+        sort!(pq, by=x->x[1])
+        (d, u) = popfirst!(pq)
+
+        if visited[u]
+            continue
+        end
+
+        visited[u] = true
+
+        # Early termination if target reached
+        if u == target
+            return d
+        end
+
+        # Relax edges
+        for v in neighbors(graph, u)
+            if !visited[v]
+                # Get edge weight
+                w = get(weights, (u, v), get(weights, (v, u), 1.0))
+                alt = dist[u] + w
+
+                if alt < dist[v]
+                    dist[v] = alt
+                    push!(pq, (alt, v))
+                end
+            end
+        end
+    end
+
+    return dist[target]
 end

@@ -30,7 +30,7 @@ export
     network_metrics, validate_graph
 
 # Import dependencies
-using LightGraphs
+using Graphs  # Replaces deprecated LightGraphs
 using DataFrames
 using CSV
 using JSON

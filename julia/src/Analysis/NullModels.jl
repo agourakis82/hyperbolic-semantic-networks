@@ -5,7 +5,7 @@ Configuration model and triadic-rewire null models.
 Uses Rust backend for parallel generation.
 """
 
-using LightGraphs
+using Graphs  # Replaces deprecated LightGraphs
 using Statistics
 using Random
 
@@ -53,16 +53,27 @@ function generate_configuration_models(
 )
     # Get degree sequence
     degrees = [degree(graph, v) for v in vertices(graph)]
-    
-    null_models = Vector{SimpleGraph}()
-    
-    # TODO: Use parallel processing with ThreadsX
-    for _ in 1:n_samples
-        null_graph = sample_configuration_model(degrees)
-        push!(null_models, null_graph)
+
+    if parallel && Threads.nthreads() > 1
+        # Parallel generation using multi-threading
+        null_models = Vector{SimpleGraph}(undef, n_samples)
+
+        Threads.@threads for i in 1:n_samples
+            null_models[i] = sample_configuration_model(degrees)
+        end
+
+        return null_models
+    else
+        # Serial generation
+        null_models = Vector{SimpleGraph}()
+
+        for _ in 1:n_samples
+            null_graph = sample_configuration_model(degrees)
+            push!(null_models, null_graph)
+        end
+
+        return null_models
     end
-    
-    return null_models
 end
 
 """
@@ -108,17 +119,31 @@ function generate_triadic_rewire_models(
     n_samples::Int,
     parallel::Bool
 )
-    # TODO: Implement proper triadic-rewire
+    # TODO: Implement proper triadic-rewire or connect to Rust FFI
     # For now, return copies (placeholder)
-    null_models = Vector{SimpleGraph}()
-    
-    for _ in 1:n_samples
-        # Placeholder: return copy of original
-        # Full implementation will preserve triangles and rewire other edges
-        push!(null_models, copy(graph))
+
+    if parallel && Threads.nthreads() > 1
+        # Parallel generation
+        null_models = Vector{SimpleGraph}(undef, n_samples)
+
+        Threads.@threads for i in 1:n_samples
+            # Placeholder: return copy of original
+            # Full implementation will preserve triangles and rewire other edges
+            null_models[i] = copy(graph)
+        end
+
+        return null_models
+    else
+        # Serial generation
+        null_models = Vector{SimpleGraph}()
+
+        for _ in 1:n_samples
+            # Placeholder: return copy of original
+            push!(null_models, copy(graph))
+        end
+
+        return null_models
     end
-    
-    return null_models
 end
 
 """

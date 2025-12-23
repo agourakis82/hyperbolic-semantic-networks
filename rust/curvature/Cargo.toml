@@ -17,8 +17,7 @@ libc.workspace = true
 [dev-dependencies]
 criterion.workspace = true
 
-# [[bench]]
-# name = "wasserstein_bench"
-# harness = false
-# TODO: Add benchmarks later
+[[bench]]
+name = "wasserstein_bench"
+harness = false
 
