@@ -61,12 +61,10 @@ hyperbolic-semantic-networks/
 │   └── null_models/             # Random graph generation
 │
 ├── experiments/                 # Sounio-powered experiments
-│   ├── 01_epistemic_uncertainty/   # Uncertainty quantification
-│   ├── 02_parallel_sweep/          # Parallel phase transitions
-│   ├── 03_gpu_sinkhorn/            # GPU acceleration
-│   ├── 04_cross_language/          # Julia/Rust/Sounio comparison
-│   ├── 05_streaming/               # Real-time network monitoring
-│   └── 06_refinement_types/        # Formal verification
+│   ├── 01_epistemic_uncertainty/   # Phase transition sweep
+│   ├── 02_null_model/              # Configuration null model ensemble
+│   ├── 03_forman_ricci/            # Forman vs Ollivier comparison
+│   └── 04_uncertainty_scaling/     # Uncertainty at phase transition
 │
 ├── results/                     # Computed results
 │   ├── experiments/             # Phase transition data
@@ -138,50 +136,52 @@ python generate_all_figures.py
 
 ---
 
-## New Experiments (Leveraging Sounio)
+## Sounio Experiments
 
-See [CLEANUP_PLAN.md](CLEANUP_PLAN.md) for full details.
+All experiments are self-contained `.sio` programs demonstrating the phase transition
+with Sounio's effect system (`with IO, Mut, Div, Panic`) and type-safe fixed-size arrays.
 
-### 1. Epistemic Uncertainty Tracking
+### Experiment 01: Phase Transition Sweep
 
-**Question**: How does curvature uncertainty vary with network properties?
-
-**Sounio Advantage**: Automatic uncertainty propagation
+Ollivier-Ricci curvature across k-regular graphs (N=20, k=2..18).
+Demonstrates the universal transition from hyperbolic to spherical geometry.
 
 ```bash
-cd experiments/01_epistemic_uncertainty
-# See README.md for details
+bash experiments/01_epistemic_uncertainty/run.sh
+# → results/sounio/phase_transition_sounio.csv
 ```
 
-### 2. Parallel Phase Sweep
+### Experiment 02: Configuration Null Model Ensemble
 
-**Question**: How fast can we sweep the phase transition with verified parallelism?
+5 independent realizations per k-value from the configuration model C(N,k).
+Tests whether curvature is a structural invariant of the degree sequence.
 
-**Sounio Advantage**: Effect-tracked parallelism
+```bash
+bash experiments/02_null_model/run.sh
+# → results/sounio/configuration_null.csv
+```
 
-### 3. GPU-Accelerated Sinkhorn
+### Experiment 03: Forman-Ricci vs Ollivier-Ricci
 
-**Question**: Can GPU acceleration enable real-time curvature for large networks?
+Compares two discrete Ricci curvature notions on the same graphs:
 
-**Sounio Advantage**: GPU-native with first-class effects
+- **Forman**: combinatorial O(deg²) per edge, no optimal transport
+- **Ollivier**: optimal transport O(n² × sinkhorn_iter) per edge
 
-### 4. Cross-Language Validation
+```bash
+bash experiments/03_forman_ricci/run.sh
+# → results/sounio/forman_comparison.csv
+```
 
-**Question**: How do Julia, Rust, and Sounio compare?
+### Experiment 04: Uncertainty Scaling at Phase Transition
 
-**Sounio Advantage**: Type-safe FFI with effect tracking
+Multi-seed ensemble analysis with Shannon entropy of geometry classification.
+Shows that epistemic uncertainty peaks at the phase transition (k²/N ≈ 2.5).
 
-### 5. Real-Time Network Monitoring
-
-**Question**: Can we track geometry changes in evolving networks?
-
-**Sounio Advantage**: Streaming effects + epistemic computing
-
-### 6. Formal Verification
-
-**Question**: Can we prove geometric properties at compile-time?
-
-**Sounio Advantage**: Refinement types + SMT verification
+```bash
+bash experiments/04_uncertainty_scaling/run.sh
+# → results/sounio/uncertainty_scaling.csv
+```
 
 ---
 
@@ -234,21 +234,18 @@ cd experiments/01_epistemic_uncertainty
 
 ## Implementation Status
 
-### ✅ Complete
-- Julia reference implementation
-- Rust performance implementation
+### Complete
+
+- Julia reference implementation (N=200, 11 networks)
+- Rust performance implementation (Sinkhorn + null models)
 - Sounio graph module (in [Sounio repo](https://github.com/sounio-lang/sounio))
 - Phase transition discovery and validation
+- Sounio Experiments 01-04 (phase transition, null model, Forman, uncertainty)
 - Scientific documentation
 
-### 🔬 In Progress
-- Experiment 1: Epistemic uncertainty tracking
-- Cross-language benchmarking
-- GPU acceleration (when Sounio GPU ready)
+### In Progress
 
-### 📋 Planned
-- Real-time network monitoring
-- Formal verification with refinement types
+- Cross-language benchmarking (Julia vs Sounio numerical agreement)
 - Publication: "Network Geometry in Sounio"
 
 ---
