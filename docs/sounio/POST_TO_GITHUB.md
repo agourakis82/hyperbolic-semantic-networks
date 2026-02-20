@@ -2,7 +2,7 @@
 
 ## Where to Post
 
-**Repository**: https://github.com/Chiuratto-AI/demetrios
+**Repository**: https://github.com/sounio-lang/sounio
 
 **Action**: Create new issue
 
@@ -28,7 +28,7 @@ The issue documents:
 
 1. ✅ **Complete implementation** of network geometry module (~1,460 lines)
 2. 🎯 **Scientific application**: Ollivier-Ricci curvature and phase transitions
-3. 🎨 **Showcases Demetrios features**: Effects, epistemic computing, units
+3. 🎨 **Showcases Sounio features**: Effects, epistemic computing, units
 4. ❓ **11 key questions** about APIs and syntax
 5. 📋 **5-phase testing plan** with example code
 6. 🔬 **Validated science**: Matches Julia reference implementation
@@ -36,9 +36,9 @@ The issue documents:
 ## What This Accomplishes
 
 - **Documents** all the work done
-- **Asks specific questions** that only Demetrios designers can answer
+- **Asks specific questions** that only Sounio designers can answer
 - **Provides testing plan** for validation
-- **Shows real-world usage** of Demetrios features
+- **Shows real-world usage** of Sounio features
 - **Creates permanent record** for future contributors
 
 ## After Posting
@@ -48,12 +48,12 @@ You can reference the issue when:
 - Making design decisions about effects
 - Planning stdlib API expansions
 - Writing documentation
-- Publishing papers about Demetrios
+- Publishing papers about Sounio
 
 ## Alternative: Email First
 
 If you prefer to review before making it public:
-1. Send `GITHUB_ISSUE_DRAFT.md` to Demetrios team via email
+1. Send `GITHUB_ISSUE_DRAFT.md` to Sounio team via email
 2. Get feedback on approach
 3. Then post refined version to GitHub
 

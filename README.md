@@ -14,7 +14,7 @@ This repository contains research on **network geometry** using Ollivier-Ricci c
 
 - **Julia**: Reference implementation (validated)
 - **Rust**: Performance-focused implementation
-- **Demetrios**: Type-safe implementation with epistemic computing
+- **Sounio**: Type-safe implementation with epistemic computing
 
 **Latest Discovery**: Universal phase transition at **⟨k⟩²/N ≈ 2.5** determines network geometry
 
@@ -60,11 +60,11 @@ hyperbolic-semantic-networks/
 │   ├── curvature/               # Curvature computation
 │   └── null_models/             # Random graph generation
 │
-├── experiments/                 # Demetrios-powered experiments
+├── experiments/                 # Sounio-powered experiments
 │   ├── 01_epistemic_uncertainty/   # Uncertainty quantification
 │   ├── 02_parallel_sweep/          # Parallel phase transitions
 │   ├── 03_gpu_sinkhorn/            # GPU acceleration
-│   ├── 04_cross_language/          # Julia/Rust/Demetrios comparison
+│   ├── 04_cross_language/          # Julia/Rust/Sounio comparison
 │   ├── 05_streaming/               # Real-time network monitoring
 │   └── 06_refinement_types/        # Formal verification
 │
@@ -74,7 +74,7 @@ hyperbolic-semantic-networks/
 │   └── swow_clustering_coefficients.json
 │
 ├── docs/                        # Organized documentation
-│   ├── demetrios/               # Demetrios implementation docs
+│   ├── sounio/                  # Sounio implementation docs
 │   ├── validation/              # Scientific validation reports
 │   ├── INDEX.md                 # Master index
 │   └── [various guides]
@@ -108,9 +108,9 @@ julia --project -e 'using Pkg; Pkg.instantiate()'
 cd rust && cargo build --release
 ```
 
-**Demetrios** (for new experiments):
+**Sounio** (for new experiments):
 ```bash
-cd path/to/demetrios/compiler
+cd path/to/sounio/compiler
 cargo build --release
 export PATH=$PATH:$(pwd)/target/release
 ```
@@ -138,7 +138,7 @@ python generate_all_figures.py
 
 ---
 
-## New Experiments (Leveraging Demetrios)
+## New Experiments (Leveraging Sounio)
 
 See [CLEANUP_PLAN.md](CLEANUP_PLAN.md) for full details.
 
@@ -146,7 +146,7 @@ See [CLEANUP_PLAN.md](CLEANUP_PLAN.md) for full details.
 
 **Question**: How does curvature uncertainty vary with network properties?
 
-**Demetrios Advantage**: Automatic uncertainty propagation
+**Sounio Advantage**: Automatic uncertainty propagation
 
 ```bash
 cd experiments/01_epistemic_uncertainty
@@ -157,31 +157,31 @@ cd experiments/01_epistemic_uncertainty
 
 **Question**: How fast can we sweep the phase transition with verified parallelism?
 
-**Demetrios Advantage**: Effect-tracked parallelism
+**Sounio Advantage**: Effect-tracked parallelism
 
 ### 3. GPU-Accelerated Sinkhorn
 
 **Question**: Can GPU acceleration enable real-time curvature for large networks?
 
-**Demetrios Advantage**: GPU-native with first-class effects
+**Sounio Advantage**: GPU-native with first-class effects
 
 ### 4. Cross-Language Validation
 
-**Question**: How do Julia, Rust, and Demetrios compare?
+**Question**: How do Julia, Rust, and Sounio compare?
 
-**Demetrios Advantage**: Type-safe FFI with effect tracking
+**Sounio Advantage**: Type-safe FFI with effect tracking
 
 ### 5. Real-Time Network Monitoring
 
 **Question**: Can we track geometry changes in evolving networks?
 
-**Demetrios Advantage**: Streaming effects + epistemic computing
+**Sounio Advantage**: Streaming effects + epistemic computing
 
 ### 6. Formal Verification
 
 **Question**: Can we prove geometric properties at compile-time?
 
-**Demetrios Advantage**: Refinement types + SMT verification
+**Sounio Advantage**: Refinement types + SMT verification
 
 ---
 
@@ -222,10 +222,10 @@ cd experiments/01_epistemic_uncertainty
 - [docs/validation/FINAL_VALIDATION_SUMMARY.md](docs/validation/FINAL_VALIDATION_SUMMARY.md) - Validation summary
 - [docs/validation/DEEP_SCIENCE_ANALYSIS.md](docs/validation/DEEP_SCIENCE_ANALYSIS.md) - Mathematical foundations
 
-### Demetrios Implementation
-- [docs/demetrios/IMPLEMENTATION_STATUS.md](docs/demetrios/IMPLEMENTATION_STATUS.md) - Implementation status
-- [docs/demetrios/INTEGRATION_PLAN.md](docs/demetrios/INTEGRATION_PLAN.md) - Integration plan
-- [docs/demetrios/ROADMAP.md](docs/demetrios/ROADMAP.md) - Development roadmap
+### Sounio Implementation
+- [docs/sounio/SOUNIO_IMPLEMENTATION_STATUS.md](docs/sounio/SOUNIO_IMPLEMENTATION_STATUS.md) - Implementation status
+- [docs/sounio/SOUNIO_INTEGRATION_PLAN.md](docs/sounio/SOUNIO_INTEGRATION_PLAN.md) - Integration plan
+- [docs/sounio/SOUNIO_ROADMAP.md](docs/sounio/SOUNIO_ROADMAP.md) - Development roadmap
 
 ### Full Index
 - [docs/INDEX.md](docs/INDEX.md) - Complete documentation index
@@ -237,19 +237,19 @@ cd experiments/01_epistemic_uncertainty
 ### ✅ Complete
 - Julia reference implementation
 - Rust performance implementation
-- Demetrios graph module (in [Demetrios repo](https://github.com/Chiuratto-AI/demetrios))
+- Sounio graph module (in [Sounio repo](https://github.com/sounio-lang/sounio))
 - Phase transition discovery and validation
 - Scientific documentation
 
 ### 🔬 In Progress
 - Experiment 1: Epistemic uncertainty tracking
 - Cross-language benchmarking
-- GPU acceleration (when Demetrios GPU ready)
+- GPU acceleration (when Sounio GPU ready)
 
 ### 📋 Planned
 - Real-time network monitoring
 - Formal verification with refinement types
-- Publication: "Network Geometry in Demetrios"
+- Publication: "Network Geometry in Sounio"
 
 ---
 
@@ -259,7 +259,7 @@ cd experiments/01_epistemic_uncertainty
 
 ```bibtex
 @software{hyperbolic_semantic_networks_julia_rust,
-  title = {Hyperbolic Semantic Networks: Julia/Rust/Demetrios Implementation},
+  title = {Hyperbolic Semantic Networks: Julia/Rust/Sounio Implementation},
   author = {Agourakis, Demetrios C.},
   year = {2025},
   doi = {10.5281/zenodo.17655231},
@@ -295,9 +295,9 @@ cd experiments/01_epistemic_uncertainty
 
 ---
 
-## Demetrios Integration
+## Sounio Integration
 
-The network geometry module has been implemented in the [Demetrios programming language](https://github.com/Chiuratto-AI/demetrios) at `stdlib/graph/`, showcasing:
+The network geometry module has been implemented in the [Sounio programming language](https://github.com/sounio-lang/sounio) at `stdlib/graph/`, showcasing:
 
 - ✅ **Effect system**: Explicit tracking of Alloc, Random, Confidence
 - ✅ **Epistemic computing**: Automatic uncertainty propagation
@@ -306,7 +306,7 @@ The network geometry module has been implemented in the [Demetrios programming l
 - 🔜 **GPU acceleration**: First-class GPU effects
 - 🔜 **Parallel computing**: Effect-tracked parallelism
 
-See [GitHub Issue #13](https://github.com/Chiuratto-AI/demetrios/issues/13) for implementation details.
+See [GitHub Issue #13](https://github.com/sounio-lang/sounio/issues/13) for implementation details.
 
 ---
 
@@ -332,7 +332,7 @@ GitHub: [@agourakis82](https://github.com/agourakis82)
 ## Acknowledgments
 
 - **Small World of Words** project team
-- **Demetrios** programming language development
+- **Sounio** programming language development
 - Julia and Rust communities
 
 ---
@@ -341,6 +341,6 @@ GitHub: [@agourakis82](https://github.com/agourakis82)
 
 See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
-**Current Version**: v0.2.0 (Phase Transition + Demetrios Implementation)
+**Current Version**: v0.2.0 (Phase Transition + Sounio Implementation)
 
 **Previous**: v0.1.0 (Initial Julia/Rust implementation)

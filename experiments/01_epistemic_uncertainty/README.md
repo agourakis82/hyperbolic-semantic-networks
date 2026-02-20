@@ -1,7 +1,7 @@
 # Experiment 1: Epistemic Uncertainty in Curvature Estimates
 
 **Status**: Design phase
-**Demetrios Advantage**: Automatic uncertainty propagation through epistemic computing
+**Sounio Advantage**: Automatic uncertainty propagation through epistemic computing
 
 ---
 
@@ -60,7 +60,7 @@ Compare epistemic uncertainty across languages.
 
 ## Implementation
 
-### Demetrios Code
+### Sounio Code
 
 ```d
 module experiments::epistemic_uncertainty
@@ -99,7 +99,7 @@ pub fn run_trial(n: usize, k: usize, params: CurvatureParams)
         k,
         ratio: stats.sparsity_ratio,
         kappa_value: kappa.value(),
-        kappa_uncertainty: kappa.uncertainty(),  // ← Automatic from Demetrios!
+        kappa_uncertainty: kappa.uncertainty(),  // ← Automatic from Sounio!
         confidence: kappa.confidence(),          // ← Automatic confidence level
         geometry: Geometry::from_curvature(kappa.value()),
         sinkhorn_iters: kappa.metadata().iterations,
@@ -145,7 +145,7 @@ pub fn run_experiment() -> [EpistemicResult] with Alloc, Random, Confidence {
 ### Comparison: Julia Bootstrap
 
 ```julia
-# Compare Demetrios epistemic uncertainty to bootstrap confidence intervals
+# Compare Sounio epistemic uncertainty to bootstrap confidence intervals
 using Statistics, Bootstrap
 
 function bootstrap_curvature(g::Graph, n_samples=1000)
@@ -169,7 +169,7 @@ function bootstrap_curvature(g::Graph, n_samples=1000)
 end
 ```
 
-**Question**: Does Demetrios epistemic uncertainty match bootstrap uncertainty?
+**Question**: Does Sounio epistemic uncertainty match bootstrap uncertainty?
 
 ---
 
@@ -178,7 +178,7 @@ end
 ### Primary Outcomes
 
 1. **κ_value** - Mean curvature
-2. **κ_uncertainty** - Epistemic uncertainty (from Demetrios)
+2. **κ_uncertainty** - Epistemic uncertainty (from Sounio)
 3. **confidence** - Confidence level (0-1)
 4. **geometry** - Classification (Hyperbolic/Euclidean/Spherical)
 
@@ -211,7 +211,7 @@ end
    - ANOVA: Is transition zone significantly higher?
 
 3. **Confidence calibration**:
-   - Compare Demetrios confidence to bootstrap coverage
+   - Compare Sounio confidence to bootstrap coverage
    - "95% confidence" should cover true value 95% of time
 
 4. **Sinkhorn convergence effect**:
@@ -222,7 +222,7 @@ end
 
 1. **Uncertainty heatmap**: N vs k, color = uncertainty
 2. **Phase diagram**: ratio vs κ, error bars = uncertainty
-3. **Calibration plot**: Demetrios confidence vs bootstrap coverage
+3. **Calibration plot**: Sounio confidence vs bootstrap coverage
 4. **Scaling plot**: log(N) vs log(uncertainty)
 
 ---
@@ -233,7 +233,7 @@ end
 
 1. **Scaling**: uncertainty ∝ N^(-0.5 ± 0.1)
 2. **Transition peak**: 2-3x higher uncertainty at ratio ≈ 2.5
-3. **Calibration**: Demetrios confidence within ±5% of bootstrap
+3. **Calibration**: Sounio confidence within ±5% of bootstrap
 4. **Convergence**: uncertainty ∝ 1/√iterations
 
 ### Qualitative Findings
@@ -241,7 +241,7 @@ end
 - Small networks (N<100): Low confidence, high uncertainty
 - Transition zone: Epistemic uncertainty captures ambiguity
 - Large networks (N>500): High confidence, low uncertainty
-- Demetrios automatic tracking matches manual bootstrap
+- Sounio automatic tracking matches manual bootstrap
 
 ---
 
@@ -249,7 +249,7 @@ end
 
 ### Must Achieve
 
-- [x] Implement epistemic curvature in Demetrios
+- [x] Implement epistemic curvature in Sounio
 - [ ] Run 800 synthetic network trials
 - [ ] Compare to Julia bootstrap (correlation > 0.8)
 - [ ] Document uncertainty sources
@@ -273,7 +273,7 @@ end
 ## Timeline
 
 **Week 1**: Implementation
-- Day 1-2: Implement epistemic tracking in Demetrios
+- Day 1-2: Implement epistemic tracking in Sounio
 - Day 3-4: Implement Julia bootstrap comparison
 - Day 5: Debug and validate
 
@@ -294,7 +294,7 @@ end
 ```
 experiments/01_epistemic_uncertainty/
 ├── README.md                    (this file)
-├── demetrios/
+├── sounio/
 │   ├── epistemic_trial.d       (single trial)
 │   ├── epistemic_sweep.d       (full sweep)
 │   └── run.sh                  (execution script)
@@ -304,7 +304,7 @@ experiments/01_epistemic_uncertainty/
 ├── results/
 │   ├── synthetic_sweep.csv     (800 trials)
 │   ├── real_networks.csv       (4 languages)
-│   └── calibration.csv         (Demetrios vs bootstrap)
+│   └── calibration.csv         (Sounio vs bootstrap)
 ├── figures/
 │   ├── uncertainty_heatmap.png
 │   ├── phase_diagram.png
@@ -318,7 +318,7 @@ experiments/01_epistemic_uncertainty/
 ## Next Steps
 
 1. ✅ Design complete
-2. 🔨 Implement epistemic tracking in Demetrios
+2. 🔨 Implement epistemic tracking in Sounio
 3. 🔨 Implement Julia bootstrap baseline
 4. 🧪 Run pilot experiment (N=100, k=10, 10 reps)
 5. 📊 Validate measurements
@@ -329,4 +329,4 @@ experiments/01_epistemic_uncertainty/
 **Status**: Ready to implement
 **Owner**: Claude + Maria
 **Estimated Duration**: 3 weeks
-**Demetrios Features Used**: Epistemic computing, effect system, confidence tracking
+**Sounio Features Used**: Epistemic computing, effect system, confidence tracking

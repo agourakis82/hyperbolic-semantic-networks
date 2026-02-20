@@ -14,7 +14,7 @@
 **After**: Organized structure:
 ```
 docs/
-├── demetrios/     (7 files) - Demetrios implementation docs
+├── sounio/     (7 files) - Sounio implementation docs
 ├── validation/    (11 files) - Scientific validation reports
 └── [other dirs]   - Existing organized docs
 ```
@@ -25,7 +25,7 @@ docs/
 
 ### 2. Experiment Design
 
-Created **6 experimental directories** leveraging Demetrios advantages:
+Created **6 experimental directories** leveraging Sounio advantages:
 
 ```
 experiments/
@@ -55,9 +55,9 @@ experiments/
 **Design**:
 - 80 network configurations (N × k × α × ε)
 - 10 replicates each = 800 measurements
-- Compare Demetrios epistemic tracking to Julia bootstrap
+- Compare Sounio epistemic tracking to Julia bootstrap
 
-**Demetrios Advantage**: Automatic uncertainty propagation!
+**Sounio Advantage**: Automatic uncertainty propagation!
 
 ```d
 // Epistemic uncertainty tracked automatically
@@ -70,7 +70,7 @@ println(kappa.confidence());   // ← Automatic!
 **Expected Results**:
 - Uncertainty ∝ N^(-0.5) (1/√N scaling)
 - Peak uncertainty at phase transition (⟨k⟩²/N ≈ 2.5)
-- Demetrios matches Julia bootstrap (r > 0.8)
+- Sounio matches Julia bootstrap (r > 0.8)
 
 **Timeline**: 3 weeks (implementation → experiments → analysis)
 
@@ -87,7 +87,7 @@ println(kappa.confidence());   // ← Automatic!
 ### Implementation Status
 - ✅ Julia: Reference implementation complete
 - ✅ Rust: Performance implementation complete
-- ✅ Demetrios: Graph module in Demetrios repo (stdlib/graph/)
+- ✅ Sounio: Graph module in Sounio repo (stdlib/graph/)
 - 🔬 Experiments: 1 fully designed, 5 structured
 
 ### Scientific Status
@@ -105,9 +105,9 @@ println(kappa.confidence());   // ← Automatic!
 1. **Commit cleanup**:
    ```bash
    git add -A
-   git commit -m "feat: Organize docs and design Demetrios experiments
+   git commit -m "feat: Organize docs and design Sounio experiments
 
-   - Move 18 files to docs/demetrios/ and docs/validation/
+   - Move 18 files to docs/sounio/ and docs/validation/
    - Create 6 experiment directories
    - Design Experiment 1: Epistemic uncertainty (full spec)
    - Update README with new structure and experiments
@@ -115,7 +115,7 @@ println(kappa.confidence());   // ← Automatic!
    ```
 
 2. **Implement Experiment 1**:
-   - Add epistemic tracking to Demetrios graph module
+   - Add epistemic tracking to Sounio graph module
    - Implement Julia bootstrap comparison
    - Run pilot (N=100, k=10, 10 reps)
 
@@ -148,12 +148,12 @@ println(kappa.confidence());   // ← Automatic!
    - GPU Sinkhorn (when ready)
 
 8. **Cross-language validation**:
-   - Benchmark Julia vs Rust vs Demetrios
+   - Benchmark Julia vs Rust vs Sounio
    - Performance comparison
    - Type safety benefits
 
 9. **Paper writing**:
-   - "Network Geometry in Demetrios: Type-Safe Scientific Computing"
+   - "Network Geometry in Sounio: Type-Safe Scientific Computing"
    - Submit to PL or scientific computing conference
 
 ---
@@ -190,13 +190,13 @@ println(kappa.confidence());   // ← Automatic!
 4. **Real-time monitoring** capabilities
 
 ### Technical Innovation
-1. **Type-safe scientific computing** with Demetrios
+1. **Type-safe scientific computing** with Sounio
 2. **Automatic uncertainty propagation** via epistemic effects
 3. **Effect-tracked parallelism** for reproducibility
 4. **GPU-native** network analysis (future)
 
 ### Pedagogical Value
-1. **Tutorial-quality code** for learning Demetrios
+1. **Tutorial-quality code** for learning Sounio
 2. **Real scientific application** (not toy examples)
 3. **Cross-language comparison** showing tradeoffs
 4. **Best practices** for scientific computing
@@ -214,7 +214,7 @@ println(kappa.confidence());   // ← Automatic!
 - 8 other essential docs
 
 ### docs/ (Organized)
-- demetrios/ - 7 implementation docs
+- sounio/ - 7 implementation docs
 - validation/ - 11 scientific reports
 - [15 other subdirs] - Existing organization
 
@@ -232,7 +232,7 @@ println(kappa.confidence());   // ← Automatic!
 
 ## 💡 Key Insights
 
-### Why Demetrios for Experiments?
+### Why Sounio for Experiments?
 
 1. **Epistemic Computing**:
    - Automatic uncertainty tracking
@@ -261,7 +261,7 @@ println(kappa.confidence());   // ← Automatic!
 - Uncertainty quantification built-in
 - Formal verification of results
 
-**For Demetrios**:
+**For Sounio**:
 - Real-world scientific application
 - Showcases all unique features
 - Tutorial for future users
@@ -281,7 +281,7 @@ println(kappa.confidence());   // ← Automatic!
 ✅ **Structure**: Ready for implementation
 🚀 **Next**: Implement Experiment 1
 
-**Ready to code!** The repository is now organized, experiments are designed, and we have a clear path forward to demonstrate Demetrios' advantages in real scientific computing.
+**Ready to code!** The repository is now organized, experiments are designed, and we have a clear path forward to demonstrate Sounio' advantages in real scientific computing.
 
 ---
 

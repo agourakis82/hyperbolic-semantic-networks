@@ -1,4 +1,4 @@
-# GitHub Issue Draft for Demetrios Repository
+# GitHub Issue Draft for Sounio Repository
 
 **Title**: Network Geometry Module Implementation - stdlib/graph with Ollivier-Ricci Curvature
 
@@ -8,7 +8,7 @@
 
 ## Summary
 
-I've implemented a complete **network geometry analysis module** (`stdlib/graph/`) showcasing Demetrios' unique features (effects, epistemic computing, units) with real scientific applications. The module computes **Ollivier-Ricci curvature** to classify networks as hyperbolic, Euclidean, or spherical.
+I've implemented a complete **network geometry analysis module** (`stdlib/graph/`) showcasing Sounio' unique features (effects, epistemic computing, units) with real scientific applications. The module computes **Ollivier-Ricci curvature** to classify networks as hyperbolic, Euclidean, or spherical.
 
 **Status**: ✅ Implementation complete (~1,460 LOC), ⚠️ Needs testing & syntax validation
 
@@ -63,7 +63,7 @@ All files in `stdlib/graph/`:
 
 ---
 
-## 🎨 Demetrios Features Showcased
+## 🎨 Sounio Features Showcased
 
 ### 1. Effect System ✅
 
@@ -145,7 +145,7 @@ This implementation validates a universal law:
 
 ---
 
-## ❓ Questions for Demetrios Team
+## ❓ Questions for Sounio Team
 
 ### Critical (Need for Compilation)
 
@@ -257,7 +257,7 @@ fn random_uniform() -> f64 with Random {
 }
 ```
 
-**Need**: Integration with Demetrios RNG system (saw LCG in `stdlib/prob/random.d`)
+**Need**: Integration with Sounio RNG system (saw LCG in `stdlib/prob/random.d`)
 
 ### Epistemic Computing Integration
 
@@ -417,7 +417,7 @@ fn main() -> i32 with Alloc {
 ## 🎯 Next Steps
 
 ### Immediate
-1. **Review & feedback** - Does this approach make sense for Demetrios stdlib?
+1. **Review & feedback** - Does this approach make sense for Sounio stdlib?
 2. **Syntax fixes** - I'll update based on compilation errors
 3. **API clarifications** - Answer the 11 questions above
 4. **Testing** - Run through the 5-phase test plan
@@ -425,7 +425,7 @@ fn main() -> i32 with Alloc {
 ### Short-term (Week 2-3)
 5. **Implement proper RNG** - Replace placeholders
 6. **Validate numerics** - Compare to Julia reference implementation
-7. **Performance baseline** - How fast is Demetrios vs Julia?
+7. **Performance baseline** - How fast is Sounio vs Julia?
 8. **Epistemic integration** - Full uncertainty propagation
 
 ### Medium-term (Week 4-6)
@@ -435,9 +435,9 @@ fn main() -> i32 with Alloc {
 12. **Documentation** - Tutorial, API docs, examples
 
 ### Long-term (Publication)
-13. **Paper writing** - "Network Geometry in Demetrios: Type-Safe Science"
-14. **Benchmark suite** - Demetrios vs Julia/Python/NetworkX
-15. **Tutorial series** - Teaching network science in Demetrios
+13. **Paper writing** - "Network Geometry in Sounio: Type-Safe Science"
+14. **Benchmark suite** - Sounio vs Julia/Python/NetworkX
+15. **Tutorial series** - Teaching network science in Sounio
 16. **Conference demo** - Show type-safe scientific computing
 
 ---
@@ -448,10 +448,10 @@ All implementation files are in the repository at:
 - `stdlib/graph/*.d` - Module implementation
 - `examples/network_geometry_demo.d` - Demo program
 - Documentation in project root:
-  - `DEMETRIOS_INTEGRATION_PLAN.md` - Original design
-  - `DEMETRIOS_IMPLEMENTATION_STATUS.md` - Current status
-  - `DEMETRIOS_SYNTAX_UPDATES.md` - Known issues
-  - `FOR_DEMETRIOS_DESIGNER.md` - Design questions
+  - `SOUNIO_INTEGRATION_PLAN.md` - Original design
+  - `SOUNIO_IMPLEMENTATION_STATUS.md` - Current status
+  - `SOUNIO_SYNTAX_UPDATES.md` - Known issues
+  - `FOR_SOUNIO_DESIGNER.md` - Design questions
 
 Julia reference implementation:
 - `phase_transition_pure_julia.jl` - Validated implementation
@@ -461,12 +461,12 @@ Julia reference implementation:
 
 ## 💡 Why This Matters
 
-### For Demetrios
+### For Sounio
 
 1. **First major scientific library** - Real computational science, not toy examples
 2. **Feature showcase** - Effects, epistemic computing, units, types all used naturally
 3. **Publishable results** - Validates actual scientific discovery
-4. **Tutorial quality** - Others can learn Demetrios from this
+4. **Tutorial quality** - Others can learn Sounio from this
 5. **Type safety + performance** - Shows you can have both
 
 ### For Science
@@ -555,4 +555,4 @@ Where:
 **Status**: Ready for review and testing
 **Contact**: via this GitHub issue
 
-Thank you for creating Demetrios! Excited to showcase its capabilities with real science. 🚀
+Thank you for creating Sounio! Excited to showcase its capabilities with real science. 🚀

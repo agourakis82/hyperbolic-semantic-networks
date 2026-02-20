@@ -1,7 +1,7 @@
 # Repository Cleanup and Organization Plan
 
 **Date**: December 23, 2024
-**Status**: Organizing documentation and planning Demetrios experiments
+**Status**: Organizing documentation and planning Sounio experiments
 
 ---
 
@@ -10,14 +10,14 @@
 ### Current State
 - ✅ 32 markdown files in root directory
 - ✅ Scientific validation complete
-- ✅ Demetrios implementation in separate repo
+- ✅ Sounio implementation in separate repo
 - ⚠️ Documentation scattered and duplicative
 
 ### Proposed Structure
 
 ```
 docs/
-├── demetrios/                    # Demetrios-specific docs
+├── sounio/                    # Sounio-specific docs
 │   ├── IMPLEMENTATION_STATUS.md
 │   ├── INTEGRATION_PLAN.md
 │   ├── ROADMAP.md
@@ -38,7 +38,7 @@ docs/
 │
 └── publications/                 # Paper drafts
     ├── phase_transition_paper.md
-    └── demetrios_showcase.md
+    └── sounio_showcase.md
 
 README.md                         # Main project overview
 CHANGELOG.md                      # Version history
@@ -47,12 +47,12 @@ DEVELOPMENT.md                    # Development guide
 
 ### Files to Move
 
-**To `docs/demetrios/`:**
-- DEMETRIOS_IMPLEMENTATION_STATUS.md
-- DEMETRIOS_INTEGRATION_PLAN.md
-- DEMETRIOS_ROADMAP.md
-- DEMETRIOS_SYNTAX_UPDATES.md
-- FOR_DEMETRIOS_DESIGNER.md
+**To `docs/sounio/`:**
+- SOUNIO_IMPLEMENTATION_STATUS.md
+- SOUNIO_INTEGRATION_PLAN.md
+- SOUNIO_ROADMAP.md
+- SOUNIO_SYNTAX_UPDATES.md
+- FOR_SOUNIO_DESIGNER.md
 - GITHUB_ISSUE_DRAFT.md
 - POST_TO_GITHUB.md
 
@@ -85,11 +85,11 @@ DEVELOPMENT.md                    # Development guide
 
 ---
 
-## 🧪 New Experiments Leveraging Demetrios Advantages
+## 🧪 New Experiments Leveraging Sounio Advantages
 
 ### Experiment 1: Epistemic Uncertainty in Curvature Estimates
 
-**Demetrios Advantage**: Automatic uncertainty propagation through epistemic computing
+**Sounio Advantage**: Automatic uncertainty propagation through epistemic computing
 
 **Scientific Question**: How does curvature uncertainty vary with network size and density?
 
@@ -101,7 +101,7 @@ DEVELOPMENT.md                    # Development guide
    - Measurement noise in shortest paths
 3. Compare confidence bands for small vs large networks
 
-**Implementation** (Demetrios):
+**Implementation** (Sounio):
 ```d
 fn curvature_with_uncertainty(g: &Graph, params: CurvatureParams)
     -> Knowledge<f64> with Alloc, Confidence {
@@ -122,7 +122,7 @@ fn curvature_with_uncertainty(g: &Graph, params: CurvatureParams)
 
 ### Experiment 2: Parallel Phase Transition Sweep
 
-**Demetrios Advantage**: Effect-tracked parallelism with guaranteed reproducibility
+**Sounio Advantage**: Effect-tracked parallelism with guaranteed reproducibility
 
 **Scientific Question**: How fast can we sweep the phase transition with parallel execution?
 
@@ -131,7 +131,7 @@ fn curvature_with_uncertainty(g: &Graph, params: CurvatureParams)
 2. Compute curvature in parallel with explicit effect tracking
 3. Measure: wall time, speedup, effect overhead
 
-**Implementation** (Demetrios):
+**Implementation** (Sounio):
 ```d
 fn parallel_phase_sweep(n: usize, k_values: [usize])
     -> [CurvatureResult] with Alloc, Parallel, Random {
@@ -147,7 +147,7 @@ fn parallel_phase_sweep(n: usize, k_values: [usize])
 **Comparison**:
 - Julia (Threads.@threads): No effect tracking
 - Rust (rayon): No epistemic tracking
-- Demetrios: Full effect + epistemic tracking
+- Sounio: Full effect + epistemic tracking
 
 **Metrics**:
 - Execution time
@@ -159,7 +159,7 @@ fn parallel_phase_sweep(n: usize, k_values: [usize])
 
 ### Experiment 3: GPU-Accelerated Sinkhorn
 
-**Demetrios Advantage**: GPU-native with first-class GPU effects
+**Sounio Advantage**: GPU-native with first-class GPU effects
 
 **Scientific Question**: How much faster is GPU Sinkhorn for large networks?
 
@@ -168,7 +168,7 @@ fn parallel_phase_sweep(n: usize, k_values: [usize])
 2. Compare CPU vs GPU for N=100, 200, 500, 1000
 3. Measure: speedup, memory usage, numeric accuracy
 
-**Implementation** (Demetrios):
+**Implementation** (Sounio):
 ```d
 kernel fn sinkhorn_gpu(
     mu: &[f64] @ gpu,
@@ -190,17 +190,17 @@ kernel fn sinkhorn_gpu(
 
 ### Experiment 4: Cross-Language Validation
 
-**Demetrios Advantage**: Type-safe FFI with effect tracking
+**Sounio Advantage**: Type-safe FFI with effect tracking
 
-**Scientific Question**: Can we validate Demetrios numerics against Julia/Python?
+**Scientific Question**: Can we validate Sounio numerics against Julia/Python?
 
 **Design**:
-1. Load same networks in Julia, Python, Demetrios
+1. Load same networks in Julia, Python, Sounio
 2. Compute curvature with identical parameters
 3. Compare results (should agree within 1e-6)
 4. Measure performance and type safety
 
-**Implementation** (Demetrios):
+**Implementation** (Sounio):
 ```d
 extern "C" fn validate_against_julia(
     adj_matrix: *const f64,
@@ -214,7 +214,7 @@ extern "C" fn validate_against_julia(
 
 **Validation Criteria**:
 - Numerical agreement: |κ_D - κ_J| < 1e-6
-- Performance: Demetrios within 2x of Julia
+- Performance: Sounio within 2x of Julia
 - Type safety: Zero runtime type errors
 - Effect correctness: All side effects tracked
 
@@ -222,7 +222,7 @@ extern "C" fn validate_against_julia(
 
 ### Experiment 5: Real-Time Network Geometry Monitoring
 
-**Demetrios Advantage**: Streaming effects + epistemic computing
+**Sounio Advantage**: Streaming effects + epistemic computing
 
 **Scientific Question**: Can we track geometry changes in evolving networks?
 
@@ -232,7 +232,7 @@ extern "C" fn validate_against_julia(
 3. Track curvature evolution with epistemic confidence
 4. Detect phase transitions in real-time
 
-**Implementation** (Demetrios):
+**Implementation** (Sounio):
 ```d
 fn monitor_network_evolution(initial: &Graph, new_edges: [Edge])
     -> Stream<GeometryUpdate> with Alloc, Confidence, Stream {
@@ -263,7 +263,7 @@ fn monitor_network_evolution(initial: &Graph, new_edges: [Edge])
 
 ### Experiment 6: Refinement Types for Network Properties
 
-**Demetrios Advantage**: SMT-verified constraints on network parameters
+**Sounio Advantage**: SMT-verified constraints on network parameters
 
 **Scientific Question**: Can we prove properties about network geometry at compile-time?
 
@@ -278,7 +278,7 @@ fn monitor_network_evolution(initial: &Graph, new_edges: [Edge])
    - `DenseGraph → Spherical` (always)
 3. Use SMT solver to verify at compile-time
 
-**Implementation** (Demetrios):
+**Implementation** (Sounio):
 ```d
 fn guaranteed_hyperbolic(g: SparseGraph) -> Geometry {
     // Refinement type guarantees g.sparsity_ratio() < 2.0
@@ -313,7 +313,7 @@ fn guaranteed_hyperbolic(g: SparseGraph) -> Geometry {
 
 ### Week 7-8: Experiment 6 + Paper
 - 🔬 Refinement types (if ready)
-- 📝 Write paper: "Network Geometry in Demetrios"
+- 📝 Write paper: "Network Geometry in Sounio"
 - 🎯 Submit to conference/journal
 
 ---
@@ -326,7 +326,7 @@ fn guaranteed_hyperbolic(g: SparseGraph) -> Geometry {
 3. **Formal verification** of geometric properties
 4. **Performance benchmarks** across languages
 
-### Demetrios Showcase
+### Sounio Showcase
 1. **Epistemic computing** in real scientific application
 2. **Effect system** for reproducible parallel experiments
 3. **GPU acceleration** for large-scale networks
@@ -334,8 +334,8 @@ fn guaranteed_hyperbolic(g: SparseGraph) -> Geometry {
 
 ### Publications
 1. **Phase transition paper** (already validated)
-2. **Demetrios showcase paper** (new experiments)
-3. **Tutorial series** for network science in Demetrios
+2. **Sounio showcase paper** (new experiments)
+3. **Tutorial series** for network science in Sounio
 4. **Benchmark suite** comparing languages
 
 ---
@@ -352,7 +352,7 @@ fn guaranteed_hyperbolic(g: SparseGraph) -> Geometry {
 - [ ] All 6 experiments implemented
 - [ ] Results validate against Julia
 - [ ] Performance competitive with Julia/Rust
-- [ ] Demetrios advantages clearly demonstrated
+- [ ] Sounio advantages clearly demonstrated
 
 ### Publication Success
 - [ ] 2 papers written
