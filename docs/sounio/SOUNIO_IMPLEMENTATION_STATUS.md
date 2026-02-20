@@ -1,4 +1,4 @@
-# Demetrios Implementation Status
+# Sounio Implementation Status
 
 **Date**: December 23, 2024
 **Status**: Week 1 Core Implementation Complete ✅
@@ -8,9 +8,9 @@
 
 ## 🎯 What We've Built
 
-### Complete Graph Module (`demetrios/stdlib/graph/`)
+### Complete Graph Module (`sounio/stdlib/graph/`)
 
-We've implemented a full-featured network geometry library in Demetrios showcasing:
+We've implemented a full-featured network geometry library in Sounio showcasing:
 
 1. ✅ **Type System** - Dimensional types for all geometric quantities
 2. ✅ **Effect System** - Explicit tracking of Alloc, Random, Confidence
@@ -42,11 +42,11 @@ We've implemented a full-featured network geometry library in Demetrios showcasi
 |------|---------|--------|
 | `examples/network_geometry_demo.d` | Phase transition demo | ✅ Complete |
 
-### Total: ~1,460 lines of Demetrios code
+### Total: ~1,460 lines of Sounio code
 
 ---
 
-## 🎨 Demetrios Features Demonstrated
+## 🎨 Sounio Features Demonstrated
 
 ### 1. Effect System ✅
 
@@ -199,7 +199,7 @@ fn random_u64() -> u64 with Random {
 }
 ```
 
-**Need**: Integration with Demetrios' RNG system.
+**Need**: Integration with Sounio' RNG system.
 
 **Question**: What's the API for `with Random`? Is there a global RNG? Thread-local?
 
@@ -261,7 +261,7 @@ for i in 0..n {
 println("  N={:3}, k={:2}: ratio={:5.2} → {}{}", n, k, ratio, ...);
 ```
 
-**Question**: What's the actual syntax for formatted output in Demetrios?
+**Question**: What's the actual syntax for formatted output in Sounio?
 
 ---
 
@@ -269,8 +269,8 @@ println("  N={:3}, k={:2}: ratio={:5.2} → {}{}", n, k, ratio, ...);
 
 ### Immediate (This Week)
 
-1. **Get your feedback** on the 8 design questions in `FOR_DEMETRIOS_DESIGNER.md`
-2. **Try to compile** this code with Demetrios compiler
+1. **Get your feedback** on the 8 design questions in `FOR_SOUNIO_DESIGNER.md`
+2. **Try to compile** this code with Sounio compiler
 3. **Fix syntax errors** - I'm sure there are many!
 4. **Implement RNG** - Replace placeholder random functions
 5. **Test basic operations** - Create graph, add edges, compute degree
@@ -294,7 +294,7 @@ println("  N={:3}, k={:2}: ratio={:5.2} → {}{}", n, k, ratio, ...);
 
 1. **Parallel curvature** - Implement parallel map over edges
 2. **Full experiment** - Phase transition from k=2 to k=50
-3. **Result comparison** - Demetrios vs Julia validation
+3. **Result comparison** - Sounio vs Julia validation
 4. **Effect tracking** - Verify all effects are correct
 
 ---
@@ -330,7 +330,7 @@ These are critical decisions that only you (as language designer) can make:
 
 ### Original Week 1 Goals
 
-- [x] ✅ Understand Demetrios fully
+- [x] ✅ Understand Sounio fully
 - [x] ✅ Build and test compiler (attempted, needs cargo)
 - [x] ✅ Run existing scientific examples (examined)
 - [x] ✅ Create basic graph structure
@@ -352,7 +352,7 @@ These are critical decisions that only you (as language designer) can make:
 
 ## 💡 What Makes This Special
 
-### For Demetrios
+### For Sounio
 
 1. **First major scientific library** - Real-world computational science
 2. **Showcases all unique features** - Effects, epistemic, units, types
@@ -376,12 +376,12 @@ We have:
 - ✅ Complete implementation of all algorithms
 - ✅ Clean, documented, example-driven code
 - ✅ Scientific validation plan
-- ✅ Integration with Demetrios features
+- ✅ Integration with Sounio features
 - ⏳ Waiting on: Compiler access + your design decisions
 
 **Next**: Let's get this compiling and tested! Then we can iterate on the design based on what works and what doesn't.
 
-**Questions?** See `FOR_DEMETRIOS_DESIGNER.md` for the 8 key design questions.
+**Questions?** See `FOR_SOUNIO_DESIGNER.md` for the 8 key design questions.
 
 ---
 

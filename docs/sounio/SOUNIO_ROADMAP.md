@@ -1,10 +1,10 @@
-# Demetrios Network Geometry: Complete Roadmap
+# Sounio Network Geometry: Complete Roadmap
 
 ## 🎯 Mission
 
-**Implement hyperbolic network geometry in Demetrios to:**
+**Implement hyperbolic network geometry in Sounio to:**
 1. Validate phase transition discovery (⟨k⟩²/N ≈ 2.5)
-2. Showcase Demetrios unique features (epistemic, effects, types)
+2. Showcase Sounio unique features (epistemic, effects, types)
 3. Create flagship scientific application for the language
 4. Publish interdisciplinary paper (science + PL)
 
@@ -16,12 +16,12 @@
 - [x] Phase transition discovered in Julia (⟨k⟩²/N ≈ 2.5)
 - [x] Validated on 11 synthetic networks
 - [x] Explained Dutch spherical anomaly
-- [x] Demetrios repository cloned
+- [x] Sounio repository cloned
 - [x] Integration plan designed
 - [x] Compiler building
 
 ### 🔨 In Progress
-- [ ] Demetrios compiler build
+- [ ] Sounio compiler build
 - [ ] Test existing examples
 - [ ] Understand stdlib capabilities
 
@@ -39,13 +39,13 @@
 ### Week 1: Foundation & Learning (Dec 23-29)
 
 **Goals:**
-- Understand Demetrios fully
+- Understand Sounio fully
 - Build and test compiler
 - Run existing scientific examples
 - Create basic graph structure
 
 **Deliverables:**
-1. `DEMETRIOS_ASSESSMENT.md` - Complete capabilities analysis
+1. `SOUNIO_ASSESSMENT.md` - Complete capabilities analysis
 2. `examples/graph_hello.d` - First graph program
 3. `stdlib/graph/types.d` - Basic type definitions
 4. `tests/graph_test.d` - First tests
@@ -74,7 +74,7 @@
 1. `stdlib/graph/algorithms.d` - BFS, shortest paths
 2. `stdlib/graph/sinkhorn.d` - Optimal transport
 3. `stdlib/graph/curvature.d` - Ollivier-Ricci
-4. `VALIDATION_DEMETRIOS.md` - Numerical validation
+4. `VALIDATION_SOUNIO.md` - Numerical validation
 
 **Success Criteria:**
 - BFS matches Julia exactly
@@ -139,8 +139,8 @@ Should random_regular_graph return Result<Graph, GraphError> or panic on invalid
 **Deliverables:**
 1. `examples/network_geometry/phase_transition.d` - Main experiment
 2. `examples/network_geometry/parallel_demo.d` - Parallelism showcase
-3. `results/demetrios/phase_transition.json` - Results
-4. `COMPARISON_JULIA_DEMETRIOS.md` - Detailed comparison
+3. `results/sounio/phase_transition.json` - Results
+4. `COMPARISON_JULIA_SOUNIO.md` - Detailed comparison
 
 **Success Criteria:**
 - Finds transition at ⟨k⟩²/N ≈ 2.5
@@ -174,8 +174,8 @@ How should parallel map handle epistemic types?
 1. `stdlib/io/csv.d` - CSV parsing (if not exists)
 2. `examples/network_geometry/load_swow.d` - Network loading
 3. `examples/network_geometry/analyze_network.d` - Full analysis
-4. `results/demetrios/swow_analysis.json` - Results
-5. `SWOW_VALIDATION_DEMETRIOS.md` - Complete validation
+4. `results/sounio/swow_analysis.json` - Results
+5. `SWOW_VALIDATION_SOUNIO.md` - Complete validation
 
 **Success Criteria:**
 - Spanish: κ = -0.155 ± σ ✅
@@ -202,7 +202,7 @@ How should parallel map handle epistemic types?
 - Examples and tutorials
 
 **Deliverables:**
-1. `BENCHMARKS_DEMETRIOS.md` - Performance comparison
+1. `BENCHMARKS_SOUNIO.md` - Performance comparison
 2. `examples/network_geometry/gpu_demo.d` - GPU version (if ready)
 3. `docs/network_geometry/` - Complete documentation
 4. `docs/network_geometry/tutorial.md` - Step-by-step tutorial
@@ -230,7 +230,7 @@ How should parallel map handle epistemic types?
 - Submit to journal/conference
 
 **Deliverables:**
-1. `paper/network_geometry_demetrios.tex` - Main paper
+1. `paper/network_geometry_sounio.tex` - Main paper
 2. `paper/figures/` - All figures
 3. `paper/supplementary/` - Code, data, proofs
 4. `paper/SUBMISSION.md` - Submission plan
@@ -242,19 +242,19 @@ Title: "Geometric Phase Transitions in Complex Networks:
 
 Abstract:
 - Phase transition discovery (⟨k⟩²/N ≈ 2.5)
-- Demetrios implementation
+- Sounio implementation
 - Epistemic computing for uncertainty
 - Type-safe scientific computing
 
 Introduction:
 - Network geometry problem
 - Need for type safety in science
-- Demetrios as solution
+- Sounio as solution
 
 Methods:
 - Ollivier-Ricci curvature
 - Sinkhorn algorithm
-- Demetrios implementation details
+- Sounio implementation details
 
 Results:
 - Phase transition at ⟨k⟩²/N ≈ 2.5
@@ -267,7 +267,7 @@ Discussion:
 - Future scientific applications
 
 Conclusion:
-- Demetrios enables safer science
+- Sounio enables safer science
 - Network geometry is hyperbolic
 - Call to adopt type-safe languages
 ```
@@ -349,13 +349,13 @@ edges.parallel_map(|e| compute(e)) with Parallel
 ## 🎯 Success Metrics
 
 ### Scientific Success
-- [ ] Phase transition validated in Demetrios
+- [ ] Phase transition validated in Sounio
 - [ ] Results match Julia (numerical agreement)
 - [ ] SWOW networks analyzed correctly
 - [ ] Paper accepted to high-impact venue
 
 ### Language Success
-- [ ] All Demetrios features demonstrated
+- [ ] All Sounio features demonstrated
 - [ ] Network geometry becomes flagship example
 - [ ] Documentation serves as tutorial
 - [ ] Community adoption (GitHub stars, forks)
@@ -442,7 +442,7 @@ edges.parallel_map(|e| compute(e)) with Parallel
 
 **By February 2025:**
 
-Demetrios will have a production-ready network geometry library that:
+Sounio will have a production-ready network geometry library that:
 - Solves real scientific problems
 - Showcases all unique language features
 - Serves as tutorial for scientific computing
@@ -450,14 +450,14 @@ Demetrios will have a production-ready network geometry library that:
 
 **Impact:**
 - Scientists see value of type-safe languages
-- Demetrios gains credibility in scientific community
+- Sounio gains credibility in scientific community
 - Network geometry gets better tools
 - We prove epistemic computing works in practice
 
 **Long-term:**
-- More scientific libraries in Demetrios
+- More scientific libraries in Sounio
 - Adoption by computational scientists
-- Demetrios becomes serious alternative to Julia/Python
+- Sounio becomes serious alternative to Julia/Python
 - Type-safe scientific computing becomes norm
 
 ---
@@ -467,7 +467,7 @@ Demetrios will have a production-ready network geometry library that:
 **Current Status:** Compiler building, design complete
 **Next Step:** Test compiler, create first graph program
 **Timeline:** 8 weeks to full implementation
-**Goal:** Revolutionary scientific computing in Demetrios
+**Goal:** Revolutionary scientific computing in Sounio
 
 **Ready?** Let's make this happen! 🔬✨
 

@@ -1,7 +1,7 @@
-# Demetrios Syntax Updates Needed
+# Sounio Syntax Updates Needed
 
 **Date**: December 23, 2024
-**Status**: Reviewed actual Demetrios repository - found syntax differences
+**Status**: Reviewed actual Sounio repository - found syntax differences
 
 ---
 
@@ -110,7 +110,7 @@ fn main() -> i32 {
 ```
 
 **Our code uses**: `println("N={:3}, k={:2}", n, k)` (Rust-style)
-**Issue**: Demetrios might not have format strings yet!
+**Issue**: Sounio might not have format strings yet!
 **Action**: Use simple concatenation or multiple println calls
 
 ---
@@ -297,7 +297,7 @@ Despite syntax differences, the **core algorithms are sound**:
 - ✅ Ollivier-Ricci formula is correct
 - ✅ Configuration model is correct
 
-It's just a matter of adapting to Demetrios' current syntax and stdlib state!
+It's just a matter of adapting to Sounio' current syntax and stdlib state!
 
 ---
 

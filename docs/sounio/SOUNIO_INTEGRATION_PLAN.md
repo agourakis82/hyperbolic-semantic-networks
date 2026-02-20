@@ -1,8 +1,8 @@
-# Demetrios Integration: Network Geometry Library
+# Sounio Integration: Network Geometry Library
 
 ## Executive Summary
 
-**Objective:** Implement hyperbolic network geometry algorithms in Demetrios, showcasing:
+**Objective:** Implement hyperbolic network geometry algorithms in Sounio, showcasing:
 - Epistemic computing for uncertainty propagation
 - Algebraic effects for explicit side effects
 - Units of measure for geometric quantities
@@ -11,13 +11,13 @@
 
 **Scientific Goal:** Validate phase transition at ⟨k⟩²/N ≈ 2.5 using type-safe epistemic computing
 
-**Language Goal:** Make network geometry THE flagship scientific application for Demetrios
+**Language Goal:** Make network geometry THE flagship scientific application for Sounio
 
 ---
 
 ## I. ASSESSMENT (Complete)
 
-### ✅ What Demetrios Has
+### ✅ What Sounio Has
 - [x] Compiler infrastructure (Rust-based)
 - [x] Effect system (`with Alloc`, `with IO`, `with Prob`)
 - [x] Units of measure (dimensional analysis)
@@ -37,7 +37,7 @@
 - [ ] Random graph generation (configuration model)
 - [ ] Network statistics (clustering, degree distribution)
 
-### 💡 Unique Demetrios Advantages
+### 💡 Unique Sounio Advantages
 1. **Epistemic Computing**: Uncertainty in κ propagates automatically
 2. **Effect Tracking**: `with Parallel, Alloc, Random` explicit
 3. **Units**: `Curvature`, `Degree`, `Distance` type-safe
@@ -597,13 +597,13 @@ let curvatures = edges.parallel_map(|e| {
 - [ ] Transition at ⟨k⟩²/N ≈ 2.5 found
 - [ ] All results match Julia
 - [ ] Performance within 5× Julia
-- [ ] All Demetrios features used
+- [ ] All Sounio features used
 
 ### Stretch Success
 - [ ] GPU acceleration working
 - [ ] 10-100× speedup
-- [ ] Paper published featuring Demetrios
-- [ ] Contributed to Demetrios stdlib
+- [ ] Paper published featuring Sounio
+- [ ] Contributed to Sounio stdlib
 - [ ] Tutorial documentation
 
 ---
@@ -611,7 +611,7 @@ let curvatures = edges.parallel_map(|e| {
 ## VI. NEXT STEPS
 
 **Immediate Actions:**
-1. Build Demetrios compiler
+1. Build Sounio compiler
 2. Run existing examples
 3. Start implementing `stdlib/graph/` module
 4. Create test suite against Julia
@@ -621,6 +621,6 @@ let curvatures = edges.parallel_map(|e| {
 - I implement and test
 - We iterate based on what works
 
-**Goal:** Ship network geometry library in Demetrios by Week 5! 🚀
+**Goal:** Ship network geometry library in Sounio by Week 5! 🚀
 
 Ready to start building!

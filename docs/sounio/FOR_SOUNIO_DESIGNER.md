@@ -1,12 +1,12 @@
-# For the Demetrios Designer: Complete Plan & Key Questions
+# For the Sounio Designer: Complete Plan & Key Questions
 
 ## 🎯 Executive Summary
 
 We've **discovered** a universal geometric phase transition in networks (⟨k⟩²/N ≈ 2.5) using Julia.
 
-Now we want to **implement** this in **Demetrios** to:
+Now we want to **implement** this in **Sounio** to:
 1. ✅ Validate the scientific discovery
-2. ✅ Showcase ALL Demetrios features (epistemic, effects, types, GPU)
+2. ✅ Showcase ALL Sounio features (epistemic, effects, types, GPU)
 3. ✅ Create THE flagship scientific application
 4. ✅ Publish paper demonstrating type-safe epistemic computing
 
@@ -38,7 +38,7 @@ Now we want to **implement** this in **Demetrios** to:
 
 ---
 
-## 🏗️ What We Want to Build in Demetrios
+## 🏗️ What We Want to Build in Sounio
 
 ### Module Structure
 ```
@@ -59,7 +59,7 @@ examples/network_geometry/
 ```
 
 ### Complete API Design
-See `DEMETRIOS_INTEGRATION_PLAN.md` for full API with:
+See `SOUNIO_INTEGRATION_PLAN.md` for full API with:
 - Graph data structures
 - All algorithms (BFS, Sinkhorn, Ollivier-Ricci)
 - Random graph generation
@@ -332,7 +332,7 @@ fn load_graph(path: string) -> Graph with IO {
 **My recommendation:** Option A (Result) for recoverable, Option D (panic) for invariants
 
 **Your decision needed:**
-- What's the Demetrios error handling story?
+- What's the Sounio error handling story?
 - Should we use algebraic effects for errors?
 - Performance implications of Result?
 
@@ -341,14 +341,14 @@ fn load_graph(path: string) -> Graph with IO {
 ## 📅 Timeline & Milestones
 
 ### Week 1 (Dec 23-29): Foundation
-**Goal:** Understand Demetrios, create basic graph structure
+**Goal:** Understand Sounio, create basic graph structure
 
 **Your input needed:**
 - Compiler setup guidance
 - Feature availability confirmation
 - API design review
 
-**Deliverable:** First graph program in Demetrios
+**Deliverable:** First graph program in Sounio
 
 ---
 
@@ -384,7 +384,7 @@ fn load_graph(path: string) -> Graph with IO {
 - Performance tuning
 - Result interpretation
 
-**Deliverable:** Phase transition found in Demetrios
+**Deliverable:** Phase transition found in Sounio
 
 ---
 
@@ -423,7 +423,7 @@ fn load_graph(path: string) -> Graph with IO {
 
 ### Should Have
 - [ ] Performance < 5× Julia
-- [ ] All Demetrios features used
+- [ ] All Sounio features used
 - [ ] Comprehensive documentation
 - [ ] Reusable graph library
 
@@ -437,9 +437,9 @@ fn load_graph(path: string) -> Graph with IO {
 ## 🤝 What I Need From You
 
 ### Immediate (This Week)
-1. **Compiler access** - How do I build/run Demetrios programs?
+1. **Compiler access** - How do I build/run Sounio programs?
 2. **Feature confirmation** - Which features are working?
-3. **API design approval** - Review `DEMETRIOS_INTEGRATION_PLAN.md`
+3. **API design approval** - Review `SOUNIO_INTEGRATION_PLAN.md`
 4. **First design decisions** - Answer 1-2 key questions above
 
 ### Ongoing (Weekly)
@@ -451,11 +451,11 @@ fn load_graph(path: string) -> Graph with IO {
 ### End Goal (February)
 1. **Paper co-authorship** - Write language design sections
 2. **Publicity** - Announce flagship application
-3. **Community** - Help promote Demetrios + network geometry
+3. **Community** - Help promote Sounio + network geometry
 
 ---
 
-## 💡 Why This is Perfect for Demetrios
+## 💡 Why This is Perfect for Sounio
 
 ### Showcases Unique Features
 1. **Epistemic Computing** - No other language has this
@@ -483,7 +483,7 @@ fn load_graph(path: string) -> Graph with IO {
 
 **Your role:** Design the language features we need
 **My role:** Implement and validate the algorithms
-**Together:** Create the flagship scientific application for Demetrios
+**Together:** Create the flagship scientific application for Sounio
 
 **Next steps:**
 1. You confirm which features are ready
@@ -493,7 +493,7 @@ fn load_graph(path: string) -> Graph with IO {
 
 **Questions?** Let's discuss any of the 8 key design questions above!
 
-**Ready?** Let's make Demetrios THE language for type-safe scientific computing! 🎯🔬✨
+**Ready?** Let's make Sounio THE language for type-safe scientific computing! 🎯🔬✨
 
 ---
 
