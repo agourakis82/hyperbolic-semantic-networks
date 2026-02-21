@@ -64,7 +64,9 @@ hyperbolic-semantic-networks/
 │   ├── 01_epistemic_uncertainty/   # Phase transition sweep
 │   ├── 02_null_model/              # Configuration null model ensemble
 │   ├── 03_forman_ricci/            # Forman vs Ollivier comparison
-│   └── 04_uncertainty_scaling/     # Uncertainty at phase transition
+│   ├── 04_uncertainty_scaling/     # Uncertainty at phase transition
+│   ├── 05_hypercomplex/           # Hypercomplex curvature embedding
+│   └── 06_spectral_geometry/     # Spectral gap phase transition
 │
 ├── results/                     # Computed results
 │   ├── experiments/             # Phase transition data
@@ -183,6 +185,36 @@ bash experiments/04_uncertainty_scaling/run.sh
 # → results/sounio/uncertainty_scaling.csv
 ```
 
+### Experiment 05: Hypercomplex Curvature Embedding
+
+Embeds graph nodes into hypercomplex hyperspheres — S³ (quaternion), S⁷ (octonion),
+S¹⁵ (sedenion) — via landmark BFS distances, then computes Ollivier-Ricci curvature
+using geodesic distances instead of integer hop-counts. Showcases Hamilton product
+(associative) and Cayley-Dickson product (non-associative).
+
+- **Phase A** (N=20): Validates embeddings reproduce the known phase transition
+- **Phase B** (N=50): Breaks the N=20 barrier using landmark-based embedding
+
+```bash
+bash experiments/05_hypercomplex/run.sh
+# → results/sounio/hypercomplex_curvature.csv
+```
+
+### Experiment 06: Spectral Geometry of Phase Transition
+
+Independent validation via eigenvalues of the adjacency matrix. Computes the second
+eigenvalue λ₂ using power iteration on the shifted matrix (A+kI) with deflation
+against the known trivial eigenvector. Derives spectral gap, algebraic connectivity,
+Cheeger constant lower bound, and Friedman ratio.
+
+- **Phase A** (N=20): Spectral + Ollivier-Ricci curvature for direct comparison
+- **Phase B** (N=50): Spectral only (cross-reference with experiment 05)
+
+```bash
+bash experiments/06_spectral_geometry/run.sh
+# → results/sounio/spectral_phase_transition.csv
+```
+
 ---
 
 ## Key Results
@@ -240,7 +272,7 @@ bash experiments/04_uncertainty_scaling/run.sh
 - Rust performance implementation (Sinkhorn + null models)
 - Sounio graph module (in [Sounio repo](https://github.com/sounio-lang/sounio))
 - Phase transition discovery and validation
-- Sounio Experiments 01-04 (phase transition, null model, Forman, uncertainty)
+- Sounio Experiments 01-06 (phase transition, null model, Forman, uncertainty, hypercomplex, spectral)
 - Scientific documentation
 
 ### In Progress
