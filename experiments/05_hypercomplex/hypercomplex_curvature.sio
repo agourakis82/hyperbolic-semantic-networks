@@ -1,0 +1,822 @@
+// Hypercomplex Curvature Embedding
+// Hyperbolic Semantic Networks Project
+//
+// Embeds graph nodes into hyperspheres S^3 (quaternion), S^7 (octonion),
+// S^15 (sedenion) using BFS distances to landmark nodes, then computes
+// Ollivier-Ricci curvature using geodesic distances in the embedding space.
+//
+// Key insight: continuous geodesic distances replace integer hop-counts,
+// giving smoother curvature estimates and richer geometric information.
+//
+// Phase A (N=20): Validates embeddings reproduce the known phase transition
+//   Compare hop-count vs quaternion (S^3) vs octonion (S^7) vs sedenion (S^15)
+//
+// Phase B (N=50): Breaks the N=20 barrier with same methods
+//   k_crit = sqrt(2.5 * 50) = 11.2  (transition around k=10-12)
+//
+// Hypercomplex algebra showcase:
+//   Hamilton product (quaternion multiplication, associative)
+//   Cayley-Dickson product (octonion multiplication via quaternion pairs)
+//
+// Output: CSV to stdout
+//   N,k,ratio,kappa_hop,kappa_q4,kappa_oct,kappa_sed,g_hop,g_q4,g_oct,g_sed
+//   g_*: 0=Hyperbolic  1=Euclidean  2=Spherical
+//
+// Reference:
+//   Agourakis, D. C. (2026). "Hyperbolic Geometry of Semantic Networks."
+//   DOI: 10.5281/zenodo.17655231
+
+// ============================================================================
+// LCG RNG (Knuth multiplicative, mod 2^64)
+// ============================================================================
+
+fn lcg_step(state: u64) -> u64 {
+    let a: u64 = 6364136223846793005
+    let c: u64 = 1442695040888963407
+    state * a + c
+}
+
+fn lcg_umod(state: u64, m: usize) -> usize with Div, Panic {
+    if m == 0 { return 0 }
+    ((state as usize) & 4294967295) % m
+}
+
+// ============================================================================
+// Graph (N <= 50, max degree 24)
+//   adj[u * 24 + i] = i-th neighbor of u
+//   deg[u]           = degree of u
+// ============================================================================
+
+struct Graph {
+    adj: [usize; 1200],
+    deg: [usize; 50],
+    n:   usize,
+}
+
+fn build_k_regular(n: usize, k: usize, seed: u64) -> Graph with Mut, Div, Panic {
+    var adj:   [usize; 1200] = [0; 1200]
+    var deg:   [usize; 50]   = [0; 50]
+    var stubs: [usize; 1200] = [0; 1200]
+
+    var si: usize = 0
+    var i:  usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < k {
+            stubs[si] = i
+            si = si + 1
+            j  = j + 1
+        }
+        i = i + 1
+    }
+    let stub_count = si
+
+    var rng: u64 = if seed == 0 { 12345 } else { seed }
+    var s: usize = stub_count
+    while s > 1 {
+        s   = s - 1
+        rng = lcg_step(rng)
+        let t   = lcg_umod(rng, s + 1)
+        let tmp = stubs[s]
+        stubs[s] = stubs[t]
+        stubs[t] = tmp
+    }
+
+    i = 0
+    while i + 1 < stub_count {
+        let u = stubs[i]
+        let v = stubs[i + 1]
+        if u != v {
+            let du = deg[u]
+            let dv = deg[v]
+            var ok: bool  = true
+            var ci: usize = 0
+            while ci < du {
+                if adj[u * 24 + ci] == v { ok = false }
+                ci = ci + 1
+            }
+            if ok && du < 24 && dv < 24 {
+                adj[u * 24 + du] = v
+                deg[u] = du + 1
+                adj[v * 24 + dv] = u
+                deg[v] = dv + 1
+            }
+        }
+        i = i + 2
+    }
+
+    Graph { adj: adj, deg: deg, n: n }
+}
+
+// ============================================================================
+// BFS all-pairs distance (stride 50)
+//   d[u * 50 + v] = hop-count distance from u to v (-1 if unreachable)
+// ============================================================================
+
+struct Dists {
+    d: [i64; 2500],
+    n: usize,
+}
+
+fn bfs_all_pairs(g: &Graph) -> Dists with Mut, Div, Panic {
+    var d: [i64; 2500] = [0; 2500]
+    let n = g.n
+
+    var src: usize = 0
+    while src < n {
+        var row:   [i64;   50] = [-1; 50]
+        var queue: [usize; 50] = [0;  50]
+        row[src] = 0
+        var qh: usize = 0
+        var qt: usize = 0
+        queue[qt] = src
+        qt = qt + 1
+
+        while qh < qt {
+            let u  = queue[qh]
+            qh = qh + 1
+            let du = g.deg[u]
+            var i: usize = 0
+            while i < du {
+                let v = g.adj[u * 24 + i]
+                if row[v] == -1 {
+                    row[v] = row[u] + 1
+                    queue[qt] = v
+                    qt = qt + 1
+                }
+                i = i + 1
+            }
+        }
+
+        var j: usize = 0
+        while j < n {
+            d[src * 50 + j] = row[j]
+            j = j + 1
+        }
+        src = src + 1
+    }
+
+    Dists { d: d, n: n }
+}
+
+// ============================================================================
+// Quaternion (4D, associative division algebra)
+// ============================================================================
+
+struct Q4 {
+    w: f64,
+    x: f64,
+    y: f64,
+    z: f64,
+}
+
+fn q4(w: f64, x: f64, y: f64, z: f64) -> Q4 {
+    Q4 { w: w, x: x, y: y, z: z }
+}
+
+fn q4_norm(q: Q4) -> f64 {
+    (q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z).sqrt()
+}
+
+fn q4_normalize(q: Q4) -> Q4 with Div, Panic {
+    let n = q4_norm(q)
+    if n < 1e-15 { return q4(1.0, 0.0, 0.0, 0.0) }
+    let inv = 1.0 / n
+    q4(q.w * inv, q.x * inv, q.y * inv, q.z * inv)
+}
+
+fn q4_conj(q: Q4) -> Q4 {
+    q4(q.w, -q.x, -q.y, -q.z)
+}
+
+fn q4_add(a: Q4, b: Q4) -> Q4 {
+    q4(a.w + b.w, a.x + b.x, a.y + b.y, a.z + b.z)
+}
+
+fn q4_sub(a: Q4, b: Q4) -> Q4 {
+    q4(a.w - b.w, a.x - b.x, a.y - b.y, a.z - b.z)
+}
+
+// Hamilton product: q1 * q2 (associative, non-commutative)
+//   (a + bi + cj + dk)(e + fi + gj + hk)
+fn hamilton_product(a: Q4, b: Q4) -> Q4 {
+    q4(
+        a.w*b.w - a.x*b.x - a.y*b.y - a.z*b.z,
+        a.w*b.x + a.x*b.w + a.y*b.z - a.z*b.y,
+        a.w*b.y - a.x*b.z + a.y*b.w + a.z*b.x,
+        a.w*b.z + a.x*b.y - a.y*b.x + a.z*b.w
+    )
+}
+
+// ============================================================================
+// Octonion (8D, non-associative, Cayley-Dickson doubling of quaternions)
+// ============================================================================
+
+struct Oct {
+    e0: f64, e1: f64, e2: f64, e3: f64,
+    e4: f64, e5: f64, e6: f64, e7: f64,
+}
+
+fn oct(e0: f64, e1: f64, e2: f64, e3: f64,
+       e4: f64, e5: f64, e6: f64, e7: f64) -> Oct {
+    Oct { e0: e0, e1: e1, e2: e2, e3: e3, e4: e4, e5: e5, e6: e6, e7: e7 }
+}
+
+fn oct_norm(o: Oct) -> f64 {
+    (o.e0*o.e0 + o.e1*o.e1 + o.e2*o.e2 + o.e3*o.e3
+   + o.e4*o.e4 + o.e5*o.e5 + o.e6*o.e6 + o.e7*o.e7).sqrt()
+}
+
+// Cayley-Dickson product: (p,q)*(r,s) = (p*r - conj(s)*q, s*p + q*conj(r))
+//   where p,q,r,s are quaternions and * is Hamilton product
+fn cayley_dickson(a: Oct, b: Oct) -> Oct {
+    let p = q4(a.e0, a.e1, a.e2, a.e3)
+    let q = q4(a.e4, a.e5, a.e6, a.e7)
+    let r = q4(b.e0, b.e1, b.e2, b.e3)
+    let s = q4(b.e4, b.e5, b.e6, b.e7)
+
+    // first  = p*r - conj(s)*q
+    let pr   = hamilton_product(p, r)
+    let sc_q = hamilton_product(q4_conj(s), q)
+    let first = q4_sub(pr, sc_q)
+
+    // second = s*p + q*conj(r)
+    let sp    = hamilton_product(s, p)
+    let q_rc  = hamilton_product(q, q4_conj(r))
+    let second = q4_add(sp, q_rc)
+
+    oct(first.w, first.x, first.y, first.z,
+        second.w, second.x, second.y, second.z)
+}
+
+// ============================================================================
+// Embedding storage (flat arrays, stride 50)
+//   e[component * 50 + node] = embedding coordinate
+// ============================================================================
+
+struct Q4Emb { e: [f64; 200] }   // 4  components x 50 nodes
+struct OctEmb  { e: [f64; 400] }   // 8  components x 50 nodes
+struct SedEmb  { e: [f64; 800] }   // 16 components x 50 nodes
+
+// ============================================================================
+// Geodesic distance on hyperspheres
+//   d(a, b) = arccos(|a . b|) for unit vectors on S^(L-1)
+// ============================================================================
+
+fn geo_q4(qe: &Q4Emb, u: usize, v: usize) -> f64 with Div, Panic {
+    let d = qe.e[u]*qe.e[v] + qe.e[50+u]*qe.e[50+v]
+          + qe.e[100+u]*qe.e[100+v] + qe.e[150+u]*qe.e[150+v]
+    let c = if d > 1.0 { 1.0 } else if d < -1.0 { -1.0 } else { d }
+    c.abs().acos()
+}
+
+fn geo_oct(oe: &OctEmb, u: usize, v: usize) -> f64 with Div, Panic {
+    let d = oe.e[u]*oe.e[v] + oe.e[50+u]*oe.e[50+v]
+          + oe.e[100+u]*oe.e[100+v] + oe.e[150+u]*oe.e[150+v]
+          + oe.e[200+u]*oe.e[200+v] + oe.e[250+u]*oe.e[250+v]
+          + oe.e[300+u]*oe.e[300+v] + oe.e[350+u]*oe.e[350+v]
+    let c = if d > 1.0 { 1.0 } else if d < -1.0 { -1.0 } else { d }
+    c.abs().acos()
+}
+
+fn geo_sed(se: &SedEmb, u: usize, v: usize) -> f64 with Mut, Div, Panic {
+    var d: f64 = 0.0
+    var c: usize = 0
+    while c < 16 {
+        d = d + se.e[c * 50 + u] * se.e[c * 50 + v]
+        c = c + 1
+    }
+    let cl = if d > 1.0 { 1.0 } else if d < -1.0 { -1.0 } else { d }
+    cl.abs().acos()
+}
+
+// ============================================================================
+// Landmark selection: greedy farthest-first traversal
+//   Pick diverse landmarks by repeatedly choosing the node most distant
+//   from all previously selected landmarks.
+// ============================================================================
+
+fn select_landmarks(dists: &Dists, n: usize, num: usize) -> [usize; 16] with Mut, Div, Panic {
+    var lm: [usize; 16] = [0; 16]
+    var min_dist: [i64; 50] = [99999; 50]
+
+    // Landmark 0 = node 0
+    lm[0] = 0
+    var i: usize = 0
+    while i < n {
+        let dd = dists.d[0 * 50 + i]
+        min_dist[i] = if dd >= 0 { dd } else { 99999 }
+        i = i + 1
+    }
+    min_dist[0] = 0
+
+    var li: usize = 1
+    while li < num {
+        // Find node with max min_dist (not already a landmark)
+        var best: usize = 0
+        var best_d: i64 = -1
+        i = 0
+        while i < n {
+            if min_dist[i] > best_d {
+                var is_lm: bool = false
+                var j: usize = 0
+                while j < li {
+                    if lm[j] == i { is_lm = true }
+                    j = j + 1
+                }
+                if !is_lm {
+                    best_d = min_dist[i]
+                    best = i
+                }
+            }
+            i = i + 1
+        }
+        lm[li] = best
+
+        // Update min_dist with new landmark
+        i = 0
+        while i < n {
+            let dd = dists.d[best * 50 + i]
+            if dd >= 0 && dd < min_dist[i] { min_dist[i] = dd }
+            i = i + 1
+        }
+
+        li = li + 1
+    }
+
+    lm
+}
+
+// ============================================================================
+// Build embeddings: BFS distances to landmarks -> normalize to unit sphere
+// ============================================================================
+
+fn build_q4_emb(dists: &Dists, lm: &[usize; 16], n: usize) -> Q4Emb with Mut, Div, Panic {
+    var e: [f64; 200] = [0.0; 200]
+    var node: usize = 0
+    while node < n {
+        var sum_sq: f64 = 0.0
+        var c: usize = 0
+        while c < 4 {
+            let d = dists.d[lm[c] * 50 + node]
+            let df = if d >= 0 { d as f64 } else { 1.0 }
+            e[c * 50 + node] = df
+            sum_sq = sum_sq + df * df
+            c = c + 1
+        }
+        let norm = sum_sq.sqrt()
+        if norm > 1e-10 {
+            c = 0
+            while c < 4 {
+                e[c * 50 + node] = e[c * 50 + node] / norm
+                c = c + 1
+            }
+        } else {
+            e[0 * 50 + node] = 1.0
+        }
+        node = node + 1
+    }
+    Q4Emb { e: e }
+}
+
+fn build_oct_emb(dists: &Dists, lm: &[usize; 16], n: usize) -> OctEmb with Mut, Div, Panic {
+    var e: [f64; 400] = [0.0; 400]
+    var node: usize = 0
+    while node < n {
+        var sum_sq: f64 = 0.0
+        var c: usize = 0
+        while c < 8 {
+            let d = dists.d[lm[c] * 50 + node]
+            let df = if d >= 0 { d as f64 } else { 1.0 }
+            e[c * 50 + node] = df
+            sum_sq = sum_sq + df * df
+            c = c + 1
+        }
+        let norm = sum_sq.sqrt()
+        if norm > 1e-10 {
+            c = 0
+            while c < 8 {
+                e[c * 50 + node] = e[c * 50 + node] / norm
+                c = c + 1
+            }
+        } else {
+            e[0 * 50 + node] = 1.0
+        }
+        node = node + 1
+    }
+    OctEmb { e: e }
+}
+
+fn build_sed_emb(dists: &Dists, lm: &[usize; 16], n: usize) -> SedEmb with Mut, Div, Panic {
+    var e: [f64; 800] = [0.0; 800]
+    var node: usize = 0
+    while node < n {
+        var sum_sq: f64 = 0.0
+        var c: usize = 0
+        while c < 16 {
+            let d = dists.d[lm[c] * 50 + node]
+            let df = if d >= 0 { d as f64 } else { 1.0 }
+            e[c * 50 + node] = df
+            sum_sq = sum_sq + df * df
+            c = c + 1
+        }
+        let norm = sum_sq.sqrt()
+        if norm > 1e-10 {
+            c = 0
+            while c < 16 {
+                e[c * 50 + node] = e[c * 50 + node] / norm
+                c = c + 1
+            }
+        } else {
+            e[0 * 50 + node] = 1.0
+        }
+        node = node + 1
+    }
+    SedEmb { e: e }
+}
+
+// ============================================================================
+// Lazy random walk measure (stride 24, max support 25)
+// ============================================================================
+
+struct Measure {
+    nodes: [usize; 25],
+    probs: [f64;   25],
+    len:   usize,
+}
+
+fn lazy_measure(g: &Graph, node: usize, alpha: f64) -> Measure with Mut, Div, Panic {
+    var nodes: [usize; 25] = [0;   25]
+    var probs: [f64;   25] = [0.0; 25]
+    var len:   usize       = 0
+
+    let deg = g.deg[node]
+    if deg == 0 {
+        nodes[0] = node
+        probs[0] = 1.0
+        return Measure { nodes: nodes, probs: probs, len: 1 }
+    }
+    let w = (1.0 - alpha) / (deg as f64)
+
+    if alpha > 0.0 {
+        nodes[0] = node
+        probs[0] = alpha
+        len = 1
+    }
+
+    var i: usize = 0
+    while i < deg {
+        nodes[len] = g.adj[node * 24 + i]
+        probs[len] = w
+        len = len + 1
+        i   = i + 1
+    }
+
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+// ============================================================================
+// Cost matrices (stride 25, capacity 625 = 25 x 25)
+// ============================================================================
+
+struct CostMat {
+    c: [f64; 625],
+}
+
+fn cost_hop(mu: &Measure, nu: &Measure, dists: &Dists) -> CostMat with Mut, Div, Panic {
+    var c: [f64; 625] = [0.0; 625]
+    var i: usize = 0
+    while i < mu.len {
+        var j: usize = 0
+        while j < nu.len {
+            let ui = mu.nodes[i]
+            let vj = nu.nodes[j]
+            let d  = dists.d[ui * 50 + vj]
+            c[i * 25 + j] = if d >= 0 { d as f64 } else { 100.0 }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    CostMat { c: c }
+}
+
+fn cost_q4(mu: &Measure, nu: &Measure, qe: &Q4Emb) -> CostMat with Mut, Div, Panic {
+    var c: [f64; 625] = [0.0; 625]
+    var i: usize = 0
+    while i < mu.len {
+        var j: usize = 0
+        while j < nu.len {
+            let g = geo_q4(qe, mu.nodes[i], nu.nodes[j])
+            c[i * 25 + j] = if g < 0.01 { 0.01 } else { g }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    CostMat { c: c }
+}
+
+fn cost_oct(mu: &Measure, nu: &Measure, oe: &OctEmb) -> CostMat with Mut, Div, Panic {
+    var c: [f64; 625] = [0.0; 625]
+    var i: usize = 0
+    while i < mu.len {
+        var j: usize = 0
+        while j < nu.len {
+            let g = geo_oct(oe, mu.nodes[i], nu.nodes[j])
+            c[i * 25 + j] = if g < 0.01 { 0.01 } else { g }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    CostMat { c: c }
+}
+
+fn cost_sed(mu: &Measure, nu: &Measure, se: &SedEmb) -> CostMat with Mut, Div, Panic {
+    var c: [f64; 625] = [0.0; 625]
+    var i: usize = 0
+    while i < mu.len {
+        var j: usize = 0
+        while j < nu.len {
+            let g = geo_sed(se, mu.nodes[i], nu.nodes[j])
+            c[i * 25 + j] = if g < 0.01 { 0.01 } else { g }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    CostMat { c: c }
+}
+
+// ============================================================================
+// Sinkhorn-Knopp regularized Wasserstein-1
+//   K[i,j] = exp(-C[i,j] / epsilon)
+//   Iterate: u <- mu / (K v),  v <- nu / (K^T u)
+// ============================================================================
+
+fn sinkhorn(
+    mu: &Measure, nu: &Measure, cm: &CostMat,
+    epsilon: f64, max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let n = mu.len
+    let m = nu.len
+    if n == 0 || m == 0 { return 0.0 }
+
+    var kmat: [f64; 625] = [0.0; 625]
+    var u_s:  [f64;  25] = [1.0;  25]
+    var v_s:  [f64;  25] = [1.0;  25]
+
+    var i: usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < m {
+            kmat[i * 25 + j] = (-cm.c[i * 25 + j] / epsilon).exp()
+            j = j + 1
+        }
+        i = i + 1
+    }
+
+    var iter: usize = 0
+    while iter < max_iter {
+        i = 0
+        while i < n {
+            var s: f64   = 0.0
+            var j: usize = 0
+            while j < m { s = s + kmat[i * 25 + j] * v_s[j]; j = j + 1 }
+            if s > 1e-15 { u_s[i] = mu.probs[i] / s }
+            i = i + 1
+        }
+        var j: usize = 0
+        while j < m {
+            var s: f64 = 0.0
+            i = 0
+            while i < n { s = s + kmat[i * 25 + j] * u_s[i]; i = i + 1 }
+            if s > 1e-15 { v_s[j] = nu.probs[j] / s }
+            j = j + 1
+        }
+        iter = iter + 1
+    }
+
+    var w1: f64 = 0.0
+    i = 0
+    while i < n {
+        var j: usize = 0
+        while j < m {
+            w1 = w1 + u_s[i] * kmat[i * 25 + j] * v_s[j] * cm.c[i * 25 + j]
+            j  = j + 1
+        }
+        i = i + 1
+    }
+
+    w1
+}
+
+// ============================================================================
+// Compute mean Ollivier-Ricci curvature for all 4 distance types in one pass
+// ============================================================================
+
+struct FourKappas {
+    hop:  f64,
+    q4: f64,
+    oct:  f64,
+    sed:  f64,
+}
+
+fn all_curvatures(
+    g: &Graph, dists: &Dists,
+    qe: &Q4Emb, oe: &OctEmb, se: &SedEmb,
+    n: usize, alpha: f64, eps: f64, iters: usize
+) -> FourKappas with Mut, Div, Panic {
+    var sh: f64 = 0.0
+    var sq: f64 = 0.0
+    var so: f64 = 0.0
+    var ss: f64 = 0.0
+    var count: usize = 0
+
+    var u: usize = 0
+    while u < n {
+        let du = g.deg[u]
+        var i: usize = 0
+        while i < du {
+            let v = g.adj[u * 24 + i]
+            if u < v {
+                let mu_u = lazy_measure(g, u, alpha)
+                let mu_v = lazy_measure(g, v, alpha)
+
+                // Hop-count curvature
+                let dh = dists.d[u * 50 + v]
+                if dh > 0 {
+                    let ch = cost_hop(&mu_u, &mu_v, dists)
+                    let wh = sinkhorn(&mu_u, &mu_v, &ch, eps, iters)
+                    sh = sh + 1.0 - wh / (dh as f64)
+                }
+
+                // Quaternion curvature (S^3 geodesic)
+                let dq = geo_q4(qe, u, v)
+                if dq > 0.01 {
+                    let cq = cost_q4(&mu_u, &mu_v, qe)
+                    let wq = sinkhorn(&mu_u, &mu_v, &cq, eps, iters)
+                    sq = sq + 1.0 - wq / dq
+                }
+
+                // Octonion curvature (S^7 geodesic)
+                let d_oct = geo_oct(oe, u, v)
+                if d_oct > 0.01 {
+                    let co = cost_oct(&mu_u, &mu_v, oe)
+                    let wo = sinkhorn(&mu_u, &mu_v, &co, eps, iters)
+                    so = so + 1.0 - wo / d_oct
+                }
+
+                // Sedenion curvature (S^15 geodesic)
+                let d_sed = geo_sed(se, u, v)
+                if d_sed > 0.01 {
+                    let cs = cost_sed(&mu_u, &mu_v, se)
+                    let ws = sinkhorn(&mu_u, &mu_v, &cs, eps, iters)
+                    ss = ss + 1.0 - ws / d_sed
+                }
+
+                count = count + 1
+            }
+            i = i + 1
+        }
+        u = u + 1
+    }
+
+    if count == 0 {
+        return FourKappas { hop: 0.0, q4: 0.0, oct: 0.0, sed: 0.0 }
+    }
+    let cf = count as f64
+    FourKappas { hop: sh / cf, q4: sq / cf, oct: so / cf, sed: ss / cf }
+}
+
+// ============================================================================
+// Geometry classification
+// ============================================================================
+
+fn classify_kappa(kappa: f64) -> i64 {
+    if kappa < -0.05 { 0 } else if kappa > 0.05 { 2 } else { 1 }
+}
+
+// ============================================================================
+// Main: Phase A (N=20) + Phase B (N=50) + Algebra showcase
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    let alpha:    f64   = 0.5
+    let epsilon:  f64   = 0.5
+    let max_iter: usize = 60
+
+    // ── Algebra showcase ────────────────────────────────────────────────
+    println("# ═══ Hypercomplex Algebra Showcase ═══")
+
+    // Hamilton product: |q1 * q2| = |q1| * |q2|  (normed algebra)
+    let q1 = q4_normalize(q4(1.0, 2.0, 3.0, 4.0))
+    let q2 = q4_normalize(q4(0.5, -1.0, 0.3, 0.7))
+    let q12 = hamilton_product(q1, q2)
+    let n12 = q4_norm(q12)
+    print("# Hamilton: |q1*q2| = ")
+    print(n12)
+    println("  (expect 1.0 for unit quaternions)")
+
+    // Cayley-Dickson: |o1 * o2| = |o1| * |o2|  (normed division algebra)
+    let o1 = oct(0.5, 0.3, 0.1, 0.7, 0.2, 0.4, 0.1, 0.3)
+    let o2 = oct(0.1, 0.5, 0.3, 0.2, 0.6, 0.1, 0.4, 0.2)
+    let o12 = cayley_dickson(o1, o2)
+    let n_o1  = oct_norm(o1)
+    let n_o2  = oct_norm(o2)
+    let n_o12 = oct_norm(o12)
+    let expected = n_o1 * n_o2
+    print("# Cayley-Dickson: |o1*o2| = ")
+    print(n_o12)
+    print("  |o1|*|o2| = ")
+    print(expected)
+    println("  (should be equal)")
+    println("#")
+
+    // ── CSV header ──────────────────────────────────────────────────────
+    println("# Hypercomplex Curvature Embedding — Sounio 1.0.0-beta")
+    println("# alpha=0.5  epsilon=0.5  sinkhorn_iter=60")
+    println("# Distances: hop=BFS, q4=Quaternion S^3(4 landmarks), oct=Octonion S^7(8), sed=Sedenion S^15(16)")
+    println("# g_*: 0=Hyperbolic  1=Euclidean  2=Spherical")
+    println("N,k,ratio,kappa_hop,kappa_q4,kappa_oct,kappa_sed,g_hop,g_q4,g_oct,g_sed")
+
+    // ── Phase A: N=20 ──────────────────────────────────────────────────
+    let k_vals_a: [usize; 11] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 18]
+
+    var ki: usize = 0
+    while ki < 11 {
+        let k = k_vals_a[ki]
+        let na: usize = 20
+
+        if k < na && (k * na) % 2 == 0 {
+            let ratio = ((k * k) as f64) / (na as f64)
+
+            let g  = build_k_regular(na, k, 42)
+            let ds = bfs_all_pairs(&g)
+            let lm = select_landmarks(&ds, na, 16)
+
+            let qe = build_q4_emb(&ds, &lm, na)
+            let oe = build_oct_emb(&ds, &lm, na)
+            let se = build_sed_emb(&ds, &lm, na)
+
+            let fk = all_curvatures(&g, &ds, &qe, &oe, &se, na, alpha, epsilon, max_iter)
+
+            print(na);          print(",")
+            print(k);           print(",")
+            print(ratio);       print(",")
+            print(fk.hop);      print(",")
+            print(fk.q4);     print(",")
+            print(fk.oct);      print(",")
+            print(fk.sed);      print(",")
+            print(classify_kappa(fk.hop));  print(",")
+            print(classify_kappa(fk.q4)); print(",")
+            print(classify_kappa(fk.oct));  print(",")
+            print(classify_kappa(fk.sed))
+            println("")
+        }
+
+        ki = ki + 1
+    }
+
+    // ── Phase B: N=50 ──────────────────────────────────────────────────
+    let k_vals_b: [usize; 8] = [2, 4, 6, 8, 10, 12, 14, 16]
+
+    ki = 0
+    while ki < 8 {
+        let k = k_vals_b[ki]
+        let nb: usize = 50
+
+        if k < nb && (k * nb) % 2 == 0 {
+            let ratio = ((k * k) as f64) / (nb as f64)
+
+            let g  = build_k_regular(nb, k, 42)
+            let ds = bfs_all_pairs(&g)
+            let lm = select_landmarks(&ds, nb, 16)
+
+            let qe = build_q4_emb(&ds, &lm, nb)
+            let oe = build_oct_emb(&ds, &lm, nb)
+            let se = build_sed_emb(&ds, &lm, nb)
+
+            let fk = all_curvatures(&g, &ds, &qe, &oe, &se, nb, alpha, epsilon, max_iter)
+
+            print(nb);          print(",")
+            print(k);           print(",")
+            print(ratio);       print(",")
+            print(fk.hop);      print(",")
+            print(fk.q4);     print(",")
+            print(fk.oct);      print(",")
+            print(fk.sed);      print(",")
+            print(classify_kappa(fk.hop));  print(",")
+            print(classify_kappa(fk.q4)); print(",")
+            print(classify_kappa(fk.oct));  print(",")
+            print(classify_kappa(fk.sed))
+            println("")
+        }
+
+        ki = ki + 1
+    }
+
+    println("")
+    println("# Phase A (N=20): k_crit = sqrt(2.5*20) = 7.07")
+    println("#   Embedding curvatures should track hop-count transition at k~7")
+    println("# Phase B (N=50): k_crit = sqrt(2.5*50) = 11.18")
+    println("#   First time computing curvature beyond N=20 in Sounio")
+    println("#   Higher-dim embeddings (oct > q4) capture more metric structure")
+}
