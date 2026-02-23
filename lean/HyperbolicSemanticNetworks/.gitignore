@@ -1,0 +1,15 @@
+# Lake build artifacts
+.lake/
+
+# Compiled Lean objects
+*.olean
+*.ilean
+*.olean.lock
+*.olean.trace
+
+# Generated C code
+*.c
+*.o
+
+# Editor files
+.DS_Store
