@@ -1,0 +1,989 @@
+{
+  "analysis": "Track A: ORC Phase Transition in Brain Connectomes",
+  "hypothesis": "brain_connectome_sweet_spot_hypothesis",
+  "semantic_reference": {
+    "dataset": "SWOW English",
+    "phase_transition_eta": 2.5,
+    "hyperbolic_threshold_eta": 2.0,
+    "spherical_threshold_eta": 3.5
+  },
+  "parameters": {
+    "n_subjects": 10,
+    "atlas": "MSDL (39 ROIs)",
+    "orc_alpha": 0.5,
+    "thresholds": [
+      0.55,
+      0.6,
+      0.65,
+      0.68,
+      0.7,
+      0.73,
+      0.75,
+      0.78,
+      0.8
+    ]
+  },
+  "per_subject": [
+    {
+      "subject_id": "0010042",
+      "diagnosis": "ADHD",
+      "adhd_label": 1,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 6.9483,
+          "mean_kappa": 0.312238,
+          "n_edges": 321,
+          "n_nodes": 39,
+          "computation_time_s": 0.21
+        },
+        {
+          "threshold": 0.6,
+          "eta": 4.5234,
+          "mean_kappa": 0.296436,
+          "n_edges": 259,
+          "n_nodes": 39,
+          "computation_time_s": 0.16
+        },
+        {
+          "threshold": 0.65,
+          "eta": 2.0182,
+          "mean_kappa": 0.26,
+          "n_edges": 173,
+          "n_nodes": 39,
+          "computation_time_s": 0.12
+        },
+        {
+          "threshold": 0.68,
+          "eta": 1.3789,
+          "mean_kappa": 0.241009,
+          "n_edges": 143,
+          "n_nodes": 39,
+          "computation_time_s": 0.11
+        },
+        {
+          "threshold": 0.7,
+          "eta": 0.971,
+          "mean_kappa": 0.223177,
+          "n_edges": 120,
+          "n_nodes": 39,
+          "computation_time_s": 0.1
+        },
+        {
+          "threshold": 0.73,
+          "eta": 0.5341,
+          "mean_kappa": 0.200742,
+          "n_edges": 89,
+          "n_nodes": 39,
+          "computation_time_s": 0.08
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.3118,
+          "mean_kappa": 0.203215,
+          "n_edges": 68,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.1427,
+          "mean_kappa": 0.215357,
+          "n_edges": 46,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.0567,
+          "mean_kappa": 0.220546,
+          "n_edges": 29,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        }
+      ]
+    },
+    {
+      "subject_id": "0010064",
+      "diagnosis": "ADHD",
+      "adhd_label": 1,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 16.7234,
+          "mean_kappa": 0.338704,
+          "n_edges": 498,
+          "n_nodes": 39,
+          "computation_time_s": 0.3
+        },
+        {
+          "threshold": 0.6,
+          "eta": 10.6815,
+          "mean_kappa": 0.298304,
+          "n_edges": 398,
+          "n_nodes": 39,
+          "computation_time_s": 0.23
+        },
+        {
+          "threshold": 0.65,
+          "eta": 6.6485,
+          "mean_kappa": 0.275528,
+          "n_edges": 314,
+          "n_nodes": 39,
+          "computation_time_s": 0.18
+        },
+        {
+          "threshold": 0.68,
+          "eta": 4.4538,
+          "mean_kappa": 0.24372,
+          "n_edges": 257,
+          "n_nodes": 39,
+          "computation_time_s": 0.15
+        },
+        {
+          "threshold": 0.7,
+          "eta": 3.3233,
+          "mean_kappa": 0.223663,
+          "n_edges": 222,
+          "n_nodes": 39,
+          "computation_time_s": 0.13
+        },
+        {
+          "threshold": 0.73,
+          "eta": 1.8806,
+          "mean_kappa": 0.216859,
+          "n_edges": 167,
+          "n_nodes": 39,
+          "computation_time_s": 0.11
+        },
+        {
+          "threshold": 0.75,
+          "eta": 1.1928,
+          "mean_kappa": 0.184286,
+          "n_edges": 133,
+          "n_nodes": 39,
+          "computation_time_s": 0.09
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.5222,
+          "mean_kappa": 0.259337,
+          "n_edges": 88,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.2849,
+          "mean_kappa": 0.256224,
+          "n_edges": 65,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        }
+      ]
+    },
+    {
+      "subject_id": "0010128",
+      "diagnosis": "TDC",
+      "adhd_label": 0,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 4.0476,
+          "mean_kappa": 0.233955,
+          "n_edges": 245,
+          "n_nodes": 39,
+          "computation_time_s": 0.15
+        },
+        {
+          "threshold": 0.6,
+          "eta": 2.4087,
+          "mean_kappa": 0.193669,
+          "n_edges": 189,
+          "n_nodes": 39,
+          "computation_time_s": 0.13
+        },
+        {
+          "threshold": 0.65,
+          "eta": 1.2289,
+          "mean_kappa": 0.16784,
+          "n_edges": 135,
+          "n_nodes": 39,
+          "computation_time_s": 0.1
+        },
+        {
+          "threshold": 0.68,
+          "eta": 0.6476,
+          "mean_kappa": 0.131794,
+          "n_edges": 98,
+          "n_nodes": 39,
+          "computation_time_s": 0.09
+        },
+        {
+          "threshold": 0.7,
+          "eta": 0.3593,
+          "mean_kappa": 0.121154,
+          "n_edges": 73,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        },
+        {
+          "threshold": 0.73,
+          "eta": 0.204,
+          "mean_kappa": 0.162747,
+          "n_edges": 55,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.1754,
+          "mean_kappa": 0.170938,
+          "n_edges": 51,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.0388,
+          "mean_kappa": 0.305903,
+          "n_edges": 24,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.0132,
+          "mean_kappa": 0.565476,
+          "n_edges": 14,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        }
+      ]
+    },
+    {
+      "subject_id": "0021019",
+      "diagnosis": "TDC",
+      "adhd_label": 0,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 13.4735,
+          "mean_kappa": 0.344668,
+          "n_edges": 447,
+          "n_nodes": 39,
+          "computation_time_s": 0.27
+        },
+        {
+          "threshold": 0.6,
+          "eta": 8.6424,
+          "mean_kappa": 0.304668,
+          "n_edges": 358,
+          "n_nodes": 39,
+          "computation_time_s": 0.22
+        },
+        {
+          "threshold": 0.65,
+          "eta": 4.9889,
+          "mean_kappa": 0.268355,
+          "n_edges": 272,
+          "n_nodes": 39,
+          "computation_time_s": 0.17
+        },
+        {
+          "threshold": 0.68,
+          "eta": 2.9738,
+          "mean_kappa": 0.237501,
+          "n_edges": 210,
+          "n_nodes": 39,
+          "computation_time_s": 0.14
+        },
+        {
+          "threshold": 0.7,
+          "eta": 2.1606,
+          "mean_kappa": 0.21824,
+          "n_edges": 179,
+          "n_nodes": 39,
+          "computation_time_s": 0.12
+        },
+        {
+          "threshold": 0.73,
+          "eta": 1.1221,
+          "mean_kappa": 0.184119,
+          "n_edges": 129,
+          "n_nodes": 39,
+          "computation_time_s": 0.1
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.7016,
+          "mean_kappa": 0.152366,
+          "n_edges": 102,
+          "n_nodes": 39,
+          "computation_time_s": 0.08
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.3304,
+          "mean_kappa": 0.176545,
+          "n_edges": 70,
+          "n_nodes": 39,
+          "computation_time_s": 0.08
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.1554,
+          "mean_kappa": 0.135731,
+          "n_edges": 48,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        }
+      ]
+    },
+    {
+      "subject_id": "0023008",
+      "diagnosis": "TDC",
+      "adhd_label": 0,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 4.6288,
+          "mean_kappa": 0.251241,
+          "n_edges": 262,
+          "n_nodes": 39,
+          "computation_time_s": 0.16
+        },
+        {
+          "threshold": 0.6,
+          "eta": 2.2091,
+          "mean_kappa": 0.217804,
+          "n_edges": 181,
+          "n_nodes": 39,
+          "computation_time_s": 0.12
+        },
+        {
+          "threshold": 0.65,
+          "eta": 0.9231,
+          "mean_kappa": 0.203846,
+          "n_edges": 117,
+          "n_nodes": 39,
+          "computation_time_s": 0.08
+        },
+        {
+          "threshold": 0.68,
+          "eta": 0.5104,
+          "mean_kappa": 0.238909,
+          "n_edges": 87,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        },
+        {
+          "threshold": 0.7,
+          "eta": 0.3496,
+          "mean_kappa": 0.257571,
+          "n_edges": 72,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.73,
+          "eta": 0.2191,
+          "mean_kappa": 0.275327,
+          "n_edges": 57,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.149,
+          "mean_kappa": 0.269081,
+          "n_edges": 47,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.0357,
+          "mean_kappa": 0.351553,
+          "n_edges": 23,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.0132,
+          "mean_kappa": 0.408333,
+          "n_edges": 14,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        }
+      ]
+    },
+    {
+      "subject_id": "0023012",
+      "diagnosis": "ADHD",
+      "adhd_label": 1,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 1.641,
+          "mean_kappa": 0.184439,
+          "n_edges": 156,
+          "n_nodes": 39,
+          "computation_time_s": 0.11
+        },
+        {
+          "threshold": 0.6,
+          "eta": 0.6609,
+          "mean_kappa": 0.143639,
+          "n_edges": 99,
+          "n_nodes": 39,
+          "computation_time_s": 0.08
+        },
+        {
+          "threshold": 0.65,
+          "eta": 0.2268,
+          "mean_kappa": 0.179858,
+          "n_edges": 58,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        },
+        {
+          "threshold": 0.68,
+          "eta": 0.0923,
+          "mean_kappa": 0.294257,
+          "n_edges": 37,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.7,
+          "eta": 0.0567,
+          "mean_kappa": 0.375,
+          "n_edges": 29,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.73,
+          "eta": 0.0195,
+          "mean_kappa": 0.495098,
+          "n_edges": 17,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.0114,
+          "mean_kappa": 0.673077,
+          "n_edges": 13,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.0033,
+          "mean_kappa": 0.714286,
+          "n_edges": 7,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.0011,
+          "mean_kappa": 1.0,
+          "n_edges": 4,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        }
+      ]
+    },
+    {
+      "subject_id": "0027011",
+      "diagnosis": "ADHD",
+      "adhd_label": 1,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 1.4971,
+          "mean_kappa": 0.256756,
+          "n_edges": 149,
+          "n_nodes": 39,
+          "computation_time_s": 0.11
+        },
+        {
+          "threshold": 0.6,
+          "eta": 0.8308,
+          "mean_kappa": 0.242163,
+          "n_edges": 111,
+          "n_nodes": 39,
+          "computation_time_s": 0.08
+        },
+        {
+          "threshold": 0.65,
+          "eta": 0.3496,
+          "mean_kappa": 0.242156,
+          "n_edges": 72,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.68,
+          "eta": 0.2115,
+          "mean_kappa": 0.264722,
+          "n_edges": 56,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.7,
+          "eta": 0.1247,
+          "mean_kappa": 0.343531,
+          "n_edges": 43,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.73,
+          "eta": 0.0691,
+          "mean_kappa": 0.439844,
+          "n_edges": 32,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.0492,
+          "mean_kappa": 0.434877,
+          "n_edges": 27,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.027,
+          "mean_kappa": 0.362083,
+          "n_edges": 20,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.0173,
+          "mean_kappa": 0.424479,
+          "n_edges": 16,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        }
+      ]
+    },
+    {
+      "subject_id": "0027018",
+      "diagnosis": "ADHD",
+      "adhd_label": 1,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 0.4316,
+          "mean_kappa": 0.191835,
+          "n_edges": 80,
+          "n_nodes": 39,
+          "computation_time_s": 0.08
+        },
+        {
+          "threshold": 0.6,
+          "eta": 0.1554,
+          "mean_kappa": 0.277951,
+          "n_edges": 48,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.65,
+          "eta": 0.0607,
+          "mean_kappa": 0.338889,
+          "n_edges": 30,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.68,
+          "eta": 0.0243,
+          "mean_kappa": 0.574561,
+          "n_edges": 19,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        },
+        {
+          "threshold": 0.7,
+          "eta": 0.0132,
+          "mean_kappa": 0.619048,
+          "n_edges": 14,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        },
+        {
+          "threshold": 0.73,
+          "eta": 0.0033,
+          "mean_kappa": 0.666667,
+          "n_edges": 7,
+          "n_nodes": 39,
+          "computation_time_s": 0.03
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.0006,
+          "mean_kappa": 1.0,
+          "n_edges": 3,
+          "n_nodes": 39,
+          "computation_time_s": 0.03
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.0006,
+          "mean_kappa": 1.0,
+          "n_edges": 3,
+          "n_nodes": 39,
+          "computation_time_s": 0.03
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.0001,
+          "mean_kappa": 1.0,
+          "n_edges": 1,
+          "n_nodes": 39,
+          "computation_time_s": 0.03
+        }
+      ]
+    },
+    {
+      "subject_id": "0027034",
+      "diagnosis": "ADHD",
+      "adhd_label": 1,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 0.2762,
+          "mean_kappa": 0.264707,
+          "n_edges": 64,
+          "n_nodes": 39,
+          "computation_time_s": 0.07
+        },
+        {
+          "threshold": 0.6,
+          "eta": 0.1134,
+          "mean_kappa": 0.368873,
+          "n_edges": 41,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.65,
+          "eta": 0.0388,
+          "mean_kappa": 0.441667,
+          "n_edges": 24,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.68,
+          "eta": 0.0218,
+          "mean_kappa": 0.512037,
+          "n_edges": 18,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.7,
+          "eta": 0.0082,
+          "mean_kappa": 0.575758,
+          "n_edges": 11,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.73,
+          "eta": 0.0043,
+          "mean_kappa": 0.739583,
+          "n_edges": 8,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.0024,
+          "mean_kappa": 0.652778,
+          "n_edges": 6,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.0011,
+          "mean_kappa": 0.8125,
+          "n_edges": 4,
+          "n_nodes": 39,
+          "computation_time_s": 0.03
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.0011,
+          "mean_kappa": 0.8125,
+          "n_edges": 4,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        }
+      ]
+    },
+    {
+      "subject_id": "0027037",
+      "diagnosis": "ADHD",
+      "adhd_label": 1,
+      "n_rois": 39,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "eta": 0.0529,
+          "mean_kappa": 0.402381,
+          "n_edges": 28,
+          "n_nodes": 39,
+          "computation_time_s": 0.06
+        },
+        {
+          "threshold": 0.6,
+          "eta": 0.0132,
+          "mean_kappa": 0.547619,
+          "n_edges": 14,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.65,
+          "eta": 0.0043,
+          "mean_kappa": 0.625,
+          "n_edges": 8,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.68,
+          "eta": 0.0011,
+          "mean_kappa": 1.0,
+          "n_edges": 4,
+          "n_nodes": 39,
+          "computation_time_s": 0.04
+        },
+        {
+          "threshold": 0.7,
+          "eta": 0.0006,
+          "mean_kappa": 1.0,
+          "n_edges": 3,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.73,
+          "eta": 0.0003,
+          "mean_kappa": 1.0,
+          "n_edges": 2,
+          "n_nodes": 39,
+          "computation_time_s": 0.05
+        },
+        {
+          "threshold": 0.75,
+          "eta": 0.0,
+          "mean_kappa": null,
+          "n_edges": 0,
+          "n_nodes": 39,
+          "computation_time_s": 0.0
+        },
+        {
+          "threshold": 0.78,
+          "eta": 0.0,
+          "mean_kappa": null,
+          "n_edges": 0,
+          "n_nodes": 39,
+          "computation_time_s": 0.0
+        },
+        {
+          "threshold": 0.8,
+          "eta": 0.0,
+          "mean_kappa": null,
+          "n_edges": 0,
+          "n_nodes": 39,
+          "computation_time_s": 0.0
+        }
+      ]
+    }
+  ],
+  "group_summary": {
+    "TDC": {
+      "n_subjects": 3,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "mean_eta": 7.3833,
+          "std_eta": 4.313,
+          "mean_kappa": 0.276621,
+          "std_kappa": 0.048631,
+          "n_subjects": 3
+        },
+        {
+          "threshold": 0.6,
+          "mean_eta": 4.4201,
+          "std_eta": 2.9868,
+          "mean_kappa": 0.238714,
+          "std_kappa": 0.047666,
+          "n_subjects": 3
+        },
+        {
+          "threshold": 0.65,
+          "mean_eta": 2.3803,
+          "std_eta": 1.8488,
+          "mean_kappa": 0.213347,
+          "std_kappa": 0.041581,
+          "n_subjects": 3
+        },
+        {
+          "threshold": 0.68,
+          "mean_eta": 1.3773,
+          "std_eta": 1.1303,
+          "mean_kappa": 0.202735,
+          "std_kappa": 0.050166,
+          "n_subjects": 3
+        },
+        {
+          "threshold": 0.7,
+          "mean_eta": 0.9565,
+          "std_eta": 0.8514,
+          "mean_kappa": 0.198988,
+          "std_kappa": 0.057332,
+          "n_subjects": 3
+        },
+        {
+          "threshold": 0.73,
+          "mean_eta": 0.5151,
+          "std_eta": 0.4293,
+          "mean_kappa": 0.207398,
+          "std_kappa": 0.048819,
+          "n_subjects": 3
+        },
+        {
+          "threshold": 0.75,
+          "mean_eta": 0.342,
+          "std_eta": 0.2545,
+          "mean_kappa": 0.197462,
+          "std_kappa": 0.051207,
+          "n_subjects": 3
+        },
+        {
+          "threshold": 0.78,
+          "mean_eta": 0.135,
+          "std_eta": 0.1382,
+          "mean_kappa": 0.278,
+          "std_kappa": 0.074121,
+          "n_subjects": 3
+        },
+        {
+          "threshold": 0.8,
+          "mean_eta": 0.0606,
+          "std_eta": 0.067,
+          "mean_kappa": 0.369847,
+          "std_kappa": 0.177541,
+          "n_subjects": 3
+        }
+      ]
+    },
+    "ADHD": {
+      "n_subjects": 7,
+      "curve": [
+        {
+          "threshold": 0.55,
+          "mean_eta": 3.9386,
+          "std_eta": 5.6639,
+          "mean_kappa": 0.278723,
+          "std_kappa": 0.072831,
+          "n_subjects": 7
+        },
+        {
+          "threshold": 0.6,
+          "mean_eta": 2.4255,
+          "std_eta": 3.675,
+          "mean_kappa": 0.310712,
+          "std_kappa": 0.115605,
+          "n_subjects": 7
+        },
+        {
+          "threshold": 0.65,
+          "mean_eta": 1.3353,
+          "std_eta": 2.267,
+          "mean_kappa": 0.337585,
+          "std_kappa": 0.14005,
+          "n_subjects": 7
+        },
+        {
+          "threshold": 0.68,
+          "mean_eta": 0.8834,
+          "std_eta": 1.5273,
+          "mean_kappa": 0.447187,
+          "std_kappa": 0.258186,
+          "n_subjects": 7
+        },
+        {
+          "threshold": 0.7,
+          "mean_eta": 0.6425,
+          "std_eta": 1.1412,
+          "mean_kappa": 0.480025,
+          "std_kappa": 0.256409,
+          "n_subjects": 7
+        },
+        {
+          "threshold": 0.73,
+          "mean_eta": 0.3587,
+          "std_eta": 0.6466,
+          "mean_kappa": 0.53697,
+          "std_kappa": 0.266988,
+          "n_subjects": 7
+        },
+        {
+          "threshold": 0.75,
+          "mean_eta": 0.2614,
+          "std_eta": 0.4306,
+          "mean_kappa": 0.524705,
+          "std_kappa": 0.286249,
+          "n_subjects": 6
+        },
+        {
+          "threshold": 0.78,
+          "mean_eta": 0.1162,
+          "std_eta": 0.1883,
+          "mean_kappa": 0.560594,
+          "std_kappa": 0.297071,
+          "n_subjects": 6
+        },
+        {
+          "threshold": 0.8,
+          "mean_eta": 0.0602,
+          "std_eta": 0.1024,
+          "mean_kappa": 0.618958,
+          "std_kappa": 0.33065,
+          "n_subjects": 6
+        }
+      ]
+    }
+  },
+  "critical_etas": {
+    "TDC": null,
+    "ADHD": null
+  },
+  "hypothesis_supported": false
+}

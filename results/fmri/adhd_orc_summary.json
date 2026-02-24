@@ -1,0 +1,142 @@
+{
+  "analysis": "Track A: ORC Phase Transition in Brain Connectomes",
+  "lean_hypothesis": "brain_connectome_sweet_spot_hypothesis (DynamicNetworks.lean)",
+  "semantic_reference": {
+    "dataset": "SWOW English",
+    "phase_transition_eta": 2.5,
+    "hyperbolic_threshold_eta": 2.0,
+    "spherical_threshold_eta": 3.5
+  },
+  "parameters": {
+    "n_subjects": 10,
+    "atlas": "MSDL (39 ROIs)",
+    "orc_alpha": 0.5,
+    "thresholds": [
+      0.55,
+      0.6,
+      0.65,
+      0.68,
+      0.7,
+      0.73,
+      0.75,
+      0.78,
+      0.8
+    ]
+  },
+  "group_statistics": {
+    "TDC": {
+      "n_subjects": 3,
+      "eta_at_min_kappa": {
+        "mean": 0.479,
+        "std": 0.325,
+        "values": [
+          0.359,
+          0.155,
+          0.923
+        ]
+      },
+      "min_kappa": {
+        "mean": 0.1536,
+        "std": 0.036,
+        "values": [
+          0.1212,
+          0.1357,
+          0.2038
+        ]
+      },
+      "kappa_at_eta25": [
+        {
+          "eta": 2.4087,
+          "kappa": 0.193669
+        },
+        {
+          "eta": 2.1606,
+          "kappa": 0.21824
+        },
+        {
+          "eta": 2.2091,
+          "kappa": 0.217804
+        }
+      ]
+    },
+    "ADHD": {
+      "n_subjects": 7,
+      "eta_at_min_kappa": {
+        "mean": 0.5,
+        "std": 0.335,
+        "values": [
+          0.534,
+          1.193,
+          0.661,
+          0.35,
+          0.432,
+          0.276,
+          0.053
+        ]
+      },
+      "min_kappa": {
+        "mean": 0.2328,
+        "std": 0.0783,
+        "values": [
+          0.2007,
+          0.1843,
+          0.1436,
+          0.2422,
+          0.1918,
+          0.2647,
+          0.4024
+        ]
+      },
+      "kappa_at_eta25": [
+        {
+          "eta": 2.0182,
+          "kappa": 0.26
+        },
+        {
+          "eta": 1.8806,
+          "kappa": 0.216859
+        },
+        {
+          "eta": 1.641,
+          "kappa": 0.184439
+        },
+        {
+          "eta": 1.4971,
+          "kappa": 0.256756
+        },
+        {
+          "eta": 0.4316,
+          "kappa": 0.191835
+        },
+        {
+          "eta": 0.2762,
+          "kappa": 0.264707
+        },
+        {
+          "eta": 0.0529,
+          "kappa": 0.402381
+        }
+      ]
+    }
+  },
+  "findings": {
+    "hypothesis_strict": "NOT SUPPORTED",
+    "hypothesis_strict_reason": "No zero-crossing of \u03ba\u0304 detected at any \u03b7 for any subject. Brain connectomes show \u03ba\u0304 > 0 (spherical geometry) at all tested densities, unlike semantic networks which have \u03ba\u0304 < 0 at \u03b7 < 2.5.",
+    "hypothesis_weak": "PARTIALLY SUPPORTED",
+    "hypothesis_weak_reason": "TDC (healthy) subjects reach lower minimum \u03ba\u0304 (0.1536) than ADHD (0.2328), \u0394 = 0.0792. Healthy brain networks are geometrically CLOSER to Euclidean (\u03ba\u0304 \u2192 0) than ADHD networks at matched density thresholds. This is consistent with the spirit of the sweet-spot hypothesis: healthy networks operate near the Euclidean critical geometry.",
+    "clinical_finding": "ADHD brains show HIGHER ORC (\u0394 = +0.0792) than TDC at minimum-\u03ba\u0304 density. This is consistent with hypersynchrony / over-connectivity in ADHD: more clique-like (spherical) topology, less tree-like (hyperbolic).",
+    "methodological_notes": [
+      "Small sample: 3 TDC vs 7 ADHD",
+      "MSDL atlas (39 ROIs) \u2014 coarser than typical parcellations",
+      "No global signal regression (global signal inflates positive FC)",
+      "Binary adjacency (no edge weights) \u2014 consistent with Lean formalization",
+      "ORC \u03b1 = 0.5 (standard idleness)"
+    ],
+    "next_steps": [
+      "Apply global signal regression to reveal negative-ORC regime",
+      "Use finer parcellation (Schaefer 200, HCP 360 ROIs)",
+      "Collect more subjects (full ADHD-200 dataset, N=40)",
+      "Test on HCP Lifespan dataset for broader comparison"
+    ]
+  }
+}

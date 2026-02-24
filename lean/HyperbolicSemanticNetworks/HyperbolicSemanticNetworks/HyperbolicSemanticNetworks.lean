@@ -5,6 +5,7 @@ import «HyperbolicSemanticNetworks».PhaseTransition
 import «HyperbolicSemanticNetworks».Bounds
 import «HyperbolicSemanticNetworks».Consistency
 import «HyperbolicSemanticNetworks».Axioms
+import «HyperbolicSemanticNetworks».DynamicNetworks
 /-!
 # Hyperbolic Semantic Networks - Lean 4 Formalization
 
@@ -19,6 +20,7 @@ This is the main entry point for the Lean 4 formalization of
 - **PhaseTransition.lean**: Phase transition at ⟨k⟩²/N ≈ 2.5
 - **Bounds.lean**: Provable bounds on all metrics
 - **Consistency.lean**: Cross-implementation verification
+- **DynamicNetworks.lean**: Time-varying networks, temporal ORC stability
 
 ## Key Theorems
 
@@ -29,6 +31,8 @@ This is the main entry point for the Lean 4 formalization of
 | `mean_curvature_bounds` | κ̄ ∈ [-1, 1] | `Curvature.lean` |
 | `probability_normalization` | Σ μ = 1 | `Curvature.lean` |
 | `wasserstein_nonneg` | W₁ ≥ 0 | `Wasserstein.lean` |
+| `temporal_ORC_stability` | \|κ̄(W(t)) - κ̄(W(0))\| ≤ L·δ·t | `DynamicNetworks.lean` |
+| `sweetSpot_persistence` | κ̄(W(0)) < -γ → κ̄(W(t)) < 0 | `DynamicNetworks.lean` |
 
 ## Citation
 
