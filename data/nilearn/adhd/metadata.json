@@ -1,0 +1,28 @@
+{
+  "dataset": "adhd",
+  "n_subjects": 10,
+  "func_files": [
+    "/home/demetrios/nilearn_data/adhd/data/0010042/0010042_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0010064/0010064_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0010128/0010128_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0021019/0021019_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0023008/0023008_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0023012/0023012_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0027011/0027011_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0027018/0027018_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0027034/0027034_rest_tshift_RPI_voreg_mni.nii.gz",
+    "/home/demetrios/nilearn_data/adhd/data/0027037/0027037_rest_tshift_RPI_voreg_mni.nii.gz"
+  ],
+  "confounds": [
+    "/home/demetrios/nilearn_data/adhd/data/0010042/0010042_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0010064/0010064_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0010128/0010128_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0021019/0021019_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0023008/0023008_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0023012/0023012_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0027011/0027011_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0027018/0027018_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0027034/0027034_regressors.csv",
+    "/home/demetrios/nilearn_data/adhd/data/0027037/0027037_regressors.csv"
+  ],
+  "phenotypic": 
