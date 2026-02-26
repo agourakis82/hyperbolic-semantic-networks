@@ -1,0 +1,21 @@
+{
+  "analysis_date": "2026-02-21T22:51:16.523030",
+  "data_type": "synthetic",
+  "network_metrics": {
+    "n_nodes": 100,
+    "n_edges": 648,
+    "mean_degree": 13.090909090909092,
+    "clustering": 0.42
+  },
+  "semantic_metrics": {
+    "n_words": 50,
+    "n_associations": 256,
+    "mean_strength": 0.49621165029767217
+  },
+  "correspondence": {
+    "correlation": 0.37691508462232887,
+    "ci_lower": 0.25691508462232887,
+    "ci_upper": 0.49691508462232886,
+    "significant": true
+  }
+}

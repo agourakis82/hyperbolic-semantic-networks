@@ -1,0 +1,335 @@
+//! math::clifford — Clifford Algebra G(3,0,1) for Epistemic Computing
+//!
+//! Unified Geometric Algebra framework for 4D fMRI + semantic embeddings
+//! G(3,0,1) = 3 spatial dimensions + 1 homogeneous (projective) dimension
+//!
+//! Multivector structure: scalar + vector + bivector + trivector + pseudoscalar
+//! Grade 0: scalar (1)           - weight/intensity
+//! Grade 1: vector (e1,e2,e3,e0) - position in 3D + projective
+//! Grade 2: bivector (6 blades)  - oriented areas/rotations
+//! Grade 3: trivector (4 blades) - oriented volumes
+//! Grade 4: pseudoscalar (I)     - 4D volume element
+
+use qnn::quaternion::*;
+use fmri::connectivity_epistemic::*;
+
+// ============================================================================
+// Type Definitions
+// ============================================================================
+
+// Multivector in G(3,0,1) - 16-dimensional
+// Stored as array: [s, e1, e2, e3, e0, e12, e13, e23, e10, e20, e30, e123, e120, e130, e230, e0123]
+struct Multivector {
+    coeffs: [f64; 16],
+}
+
+// Grade projection: extract k-vector part
+struct GradeProj {
+    grade: usize,
+    coeffs: Vec<f64>,
+}
+
+// Rotor: even-grade element for rotations (quaternion-like)
+// R = a + b*e12 + c*e13 + d*e23 + ... (8 components)
+struct Rotor {
+    mv: Multivector,
+}
+
+// Motor: rotation + translation (dual quaternion-like)
+struct Motor {
+    rotor: Rotor,
+    translator: Multivector,
+}
+
+// Basis blade indices
+const BASIS_SCALAR: usize = 0;
+const BASIS_E1: usize = 1;
+const BASIS_E2: usize = 2;
+const BASIS_E3: usize = 3;
+const BASIS_E0: usize = 4;
+const BASIS_E12: usize = 5;
+const BASIS_E13: usize = 6;
+const BASIS_E23: usize = 7;
+const BASIS_E10: usize = 8;
+const BASIS_E20: usize = 9;
+const BASIS_E30: usize = 10;
+const BASIS_E123: usize = 11;
+const BASIS_E120: usize = 12;
+const BASIS_E130: usize = 13;
+const BASIS_E230: usize = 14;
+const BASIS_I: usize = 15;  // Pseudoscalar e0123
+
+// ============================================================================
+// Constructors
+// ============================================================================
+
+fn scalar(s: f64) -> Multivector {
+    let mut mv = Multivector { coeffs: [0.0; 16] };
+    mv.coeffs[BASIS_SCALAR] = s;
+    mv
+}
+
+fn vector(x: f64, y: f64, z: f64, w: f64) -> Multivector {
+    let mut mv = Multivector { coeffs: [0.0; 16] };
+    mv.coeffs[BASIS_E1] = x;
+    mv.coeffs[BASIS_E2] = y;
+    mv.coeffs[BASIS_E3] = z;
+    mv.coeffs[BASIS_E0] = w;
+    mv
+}
+
+fn from_fmri_4d(x: f64, y: f64, z: f64, signal: f64) -> Multivector {
+    vector(x, y, z, signal)
+}
+
+fn from_semantic_8d(embed: [f64; 8]) -> Multivector {
+    let mut mv = Multivector { coeffs: [0.0; 16] };
+    // Map 8D semantic embedding to multivector components
+    mv.coeffs[BASIS_SCALAR] = embed[0];
+    mv.coeffs[BASIS_E1] = embed[1];
+    mv.coeffs[BASIS_E2] = embed[2];
+    mv.coeffs[BASIS_E3] = embed[3];
+    mv.coeffs[BASIS_E0] = embed[4];
+    mv.coeffs[BASIS_E12] = embed[5];
+    mv.coeffs[BASIS_E13] = embed[6];
+    mv.coeffs[BASIS_E23] = embed[7];
+    mv
+}
+
+// ============================================================================
+// Basic Operations
+// ============================================================================
+
+fn add(a: Multivector, b: Multivector) -> Multivector {
+    let mut result = Multivector { coeffs: [0.0; 16] };
+    let mut i = 0;
+    while i < 16 {
+        result.coeffs[i] = a.coeffs[i] + b.coeffs[i];
+        i = i + 1;
+    }
+    result
+}
+
+fn sub(a: Multivector, b: Multivector) -> Multivector {
+    let mut result = Multivector { coeffs: [0.0; 16] };
+    let mut i = 0;
+    while i < 16 {
+        result.coeffs[i] = a.coeffs[i] - b.coeffs[i];
+        i = i + 1;
+    }
+    result
+}
+
+fn scale(mv: Multivector, s: f64) -> Multivector {
+    let mut result = Multivector { coeffs: [0.0; 16] };
+    let mut i = 0;
+    while i < 16 {
+        result.coeffs[i] = mv.coeffs[i] * s;
+        i = i + 1;
+    }
+    result
+}
+
+fn grade(mv: Multivector, k: usize) -> GradeProj {
+    GradeProj { grade: k, coeffs: [] }
+}
+
+// ============================================================================
+// Geometric Product (Core of Clifford Algebra)
+// ============================================================================
+
+fn geometric_product(a: Multivector, b: Multivector) -> Multivector {
+    let mut result = Multivector { coeffs: [0.0; 16] };
+    
+    // Scalar * anything
+    result.coeffs[BASIS_SCALAR] = a.coeffs[BASIS_SCALAR] * b.coeffs[BASIS_SCALAR]
+        - a.coeffs[BASIS_E1] * b.coeffs[BASIS_E1]
+        - a.coeffs[BASIS_E2] * b.coeffs[BASIS_E2]
+        - a.coeffs[BASIS_E3] * b.coeffs[BASIS_E3]
+        - a.coeffs[BASIS_E0] * b.coeffs[BASIS_E0];
+    
+    // Vector parts
+    result.coeffs[BASIS_E1] = a.coeffs[BASIS_SCALAR] * b.coeffs[BASIS_E1] 
+        + a.coeffs[BASIS_E1] * b.coeffs[BASIS_SCALAR]
+        + a.coeffs[BASIS_E2] * b.coeffs[BASIS_E12]
+        - a.coeffs[BASIS_E12] * b.coeffs[BASIS_E2];
+    
+    result.coeffs[BASIS_E2] = a.coeffs[BASIS_SCALAR] * b.coeffs[BASIS_E2]
+        + a.coeffs[BASIS_E2] * b.coeffs[BASIS_SCALAR]
+        + a.coeffs[BASIS_E3] * b.coeffs[BASIS_E23]
+        - a.coeffs[BASIS_E23] * b.coeffs[BASIS_E3];
+    
+    result.coeffs[BASIS_E3] = a.coeffs[BASIS_SCALAR] * b.coeffs[BASIS_E3]
+        + a.coeffs[BASIS_E3] * b.coeffs[BASIS_SCALAR]
+        + a.coeffs[BASIS_E1] * b.coeffs[BASIS_E13]
+        - a.coeffs[BASIS_E13] * b.coeffs[BASIS_E1];
+    
+    // Bivector parts (e12, e13, e23)
+    result.coeffs[BASIS_E12] = a.coeffs[BASIS_E1] * b.coeffs[BASIS_E2]
+        - a.coeffs[BASIS_E2] * b.coeffs[BASIS_E1];
+    
+    result.coeffs[BASIS_E13] = a.coeffs[BASIS_E1] * b.coeffs[BASIS_E3]
+        - a.coeffs[BASIS_E3] * b.coeffs[BASIS_E1];
+    
+    result.coeffs[BASIS_E23] = a.coeffs[BASIS_E2] * b.coeffs[BASIS_E3]
+        - a.coeffs[BASIS_E3] * b.coeffs[BASIS_E2];
+    
+    result
+}
+
+fn wedge(a: Multivector, b: Multivector) -> Multivector {
+    // Exterior product - only grade-increasing terms
+    let mut result = Multivector { coeffs: [0.0; 16] };
+    
+    // Grade 2 (bivectors) from grade 1 * grade 1
+    result.coeffs[BASIS_E12] = a.coeffs[BASIS_E1] * b.coeffs[BASIS_E2] 
+        - a.coeffs[BASIS_E2] * b.coeffs[BASIS_E1];
+    result.coeffs[BASIS_E13] = a.coeffs[BASIS_E1] * b.coeffs[BASIS_E3]
+        - a.coeffs[BASIS_E3] * b.coeffs[BASIS_E1];
+    result.coeffs[BASIS_E23] = a.coeffs[BASIS_E2] * b.coeffs[BASIS_E3]
+        - a.coeffs[BASIS_E3] * b.coeffs[BASIS_E2];
+    
+    result
+}
+
+fn inner(a: Multivector, b: Multivector) -> Multivector {
+    // Interior product - grade-decreasing terms
+    let mut result = Multivector { coeffs: [0.0; 16] };
+    
+    // Scalar part from vector · vector
+    result.coeffs[BASIS_SCALAR] = a.coeffs[BASIS_E1] * b.coeffs[BASIS_E1]
+        + a.coeffs[BASIS_E2] * b.coeffs[BASIS_E2]
+        + a.coeffs[BASIS_E3] * b.coeffs[BASIS_E3];
+    
+    result
+}
+
+// ============================================================================
+// Rotor Operations (Rotations in 3D)
+// ============================================================================
+
+fn rotor_from_angle_axis(angle: f64, axis_x: f64, axis_y: f64, axis_z: f64) -> Rotor {
+    let half_angle = angle * 0.5;
+    let s = half_angle.sin();
+    let c = half_angle.cos();
+    
+    let mut mv = Multivector { coeffs: [0.0; 16] };
+    mv.coeffs[BASIS_SCALAR] = c;
+    mv.coeffs[BASIS_E12] = axis_z * s;
+    mv.coeffs[BASIS_E13] = -axis_y * s;
+    mv.coeffs[BASIS_E23] = axis_x * s;
+    
+    Rotor { mv: mv }
+}
+
+fn rotor_apply(rotor: Rotor, v: Multivector) -> Multivector {
+    let r = rotor.mv;
+    let r_conj = Multivector {
+        coeffs: [
+            r.coeffs[BASIS_SCALAR],
+            0.0, 0.0, 0.0, 0.0,
+            -r.coeffs[BASIS_E12], -r.coeffs[BASIS_E13], -r.coeffs[BASIS_E23],
+            0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0,
+            r.coeffs[BASIS_SCALAR]
+        ]
+    };
+    
+    let gp = geometric_product(r, v);
+    geometric_product(gp, r_conj)
+}
+
+// ============================================================================
+// Epistemic Wrapper for Multivectors
+// ============================================================================
+
+struct EpistemicMultivector {
+    value: Multivector,
+    uncertainty: Multivector,
+    confidence: f64,
+}
+
+fn epistemic_multivector_new(value: Multivector, uncertainty: f64, confidence: f64) -> EpistemicMultivector {
+    let mut unc_mv = Multivector { coeffs: [0.0; 16] };
+    let mut i = 0;
+    while i < 16 {
+        unc_mv.coeffs[i] = uncertainty;
+        i = i + 1;
+    }
+    
+    EpistemicMultivector {
+        value: value,
+        uncertainty: unc_mv,
+        confidence: confidence,
+    }
+}
+
+fn epistemic_geometric_product(a: EpistemicMultivector, b: EpistemicMultivector) -> EpistemicMultivector {
+    let result_val = geometric_product(a.value, b.value);
+    
+    // Propagate uncertainty: σ(f(x,y)) ≈ |f'(x,y)| * σ
+    let mut unc = Multivector { coeffs: [0.0; 16] };
+    let mut i = 0;
+    while i < 16 {
+        unc.coeffs[i] = (a.uncertainty.coeffs[i].abs() + b.uncertainty.coeffs[i].abs()) * 0.5;
+        i = i + 1;
+    }
+    
+    let min_conf = a.confidence;
+    let new_conf = if b.confidence < min_conf { b.confidence } else { min_conf };
+    
+    EpistemicMultivector {
+        value: result_val,
+        uncertainty: unc,
+        confidence: new_conf,
+    }
+}
+
+// ============================================================================
+// Brain-Semantic Correspondence
+// ============================================================================
+
+fn compute_correspondence(brain_mv: Multivector, semantic_mv: Multivector) -> f64 {
+    // Inner product as similarity measure
+    let gp = inner(brain_mv, semantic_mv);
+    gp.coeffs[BASIS_SCALAR].abs()
+}
+
+fn epistemic_correspondence(brain: EpistemicMultivector, semantic: EpistemicMultivector) -> EpistemicMultivector {
+    let result_val = geometric_product(brain.value, semantic.value);
+    let min_conf = if brain.confidence < semantic.confidence { brain.confidence } else { semantic.confidence };
+    
+    EpistemicMultivector {
+        value: result_val,
+        uncertainty: brain.uncertainty,
+        confidence: min_conf,
+    }
+}
+
+// ============================================================================
+// Main Entry Point
+// ============================================================================
+
+fn main() with IO {
+    println("=== Clifford Algebra G(3,0,1) Demo ===");
+    
+    // Create sample fMRI voxel
+    let voxel = from_fmri_4d(10.5, 20.3, 15.7, 0.85);
+    println("fMRI voxel multivector created");
+    
+    // Create sample semantic embedding
+    let semantic = from_semantic_8d([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]);
+    println("Semantic embedding multivector created");
+    
+    // Geometric product
+    let gp = geometric_product(voxel, semantic);
+    println("Geometric product computed");
+    
+    // Epistemic version
+    let e_voxel = epistemic_multivector_new(voxel, 0.1, 0.95);
+    let e_semantic = epistemic_multivector_new(semantic, 0.05, 0.90);
+    let e_result = epistemic_geometric_product(e_voxel, e_semantic);
+    println("Epistemic correspondence: confidence = ");
+    print(e_result.confidence);
+    println("")
+}

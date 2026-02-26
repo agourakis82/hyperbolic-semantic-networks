@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(SOUNIO_SELFHOST_DRIVER_REQUIRE_OUTPUT=0 /home/demetrios/work/sounio/target/release/souc run:*)",
+      "Bash(./target/release/souc check:*)",
+      "Read(//home/demetrios/work/hyperbolic-semantic-networks/lean/HyperbolicSemanticNetworks/**)",
+      "Bash(pdflatex -interaction=nonstopmode PREPRINT.tex)",
+      "Bash(kpsewhich svjour3.cls)",
+      "Bash(pdflatex --version)"
+    ]
+  }
+}

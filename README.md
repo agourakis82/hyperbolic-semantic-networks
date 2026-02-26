@@ -66,7 +66,8 @@ hyperbolic-semantic-networks/
 │   ├── 03_forman_ricci/            # Forman vs Ollivier comparison
 │   ├── 04_uncertainty_scaling/     # Uncertainty at phase transition
 │   ├── 05_hypercomplex/           # Hypercomplex curvature embedding
-│   └── 06_spectral_geometry/     # Spectral gap phase transition
+│   ├── 06_spectral_geometry/     # Spectral gap phase transition
+│   └── 07_scale_n500/            # N=100 all methods + N=200 spectral
 │
 ├── results/                     # Computed results
 │   ├── experiments/             # Phase transition data
@@ -215,6 +216,20 @@ bash experiments/06_spectral_geometry/run.sh
 # → results/sounio/spectral_phase_transition.csv
 ```
 
+### Experiment 07: Scale — N=100 (All Methods) + N=200 (Spectral)
+
+Scales beyond the N=50 barrier. N=500 BFS all-pairs (`[i64; 250000]`) proved
+infeasible in the bytecode VM (~6 hours per k-value). Practical design:
+
+- **Phase A** (N=100): curvature + Q4 embedding + spectral for k ≤ 18, spectral-only for k > 18
+  - k_crit = √(2.5 × 100) ≈ 15.8 — curvature spans the full transition
+- **Phase B** (N=200): spectral + BFS metrics only — matches Julia reference
+
+```bash
+bash experiments/07_scale_n500/run.sh
+# → results/sounio/scale_n500.csv
+```
+
 ---
 
 ## Key Results
@@ -272,7 +287,7 @@ bash experiments/06_spectral_geometry/run.sh
 - Rust performance implementation (Sinkhorn + null models)
 - Sounio graph module (in [Sounio repo](https://github.com/sounio-lang/sounio))
 - Phase transition discovery and validation
-- Sounio Experiments 01-06 (phase transition, null model, Forman, uncertainty, hypercomplex, spectral)
+- Sounio Experiments 01-07 (phase transition, null model, Forman, uncertainty, hypercomplex, spectral, N=100/200 scale)
 - Scientific documentation
 
 ### In Progress

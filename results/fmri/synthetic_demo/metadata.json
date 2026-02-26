@@ -1,0 +1,8 @@
+{
+  "generated_at": "2026-02-21T22:51:16.470938",
+  "n_rois": 100,
+  "n_timepoints": 200,
+  "n_words": 50,
+  "tr_seconds": 0.72,
+  "description": "Synthetic data for pipeline testing"
+}

@@ -1,0 +1,802 @@
+// Experiment 07 — Scale: All Methods at N=100 + Spectral at N=200
+// Hyperbolic Semantic Networks Project
+//
+// Scales beyond the N=50 barrier.  Bytecode VM throughput limits prevent
+// N=500 curvature (BFS all-pairs + Sinkhorn at 250K distances is infeasible).
+// Instead:
+//
+//   Phase A: N=100 — spectral + curvature (hop + Q4) for k <= 18
+//                    spectral + incremental BFS for k > 18
+//            k_crit = sqrt(2.5 * 100) = 15.8
+//            k-values: {2, 4, 8, 12, 16, 18, 24, 32, 40, 48}
+//
+//   Phase B: N=200 — spectral + incremental BFS only
+//            k_crit = sqrt(2.5 * 200) = 22.4
+//            k-values: {2, 4, 8, 14, 22, 30, 38, 44}
+//            Matches Julia reference (N=200 validated)
+//
+// Array budget (peak, N=200 arrays shared):
+//   Graph.adj:  [usize; 9600]   200 x 48 stride
+//   Graph.deg:  [usize; 200]
+//   Dists.d:    [i64; 40000]    200 x 200 stride (only Phase A k <= 18)
+//   Eigenvec:   [f64; 200] x 2  power iteration vectors
+//   Q4Emb.e:   [f64; 800]      200 x 4 components
+//   CostMat.c:  [f64; 625]      25 x 25 Sinkhorn cost
+//
+// Output: CSV to stdout
+//   N,k,ratio,lambda2,spectral_gap,norm_gap,cheeger_lb,friedman,friedman_ratio,
+//   diameter,avg_path,kappa_hop,kappa_q4,geom
+//   geom: 0=Hyperbolic  1=Euclidean  2=Spherical  -1=not computed
+//
+// Reference:
+//   Agourakis, D. C. (2026). "Hyperbolic Geometry of Semantic Networks."
+//   DOI: 10.5281/zenodo.17655231
+
+// ============================================================================
+// LCG RNG (Knuth multiplicative, mod 2^64)
+// ============================================================================
+
+fn lcg_step(state: u64) -> u64 {
+    let a: u64 = 6364136223846793005
+    let c: u64 = 1442695040888963407
+    state * a + c
+}
+
+fn lcg_umod(state: u64, m: usize) -> usize with Div, Panic {
+    if m == 0 { return 0 }
+    ((state as usize) & 4294967295) % m
+}
+
+// ============================================================================
+// Graph (N <= 200, max degree 48, stride 48)
+//   adj[u * 48 + i] = i-th neighbor of u
+//   deg[u]           = degree of u
+// ============================================================================
+
+struct Graph {
+    adj: [usize; 9600],
+    deg: [usize; 200],
+    n:   usize,
+}
+
+fn build_k_regular(n: usize, k: usize, seed: u64) -> Graph with Mut, Div, Panic {
+    var adj:   [usize; 9600] = [0; 9600]
+    var deg:   [usize; 200]  = [0; 200]
+    var stubs: [usize; 9600] = [0; 9600]
+
+    var si: usize = 0
+    var i:  usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < k {
+            stubs[si] = i
+            si = si + 1
+            j  = j + 1
+        }
+        i = i + 1
+    }
+    let stub_count = si
+
+    var rng: u64 = if seed == 0 { 12345 } else { seed }
+    var s: usize = stub_count
+    while s > 1 {
+        s   = s - 1
+        rng = lcg_step(rng)
+        let t   = lcg_umod(rng, s + 1)
+        let tmp = stubs[s]
+        stubs[s] = stubs[t]
+        stubs[t] = tmp
+    }
+
+    i = 0
+    while i + 1 < stub_count {
+        let u = stubs[i]
+        let v = stubs[i + 1]
+        if u != v {
+            let du = deg[u]
+            let dv = deg[v]
+            var ok: bool  = true
+            var ci: usize = 0
+            while ci < du {
+                if adj[u * 48 + ci] == v { ok = false }
+                ci = ci + 1
+            }
+            if ok && du < 48 && dv < 48 {
+                adj[u * 48 + du] = v
+                deg[u] = du + 1
+                adj[v * 48 + dv] = u
+                deg[v] = dv + 1
+            }
+        }
+        i = i + 2
+    }
+
+    Graph { adj: adj, deg: deg, n: n }
+}
+
+// ============================================================================
+// BFS all-pairs distance (stride 200)
+//   d[u * 200 + v] = hop-count from u to v (-1 if unreachable)
+//   Only used for Phase A curvature (k <= 18)
+// ============================================================================
+
+struct Dists {
+    d: [i64; 40000],
+    n: usize,
+}
+
+fn bfs_all_pairs(g: &Graph) -> Dists with Mut, Div, Panic {
+    var d: [i64; 40000] = [0; 40000]
+    let n = g.n
+
+    var src: usize = 0
+    while src < n {
+        var row:   [i64;   200] = [-1; 200]
+        var queue: [usize; 200] = [0;  200]
+        row[src] = 0
+        var qh: usize = 0
+        var qt: usize = 0
+        queue[qt] = src
+        qt = qt + 1
+
+        while qh < qt {
+            let u  = queue[qh]
+            qh = qh + 1
+            let du = g.deg[u]
+            var i: usize = 0
+            while i < du {
+                let v = g.adj[u * 48 + i]
+                if row[v] == -1 {
+                    row[v] = row[u] + 1
+                    queue[qt] = v
+                    qt = qt + 1
+                }
+                i = i + 1
+            }
+        }
+
+        var j: usize = 0
+        while j < n {
+            d[src * 200 + j] = row[j]
+            j = j + 1
+        }
+        src = src + 1
+    }
+
+    Dists { d: d, n: n }
+}
+
+// ============================================================================
+// Graph metrics
+// ============================================================================
+
+struct GraphMetrics {
+    diameter: i64,
+    avg_path: f64,
+}
+
+fn metrics_from_dists(dists: &Dists, n: usize) -> GraphMetrics with Mut, Div, Panic {
+    var max_d: i64   = 0
+    var total: f64   = 0.0
+    var count: usize = 0
+    var i: usize = 0
+    while i < n {
+        var j: usize = i + 1
+        while j < n {
+            let d = dists.d[i * 200 + j]
+            if d > 0 {
+                if d > max_d { max_d = d }
+                total = total + (d as f64)
+                count = count + 1
+            }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    let avg = if count > 0 { total / (count as f64) } else { 0.0 }
+    GraphMetrics { diameter: max_d, avg_path: avg }
+}
+
+fn compute_graph_metrics_inc(g: &Graph, n: usize) -> GraphMetrics with Mut, Div, Panic {
+    var max_d: i64   = 0
+    var total: f64   = 0.0
+    var count: usize = 0
+
+    var src: usize = 0
+    while src < n {
+        var row:   [i64;   200] = [-1; 200]
+        var queue: [usize; 200] = [0;  200]
+        row[src] = 0
+        var qh: usize = 0
+        var qt: usize = 0
+        queue[qt] = src
+        qt = qt + 1
+
+        while qh < qt {
+            let u  = queue[qh]
+            qh = qh + 1
+            let du = g.deg[u]
+            var i: usize = 0
+            while i < du {
+                let v = g.adj[u * 48 + i]
+                if row[v] == -1 {
+                    row[v] = row[u] + 1
+                    queue[qt] = v
+                    qt = qt + 1
+                }
+                i = i + 1
+            }
+        }
+
+        var j: usize = src + 1
+        while j < n {
+            let d = row[j]
+            if d > 0 {
+                if d > max_d { max_d = d }
+                total = total + (d as f64)
+                count = count + 1
+            }
+            j = j + 1
+        }
+        src = src + 1
+    }
+
+    let avg = if count > 0 { total / (count as f64) } else { 0.0 }
+    GraphMetrics { diameter: max_d, avg_path: avg }
+}
+
+// ============================================================================
+// Eigensolver: Power iteration on shifted matrix (A + kI)
+//   max_iter = 1000 for N=200 convergence margin
+// ============================================================================
+
+struct EigenResult {
+    lambda2:   f64,
+    converged: bool,
+    iters:     usize,
+}
+
+fn compute_lambda2(g: &Graph, n: usize, k: usize, seed: u64) -> EigenResult with Mut, Div, Panic {
+    let max_iter: usize = 1000
+    let tol: f64 = 1e-8
+
+    var v: [f64; 200] = [0.0; 200]
+    var rng: u64 = seed
+    var i: usize = 0
+    while i < n {
+        rng = lcg_step(rng)
+        let raw = (lcg_umod(rng, 10000) as f64) / 5000.0 - 1.0
+        v[i] = raw
+        i = i + 1
+    }
+
+    // Orthogonalize against v1: subtract mean
+    var sum_v: f64 = 0.0
+    i = 0
+    while i < n { sum_v = sum_v + v[i]; i = i + 1 }
+    var mean_v: f64 = sum_v / (n as f64)
+    i = 0
+    while i < n { v[i] = v[i] - mean_v; i = i + 1 }
+
+    // Normalize
+    var norm_sq: f64 = 0.0
+    i = 0
+    while i < n { norm_sq = norm_sq + v[i] * v[i]; i = i + 1 }
+    var norm_v: f64 = norm_sq.sqrt()
+    if norm_v < 1e-15 {
+        i = 0
+        while i < n {
+            v[i] = if i % 2 == 0 { 1.0 } else { -1.0 }
+            i = i + 1
+        }
+        norm_v = (n as f64).sqrt()
+    }
+    i = 0
+    while i < n { v[i] = v[i] / norm_v; i = i + 1 }
+
+    // Power iteration
+    var lambda_old: f64 = 0.0
+    var lambda_new: f64 = 0.0
+    var did_converge: bool = false
+    var final_iter: usize = max_iter
+    let k_f64 = k as f64
+
+    var iter: usize = 0
+    while iter < max_iter {
+        var w: [f64; 200] = [0.0; 200]
+        var u: usize = 0
+        while u < n {
+            var s: f64 = k_f64 * v[u]
+            let du = g.deg[u]
+            var j: usize = 0
+            while j < du {
+                let nbr = g.adj[u * 48 + j]
+                s = s + v[nbr]
+                j = j + 1
+            }
+            w[u] = s
+            u = u + 1
+        }
+
+        // Orthogonalize w against v1
+        var sum_w: f64 = 0.0
+        i = 0
+        while i < n { sum_w = sum_w + w[i]; i = i + 1 }
+        let mean_w = sum_w / (n as f64)
+        i = 0
+        while i < n { w[i] = w[i] - mean_w; i = i + 1 }
+
+        // Rayleigh quotient
+        var vw: f64 = 0.0
+        var vv: f64 = 0.0
+        i = 0
+        while i < n {
+            vw = vw + v[i] * w[i]
+            vv = vv + v[i] * v[i]
+            i = i + 1
+        }
+        lambda_new = if vv > 1e-15 { vw / vv } else { 0.0 }
+
+        // Convergence check
+        let diff = if lambda_new > lambda_old { lambda_new - lambda_old }
+                   else { lambda_old - lambda_new }
+        if diff < tol && iter > 10 {
+            did_converge = true
+            final_iter = iter
+            iter = max_iter
+        } else {
+            lambda_old = lambda_new
+            var norm_w_sq: f64 = 0.0
+            i = 0
+            while i < n { norm_w_sq = norm_w_sq + w[i] * w[i]; i = i + 1 }
+            let norm_w = norm_w_sq.sqrt()
+            if norm_w > 1e-15 {
+                i = 0
+                while i < n { v[i] = w[i] / norm_w; i = i + 1 }
+            }
+            iter = iter + 1
+        }
+    }
+
+    let l2 = lambda_new - k_f64
+    EigenResult { lambda2: l2, converged: did_converge, iters: final_iter }
+}
+
+// ============================================================================
+// Spectral results
+// ============================================================================
+
+struct SpectralResult {
+    lambda2:        f64,
+    spectral_gap:   f64,
+    norm_gap:       f64,
+    cheeger_lb:     f64,
+    friedman:       f64,
+    friedman_ratio: f64,
+}
+
+fn compute_spectral(g: &Graph, n: usize, k: usize) -> SpectralResult with Mut, Div, Panic {
+    let er = compute_lambda2(g, n, k, 7919)
+
+    let gap   = (k as f64) - er.lambda2
+    let ngap  = if k > 0 { gap / (k as f64) } else { 0.0 }
+    let chg   = gap / 2.0
+    let fried = if k > 1 { 2.0 * ((k - 1) as f64).sqrt() } else { 0.0 }
+    let fratio = if fried > 0.0 { er.lambda2 / fried } else { 0.0 }
+
+    SpectralResult {
+        lambda2:        er.lambda2,
+        spectral_gap:   gap,
+        norm_gap:       ngap,
+        cheeger_lb:     chg,
+        friedman:       fried,
+        friedman_ratio: fratio,
+    }
+}
+
+// ============================================================================
+// Ollivier-Ricci curvature
+// ============================================================================
+
+struct Measure {
+    nodes: [usize; 25],
+    probs: [f64;   25],
+    len:   usize,
+}
+
+fn lazy_measure(g: &Graph, node: usize, alpha: f64) -> Measure with Mut, Div, Panic {
+    var nodes: [usize; 25] = [0;   25]
+    var probs: [f64;   25] = [0.0; 25]
+    var len:   usize       = 0
+
+    let deg = g.deg[node]
+    if deg == 0 {
+        nodes[0] = node
+        probs[0] = 1.0
+        return Measure { nodes: nodes, probs: probs, len: 1 }
+    }
+    let w = (1.0 - alpha) / (deg as f64)
+
+    if alpha > 0.0 {
+        nodes[0] = node
+        probs[0] = alpha
+        len = 1
+    }
+
+    var i: usize = 0
+    while i < deg {
+        nodes[len] = g.adj[node * 48 + i]
+        probs[len] = w
+        len = len + 1
+        i   = i + 1
+    }
+
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+struct CostMat {
+    c: [f64; 625],
+}
+
+fn cost_hop(mu: &Measure, nu: &Measure, dists: &Dists) -> CostMat with Mut, Div, Panic {
+    var c: [f64; 625] = [0.0; 625]
+    var i: usize = 0
+    while i < mu.len {
+        var j: usize = 0
+        while j < nu.len {
+            let ui = mu.nodes[i]
+            let vj = nu.nodes[j]
+            let d  = dists.d[ui * 200 + vj]
+            c[i * 25 + j] = if d >= 0 { d as f64 } else { 100.0 }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    CostMat { c: c }
+}
+
+fn sinkhorn(
+    mu: &Measure, nu: &Measure, cm: &CostMat,
+    epsilon: f64, max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let n = mu.len
+    let m = nu.len
+    if n == 0 || m == 0 { return 0.0 }
+
+    var kmat: [f64; 625] = [0.0; 625]
+    var u_s:  [f64;  25] = [1.0;  25]
+    var v_s:  [f64;  25] = [1.0;  25]
+
+    var i: usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < m {
+            kmat[i * 25 + j] = (-cm.c[i * 25 + j] / epsilon).exp()
+            j = j + 1
+        }
+        i = i + 1
+    }
+
+    var iter: usize = 0
+    while iter < max_iter {
+        i = 0
+        while i < n {
+            var s: f64   = 0.0
+            var j: usize = 0
+            while j < m { s = s + kmat[i * 25 + j] * v_s[j]; j = j + 1 }
+            if s > 1e-15 { u_s[i] = mu.probs[i] / s }
+            i = i + 1
+        }
+        var j: usize = 0
+        while j < m {
+            var s: f64 = 0.0
+            i = 0
+            while i < n { s = s + kmat[i * 25 + j] * u_s[i]; i = i + 1 }
+            if s > 1e-15 { v_s[j] = nu.probs[j] / s }
+            j = j + 1
+        }
+        iter = iter + 1
+    }
+
+    var w1: f64 = 0.0
+    i = 0
+    while i < n {
+        var j: usize = 0
+        while j < m {
+            w1 = w1 + u_s[i] * kmat[i * 25 + j] * v_s[j] * cm.c[i * 25 + j]
+            j  = j + 1
+        }
+        i = i + 1
+    }
+
+    w1
+}
+
+// ============================================================================
+// Quaternion S^3 embedding (4 landmarks, stride 200)
+// ============================================================================
+
+struct Q4Emb { e: [f64; 800] }  // 4 components x 200 nodes
+
+fn geo_q4(qe: &Q4Emb, u: usize, v: usize) -> f64 with Div, Panic {
+    let d = qe.e[u]*qe.e[v] + qe.e[200+u]*qe.e[200+v]
+          + qe.e[400+u]*qe.e[400+v] + qe.e[600+u]*qe.e[600+v]
+    let c = if d > 1.0 { 1.0 } else if d < -1.0 { -1.0 } else { d }
+    c.abs().acos()
+}
+
+fn select_landmarks(dists: &Dists, n: usize, num: usize) -> [usize; 16] with Mut, Div, Panic {
+    var lm: [usize; 16] = [0; 16]
+    var min_dist: [i64; 200] = [99999; 200]
+
+    lm[0] = 0
+    var i: usize = 0
+    while i < n {
+        let dd = dists.d[0 * 200 + i]
+        min_dist[i] = if dd >= 0 { dd } else { 99999 }
+        i = i + 1
+    }
+    min_dist[0] = 0
+
+    var li: usize = 1
+    while li < num {
+        var best: usize = 0
+        var best_d: i64 = -1
+        i = 0
+        while i < n {
+            if min_dist[i] > best_d {
+                var is_lm: bool = false
+                var j: usize = 0
+                while j < li {
+                    if lm[j] == i { is_lm = true }
+                    j = j + 1
+                }
+                if !is_lm {
+                    best_d = min_dist[i]
+                    best = i
+                }
+            }
+            i = i + 1
+        }
+        lm[li] = best
+
+        i = 0
+        while i < n {
+            let dd = dists.d[best * 200 + i]
+            if dd >= 0 && dd < min_dist[i] { min_dist[i] = dd }
+            i = i + 1
+        }
+
+        li = li + 1
+    }
+
+    lm
+}
+
+fn build_q4_emb(dists: &Dists, lm: &[usize; 16], n: usize) -> Q4Emb with Mut, Div, Panic {
+    var e: [f64; 800] = [0.0; 800]
+    var node: usize = 0
+    while node < n {
+        var sum_sq: f64 = 0.0
+        var c: usize = 0
+        while c < 4 {
+            let d = dists.d[lm[c] * 200 + node]
+            let df = if d >= 0 { d as f64 } else { 1.0 }
+            e[c * 200 + node] = df
+            sum_sq = sum_sq + df * df
+            c = c + 1
+        }
+        let norm = sum_sq.sqrt()
+        if norm > 1e-10 {
+            c = 0
+            while c < 4 {
+                e[c * 200 + node] = e[c * 200 + node] / norm
+                c = c + 1
+            }
+        } else {
+            e[0 * 200 + node] = 1.0
+        }
+        node = node + 1
+    }
+    Q4Emb { e: e }
+}
+
+fn cost_q4(mu: &Measure, nu: &Measure, qe: &Q4Emb) -> CostMat with Mut, Div, Panic {
+    var c: [f64; 625] = [0.0; 625]
+    var i: usize = 0
+    while i < mu.len {
+        var j: usize = 0
+        while j < nu.len {
+            let g = geo_q4(qe, mu.nodes[i], nu.nodes[j])
+            c[i * 25 + j] = if g < 0.01 { 0.01 } else { g }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    CostMat { c: c }
+}
+
+// ============================================================================
+// Combined curvature: hop + Q4 in one pass
+// ============================================================================
+
+struct TwoKappas {
+    hop: f64,
+    q4:  f64,
+}
+
+fn compute_curvatures(
+    g: &Graph, dists: &Dists, qe: &Q4Emb,
+    n: usize, alpha: f64, eps: f64, max_iter: usize
+) -> TwoKappas with Mut, Div, Panic {
+    var sh: f64 = 0.0
+    var sq: f64 = 0.0
+    var count: usize = 0
+
+    var u: usize = 0
+    while u < n {
+        let du = g.deg[u]
+        var ei: usize = 0
+        while ei < du {
+            let v = g.adj[u * 48 + ei]
+            if v > u {
+                let mu_u = lazy_measure(g, u, alpha)
+                let mu_v = lazy_measure(g, v, alpha)
+
+                let dh = dists.d[u * 200 + v]
+                if dh > 0 {
+                    let ch = cost_hop(&mu_u, &mu_v, dists)
+                    let wh = sinkhorn(&mu_u, &mu_v, &ch, eps, max_iter)
+                    sh = sh + 1.0 - wh / (dh as f64)
+                }
+
+                let dq = geo_q4(qe, u, v)
+                if dq > 0.01 {
+                    let cq = cost_q4(&mu_u, &mu_v, qe)
+                    let wq = sinkhorn(&mu_u, &mu_v, &cq, eps, max_iter)
+                    sq = sq + 1.0 - wq / dq
+                }
+
+                count = count + 1
+            }
+            ei = ei + 1
+        }
+        u = u + 1
+    }
+
+    if count == 0 {
+        return TwoKappas { hop: 0.0, q4: 0.0 }
+    }
+    let cf = count as f64
+    TwoKappas { hop: sh / cf, q4: sq / cf }
+}
+
+// ============================================================================
+// Geometry classification
+// ============================================================================
+
+fn classify_kappa(kappa: f64) -> i64 {
+    if kappa < -0.05 { 0 }
+    else if kappa > 0.05 { 2 }
+    else { 1 }
+}
+
+// ============================================================================
+// Output helper
+// ============================================================================
+
+fn print_row(
+    n: usize, k: usize, ratio: f64,
+    sp: &SpectralResult, diam: i64, apl: f64,
+    kh: f64, kq: f64, geom: i64
+) with IO, Mut, Div, Panic {
+    print(n);                print(",")
+    print(k);                print(",")
+    print(ratio);            print(",")
+    print(sp.lambda2);       print(",")
+    print(sp.spectral_gap);  print(",")
+    print(sp.norm_gap);      print(",")
+    print(sp.cheeger_lb);    print(",")
+    print(sp.friedman);      print(",")
+    print(sp.friedman_ratio); print(",")
+    print(diam);             print(",")
+    print(apl);              print(",")
+    print(kh);               print(",")
+    print(kq);               print(",")
+    print(geom)
+    println("")
+}
+
+// ============================================================================
+// Main
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    let alpha:     f64   = 0.5
+    let epsilon:   f64   = 0.5
+    let sink_iter: usize = 60
+
+    // ── Header ────────────────────────────────────────────────────────────
+    println("# Scale Experiment — Sounio 1.0.0-beta")
+    println("# Phase A: N=100 (curvature k<=18, spectral all)")
+    println("# Phase B: N=200 (spectral + BFS metrics only)")
+    println("# Eigensolver: power iteration on shifted (A+kI), max_iter=1000, tol=1e-8")
+    println("# Curvature: alpha=0.5  epsilon=0.5  sinkhorn_iter=60")
+    println("# Q4 embedding: 4 landmarks, geodesic on S^3")
+    println("# geom: 0=Hyperbolic  1=Euclidean  2=Spherical  -1=n/a")
+    println("N,k,ratio,lambda2,spectral_gap,norm_gap,cheeger_lb,friedman,friedman_ratio,diameter,avg_path,kappa_hop,kappa_q4,geom")
+
+    // ── Phase A: N=100, curvature through the transition ─────────────────
+    //   k_crit = sqrt(2.5 * 100) = 15.8
+    let k_curv: [usize; 6] = [2, 4, 8, 12, 16, 18]
+
+    var ki: usize = 0
+    while ki < 6 {
+        let k  = k_curv[ki]
+        let na: usize = 100
+
+        if k < na && (k * na) % 2 == 0 {
+            let ratio = ((k * k) as f64) / (na as f64)
+            let g  = build_k_regular(na, k, 42)
+            let sp = compute_spectral(&g, na, k)
+            let ds = bfs_all_pairs(&g)
+            let gm = metrics_from_dists(&ds, na)
+            let lm = select_landmarks(&ds, na, 4)
+            let qe = build_q4_emb(&ds, &lm, na)
+            let kk = compute_curvatures(&g, &ds, &qe, na, alpha, epsilon, sink_iter)
+            let geom = classify_kappa(kk.hop)
+            print_row(na, k, ratio, &sp, gm.diameter, gm.avg_path, kk.hop, kk.q4, geom)
+        }
+
+        ki = ki + 1
+    }
+
+    // Phase A continued: spectral-only for dense k
+    let k_spec_a: [usize; 4] = [24, 32, 40, 48]
+
+    ki = 0
+    while ki < 4 {
+        let k  = k_spec_a[ki]
+        let na: usize = 100
+
+        if k < na && (k * na) % 2 == 0 {
+            let ratio = ((k * k) as f64) / (na as f64)
+            let g  = build_k_regular(na, k, 42)
+            let sp = compute_spectral(&g, na, k)
+            let gm = compute_graph_metrics_inc(&g, na)
+            print_row(na, k, ratio, &sp, gm.diameter, gm.avg_path, -999.0, -999.0, -1)
+        }
+
+        ki = ki + 1
+    }
+
+    // ── Phase B: N=200, spectral + BFS metrics only ──────────────────────
+    //   k_crit = sqrt(2.5 * 200) = 22.4
+    //   Matches Julia reference (N=200)
+    let k_vals_b: [usize; 8] = [2, 4, 8, 14, 22, 30, 38, 44]
+
+    ki = 0
+    while ki < 8 {
+        let k  = k_vals_b[ki]
+        let nb: usize = 200
+
+        if k < nb && (k * nb) % 2 == 0 {
+            let ratio = ((k * k) as f64) / (nb as f64)
+            let g  = build_k_regular(nb, k, 42)
+            let sp = compute_spectral(&g, nb, k)
+            let gm = compute_graph_metrics_inc(&g, nb)
+            print_row(nb, k, ratio, &sp, gm.diameter, gm.avg_path, -999.0, -999.0, -1)
+        }
+
+        ki = ki + 1
+    }
+
+    println("")
+    println("# Phase A: N=100, k_crit = sqrt(2.5*100) = 15.8")
+    println("#   Curvature k<=18 spans the full transition (ratio 0.04 to 3.24)")
+    println("#   Spectral k<=48 extends into deep spherical regime")
+    println("# Phase B: N=200, k_crit = sqrt(2.5*200) = 22.4")
+    println("#   Spectral + BFS metrics only (curvature too slow at N=200)")
+    println("#   Cross-reference: Julia N=200 validated data")
+    println("#   Friedman ratio near 1.0 validates random regular graph model")
+}

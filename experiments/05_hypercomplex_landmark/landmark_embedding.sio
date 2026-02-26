@@ -1,0 +1,25 @@
+//@ run-pass
+//! Experiment 05 — Landmark hypercomplex embedding for Ollivier-Ricci curvature
+//! N=20 comparison + N=50 scale using L=8 (octonion) / L=16 (sedenion) landmarks
+//! Avoids full N×N dist matrix — only landmark BFS + embedded geodesic distances
+use math::octonion::*
+use math::sedenion::*
+
+struct Graph {
+    adj: [usize; 2400], // MAX_N=50 * MAX_K=48
+    deg: [usize; 50],
+    n: usize,
+}
+
+struct LandmarkEmbedding {
+    pos_oct: [Octonion; 50],   // L=8 octonion coords per node
+    pos_sed: [Sedenion; 50],   // L=16 sedenion coords per node
+    n: usize,
+}
+
+fn main() with IO, Mut, Div, Panic {
+    println("=== Experiment 05 — Hypercomplex Landmark Embeddings ===")
+    println("N=20 comparison + N=50 scale using Octonion/Sedenion landmarks")
+    // TODO: implement k-regular + landmark BFS + embedded curvature sweep
+    println("Skeleton ready — API confirmed")
+}

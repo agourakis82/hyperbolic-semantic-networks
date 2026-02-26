@@ -1,0 +1,5 @@
+fn main() with IO {
+    let x: i64 = 42
+    print(x)
+    println("")
+}
