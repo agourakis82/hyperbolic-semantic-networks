@@ -32,7 +32,7 @@ namespace Bounds
 
 section CurvatureBounds
 
-variable {V : Type} [Fintype V] [DecidableEq V]
+variable {V : Type} [Fintype V] [DecidableEq V] [Nonempty V]
 
 /-- Curvature is always in [-1, 1]. -/
 theorem curvature_bounds (G : WeightedGraph V) (u v : V) (α : Curvature.Idleness) :
@@ -57,7 +57,7 @@ end CurvatureBounds
 
 section ClusteringBounds
 
-variable {V : Type} [Fintype V] [DecidableEq V] [LinearOrder V]
+variable {V : Type} [Fintype V] [DecidableEq V] [Nonempty V] [LinearOrder V]
 
 /-- Local clustering is in [0, 1]. -/
 theorem local_clustering_bounds (G : WeightedGraph V) [DecidableRel G.graph.Adj] (v : V) :
@@ -182,7 +182,7 @@ end DegreeBounds
 /-! ## Summary Theorem -/
 
 /-- All key metrics are properly bounded. -/
-theorem all_metrics_properly_bounded {V : Type} [Fintype V] [DecidableEq V] [LinearOrder V]
+theorem all_metrics_properly_bounded {V : Type} [Fintype V] [DecidableEq V] [Nonempty V] [LinearOrder V]
     (G : WeightedGraph V) [DecidableRel G.graph.Adj] (α : Curvature.Idleness) (v : V) :
     Curvature.ollivierRicci G v v α ∈ Set.Icc (-1) 1 ∧
     Clustering.localClustering G v ∈ Set.Icc 0 1 ∧
