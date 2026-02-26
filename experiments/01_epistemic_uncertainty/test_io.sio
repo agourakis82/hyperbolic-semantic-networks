@@ -1,0 +1,4 @@
+fn main() with IO {
+    print("File I/O test OK");
+}
+

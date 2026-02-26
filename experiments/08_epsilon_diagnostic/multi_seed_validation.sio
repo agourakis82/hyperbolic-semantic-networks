@@ -1,0 +1,419 @@
+// Multi-Seed Validation: Ollivier-Ricci Curvature at N=100
+//
+// Tests reproducibility across 3 independent random graph realizations.
+// Uses corrected epsilon=0.1, max_iter=300 (from epsilon diagnostic).
+//
+// Seeds: [42, 137, 314]
+// k-values: [3, 16, 30]
+//   k=3  (ratio=0.09): Deep hyperbolic regime
+//   k=16 (ratio=2.56): Near critical point (k_crit ≈ 15.81)
+//   k=30 (ratio=9.0):  Spherical regime
+//
+// Success criterion: ensemble std < 0.03
+//
+// Output CSV:
+//   type,N,k,seed,ratio,kappa_mean,kappa_std,std_err,n_edges
+//   type: I=individual, E=ensemble summary
+
+// ============================================================================
+// LCG Random Number Generator
+// ============================================================================
+
+fn lcg_step(state: u64) -> u64 {
+    let a: u64 = 6364136223846793005
+    let c: u64 = 1442695040888963407
+    state * a + c
+}
+
+fn lcg_umod(state: u64, m: usize) -> usize with Div, Panic {
+    if m == 0 { return 0 }
+    ((state as usize) & 4294967295) % m
+}
+
+// ============================================================================
+// Graph (N≤100, each node has ≤40 neighbors)
+// ============================================================================
+
+struct Graph {
+    adj: [usize; 4000],
+    deg: [usize; 100],
+    n:   usize,
+}
+
+fn build_k_regular(n: usize, k: usize, seed: u64) -> Graph with Mut, Div, Panic {
+    var adj:   [usize; 4000] = [0; 4000]
+    var deg:   [usize; 100]  = [0; 100]
+    var stubs: [usize; 4000] = [0; 4000]
+
+    var si: usize = 0
+    var i:  usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < k {
+            stubs[si] = i
+            si = si + 1
+            j  = j + 1
+        }
+        i = i + 1
+    }
+    let stub_count = si
+
+    var rng: u64 = if seed == 0 { 12345 } else { seed }
+    var s: usize = stub_count
+    while s > 1 {
+        s   = s - 1
+        rng = lcg_step(rng)
+        let t   = lcg_umod(rng, s + 1)
+        let tmp = stubs[s]
+        stubs[s] = stubs[t]
+        stubs[t] = tmp
+    }
+
+    i = 0
+    while i + 1 < stub_count {
+        let u = stubs[i]
+        let v = stubs[i + 1]
+        if u != v {
+            let du = deg[u]
+            let dv = deg[v]
+            var ok: bool  = true
+            var ci: usize = 0
+            while ci < du {
+                if adj[u * 40 + ci] == v { ok = false }
+                ci = ci + 1
+            }
+            if ok && du < 40 && dv < 40 {
+                adj[u * 40 + du] = v
+                deg[u] = du + 1
+                adj[v * 40 + dv] = u
+                deg[v] = dv + 1
+            }
+        }
+        i = i + 2
+    }
+
+    Graph { adj: adj, deg: deg, n: n }
+}
+
+// ============================================================================
+// BFS all-pairs distance (N≤100)
+// ============================================================================
+
+struct Dists {
+    d: [i64; 10000],
+    n: usize,
+}
+
+fn bfs_all_pairs(g: &Graph) -> Dists with Mut, Div, Panic {
+    var d: [i64; 10000] = [0; 10000]
+    let n = g.n
+
+    var src: usize = 0
+    while src < n {
+        var row:   [i64;   100] = [-1; 100]
+        var queue: [usize; 100] = [0; 100]
+        row[src] = 0
+        var qh: usize = 0
+        var qt: usize = 0
+        queue[qt] = src
+        qt = qt + 1
+
+        while qh < qt {
+            let u  = queue[qh]
+            qh = qh + 1
+            let du = g.deg[u]
+            var i: usize = 0
+            while i < du {
+                let v = g.adj[u * 40 + i]
+                if row[v] == -1 {
+                    row[v] = row[u] + 1
+                    queue[qt] = v
+                    qt = qt + 1
+                }
+                i = i + 1
+            }
+        }
+
+        var j: usize = 0
+        while j < n {
+            d[src * 100 + j] = row[j]
+            j = j + 1
+        }
+        src = src + 1
+    }
+
+    Dists { d: d, n: n }
+}
+
+// ============================================================================
+// Lazy random walk measure (max 41 support points)
+// ============================================================================
+
+struct Measure {
+    nodes: [usize; 41],
+    probs: [f64;   41],
+    len:   usize,
+}
+
+fn lazy_measure(g: &Graph, node: usize, alpha: f64) -> Measure with Mut, Div, Panic {
+    var nodes: [usize; 41] = [0;   41]
+    var probs: [f64;   41] = [0.0; 41]
+    var len:   usize       = 0
+
+    let deg = g.deg[node]
+    if deg == 0 {
+        nodes[0] = node
+        probs[0] = 1.0
+        return Measure { nodes: nodes, probs: probs, len: 1 }
+    }
+
+    let w = (1.0 - alpha) / (deg as f64)
+
+    if alpha > 0.0 {
+        nodes[0] = node
+        probs[0] = alpha
+        len = 1
+    }
+
+    var i: usize = 0
+    while i < deg {
+        nodes[len] = g.adj[node * 40 + i]
+        probs[len] = w
+        len = len + 1
+        i   = i + 1
+    }
+
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+// ============================================================================
+// Sinkhorn-Knopp Wasserstein-1 (stride 41)
+// epsilon=0.1, max_iter=300, floor guard 1e-300
+// ============================================================================
+
+fn wasserstein1(
+    mu:       &Measure,
+    nu:       &Measure,
+    dists:    &Dists,
+    epsilon:  f64,
+    max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let n = mu.len
+    let m = nu.len
+    if n == 0 || m == 0 { return 0.0 }
+
+    var cost: [f64; 1681] = [0.0; 1681]
+    var kmat: [f64; 1681] = [0.0; 1681]
+    var u_s:  [f64;   41] = [1.0;   41]
+    var v_s:  [f64;   41] = [1.0;   41]
+
+    var i: usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < m {
+            let ui = mu.nodes[i]
+            let vj = nu.nodes[j]
+            let dv = dists.d[ui * dists.n + vj]
+            let c  = if dv >= 0 { dv as f64 } else { 100.0 }
+            cost[i * 41 + j] = c
+            kmat[i * 41 + j] = (-c / epsilon).exp()
+            j = j + 1
+        }
+        i = i + 1
+    }
+
+    var iter: usize = 0
+    while iter < max_iter {
+        i = 0
+        while i < n {
+            var s: f64   = 0.0
+            var j: usize = 0
+            while j < m { s = s + kmat[i * 41 + j] * v_s[j]; j = j + 1 }
+            if s > 1e-300 { u_s[i] = mu.probs[i] / s }
+            i = i + 1
+        }
+        var j: usize = 0
+        while j < m {
+            var s: f64   = 0.0
+            i = 0
+            while i < n { s = s + kmat[i * 41 + j] * u_s[i]; i = i + 1 }
+            if s > 1e-300 { v_s[j] = nu.probs[j] / s }
+            j = j + 1
+        }
+        iter = iter + 1
+    }
+
+    var w1: f64   = 0.0
+    i = 0
+    while i < n {
+        var j: usize = 0
+        while j < m {
+            w1 = w1 + u_s[i] * kmat[i * 41 + j] * v_s[j] * cost[i * 41 + j]
+            j  = j + 1
+        }
+        i = i + 1
+    }
+
+    w1
+}
+
+// ============================================================================
+// Ollivier-Ricci curvature
+// ============================================================================
+
+fn ollivier_ricci(
+    g:        &Graph,
+    dists:    &Dists,
+    u:        usize,
+    v:        usize,
+    alpha:    f64,
+    epsilon:  f64,
+    max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let d_uv = dists.d[u * dists.n + v]
+    if d_uv <= 0 { return 0.0 }
+    let mu_u = lazy_measure(g, u, alpha)
+    let mu_v = lazy_measure(g, v, alpha)
+    1.0 - wasserstein1(&mu_u, &mu_v, dists, epsilon, max_iter) / (d_uv as f64)
+}
+
+// ============================================================================
+// Curvature statistics
+// ============================================================================
+
+struct CurvResult {
+    kappa_mean: f64,
+    kappa_var:  f64,
+    std_err:    f64,
+    n_edges:    usize,
+}
+
+fn compute_curvature(
+    g:        &Graph,
+    alpha:    f64,
+    epsilon:  f64,
+    max_iter: usize
+) -> CurvResult with Mut, Div, Panic {
+    let dists = bfs_all_pairs(g)
+
+    var kappas: [f64; 2000] = [0.0; 2000]
+    var klen:   usize       = 0
+
+    var u: usize = 0
+    while u < g.n {
+        let du = g.deg[u]
+        var i: usize = 0
+        while i < du {
+            let v = g.adj[u * 40 + i]
+            if u < v {
+                let kappa = ollivier_ricci(g, &dists, u, v, alpha, epsilon, max_iter)
+                kappas[klen] = kappa
+                klen = klen + 1
+            }
+            i = i + 1
+        }
+        u = u + 1
+    }
+
+    if klen == 0 {
+        return CurvResult { kappa_mean: 0.0, kappa_var: 0.0, std_err: 0.0, n_edges: 0 }
+    }
+
+    var sum: f64   = 0.0
+    var i:   usize = 0
+    while i < klen { sum = sum + kappas[i]; i = i + 1 }
+    let mean = sum / (klen as f64)
+
+    var ssq: f64   = 0.0
+    i = 0
+    while i < klen { let d = kappas[i] - mean; ssq = ssq + d * d; i = i + 1 }
+    let kvar = if klen > 1 { ssq / ((klen - 1) as f64) } else { 0.0 }
+    let kstd = kvar.sqrt()
+    let se   = kstd / (klen as f64).sqrt()
+
+    CurvResult { kappa_mean: mean, kappa_var: kvar, std_err: se, n_edges: klen }
+}
+
+// ============================================================================
+// Main: Multi-seed validation
+//
+// For each k in {3, 16, 30}, generate 3 independent k-regular graphs
+// with different seeds and compute curvature. Report individual and
+// ensemble statistics.
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    let n:        usize = 100
+    let alpha:    f64   = 0.5
+    let epsilon:  f64   = 0.1
+    let max_iter: usize = 300
+
+    println("# Multi-Seed Validation — Sounio N=100 (FIXED epsilon)")
+    println("# N=100  alpha=0.5  epsilon=0.1  sinkhorn_iter=300")
+    println("# Seeds: 42, 137, 314")
+    println("# k-values: 3 (hyperbolic), 16 (transition), 30 (spherical)")
+    println("# Success criterion: ensemble_std < 0.03")
+    println("type,N,k,seed,ratio,kappa_mean,kappa_std,std_err,n_edges")
+
+    let seeds: [u64; 3] = [42, 137, 314]
+    let n_seeds: usize  = 3
+
+    let k_vals: [usize; 3] = [3, 16, 30]
+
+    var ki: usize = 0
+    while ki < 3 {
+        let k = k_vals[ki]
+        let ratio = ((k * k) as f64) / (n as f64)
+
+        // Accumulate ensemble statistics
+        var sum_kappa:    f64   = 0.0
+        var sum_kappa_sq: f64   = 0.0
+
+        var si: usize = 0
+        while si < n_seeds {
+            let seed = seeds[si]
+            let g    = build_k_regular(n, k, seed)
+            let ec   = compute_curvature(&g, alpha, epsilon, max_iter)
+            let kstd = ec.kappa_var.sqrt()
+
+            // Print individual row
+            print("I,")
+            print(n);              print(",")
+            print(k);              print(",")
+            print(seed);           print(",")
+            print(ratio);          print(",")
+            print(ec.kappa_mean);  print(",")
+            print(kstd);           print(",")
+            print(ec.std_err);     print(",")
+            print(ec.n_edges)
+            println("")
+
+            // Accumulate
+            sum_kappa    = sum_kappa    + ec.kappa_mean
+            sum_kappa_sq = sum_kappa_sq + ec.kappa_mean * ec.kappa_mean
+
+            si = si + 1
+        }
+
+        // Ensemble summary
+        let ens_mean = sum_kappa / (n_seeds as f64)
+        let ens_var  = if n_seeds > 1 {
+            (sum_kappa_sq - (n_seeds as f64) * ens_mean * ens_mean) / ((n_seeds - 1) as f64)
+        } else { 0.0 }
+        let ens_std  = if ens_var > 0.0 { ens_var.sqrt() } else { 0.0 }
+        let ens_se   = ens_std / (n_seeds as f64).sqrt()
+
+        print("E,")
+        print(n);         print(",")
+        print(k);         print(",")
+        print(n_seeds);   print(",")
+        print(ratio);     print(",")
+        print(ens_mean);  print(",")
+        print(ens_std);   print(",")
+        print(ens_se);    print(",")
+        print(0)
+        println("")
+
+        ki = ki + 1
+    }
+}

@@ -1,0 +1,297 @@
+{
+  "n_threads": 24,
+  "method": "exact_LP",
+  "N_fixed": 1000,
+  "n_seeds": 3,
+  "alpha": 0.5,
+  "seeds": [
+    42,
+    137,
+    271
+  ],
+  "experiment": "phase_transition_exact_n1000",
+  "solver": "HiGHS",
+  "results": [
+    {
+      "lly_kappa_std_edges": 0.057914760363545224,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.0268427735007318,
+      "kappa_min": -0.17432301740812384,
+      "ratio": 2.304,
+      "k_actual": 46.792,
+      "kappa_mean": -0.05660414530956811,
+      "E": 23396,
+      "lly_kappa_std_ensemble": 0.0001258355157777688,
+      "kappa_max": 0.04255319148936243,
+      "N": 1000,
+      "kappa_median": -0.05615942028985377,
+      "per_seed_kappa_means": [
+        -0.05668775479738348,
+        -0.05629996506716095,
+        -0.05682471606415991
+      ],
+      "geometry": "HYPERBOLIC",
+      "k_target": 48,
+      "per_seed_lly_means": [
+        -0.8703760671066789,
+        -0.8705962261684391,
+        -0.8705917459829018
+      ],
+      "kappa_std_ensemble": 0.0002721834161965262,
+      "lly_kappa_mean": -0.87052134641934
+    },
+    {
+      "lly_kappa_std_edges": 0.05811743742637894,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.025497422391610666,
+      "kappa_min": -0.1615646258503387,
+      "ratio": 2.5,
+      "k_actual": 48.774,
+      "kappa_mean": -0.04231542705621474,
+      "E": 24387,
+      "lly_kappa_std_ensemble": 0.000681814459958054,
+      "kappa_max": 0.06382978723404342,
+      "N": 1000,
+      "kappa_median": -0.04081632653061251,
+      "per_seed_kappa_means": [
+        -0.04178950966129785,
+        -0.042471316377504245,
+        -0.04268545512984212
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 50,
+      "per_seed_lly_means": [
+        -0.8674001295084084,
+        -0.8686835727980557,
+        -0.8684408409590142
+      ],
+      "kappa_std_ensemble": 0.0004678735737571947,
+      "lly_kappa_mean": -0.8681748477551595
+    },
+    {
+      "lly_kappa_std_edges": 0.05827234384746823,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.024101218992788772,
+      "kappa_min": -0.13657770800627977,
+      "ratio": 2.704,
+      "k_actual": 50.718,
+      "kappa_mean": -0.029945782232710192,
+      "E": 25359,
+      "lly_kappa_std_ensemble": 0.00040394379840201256,
+      "kappa_max": 0.0690045248868778,
+      "N": 1000,
+      "kappa_median": -0.02941176470588136,
+      "per_seed_kappa_means": [
+        -0.029965328693625084,
+        -0.030019319566033337,
+        -0.029852698438472162
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 52,
+      "per_seed_lly_means": [
+        -0.8655804476766928,
+        -0.8663205664616912,
+        -0.8662310064718148
+      ],
+      "kappa_std_ensemble": 8.501292924115937e-5,
+      "lly_kappa_mean": -0.8660440068700662
+    },
+    {
+      "lly_kappa_std_edges": 0.05770878050404208,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.022829092649226862,
+      "kappa_min": -0.12578492935635754,
+      "ratio": 2.916,
+      "k_actual": 52.418,
+      "kappa_mean": -0.01895933520689877,
+      "E": 26209,
+      "lly_kappa_std_ensemble": 0.0004878229275156258,
+      "kappa_max": 0.05769230769230793,
+      "N": 1000,
+      "kappa_median": -0.018867924528301883,
+      "per_seed_kappa_means": [
+        -0.018993207261738494,
+        -0.018353875509461957,
+        -0.01953092284949585
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 54,
+      "per_seed_lly_means": [
+        -0.8636305153285915,
+        -0.8638119642464424,
+        -0.8645514330442275
+      ],
+      "kappa_std_ensemble": 0.0005892542721478694,
+      "lly_kappa_mean": -0.8639979708730872
+    },
+    {
+      "lly_kappa_std_edges": 0.05763755754941083,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.02115680243701804,
+      "kappa_min": -0.10250000000000004,
+      "ratio": 3.136,
+      "k_actual": 54.384,
+      "kappa_mean": -0.007884664925512805,
+      "E": 27192,
+      "lly_kappa_std_ensemble": 0.00014279648759852372,
+      "kappa_max": 0.0807127882599582,
+      "N": 1000,
+      "kappa_median": -0.008279220779220164,
+      "per_seed_kappa_means": [
+        -0.007479701757938529,
+        -0.0079610301937586,
+        -0.008213262824841286
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 56,
+      "per_seed_lly_means": [
+        -0.8622410212197877,
+        -0.8619574844765465,
+        -0.8621288788002286
+      ],
+      "kappa_std_ensemble": 0.00037269518425191265,
+      "lly_kappa_mean": -0.862109128165521
+    },
+    {
+      "lly_kappa_std_edges": 0.05758219240821077,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.019649986116641417,
+      "kappa_min": -0.08220443349753714,
+      "ratio": 3.364,
+      "k_actual": 56.338,
+      "kappa_mean": 0.0018149180519991253,
+      "E": 28169,
+      "lly_kappa_std_ensemble": 0.0006189234431207875,
+      "kappa_max": 0.07389162561576335,
+      "N": 1000,
+      "kappa_median": 0.0010971786833856578,
+      "per_seed_kappa_means": [
+        0.001909280562537493,
+        0.0016491042414775827,
+        0.0018863693519823007
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 58,
+      "per_seed_lly_means": [
+        -0.8596055492604219,
+        -0.8596475626082029,
+        -0.8585551667219858
+      ],
+      "kappa_std_ensemble": 0.00014405518287111937,
+      "lly_kappa_mean": -0.8592694261968702
+    },
+    {
+      "lly_kappa_std_edges": 0.05771732455548143,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.018326769644450087,
+      "kappa_min": -0.07566585956416372,
+      "ratio": 3.6,
+      "k_actual": 58.214,
+      "kappa_mean": 0.010053197290187476,
+      "E": 29107,
+      "lly_kappa_std_ensemble": 0.00040559691382899645,
+      "kappa_max": 0.08620689655172487,
+      "N": 1000,
+      "kappa_median": 0.009069283377936888,
+      "per_seed_kappa_means": [
+        0.010322123207220245,
+        0.009856532003114234,
+        0.009980936660227948
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 60,
+      "per_seed_lly_means": [
+        -0.8561494990253636,
+        -0.8569467401977244,
+        -0.8566778557065308
+      ],
+      "kappa_std_ensemble": 0.0002410601404563438,
+      "lly_kappa_mean": -0.8565913649765396
+    },
+    {
+      "lly_kappa_std_edges": 0.05752850394997589,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.017373375416051134,
+      "kappa_min": -0.05765969474279209,
+      "ratio": 3.844,
+      "k_actual": 60.132,
+      "kappa_mean": 0.017463459113639983,
+      "E": 30066,
+      "lly_kappa_std_ensemble": 0.0004787818163327074,
+      "kappa_max": 0.09703860391327368,
+      "N": 1000,
+      "kappa_median": 0.01680327868852438,
+      "per_seed_kappa_means": [
+        0.0176149846568487,
+        0.017284420367436402,
+        0.017490972316634847
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 62,
+      "per_seed_lly_means": [
+        -0.8545935116880888,
+        -0.8545300062330278,
+        -0.8537343102456305
+      ],
+      "kappa_std_ensemble": 0.0001669907770295768,
+      "lly_kappa_mean": -0.854285942722249
+    },
+    {
+      "lly_kappa_std_edges": 0.05806584305107166,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.01667565816543469,
+      "kappa_min": -0.042498719918074856,
+      "ratio": 4.096,
+      "k_actual": 61.93,
+      "kappa_mean": 0.023302543903054865,
+      "E": 30965,
+      "lly_kappa_std_ensemble": 0.00046122137369731885,
+      "kappa_max": 0.09575012800819271,
+      "N": 1000,
+      "kappa_median": 0.023633879781420286,
+      "per_seed_kappa_means": [
+        0.023332427985717465,
+        0.023261000694013483,
+        0.023314203029433652
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 64,
+      "per_seed_lly_means": [
+        -0.8509594796046708,
+        -0.851576833946997,
+        -0.8506745822828897
+      ],
+      "kappa_std_ensemble": 3.711355441046882e-5,
+      "lly_kappa_mean": -0.8510702986115192
+    },
+    {
+      "lly_kappa_std_edges": 0.057716474751278946,
+      "n_seeds": 3,
+      "kappa_std_edges": 0.015932360366192277,
+      "kappa_min": -0.03734491315136479,
+      "ratio": 4.356,
+      "k_actual": 63.828,
+      "kappa_mean": 0.028375224398543217,
+      "E": 31914,
+      "lly_kappa_std_ensemble": 0.001113467882357245,
+      "kappa_max": 0.1015625,
+      "N": 1000,
+      "kappa_median": 0.028880127727463678,
+      "per_seed_kappa_means": [
+        0.028594241632480415,
+        0.028251785303500615,
+        0.028279646259648617
+      ],
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "k_target": 66,
+      "per_seed_lly_means": [
+        -0.8471995173677287,
+        -0.8493954624152928,
+        -0.8486181161321434
+      ],
+      "kappa_std_ensemble": 0.00019018535640394758,
+      "lly_kappa_mean": -0.848404365305055
+    }
+  ],
+  "description": "N=1000 sweep near predicted transition (3 seeds)"
+}

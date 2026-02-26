@@ -1,0 +1,337 @@
+//! math::riemannian_manifold — Riemannian Manifold State-Space Models
+//!
+//! Models brain connectivity as evolving on a Riemannian manifold with
+//! epistemic uncertainty propagation through tangent space geodesics.
+
+use fmri::connectivity_epistemic::*;
+use math::clifford::*;
+use math::homology_curvature::*;
+use data::ops::*;
+
+// ============================================================================
+// Type Definitions
+// ============================================================================
+
+// Riemannian metric tensor (symmetric positive-definite)
+// Represented as Cholesky factor for numerical stability
+struct MetricTensor {
+    // Lower triangular Cholesky factor L where G = L * L^T
+    // For d dimensions, store d*(d+1)/2 values
+    cholesky: Vec<f64>,
+    dimension: usize,
+}
+
+// Point on Riemannian manifold
+struct ManifoldPoint {
+    // Coordinates in embedding space
+    coordinates: Vec<f64>,
+    // Tangent space covariance (uncertainty)
+    covariance: Vec<f64>,
+    // Epistemic confidence
+    confidence: f64,
+}
+
+// Tangent vector at a point on manifold
+struct TangentVector {
+    // Vector components
+    components: Vec<f64>,
+    // Base point
+    base_point: ManifoldPoint,
+}
+
+// Brain manifold structure
+struct BrainManifold {
+    // Number of regions (dimension)
+    n_regions: usize,
+    // Metric tensor
+    metric: MetricTensor,
+    // Embedding dimension
+    embedding_dim: usize,
+}
+
+// State-space model on manifold
+struct ManifoldSSM {
+    manifold: BrainManifold,
+    // Current state
+    current_state: ManifoldPoint,
+    // Transition matrix on tangent space
+    transition_matrix: Vec<Vec<f64>>,
+    // Process noise
+    process_noise: f64,
+}
+
+// Trajectory through manifold
+struct CorrespondenceTrajectory {
+    points: Vec<ManifoldPoint>,
+    geodesic_distances: Vec<f64>,
+    timestamps: Vec<usize>,
+}
+
+// ============================================================================
+// Metric Tensor Construction
+// ============================================================================
+
+// Create metric from connectivity matrix (inverse covariance / precision)
+fn metric_from_connectivity(connectivity: Vec<Vec<f64>>) -> MetricTensor {
+    let n = connectivity.len();
+    let dim = n * n;  // Flattened matrix as embedding
+    
+    // Simplified: use identity + regularization
+    var chol: Vec<f64> = [];
+    let mut i = 0;
+    while i < dim {
+        if i % (n + 1) == 0 {
+            chol.push(1.0);  // Diagonal
+        } else {
+            chol.push(0.0);  // Off-diagonal
+        }
+        i = i + 1;
+    }
+    
+    MetricTensor {
+        cholesky: chol,
+        dimension: dim,
+    }
+}
+
+// Create brain manifold from connectivity
+fn create_brain_manifold(connectivity: Vec<Vec<f64>>) -> BrainManifold {
+    let n_regions = connectivity.len();
+    let metric = metric_from_connectivity(connectivity);
+    
+    BrainManifold {
+        n_regions: n_regions,
+        metric: metric,
+        embedding_dim: n_regions * n_regions,
+    }
+}
+
+// ============================================================================
+// Exponential & Logarithmic Maps (Manifold <-> Tangent)
+// ============================================================================
+
+// Exponential map: tangent vector -> manifold point
+// v --> p = exp_p(v)
+fn exp_map(point: ManifoldPoint, tangent: TangentVector) -> ManifoldPoint {
+    let dim = point.coordinates.len();
+    var new_coords: Vec<f64> = [];
+    
+    // Riemannian exp: p + v (in coordinates)
+    // For strong curvature, use: exp_p(v) = p + v + 0.5*Γ(v,v) + ...
+    let mut i = 0;
+    while i < dim {
+        let new_coord = point.coordinates[i] + tangent.components[i];
+        new_coords.push(new_coord);
+        i = i + 1;
+    }
+    
+    // Propagate uncertainty
+    var new_cov: Vec<f64> = [];
+    let cov_dim = point.covariance.len();
+    let mut j = 0;
+    while j < cov_dim {
+        new_cov.push(point.covariance[j] * 1.1);  // Increase uncertainty
+        j = j + 1;
+    }
+    
+    // Reduce confidence after geodesic step
+    let new_conf = point.confidence * 0.99;
+    
+    ManifoldPoint {
+        coordinates: new_coords,
+        covariance: new_cov,
+        confidence: new_conf,
+    }
+}
+
+// Logarithmic map: manifold point -> tangent vector
+// p --> v = log_q(p)
+fn log_map(base: ManifoldPoint, point: ManifoldPoint) -> TangentVector {
+    let dim = base.coordinates.len();
+    var components: Vec<f64> = [];
+    
+    let mut i = 0;
+    while i < dim {
+        let comp = point.coordinates[i] - base.coordinates[i];
+        components.push(comp);
+        i = i + 1;
+    }
+    
+    TangentVector {
+        components: components,
+        base_point: base,
+    }
+}
+
+// ============================================================================
+// Geodesic Distance
+// ============================================================================
+
+// Compute geodesic distance between two points
+fn geodesic_distance(p1: ManifoldPoint, p2: ManifoldPoint) -> f64 {
+    let dim = p1.coordinates.len();
+    
+    // Simplified: Euclidean in embedding
+    // True geodesic requires solving ODE
+    var sum_sq = 0.0;
+    let mut i = 0;
+    while i < dim {
+        let d = p2.coordinates[i] - p1.coordinates[i];
+        sum_sq = sum_sq + d * d;
+        i = i + 1;
+    }
+    
+    sum_sq.sqrt()
+}
+
+// ============================================================================
+// State-Space Model
+// ============================================================================
+
+// Create manifold SSM from brain manifold and initial state
+fn create_manifold_ssm(manifold: BrainManifold, initial_coords: Vec<f64>) -> ManifoldSSM {
+    let n = manifold.embedding_dim;
+    
+    // Initialize covariance
+    var cov: Vec<f64> = [];
+    let mut i = 0;
+    while i < n {
+        cov.push(0.01);  // Small initial uncertainty
+        i = i + 1;
+    }
+    
+    let initial_state = ManifoldPoint {
+        coordinates: initial_coords,
+        covariance: cov,
+        confidence: 0.95,
+    };
+    
+    // Identity transition (simplified)
+    var trans: Vec<Vec<f64>> = [];
+    let mut i = 0;
+    while i < n {
+        var row: Vec<f64> = [];
+        let mut j = 0;
+        while j < n {
+            if i == j {
+                row.push(0.99);  // Near-identity
+            } else {
+                row.push(0.0);
+            }
+            j = j + 1;
+        }
+        trans.push(row);
+        i = i + 1;
+    }
+    
+    ManifoldSSM {
+        manifold: manifold,
+        current_state: initial_state,
+        transition_matrix: trans,
+        process_noise: 0.001,
+    }
+}
+
+// ============================================================================
+// Semantic-Brain Correspondence Tracking
+// ============================================================================
+
+fn track_correspondence(
+    ssm: ManifoldSSM,
+    semantic_input: Multivector,
+    n_steps: usize
+) -> CorrespondenceTrajectory {
+    var points: Vec<ManifoldPoint> = [];
+    var distances: Vec<f64> = [];
+    var timestamps: Vec<usize> = [];
+    
+    // Start from current state
+    var current = ssm.current_state;
+    points.push(current);
+    distances.push(0.0);
+    timestamps.push(0);
+    
+    // Extract semantic direction from multivector
+    let mut semantic_dir: Vec<f64> = [];
+    let dim = current.coordinates.len();
+    let mut i = 0;
+    while i < dim {
+        if i < 16 {
+            semantic_dir.push(semantic_input.coeffs[i] * 0.1);
+        } else {
+            semantic_dir.push(0.0);
+        }
+        i = i + 1;
+    }
+    
+    // Evolve state along semantic direction
+    let mut step = 1;
+    while step <= n_steps {
+        // Create tangent vector pointing toward semantic
+        let tangent = TangentVector {
+            components: semantic_dir,
+            base_point: current,
+        };
+        
+        // Move along geodesic
+        current = exp_map(current, tangent);
+        
+        // Record
+        let dist = geodesic_distance(ssm.current_state, current);
+        points.push(current);
+        distances.push(dist);
+        timestamps.push(step);
+        
+        step = step + 1;
+    }
+    
+    CorrespondenceTrajectory {
+        points: points,
+        geodesic_distances: distances,
+        timestamps: timestamps,
+    }
+}
+
+// ============================================================================
+// Epistemic Manifold Operations
+// ============================================================================
+
+fn epistemic_geodesic(
+    start: ManifoldPoint,
+    end: ManifoldPoint,
+    confidence: f64
+) -> (ManifoldPoint, f64) {
+    // Compute geodesic with uncertainty propagation
+    let dist = geodesic_distance(start, end);
+    
+    // Midpoint
+    var mid_coords: Vec<f64> = [];
+    let dim = start.coordinates.len();
+    let mut i = 0;
+    while i < dim {
+        let mid = (start.coordinates[i] + end.coordinates[i]) * 0.5;
+        mid_coords.push(mid);
+        i = i + 1;
+    }
+    
+    // Propagate uncertainty
+    var mid_cov: Vec<f64> = [];
+    let cov_dim = start.covariance.len();
+    let mut j = 0;
+    while j < cov_dim {
+        let combined_unc = (start.covariance[j] + end.covariance[j]) * 0.5;
+        mid_cov.push(combined_unc);
+        j = j + 1;
+    }
+    
+    // Combined confidence
+    let combined_conf = start.confidence * end.confidence * confidence;
+    
+    let midpoint = ManifoldPoint {
+        coordinates: mid_coords,
+        covariance: mid_cov,
+        confidence: combined_conf,
+    };
+    
+    (midpoint, dist)
+}

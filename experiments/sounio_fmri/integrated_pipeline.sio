@@ -1,0 +1,186 @@
+// Integrated Epistemic Pipeline
+// ==============================
+// Complete pipeline: fMRI → Scattering → Clifford → Homology → Manifold → Correspondence
+// With full epistemic uncertainty propagation
+
+module experiments.sounio_fmri.integrated_pipeline;
+
+import stdlib.math.scattering;
+import stdlib.math.clifford;
+import stdlib.math.homology_curvature;
+import stdlib.math.riemannian_manifold;
+import stdlib.math.curvature;
+import stdlib.graph.core;
+import stdlib.io.csv;
+
+with Panic, Div, Alloc, IO, Random, Confidence
+
+// Pipeline configuration
+type PipelineConfig {
+    scattering_scales: usize,
+    filtration_steps: usize,
+    geodesic_steps: usize,
+    n_trajectory_steps: usize,
+}
+
+impl Default for PipelineConfig {
+    fn default() -> PipelineConfig {
+        PipelineConfig {
+            scattering_scales: 4,
+            filtration_steps: 20,
+            geodesic_steps: 100,
+            n_trajectory_steps: 1000,
+        }
+    }
+}
+
+/// Main pipeline execution
+fn run_integrated_pipeline(
+    fmri_path: String,
+    semantic_path: String,
+    config: PipelineConfig
+) -> PipelineOutput 
+    with Panic, Div, Alloc, IO, Random, Confidence
+{
+    println!("Starting Integrated Epistemic Pipeline...");
+    
+    // Stage 1: Geometric Scattering
+    println!("[1/5] Geometric Scattering Transform...");
+    let scattering = stage_scattering(fmri_path, config.scattering_scales)?;
+    
+    // Stage 2: Clifford Algebra
+    println!("[2/5] Clifford Algebra Encoding...");
+    let clifford = stage_clifford(fmri_path, &scattering)?;
+    
+    // Stage 3: Homology-Curvature Fusion
+    println!("[3/5] Homology-Curvature Fusion...");
+    let fused = stage_homology_curvature(fmri_path, &clifford, config.filtration_steps)?;
+    
+    // Stage 4: Riemannian Manifold
+    println!("[4/5] Riemannian Manifold Dynamics...");
+    let manifold = stage_manifold(fmri_path, semantic_path, &fused, config)?;
+    
+    // Stage 5: Semantic-Brain Correspondence
+    println!("[5/5] Semantic-Brain Correspondence...");
+    let correspondence = stage_correspondence(&manifold, semantic_path)?;
+    
+    println!("Pipeline Complete!");
+    
+    PipelineOutput {
+        scattering,
+        clifford,
+        fused,
+        manifold,
+        correspondence,
+    }
+}
+
+/// Stage 1: Geometric Scattering Transform
+fn stage_scattering(fmri_path: String, n_scales: usize) -> Result<Vec<ScatteringResult>, Error> {
+    let graph = load_fmri_graph(fmri_path)?;
+    let signal = load_fmri_signal(fmri_path)?;
+    
+    let config = ScatteringConfig {
+        max_scale: n_scales,
+        nonlinearity: Nonlinearity::Abs,
+        averaging: true,
+    };
+    
+    Ok(geometric_scattering_transform(signal, graph, config))
+}
+
+/// Stage 2: Clifford Algebra Encoding
+fn stage_clifford(fmri_path: String, scattering: &Vec<ScatteringResult>) -> Result<Vec<Multivector>, Error> {
+    let time_series = load_fmri_4d(fmri_path)?;
+    let mut features = Vec::new();
+    
+    for (i, tp) in time_series.iter().enumerate() {
+        let mv = from_fmri_4d(tp.x, tp.y, tp.z, tp.signal);
+        let augmented = if i < scattering.len() {
+            augment_with_scattering(mv, &scattering[i])
+        } else {
+            mv
+        };
+        features.push(augmented);
+    }
+    
+    Ok(features)
+}
+
+/// Stage 3: Persistent Homology + Curvature Fusion
+fn stage_homology_curvature(
+    fmri_path: String,
+    clifford: &Vec<Multivector>,
+    n_filtration: usize
+) -> Result<Vec<FusedFeature>, Error> {
+    let graph = load_fmri_graph(fmri_path)?;
+    let curvature = compute_or_curvature(graph.clone())?;
+    Ok(homology_curvature_pipeline(graph, curvature))
+}
+
+/// Stage 4: Riemannian Manifold State-Space
+fn stage_manifold(
+    fmri_path: String,
+    semantic_path: String,
+    fused: &Vec<FusedFeature>,
+    config: PipelineConfig
+) -> Result<ManifoldTrajectory, Error> {
+    let brain_manifold = build_brain_manifold(fmri_path, fused)?;
+    let semantic_mv = load_semantic_multivector(semantic_path)?;
+    
+    let ssm = create_brain_ssm(brain_manifold, semantic_mv);
+    let initial = initialize_manifold_state(semantic_mv)?;
+    
+    Ok(track_semantic_brain_correspondence(ssm, initial, config.n_trajectory_steps))
+}
+
+/// Stage 5: Semantic-Brain Correspondence
+fn stage_correspondence(
+    trajectory: &ManifoldTrajectory,
+    semantic_path: String
+) -> Result<EpistemicResult, Error> {
+    let strengths = correspondence_strength(trajectory);
+    let mean = strengths.iter().sum::<f64>() / strengths.len() as f64;
+    let std = standard_deviation(strengths);
+    
+    Ok(EpistemicResult {
+        coefficients: vec![mean],
+        std_err: std / (strengths.len() as f64).sqrt(),
+        scale: 0,
+    })
+}
+
+// Output type
+type PipelineOutput {
+    scattering: Vec<ScatteringResult>,
+    clifford: Vec<Multivector>,
+    fused: Vec<FusedFeature>,
+    manifold: ManifoldTrajectory,
+    correspondence: EpistemicResult,
+}
+
+type ManifoldTrajectory = CorrespondenceTrajectory;
+
+// Placeholder functions (would be implemented in respective modules)
+fn load_fmri_graph(path: String) -> Result<Graph, Error> { unimplemented!() }
+fn load_fmri_signal(path: String) -> Result<Vec<f64>, Error> { unimplemented!() }
+fn load_fmri_4d(path: String) -> Result<Vec<QuaternionTimePoint>, Error> { unimplemented!() }
+fn augment_with_scattering(mv: Multivector, sc: &ScatteringResult) -> Multivector { mv }
+fn build_brain_manifold(path: String, fused: &Vec<FusedFeature>) -> Result<BrainManifold, Error> { unimplemented!() }
+fn load_semantic_multivector(path: String) -> Result<Multivector, Error> { unimplemented!() }
+fn initialize_manifold_state(mv: Multivector) -> Result<ManifoldState, Error> { unimplemented!() }
+
+fn main() -> ()
+    with Panic, Div, Alloc, IO, Random, Confidence
+{
+    let config = PipelineConfig::default();
+    let output = run_integrated_pipeline(
+        "data/fmri/hcp_subject.csv".to_string(),
+        "data/semantic/swow_english.csv".to_string(),
+        config
+    );
+    
+    println!("Correlation: {:.4} ± {:.4}",
+             output.correspondence.coefficients[0],
+             output.correspondence.std_err);
+}

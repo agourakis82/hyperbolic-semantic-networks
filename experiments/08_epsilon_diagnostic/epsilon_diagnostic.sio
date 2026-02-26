@@ -1,0 +1,378 @@
+// Epsilon Diagnostic: How Sinkhorn regularization affects curvature
+//
+// The Sounio experiments (01-07) used epsilon=0.5, max_iter=80.
+// The Julia reference uses epsilon=0.01, max_iter=1000.
+// This experiment sweeps epsilon to measure the effect.
+//
+// N=20, k in {3, 7, 10, 14, 18}
+// epsilon in {0.5, 0.1, 0.05, 0.01}
+// max_iter=200 (generous for all epsilon values)
+//
+// Output CSV:
+//   N,k,epsilon,max_iter,kappa_mean,kappa_std,n_edges
+
+// ============================================================================
+// LCG RNG
+// ============================================================================
+
+fn lcg_step(state: u64) -> u64 {
+    let a: u64 = 6364136223846793005
+    let c: u64 = 1442695040888963407
+    state * a + c
+}
+
+fn lcg_umod(state: u64, m: usize) -> usize with Div, Panic {
+    if m == 0 { return 0 }
+    ((state as usize) & 4294967295) % m
+}
+
+// ============================================================================
+// Graph (N=20, stride 18)
+// ============================================================================
+
+struct Graph {
+    adj: [usize; 360],
+    deg: [usize; 20],
+    n:   usize,
+}
+
+fn build_k_regular(n: usize, k: usize, seed: u64) -> Graph with Mut, Div, Panic {
+    var adj:   [usize; 360] = [0; 360]
+    var deg:   [usize; 20]  = [0; 20]
+    var stubs: [usize; 360] = [0; 360]
+
+    var si: usize = 0
+    var i:  usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < k {
+            stubs[si] = i
+            si = si + 1
+            j  = j + 1
+        }
+        i = i + 1
+    }
+    let stub_count = si
+
+    var rng: u64 = if seed == 0 { 12345 } else { seed }
+    var s: usize = stub_count
+    while s > 1 {
+        s   = s - 1
+        rng = lcg_step(rng)
+        let t   = lcg_umod(rng, s + 1)
+        let tmp = stubs[s]
+        stubs[s] = stubs[t]
+        stubs[t] = tmp
+    }
+
+    i = 0
+    while i + 1 < stub_count {
+        let u = stubs[i]
+        let v = stubs[i + 1]
+        if u != v {
+            let du = deg[u]
+            let dv = deg[v]
+            var ok: bool  = true
+            var ci: usize = 0
+            while ci < du {
+                if adj[u * 18 + ci] == v { ok = false }
+                ci = ci + 1
+            }
+            if ok && du < 18 && dv < 18 {
+                adj[u * 18 + du] = v
+                deg[u] = du + 1
+                adj[v * 18 + dv] = u
+                deg[v] = dv + 1
+            }
+        }
+        i = i + 2
+    }
+
+    Graph { adj: adj, deg: deg, n: n }
+}
+
+// ============================================================================
+// BFS all-pairs (N=20)
+// ============================================================================
+
+struct Dists {
+    d: [i64; 400],
+    n: usize,
+}
+
+fn bfs_all_pairs(g: &Graph) -> Dists with Mut, Div, Panic {
+    var d: [i64; 400] = [0; 400]
+    let n = g.n
+
+    var src: usize = 0
+    while src < n {
+        var row:   [i64;   20] = [-1; 20]
+        var queue: [usize; 20] = [0; 20]
+        row[src] = 0
+        var qh: usize = 0
+        var qt: usize = 0
+        queue[qt] = src
+        qt = qt + 1
+
+        while qh < qt {
+            let u  = queue[qh]
+            qh = qh + 1
+            let du = g.deg[u]
+            var i: usize = 0
+            while i < du {
+                let v = g.adj[u * 18 + i]
+                if row[v] == -1 {
+                    row[v] = row[u] + 1
+                    queue[qt] = v
+                    qt = qt + 1
+                }
+                i = i + 1
+            }
+        }
+
+        var j: usize = 0
+        while j < n {
+            d[src * 20 + j] = row[j]
+            j = j + 1
+        }
+        src = src + 1
+    }
+
+    Dists { d: d, n: n }
+}
+
+// ============================================================================
+// Lazy measure (stride 19 = 1 + max_k=18)
+// ============================================================================
+
+struct Measure {
+    nodes: [usize; 19],
+    probs: [f64;   19],
+    len:   usize,
+}
+
+fn lazy_measure(g: &Graph, node: usize, alpha: f64) -> Measure with Mut, Div, Panic {
+    var nodes: [usize; 19] = [0;   19]
+    var probs: [f64;   19] = [0.0; 19]
+    var len:   usize       = 0
+
+    let deg = g.deg[node]
+    if deg == 0 {
+        nodes[0] = node
+        probs[0] = 1.0
+        return Measure { nodes: nodes, probs: probs, len: 1 }
+    }
+
+    let w = (1.0 - alpha) / (deg as f64)
+
+    if alpha > 0.0 {
+        nodes[0] = node
+        probs[0] = alpha
+        len = 1
+    }
+
+    var i: usize = 0
+    while i < deg {
+        nodes[len] = g.adj[node * 18 + i]
+        probs[len] = w
+        len = len + 1
+        i   = i + 1
+    }
+
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+// ============================================================================
+// Sinkhorn W1 (stride 19)
+// ============================================================================
+
+fn wasserstein1(
+    mu:       &Measure,
+    nu:       &Measure,
+    dists:    &Dists,
+    epsilon:  f64,
+    max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let n = mu.len
+    let m = nu.len
+    if n == 0 || m == 0 { return 0.0 }
+
+    var cost: [f64; 361] = [0.0; 361]
+    var kmat: [f64; 361] = [0.0; 361]
+    var u_s:  [f64;  19] = [1.0;  19]
+    var v_s:  [f64;  19] = [1.0;  19]
+
+    var i: usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < m {
+            let ui = mu.nodes[i]
+            let vj = nu.nodes[j]
+            let dv = dists.d[ui * dists.n + vj]
+            let c  = if dv >= 0 { dv as f64 } else { 100.0 }
+            cost[i * 19 + j] = c
+            kmat[i * 19 + j] = (-c / epsilon).exp()
+            j = j + 1
+        }
+        i = i + 1
+    }
+
+    var iter: usize = 0
+    while iter < max_iter {
+        i = 0
+        while i < n {
+            var s: f64   = 0.0
+            var j: usize = 0
+            while j < m { s = s + kmat[i * 19 + j] * v_s[j]; j = j + 1 }
+            if s > 1e-300 { u_s[i] = mu.probs[i] / s }
+            i = i + 1
+        }
+        var j: usize = 0
+        while j < m {
+            var s: f64   = 0.0
+            i = 0
+            while i < n { s = s + kmat[i * 19 + j] * u_s[i]; i = i + 1 }
+            if s > 1e-300 { v_s[j] = nu.probs[j] / s }
+            j = j + 1
+        }
+        iter = iter + 1
+    }
+
+    var w1: f64   = 0.0
+    i = 0
+    while i < n {
+        var j: usize = 0
+        while j < m {
+            w1 = w1 + u_s[i] * kmat[i * 19 + j] * v_s[j] * cost[i * 19 + j]
+            j  = j + 1
+        }
+        i = i + 1
+    }
+
+    w1
+}
+
+// ============================================================================
+// Ollivier-Ricci curvature
+// ============================================================================
+
+fn ollivier_ricci(
+    g:        &Graph,
+    dists:    &Dists,
+    u:        usize,
+    v:        usize,
+    alpha:    f64,
+    epsilon:  f64,
+    max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let d_uv = dists.d[u * dists.n + v]
+    if d_uv <= 0 { return 0.0 }
+    let mu_u = lazy_measure(g, u, alpha)
+    let mu_v = lazy_measure(g, v, alpha)
+    1.0 - wasserstein1(&mu_u, &mu_v, dists, epsilon, max_iter) / (d_uv as f64)
+}
+
+// ============================================================================
+// Curvature statistics
+// ============================================================================
+
+struct EResult {
+    kappa_mean: f64,
+    kappa_var:  f64,
+    n_edges:    usize,
+}
+
+fn compute_curvature(
+    g:        &Graph,
+    dists:    &Dists,
+    alpha:    f64,
+    epsilon:  f64,
+    max_iter: usize
+) -> EResult with Mut, Div, Panic {
+    var kappas: [f64; 200] = [0.0; 200]
+    var klen:   usize      = 0
+
+    var u: usize = 0
+    while u < g.n {
+        let du = g.deg[u]
+        var i: usize = 0
+        while i < du {
+            let v = g.adj[u * 18 + i]
+            if u < v {
+                let kappa = ollivier_ricci(g, dists, u, v, alpha, epsilon, max_iter)
+                kappas[klen] = kappa
+                klen = klen + 1
+            }
+            i = i + 1
+        }
+        u = u + 1
+    }
+
+    if klen == 0 {
+        return EResult { kappa_mean: 0.0, kappa_var: 0.0, n_edges: 0 }
+    }
+
+    var sum: f64   = 0.0
+    var i:   usize = 0
+    while i < klen { sum = sum + kappas[i]; i = i + 1 }
+    let mean = sum / (klen as f64)
+
+    var ssq: f64   = 0.0
+    i = 0
+    while i < klen { let d = kappas[i] - mean; ssq = ssq + d * d; i = i + 1 }
+    let kvar = if klen > 1 { ssq / ((klen - 1) as f64) } else { 0.0 }
+
+    EResult { kappa_mean: mean, kappa_var: kvar, n_edges: klen }
+}
+
+// ============================================================================
+// Main: sweep (k, epsilon) pairs
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    let n:     usize = 20
+    let alpha: f64   = 0.5
+    let mi:    usize = 200
+
+    println("# Epsilon Diagnostic — Sounio 1.0.0-beta")
+    println("# N=20  alpha=0.5  max_iter=200")
+    println("# Floor guard lowered to 1e-300 for small epsilon")
+    println("N,k,epsilon,max_iter,kappa_mean,kappa_std,n_edges")
+
+    let k_vals: [usize; 5] = [3, 7, 10, 14, 18]
+
+    // epsilon values encoded as integers to avoid nested array issues
+    // 50 = 0.5,  10 = 0.1,  5 = 0.05,  1 = 0.01
+    let eps_x100: [usize; 4] = [50, 10, 5, 1]
+
+    var ki: usize = 0
+    while ki < 5 {
+        let k = k_vals[ki]
+
+        if k < n && (k * n) % 2 == 0 {
+            let g     = build_k_regular(n, k, 42)
+            let dists = bfs_all_pairs(&g)
+
+            var ei: usize = 0
+            while ei < 4 {
+                let eps = (eps_x100[ei] as f64) / 100.0
+
+                let ec = compute_curvature(&g, &dists, alpha, eps, mi)
+                let kstd = ec.kappa_var.sqrt()
+
+                print(n);              print(",")
+                print(k);              print(",")
+                print(eps);            print(",")
+                print(mi);             print(",")
+                print(ec.kappa_mean);  print(",")
+                print(kstd);           print(",")
+                print(ec.n_edges)
+                println("")
+
+                ei = ei + 1
+            }
+        }
+
+        ki = ki + 1
+    }
+}

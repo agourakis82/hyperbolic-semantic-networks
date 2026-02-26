@@ -1,0 +1,28 @@
+{
+  "n_edges": 648,
+  "alpha": 0.5,
+  "mean_kappa": 0.15034,
+  "geometry": "spherical",
+  "mean_degree": 13.0909,
+  "octonionic": {
+    "predicted_hyperbolic": true,
+    "module_signals": [
+      0.486,
+      0.5449,
+      0.521,
+      0.5529,
+      0.5055,
+      0.553,
+      0.5672,
+      0.6406
+    ],
+    "norm_snd_sq": 1.293582,
+    "norm_fst_sq": 1.11024,
+    "actual_hyperbolic": false,
+    "axiom_match": false,
+    "mapping_note": "Synthetic: modules 1-4→fst, 5-8→snd (arbitrary). Real fMRI: global,DMN,SMN,VN→fst; DAN,VAN,FPN,Limbic→snd."
+  },
+  "input_file": "/home/demetrios/work/hyperbolic-semantic-networks/code/fmri/../../results/fmri/synthetic_demo/synthetic_edges.csv",
+  "n_nodes": 99,
+  "kappa_std": 0.252176
+}

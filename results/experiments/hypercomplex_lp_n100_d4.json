@@ -1,0 +1,99 @@
+{
+  "embedding": "Q4 (S³)",
+  "N": 100,
+  "alpha": 0.5,
+  "seeds": [
+    42,
+    137,
+    271,
+    314,
+    577
+  ],
+  "results": [
+    {
+      "n_seeds": 0,
+      "k": 2,
+      "eta": 0.04,
+      "kappa_mean": null,
+      "kappa_std": null
+    },
+    {
+      "n_seeds": 5,
+      "k": 4,
+      "eta": 0.16,
+      "kappa_mean": 0.111468,
+      "kappa_std": 0.011212
+    },
+    {
+      "n_seeds": 5,
+      "k": 6,
+      "eta": 0.36,
+      "kappa_mean": 0.17183,
+      "kappa_std": 0.003132
+    },
+    {
+      "n_seeds": 5,
+      "k": 8,
+      "eta": 0.64,
+      "kappa_mean": 0.21123,
+      "kappa_std": 0.007859
+    },
+    {
+      "n_seeds": 5,
+      "k": 10,
+      "eta": 1.0,
+      "kappa_mean": 0.239925,
+      "kappa_std": 0.003743
+    },
+    {
+      "n_seeds": 5,
+      "k": 12,
+      "eta": 1.44,
+      "kappa_mean": 0.264038,
+      "kappa_std": 0.003951
+    },
+    {
+      "n_seeds": 5,
+      "k": 14,
+      "eta": 1.96,
+      "kappa_mean": 0.298995,
+      "kappa_std": 0.005882
+    },
+    {
+      "n_seeds": 5,
+      "k": 16,
+      "eta": 2.56,
+      "kappa_mean": 0.330202,
+      "kappa_std": 0.004304
+    },
+    {
+      "n_seeds": 5,
+      "k": 18,
+      "eta": 3.24,
+      "kappa_mean": 0.336662,
+      "kappa_std": 0.005912
+    },
+    {
+      "n_seeds": 5,
+      "k": 20,
+      "eta": 4.0,
+      "kappa_mean": 0.348388,
+      "kappa_std": 0.005517
+    },
+    {
+      "n_seeds": 5,
+      "k": 25,
+      "eta": 6.25,
+      "kappa_mean": 0.367845,
+      "kappa_std": 0.005509
+    },
+    {
+      "n_seeds": 5,
+      "k": 30,
+      "eta": 9.0,
+      "kappa_mean": 0.378828,
+      "kappa_std": 0.003556
+    }
+  ],
+  "d": 4
+}
