@@ -76,12 +76,12 @@ structure PhaseTransitionConjecture where
   hyperbolicRegime : ∀ (ε : ℝ) (_hε : ε > 0),
     ∀ G : WeightedGraph V,
     densityParameter G < criticalValue - ε →
-    Curvature.isHyperbolic G Curvature.Idleness.standard
+    Curvature.isHyperbolic G Curvature.Idleness.standard ε
   /-- For large η, curvature is positive -/
   sphericalRegime : ∀ (ε : ℝ) (_hε : ε > 0),
     ∀ G : WeightedGraph V,
     densityParameter G > criticalValue + ε →
-    Curvature.isSpherical G Curvature.Idleness.standard
+    Curvature.isSpherical G Curvature.Idleness.standard ε
   /-- At critical point, curvature ≈ 0 -/
   criticalPoint : ∀ (ε : ℝ) (_hε : ε > 0),
     ∃ (δ : ℝ) (_hδ : δ > 0),
