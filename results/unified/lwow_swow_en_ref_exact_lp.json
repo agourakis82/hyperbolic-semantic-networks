@@ -1,0 +1,20 @@
+{
+  "label": "SWOW-EN (Human)",
+  "C": 0.12772427774961986,
+  "kappa_min": -0.7888888888888892,
+  "model": "human_swow_en",
+  "kappa_mean": -0.13714700663919419,
+  "kappa_max": 0.75,
+  "N": 438,
+  "geometry": "HYPERBOLIC",
+  "id": "lwow_swow_en_ref",
+  "frac_spherical": 0.2921875,
+  "k_mean": 2.922374429223744,
+  "eta_c": 3.0514293784863202,
+  "eta": 0.019498338594933346,
+  "E": 640,
+  "frac_euclidean": 0.071875,
+  "kappa_std": 0.312363300475585,
+  "frac_hyperbolic": 0.6359375,
+  "source": "human"
+}

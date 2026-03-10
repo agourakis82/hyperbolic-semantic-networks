@@ -1,0 +1,22 @@
+{
+  "label": "LWOW-Haiku (matched vocab)",
+  "C": 0.18876404494382024,
+  "kappa_min": -0.8090909090909091,
+  "model": "lwow_haiku",
+  "kappa_mean": -0.08896668403612845,
+  "kappa_max": 0.75,
+  "N": 344,
+  "geometry": "HYPERBOLIC",
+  "id": "lwow_haiku_matched",
+  "frac_spherical": 0.37777777777777777,
+  "lcc_fraction": 0.900523560209424,
+  "k_mean": 3.13953488372093,
+  "eta_c": 2.9617424278828652,
+  "comparison": "matched_to_swow_en",
+  "eta": 0.02865313745959475,
+  "E": 540,
+  "frac_euclidean": 0.04814814814814815,
+  "kappa_std": 0.3165031195659458,
+  "frac_hyperbolic": 0.5740740740740741,
+  "source": "llm"
+}
