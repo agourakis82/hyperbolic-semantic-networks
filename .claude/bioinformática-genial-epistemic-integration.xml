@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epistemic-integration>
+    <meta>
+        <name>Epistemic Integration - Bioinformática Genial</name>
+        <version>1.0.0</version>
+        <created>2026-01-14</created>
+        <description>Integração epistêmica entre descobertas científicas em bioinformática e o Darwin Atlas</description>
+    </meta>
+
+    <integration-framework>
+        <name>Bioinformatics-Epistemic Bridge</name>
+        <description>Framework para integrar conhecimento científico da bioinformática com o sistema epistêmico do Darwin Atlas</description>
+        
+        <core-principles>
+            <principle>
+                <name>Provenance Preservation</name>
+                <description>Manter rastreabilidade completa da origem científica das descobertas</description>
+                <implementation>
+                    <item>Documentar PMID/DOI de todas as fontes</item>
+                    <item>Registrar autores e instituições</item>
+                    <item>Manter histórico de citações</item>
+                    <item>Registrar data de acesso e versão</item>
+                </implementation>
+            </principle>
+            
+            <principle>
+                <name>Uncertainty Quantification</name>
+                <description>Quantificar incerteza em todas as descobertas científicas</description>
+                <implementation>
+                    <item>Propagar incerteza de estudos primários</item>
+                    <item>Considerar variabilidade metodológica</item>
+                    <item>Avaliar qualidade de evidências</item>
+                    <item>Calcular confiança epistêmica</item>
+                </implementation>
+            </principle>
+            
+            <principle>
+                <name>Knowledge Validation</name>
+                <description>Validar novas descobertas contra conhecimento estabelecido</description>
+                <implementation>
+                    <item>Verificar contra conhecimento existente</item>
+                    <item>Identificar contradições</item>
+                    <item>Estabelecer níveis de evidência</item>
+                    <item>Documentar validações cruzadas</item>
+                </implementation>
+            </principle>
+            
+            <principle>
+                <name>Schema Evolution</name>
+                <description>Extender schemas de forma controlada e rastreável</description>
+                <implementation>
+                    <item>Adicionar novos tipos de record quando necessário</item>
+                    <item>Manter compatibilidade retroativa</item>
+                    <item>Versionar extensões do schema</item>
+                    <item>Documentar mudanças</item>
+                </implementation>
+            </principle>
+        </core-principles>
+    </integration-framework>
+
+    <schema-extension>
+        <current-schema-reference>data/epistemic/schema_atlas_knowledge.json</current-schema-reference>
+        <extensions>
+            <extension name="Scientific Literature Records">
+                <description>Extensão para registrar conhecimento oriundo da literatura científica</description>
+                <new-record-types>
+                    <type>literature_discovery</type>
+                    <type>citation_network</type>
+                    <type>knowledge_gap</type>
+                    <type>research_trend</type>
+                    <type>methodology_innovation</type>
+                    <type>cross_domain_synthesis</type>
+                </new-record-types>
+            </extension>
+            
+            <extension name="Scientific Provenance">
+                <description>Extensão do sistema de provenance para literatura científica</description>
+                <new-provenance-fields>
+                    <field name="literature_source" type="object">
+                        <properties>
+                            <pmid type="string"/>
+                            <doi type="string"/>
+                            <title type="string"/>
+                            <authors type="array"/>
+                            <journal type="string"/>
+                            <publication_date type="string"/>
+                            <access_date type="string"/>
+                        </properties>
+                    </field>
+                    <field name="citation_context" type="object">
+                        <properties>
+                            <cited_by_count type="integer"/>
+                            <citation_networks type="array"/>
+                            <influence_score type="number"/>
+                        </properties>
+                    </field>
+                    <field name="evidence_quality" type="object">
+                        <properties>
+                            <evidence_level type="string"/>
+                            <study_type type="string"/>
+                            <sample_size type="integer"/>
+                            <replication_status type="string"/>
+                        </properties>
+                    </field>
+                </new-provenance-fields>
+            </extension>
+        </extensions>
+    </schema-extension>
+
+    <integration-processes>
+        <process name="Literature Discovery Integration">
+            <description>Integração de descobertas da literatura científica</description>
+            <steps>
+                <step name="Discovery Extraction">
+                    <description>Extrair descobertas de artigos científicos</description>
+                    <actions>
+                        <action>Identificar fatos científicos mensuráveis</action>
+                        <action>Extrair parâmetros e métricas</action>
+                        <action>Registrar condições experimentais</action>
+                        <action>Documentar limitações do estudo</action>
+                    </actions>
+                </step>
+                
+                <step name="Epistemic Classification">
+                    <description>Classificar descobertas no framework epistêmico</description>
+                    <actions>
+                        <action>Determinar tipo de record apropriado</action>
+                        <action>Mapear para métricas existentes</action>
+                        <action>Identificar necessidade de novo tipo</action>
+                        <action>Estabelecer hierarquia de conhecimento</action>
+                    </actions>
+                </step>
+                
+                <step name="Uncertainty Assessment">
+                    <description>Avaliar incerteza na descoberta</description>
+                    <actions>
+                        <action>Quantificar incerteza experimental</action>
+                        <action>Propagar incerteza de estudos primários</action>
+                        <action>Considerar reprodutibilidade</action>
+                        <action>Calcular confiança epistêmica final</action>
+                    </actions>
+                </step>
+                
+                <step name="Provenance Registration">
+                    <description>Registrar provenance científica completa</description>
+                    <actions>
+                        <action>Documentar fontes primárias</action>
+                        <action>Registrar cadeia de evidências</action>
+                        <action>Mapear redes de citação</action>
+                        <action>Associar com conhecimento existente</action>
+                    </actions>
+                </step>
+                
+                <step name="Validation Check">
+                    <description>Validar contra conhecimento existente</description>
+                    <actions>
+                        <action>Verificar consistência com registros existentes</action>
+                        <action>Identificar conflitos ou contradições</action>
+                        <action>Estabelecer níveis de evidência</action>
+                        <action>Decidir sobre aceitação ou necessidade de investigação adicional</action>
+                    </actions>
+                </step>
+            </steps>
+        </process>
+        
+        <process name="Knowledge Gap Integration">
+            <description>Integração de lacunas identificadas na literatura</description>
+            <output-record-type>knowledge_gap</output-record-type>
+            <fields>
+                <field name="gap_description" type="string"/>
+                <field name="research_area" type="string"/>
+                <field name="potential_impact" type="number"/>
+                <field name="methodological_barriers" type="array"/>
+                <field name="related_knowledge" type="array"/>
+                <field name="research_opportunities" type="array"/>
+            </fields>
+        </process>
+        
+        <process name="Citation Network Integration">
+            <description>Integração de análises de redes de citação</description>
+            <output-record-type>citation_network</output-record-type>
+            <fields>
+                <field name="network_structure" type="object"/>
+                <field name="influential_papers" type="array"/>
+                <field name="research_communities" type="array"/>
+                <field name="knowledge_flows" type="array"/>
+                <field name="emerging_topics" type="array"/>
+            </fields>
+        </process>
+    </integration-processes>
+
+    <validation-rules>
+        <epistemic-consistency>
+            <rule name="Cross-Reference Validation">
+                <description>Validar novas descobertas contra conhecimento cruzado</description>
+                <check>Verificar se descoberta é consistente com registros existentes</check>
+                <action>Se conflito, reduzir confiança e marcar para revisão</action>
+            </rule>
+            
+            <rule name="Evidence Hierarchy">
+                <description>Estabelecer hierarquia de evidências</description>
+                <levels>
+                    <level name="Meta-analysis">Highest confidence (0.9-1.0)</level>
+                    <level name="Systematic Review">High confidence (0.8-0.9)</level>
+                    <level name="Randomized Trial">High confidence (0.7-0.9)</level>
+                    <level name="Cohort Study">Medium-High confidence (0.6-0.8)</level>
+                    <level name="Case-Control">Medium confidence (0.5-0.7)</level>
+                    <level name="Case Report">Lower confidence (0.3-0.6)</level>
+                    <level name="Expert Opinion">Low confidence (0.2-0.5)</level>
+                </levels>
+            </rule>
+            
+            <rule name="Provenance Verification">
+                <description>Verificar qualidade do provenance científico</description>
+                <requirements>
+                    <requirement>PMID ou DOI disponível</requirement>
+                    <requirement>Autores identificados</requirement>
+                    <requirement>Data de publicação registrada</requirement>
+                    <requirement>Journal/Fonte verificada</requirement>
+                </requirements>
+            </rule>
+        </epistemic-consistency>
+        
+        <quality-assurance>
+            <rule name="Minimum Evidence Threshold">
+                <description>Estabelecer limiar mínimo de evidência</description>
+                <threshold>
+                    <confidence>minimum 0.5</confidence>
+                    <evidence_level>at least case-control</evidence_level>
+                    <citations>minimum 5 citações para artigos influentes</citations>
+                </threshold>
+            </rule>
+            
+            <rule name="Reproducibility Check">
+                <description>Verificar reprodutibilidade dos achados</description>
+                <criteria>
+                    <criterion>Metodologia claramente documentada</criterion>
+                    <criterion>Dados disponíveis (quando aplicável)</criterion>
+                    <criterion>Código disponível (quando aplicável)</criterion>
+                    <criterion>Replicações independentes identificadas</criterion>
+                </criteria>
+            </rule>
+        </quality-assurance>
+    </validation-rules>
+
+    <knowledge-extension-strategies>
+        <strategy name="Incremental Schema Evolution">
+            <description>Extensão incremental do schema de conhecimento</description>
+            <steps>
+                <step>Identificar necessidade de novo tipo de record</step>
+                <step>Propor extensão com justificativa científica</step>
+                <step>Implementar teste de compatibilidade</step>
+                <step>Versionar mudança</step>
+                <step>Documentar nova funcionalidade</step>
+            </steps>
+        </strategy>
+        
+        <strategy name="Cross-Domain Synthesis">
+            <description>Síntese de conhecimento entre domínios da bioinformática</description>
+            <processes>
+                <process>Identificar conexões entre diferentes áreas</process>
+                <process>Mapear transferências de metodologia</process>
+                <process>Estabelecer pontes conceituais</process>
+                <process>Validar sínteses interdisciplinares</process>
+            </processes>
+        </strategy>
+        
+        <strategy name="Emerging Knowledge Tracking">
+            <description>Rastreamento de conhecimento emergente</description>
+            <methods>
+                <method>Análise temporal de publicações</method>
+                <method>Detecção de novos paradigmas</method>
+                <method>Mapeamento de mudanças conceituais</method>
+                <method>Identificação de disrupções científicas</method>
+            </methods>
+        </strategy>
+    </knowledge-extension-strategies>
+
+    <output-specifications>
+        <epistemic-records>
+            <format>JSON seguindo schema_atlas_knowledge.json estendido</format>
+            <required-fields>
+                <field>record_type</field>
+                <field>metric_name</field>
+                <field>value</field>
+                <field>epsilon (se aplicável)</field>
+                <field>confidence</field>
+                <field>validity</field>
+                <field>provenance (incluindo extensões científicas)</field>
+            </required-fields>
+        </epistemic-records>
+        
+        <literature-integrations>
+            <format>CSV com referências e escores de relevância</format>
+            <columns>
+                <column>PMID/DOI</column>
+                <column>Title</column>
+                <column>Authors</column>
+                <column>Journal</column>
+                <column>Publication Year</column>
+                <column>Citations</column>
+                <column>Relevance Score</column>
+                <column>Evidence Level</column>
+                <column>Integration Date</column>
+            </columns>
+        </literature-integrations>
+        
+        <network-analyses>
+            <format>GraphML ou JSON para redes de citação</format>
+            <includes>
+                <include>Nós: artigos, autores, instituições</include>
+                <include>Arestas: citações, coautorias, colaborações</include>
+                <include>Atributos: peso, tempo, tipo de relação</include>
+                <include>Métricas: centralidade, clustering, influência</include>
+            </includes>
+        </network-analyses>
+    </output-specifications>
+
+    <quality-metrics>
+        <coverage-metrics>
+            <metric name="Literature Coverage">
+                <description>Percentual da literatura relevante coberta</description>
+                <target>> 80% para tópicos principais</target>
+            </metric>
+            <metric name="Citation Network Completeness">
+                <description>Completude da rede de citações mapeada</description>
+                <target>> 90% para artigos influentes</target>
+            </metric>
+        </coverage-metrics>
+        
+        <accuracy-metrics>
+            <metric name="Provenance Accuracy">
+                <description>Precisão do provenance científico</description>
+                <target>> 95% para fontes primárias</target>
+            </metric>
+            <metric name="Evidence Classification Accuracy">
+                <description>Precisão na classificação de evidências</description>
+                <target>> 90% para níveis de evidência</target>
+            </metric>
+        </accuracy-metrics>
+        
+        <timeliness-metrics>
+            <metric name="Update Frequency">
+                <description>Frequência de atualização do conhecimento</description>
+                <target>Semanal para literatura recente</target>
+            </metric>
+            <metric name="Gap Identification Latency">
+                <description>Tempo para identificação de lacunas</description>
+                <target>< 30 dias após publicação relevante</target>
+            </metric>
+        </timeliness-metrics>
+    </quality-metrics>
+</epistemic-integration>

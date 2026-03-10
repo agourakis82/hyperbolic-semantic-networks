@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<literature-search>
+    <meta>
+        <name>Literature Search - Bioinformática Genial</name>
+        <version>1.0.0</version>
+        <created>2026-01-14</created>
+        <description>Regras avançadas para busca profunda em literatura científica em bioinformática</description>
+    </meta>
+
+    <search-strategy>
+        <approach>Multi-layer Deep Search</approach>
+        <phases>
+            <phase name="Initial Discovery">
+                <description>Busca inicial abrangente para mapeamento da área</description>
+                <techniques>
+                    <technique>
+                        <name>Broad Semantic Search</name>
+                        <description>Busca semântica ampla usando termos-chave amplos</description>
+                        <tools>
+                            <tool>PubMed/MEDLINE</tool>
+                            <tool>NCBI Gene/Protein databases</tool>
+                            <tool>bioRxiv/medRxiv preprints</tool>
+                            <tool>arXiv quantitative biology</tool>
+                        </tools>
+                    </technique>
+                    <technique>
+                        <name>Citation Network Analysis</name>
+                        <description>Análise de redes de citação para encontrar trabalhos fundamentais</description>
+                        <tools>
+                            <tool>Google Scholar citation graphs</tool>
+                            <tool>Semantic Scholar</tool>
+                            <tool>PubMed related articles</tool>
+                        </tools>
+                    </technique>
+                </techniques>
+                <output>
+                    <item>Lista de 50-100 artigos mais relevantes</item>
+                    <item>Mapeamento inicial de autores-chave</item>
+                    <item>Timeline de desenvolvimentos na área</item>
+                </output>
+            </phase>
+
+            <phase name="Deep Exploration">
+                <description>Exploração profunda baseada nos achados iniciais</description>
+                <techniques>
+                    <technique>
+                        <name>Targeted Literature Review</name>
+                        <description>Revisão direcionada de artigos específicos</description>
+                        <focus>
+                            <focus>Metodologias inovadoras</focus>
+                            <focus>Resultados contraditórios</focus>
+                            <focus>Estudos de validação</focus>
+                            <focus>Meta-análises</focus>
+                        </focus>
+                    </technique>
+                    <technique>
+                        <name>Cross-Reference Mining</name>
+                        <description>Mina de referências cruzadas entre artigos</description>
+                        <actions>
+                            <action>Extração de citações relevantes</action>
+                            <action>Identificação de trabalhos órfãos (orphan papers)</action>
+                            <action>Mapeamento de colaborações entre autores</action>
+                        </actions>
+                    </technique>
+                    <technique>
+                        <name>Temporal Analysis</name>
+                        <description>Análise temporal para identificar tendências</description>
+                        <metrics>
+                            <metric>Publicações por ano</metric>
+                            <metric>Índice de citação ao longo do tempo</metric>
+                            <metric>Taxa de crescimento da área</metric>
+                        </metrics>
+                    </technique>
+                </techniques>
+            </phase>
+
+            <phase name="Gap Identification">
+                <description>Identificação sistemática de lacunas na literatura</description>
+                <methods>
+                    <method>
+                        <name>Literature Gap Analysis</name>
+                        <description>Análise sistemática de lacunas na literatura</description>
+                        <criteria>
+                            <criterion>Tópicos com poucos estudos</criterion>
+                            <criterion>Metodologias não exploradas</criterion>
+                            <criterion>Populações/condições sub-representadas</criterion>
+                            <criterion>Técnicas emergentes não validadas</criterion>
+                        </criteria>
+                    </method>
+                    <method>
+                        <name>Emerging Trends Detection</name>
+                        <description>Detecção de tendências emergentes</description>
+                        <indicators>
+                            <indicator>Aumento súbito em publicações</indicator>
+                            <indicator>Novas colaborações interdisciplinares</indicator>
+                            <indicator>Desenvolvimento de novas ferramentas</indicator>
+                            <indicator>Paradigmas emergentes</indicator>
+                        </indicators>
+                    </method>
+                </methods>
+            </phase>
+        </phases>
+    </search-strategy>
+
+    <databases>
+        <primary-sources>
+            <database>
+                <name>PubMed/MEDLINE</name>
+                <url>https://pubmed.ncbi.nlm.nih.gov/</url>
+                <coverage>Artigos biomédicos revisados por pares</coverage>
+                <best-for>
+                    <item>Estudos clínicos</item>
+                    <item>Pesquisa biomédica tradicional</item>
+                    <item>Revisões sistemáticas</item>
+                </best-for>
+                <search-features>
+                    <feature>MeSH terms</feature>
+                    <feature>Advanced boolean operators</feature>
+                    <feature>Publication date filters</feature>
+                    <feature>Citation analysis</feature>
+                </search-features>
+            </database>
+
+            <database>
+                <name>NCBI Gene/Protein</name>
+                <url>https://www.ncbi.nlm.nih.gov/gene/</url>
+                <coverage>Informações genômicas e proteômicas</coverage>
+                <best-for>
+                    <item>Análise de sequências</item>
+                    <item>Annotações funcionais</item>
+                    <item>Expressão gênica</item>
+                </best-for>
+            </database>
+
+            <database>
+                <name>bioRxiv/medRxiv</name>
+                <url>https://www.biorxiv.org/</url>
+                <coverage>Preprints em biologia e medicina</coverage>
+                <best-for>
+                    <item>Desenvolvimentos mais recentes</item>
+                    <item>Metodologias emergentes</item>
+                    <item>Dados preliminares</item>
+                </best-for>
+            </database>
+
+            <database>
+                <name>arXiv</name>
+                <url>https://arxiv.org/</url>
+                <coverage>Física, matemática, ciências da computação, biologia quantitativa</coverage>
+                <best-for>
+                    <item>Métodos computacionais</item>
+                    <item>Modelagem matemática</item>
+                    <item>Teoria de sistemas complexos</item>
+                </best-for>
+            </database>
+        </primary-sources>
+
+        <secondary-sources>
+            <database>
+                <name>Semantic Scholar</name>
+                <url>https://www.semanticscholar.org/</url>
+                <coverage>Análise semântica e citações</coverage>
+                <best-for>
+                    <item>Redes de citação</item>
+                    <item>Influência de artigos</item>
+                    <item>Co-autores</item>
+                </best-for>
+            </database>
+
+            <database>
+                <name>Google Scholar</name>
+                <url>https://scholar.google.com/</url>
+                <coverage>Busca acadêmica ampla</coverage>
+                <best-for>
+                    <item>Busca exploratória</item>
+                    <item>Dados de citação</item>
+                    <item>Métricas de impacto</item>
+                </best-for>
+            </database>
+        </secondary-sources>
+    </databases>
+
+    <search-queries>
+        <semantic-templates>
+            <template name="Genomic Analysis">
+                <pattern>(genomic OR genomic OR genome-wide) AND (analysis OR sequencing OR variants)</pattern>
+                <refinement>
+                    <refinement>AND (RNA-seq OR ChIP-seq OR ATAC-seq)</refinement>
+                    <refinement>AND (bioinformatics OR computational)</refinement>
+                </refinement>
+            </template>
+
+            <template name="Phylogenetics">
+                <pattern>(phylogenetic OR phylogeny OR evolutionary) AND (analysis OR reconstruction)</pattern>
+                <refinement>
+                    <refinement>AND (molecular OR genetic OR genomic)</refinement>
+                    <refinement>AND (trees OR relationships)</refinement>
+                </refinement>
+            </template>
+
+            <template name="Protein Structure">
+                <pattern>(protein structure OR structural biology) AND (prediction OR modeling)</pattern>
+                <refinement>
+                    <refinement>AND (computational OR bioinformatics)</refinement>
+                    <refinement>AND (machine learning OR AI)</refinement>
+                </refinement>
+            </template>
+
+            <template name="Systems Biology">
+                <pattern>(systems biology OR network analysis) AND (biological OR cellular)</pattern>
+                <refinement>
+                    <refinement>AND (pathways OR interactions)</refinement>
+                    <refinement>AND (modeling OR simulation)</refinement>
+                </refinement>
+            </template>
+
+            <template name="Metagenomics">
+                <pattern>(metagenomic OR microbiome) AND (analysis OR sequencing)</pattern>
+                <refinement>
+                    <refinement>AND (microbial OR bacteria OR archaea)</refinement>
+                    <refinement>AND (bioinformatics OR computational)</refinement>
+                </refinement>
+            </template>
+        </semantic-templates>
+
+        <boolean-strategies>
+            <strategy name="Broad Discovery">
+                <description>Busca ampla para descoberta inicial</description>
+                <pattern>(bioinformatics OR computational biology) AND (genomics OR proteomics OR transcriptomics)</pattern>
+                <filters>
+                    <filter>Date: last 5 years</filter>
+                    <filter>Publication type: Research article</filter>
+                </filters>
+            </strategy>
+
+            <strategy name="Deep Dive">
+                <description>Busca profunda para tópicos específicos</description>
+                <pattern>((specific_term1 OR specific_term2) AND (method1 OR method2)) AND NOT (excluded_terms)</pattern>
+                <filters>
+                    <filter>Date: last 3 years</filter>
+                    <filter>Language: English</filter>
+                    <filter>Impact factor: > 3.0 (when available)</filter>
+                </filters>
+            </strategy>
+        </boolean-strategies>
+    </search-queries>
+
+    <analysis-methods>
+        <citation-analysis>
+            <metrics>
+                <metric name="Citation Count">Número total de citações</metric>
+                <metric name="H-index">Índice H do artigo</metric>
+                <metric name="Citation Velocity">Citações por ano</metric>
+                <metric name="Co-citation Network">Rede de co-citações</metric>
+            </metrics>
+            <tools>
+                <tool>Google Scholar Metrics</tool>
+                <tool>Semantic Scholar API</tool>
+                <tool>Publish or Perish</tool>
+                <tool>NCBI Citation Exporter</tool>
+            </tools>
+        </citation-analysis>
+
+        <network-analysis>
+            <types>
+                <type>Citation Networks</type>
+                <type>Co-authorship Networks</type>
+                <type>Keyword Co-occurrence Networks</type>
+                <type>Institution Collaboration Networks</type>
+            </types>
+            <software>
+                <tool>Gephi</tool>
+                <tool>Cytoscape</tool>
+                <tool>NetworkX (Python)</tool>
+                <tool>igraph (R)</tool>
+            </software>
+        </network-analysis>
+
+        <trend-analysis>
+            <methods>
+                <method>Temporal Publication Trends</method>
+                <method>Citation Growth Patterns</method>
+                <method>Emerging Topic Detection</method>
+                <method>Technology Adoption Curves</method>
+            </methods>
+            <visualizations>
+                <visualization>Time series plots</visualization>
+                <visualization>Heat maps</visualization>
+                <visualization>Network graphs</visualization>
+                <visualization>Word clouds</visualization>
+            </visualizations>
+        </trend-analysis>
+    </analysis-methods>
+
+    <quality-criteria>
+        <article-selection>
+            <criteria>
+                <criterion>
+                    <name>Peer Review Status</name>
+                    <weight>High</weight>
+                    <description>Priorizar artigos revisados por pares</description>
+                </criterion>
+                <criterion>
+                    <name>Impact Factor</name>
+                    <weight>Medium-High</weight>
+                    <description>Considerar fator de impacto da revista</description>
+                </criterion>
+                <criterion>
+                    <name>Citation Count</name>
+                    <weight>Medium</weight>
+                    <description>Número de citações recebidas</description>
+                </criterion>
+                <criterion>
+                    <name>Methodology Quality</name>
+                    <weight>High</weight>
+                    <description>Qualidade e rigor metodológico</description>
+                </criterion>
+                <criterion>
+                    <name>Reproducibility</name>
+                    <weight>High</weight>
+                    <description>Disponibilidade de dados e código</description>
+                </criterion>
+            </criteria>
+        </article-selection>
+
+        <relevance-scoring>
+            <factors>
+                <factor>
+                    <name>Topic Relevance</name>
+                    <weight>40%</weight>
+                    <description>Relevância direta ao tópico de interesse</description>
+                </factor>
+                <factor>
+                    <name>Methodology Innovation</name>
+                    <weight>25%</weight>
+                    <description>Inovação metodológica ou técnica</description>
+                </factor>
+                <factor>
+                    <name>Results Significance</name>
+                    <weight>25%</weight>
+                    <description>Significância dos resultados</description>
+                </factor>
+                <factor>
+                    <name>Citation Impact</name>
+                    <weight>10%</weight>
+                    <description>Impacto na comunidade científica</description>
+                </factor>
+            </factors>
+        </relevance-scoring>
+    </quality-criteria>
+
+    <output-format>
+        <structured-report>
+            <section name="Executive Summary">
+                <content>Resumo das principais descobertas</content>
+                <length>1-2 páginas</length>
+            </section>
+            <section name="Literature Overview">
+                <content>Visão geral da literatura encontrada</content>
+                <length>3-5 páginas</length>
+                <subsections>
+                    <subsection>Artigos fundamentais</subsection>
+                    <subsection>Desenvolvimentos recentes</subsection>
+                    <subsection>Metodologias emergentes</subsection>
+                </subsections>
+            </section>
+            <section name="Citation Network Analysis">
+                <content>Análise de redes de citação</content>
+                <length>2-3 páginas</length>
+                <includes>
+                    <include>Gráficos de rede</include>
+                    <include>Análise de influenciadores</include>
+                    <include>Comunidades identificadas</include>
+                </includes>
+            </section>
+            <section name="Gap Analysis">
+                <content>Análise de lacunas na literatura</content>
+                <length>2-3 páginas</length>
+                <subsections>
+                    <subsection>Áreas não exploradas</subsection>
+                    <subsection>Oportunidades de pesquisa</subsection>
+                    <subsection>Metodologias promissoras</subsection>
+                </subsections>
+            </section>
+            <section name="Future Directions">
+                <content>Direções futuras de pesquisa</content>
+                <length>1-2 páginas</length>
+                <includes>
+                    <include>Prioridades de pesquisa</include>
+                    <include>Colaborações potenciais</include>
+                    <include>Recomendações metodológicas</include>
+                </includes>
+            </section>
+            <section name="References">
+                <content>Lista completa de referências</content>
+                <format>PMID/DOI quando disponível</format>
+            </section>
+        </structured-report>
+    </output-format>
+</literature-search>

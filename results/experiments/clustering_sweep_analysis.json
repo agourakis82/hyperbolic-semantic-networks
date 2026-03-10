@@ -1,0 +1,94 @@
+{
+  "hehl_mean_slope_mid": 1.1107313853769656,
+  "N": 200,
+  "n_graphs_per_beta": 20,
+  "description": "Linear regression and Hehl formula comparison for WS sweep",
+  "n_beta_values": 10,
+  "discrepancy_pct": -64.9708345555546,
+  "k": 4,
+  "alpha": 0.5,
+  "experiment": "clustering_sweep_analysis",
+  "linear_regression": {
+    "slope": 0.38907993462707774,
+    "intercept": 0.2389891308867615,
+    "t_stat": 34.23000178688455,
+    "note": "slope = partial_kappa / partial_C (empirical, WS sweep)",
+    "r2": 0.993218574791433,
+    "se_slope": 0.011366634949348914,
+    "ci_95_lo": 0.36286847443387915,
+    "ci_95_hi": 0.4152913948202763
+  },
+  "eta": 0.08,
+  "hehl_predictions": [
+    {
+      "d_kappa_d_C_hehl": 1.113779884643229,
+      "kappa_empirical": 0.4367885416666667,
+      "C": 0.4985083333333334,
+      "kappa_hehl": -0.06135943363624863,
+      "beta": 0.001
+    },
+    {
+      "d_kappa_d_C_hehl": 1.113644926372448,
+      "kappa_empirical": 0.4338958333333333,
+      "C": 0.49244166666666667,
+      "kappa_hehl": -0.0681159555531643,
+      "beta": 0.005
+    },
+    {
+      "d_kappa_d_C_hehl": 1.113521107262705,
+      "kappa_empirical": 0.4313385416666666,
+      "C": 0.48687500000000006,
+      "kappa_hehl": -0.07431490100577998,
+      "beta": 0.01
+    },
+    {
+      "d_kappa_d_C_hehl": 1.1131864285394144,
+      "kappa_empirical": 0.4240687500000001,
+      "C": 0.47182500000000005,
+      "kappa_hehl": -0.09107087506911316,
+      "beta": 0.02
+    },
+    {
+      "d_kappa_d_C_hehl": 1.1123535603342338,
+      "kappa_empirical": 0.40663229166666676,
+      "C": 0.43434999999999996,
+      "kappa_hehl": -0.13277192841138485,
+      "beta": 0.05
+    },
+    {
+      "d_kappa_d_C_hehl": 1.1109386451096936,
+      "kappa_empirical": 0.37867619047619056,
+      "C": 0.37061309523809516,
+      "kappa_hehl": -0.20362479939063727,
+      "beta": 0.1
+    },
+    {
+      "d_kappa_d_C_hehl": 1.108757034339547,
+      "kappa_empirical": 0.3359302083333334,
+      "C": 0.2721595238095238,
+      "kappa_hehl": -0.31289324322815304,
+      "beta": 0.2
+    },
+    {
+      "d_kappa_d_C_hehl": 1.1056315366761993,
+      "kappa_empirical": 0.28090558035714286,
+      "C": 0.13072757936507937,
+      "kappa_hehl": -0.4694857664344303,
+      "beta": 0.4
+    },
+    {
+      "d_kappa_d_C_hehl": 1.103386530859729,
+      "kappa_empirical": 0.2507391369047619,
+      "C": 0.028859722222222217,
+      "kappa_hehl": -0.581999691108626,
+      "beta": 0.7
+    },
+    {
+      "d_kappa_d_C_hehl": 1.1030888446439402,
+      "kappa_empirical": 0.2566312996031746,
+      "C": 0.015334523809523807,
+      "kappa_hehl": -0.5969211996283601,
+      "beta": 1.0
+    }
+  ]
+}
