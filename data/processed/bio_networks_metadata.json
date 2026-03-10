@@ -1,0 +1,47 @@
+{
+  "celegans": {
+    "source": "Netzschleuder/celegansneural (White et al 1986)",
+    "description": "C. elegans neural connectome (directed\u2192undirected)",
+    "N": 297,
+    "E": 2148,
+    "k_mean": 14.4646,
+    "C": 0.2924,
+    "eta": 0.704465
+  },
+  "yeast_ppi": {
+    "source": "STRING v12.0 (4932, score\u2265900, 20-core, LCC)",
+    "description": "S. cerevisiae PPI high-confidence core",
+    "N": 788,
+    "E": 32360,
+    "k_mean": 82.132,
+    "C": 0.7656,
+    "eta": 8.560485
+  },
+  "celegans_metabolic": {
+    "source": "Netzschleuder/celegans_metabolic",
+    "description": "C. elegans metabolic network (undirected, LCC)",
+    "N": 453,
+    "E": 2025,
+    "k_mean": 8.9404,
+    "C": 0.6465,
+    "eta": 0.176447
+  },
+  "ecoli_grn": {
+    "source": "Netzschleuder/ecoli_transcription v1.1 (Shen-Orr 2002, directed\u2192undirected LCC)",
+    "description": "E. coli K-12 transcription factor gene regulatory network",
+    "N": 328,
+    "E": 456,
+    "k_mean": 2.7805,
+    "C": 0.1102,
+    "eta": 0.02357
+  },
+  "ecoli_ppi": {
+    "source": "STRING v12.0 (511145=E.coli K-12, score\u2265990, LCC)",
+    "description": "E. coli K-12 protein interactions (STRING, very-high-confidence, LCC)",
+    "N": 450,
+    "E": 3104,
+    "k_mean": 13.7956,
+    "C": 0.6033,
+    "eta": 0.422927
+  }
+}
