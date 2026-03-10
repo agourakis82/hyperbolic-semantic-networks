@@ -5,6 +5,7 @@ Tests data loading and graph construction.
 """
 
 using Test
+using Graphs
 using HyperbolicSemanticNetworks
 
 @testset "SWOW Loader" begin
@@ -37,8 +38,6 @@ using HyperbolicSemanticNetworks
 end
 
 @testset "Graph Validation" begin
-    using LightGraphs
-    
     # Valid graph
     G1 = SimpleGraph(4)
     add_edge!(G1, 1, 2)
@@ -56,8 +55,6 @@ end
 end
 
 @testset "Network Metrics" begin
-    using LightGraphs
-    
     # Create test graph
     G = SimpleGraph(5)
     add_edge!(G, 1, 2)

@@ -1,0 +1,5 @@
+N=500
+E=527
+max_deg=38
+kappa_ref=-0.001532
+geometry=EUCLIDEAN/TRANSITION

@@ -1,0 +1,354 @@
+[
+  {
+    "network": "swow_es",
+    "N": 422,
+    "C": 0.13594040968342644,
+    "language": "Spanish",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.989492119089317,
+      "mean": -1.2874907540406666,
+      "std": 0.3803304997877728
+    },
+    "eta": 0.01735381066775985,
+    "E": 571,
+    "category": "association",
+    "kavg": 2.706161137440758,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.7005253940455342,
+      "mean": -2.492119089316988,
+      "std": 3.228359676884951
+    }
+  },
+  {
+    "network": "swow_en",
+    "N": 438,
+    "C": 0.12772427774961986,
+    "language": "English",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.99375,
+      "mean": -1.3383514575702082,
+      "std": 0.3649383645858244
+    },
+    "eta": 0.019498338594933346,
+    "E": 640,
+    "category": "association",
+    "kavg": 2.922374429223744,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.765625,
+      "mean": -2.984375,
+      "std": 3.2845833634837907
+    }
+  },
+  {
+    "network": "swow_zh",
+    "N": 465,
+    "C": 0.17279821627647715,
+    "language": "Chinese",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9960629921259843,
+      "mean": -1.3033169149310881,
+      "std": 0.36455178224500323
+    },
+    "eta": 0.023099951887035234,
+    "E": 762,
+    "category": "association",
+    "kavg": 3.2774193548387096,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.7755905511811023,
+      "mean": -3.232283464566929,
+      "std": 3.620623839417641
+    }
+  },
+  {
+    "network": "swow_nl",
+    "N": 500,
+    "C": 0.2383494962454247,
+    "language": "Dutch",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 1.0,
+      "mean": -1.465534938985004,
+      "std": 0.20511192470748818
+    },
+    "eta": 7.557613568000001,
+    "E": 15368,
+    "category": "association",
+    "kavg": 61.472,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9998698594482041,
+      "mean": -95.49544508068715,
+      "std": 53.34718380559562
+    }
+  },
+  {
+    "network": "conceptnet_en",
+    "N": 467,
+    "C": 0.10835812980585098,
+    "language": "English",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 1.0,
+      "mean": -1.6598723732049492,
+      "std": 0.21129688534838836
+    },
+    "eta": 0.2230269957465747,
+    "E": 2383,
+    "category": "knowledge",
+    "kavg": 10.205567451820128,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9958036088963491,
+      "mean": -21.85732270247587,
+      "std": 11.643412528016972
+    }
+  },
+  {
+    "network": "conceptnet_pt",
+    "N": 489,
+    "C": 0.1056985294117647,
+    "language": "Portuguese",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 1.0,
+      "mean": -1.5817808368617998,
+      "std": 0.2801630515667042
+    },
+    "eta": 0.085181917422868,
+    "E": 1578,
+    "category": "knowledge",
+    "kavg": 6.45398773006135,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9708491761723701,
+      "mean": -15.404942965779467,
+      "std": 12.484365401697898
+    }
+  },
+  {
+    "network": "wordnet_en",
+    "N": 500,
+    "C": 0.012711864406779662,
+    "language": "English",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9943074003795066,
+      "mean": -1.7453167012318629,
+      "std": 0.3207571796642355
+    },
+    "eta": 0.008887328,
+    "E": 527,
+    "category": "taxonomy",
+    "kavg": 2.108,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.920303605313093,
+      "mean": -15.571157495256166,
+      "std": 10.670228080450592
+    }
+  },
+  {
+    "network": "wordnet_en_2k",
+    "N": 2000,
+    "C": 0.0021390960947784117,
+    "language": "English",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9951807228915662,
+      "mean": -1.8288709581077305,
+      "std": 0.2840102018427873
+    },
+    "eta": 0.0021528125000000006,
+    "E": 2075,
+    "category": "taxonomy",
+    "kavg": 2.075,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9518072289156626,
+      "mean": -68.06650602409638,
+      "std": 85.52094270054505
+    }
+  },
+  {
+    "network": "babelnet_ru",
+    "N": 493,
+    "C": 0.0012422360248447205,
+    "language": "Russian",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 1.0,
+      "mean": -1.7860913458614596,
+      "std": 0.032974462651408944
+    },
+    "eta": 0.009096205001509016,
+    "E": 522,
+    "category": "taxonomy",
+    "kavg": 2.1176470588235294,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 1.0,
+      "mean": -7.235632183908046,
+      "std": 1.8680140446414104
+    }
+  },
+  {
+    "network": "babelnet_ar",
+    "N": 142,
+    "C": 0.0,
+    "language": "Arabic",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 1.0,
+      "mean": -1.7695364238410596,
+      "std": 0.0804226576685909
+    },
+    "eta": 0.031852890802462064,
+    "E": 151,
+    "category": "taxonomy",
+    "kavg": 2.1267605633802815,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9933774834437086,
+      "mean": -6.6490066225165565,
+      "std": 1.7933160178718783
+    }
+  },
+  {
+    "network": "eat_en",
+    "N": 500,
+    "C": 0.12878476033662642,
+    "language": "British English",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 1.0,
+      "mean": -1.686465396946307,
+      "std": 0.15749214406844522
+    },
+    "eta": 1.8507528000000002,
+    "E": 7605,
+    "category": "association",
+    "kavg": 30.42,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 1.0,
+      "mean": -53.6698224852071,
+      "std": 18.41910075227353
+    }
+  },
+  {
+    "network": "framenet_en",
+    "N": 1173,
+    "C": 0.0453508829087118,
+    "language": "English",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9984464008285863,
+      "mean": -1.5512720970050318,
+      "std": 0.34233064556075016
+    },
+    "eta": 0.009241245389628923,
+    "E": 1931,
+    "category": "frames",
+    "kavg": 3.2924126172208013,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.8839979285344381,
+      "mean": -12.814085965820817,
+      "std": 16.825441149537323
+    }
+  },
+  {
+    "network": "swow_rp",
+    "N": 489,
+    "C": 0.15428571428571428,
+    "language": "Arg. Spanish",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9990714948932219,
+      "mean": -1.4024071203736943,
+      "std": 0.32486218344478446
+    },
+    "eta": 0.0396793747899227,
+    "E": 1077,
+    "category": "association",
+    "kavg": 4.404907975460123,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.8997214484679665,
+      "mean": -5.493036211699164,
+      "std": 4.877228569975005
+    }
+  },
+  {
+    "network": "wordnet_de",
+    "N": 759,
+    "C": 0.02219626168224299,
+    "language": "German",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9927536231884058,
+      "mean": -1.3970103903074913,
+      "std": 0.348467029473515
+    },
+    "eta": 0.006271845294482735,
+    "E": 828,
+    "category": "taxonomy",
+    "kavg": 2.1818181818181817,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.6739130434782609,
+      "mean": -3.996376811594203,
+      "std": 7.407551061808133
+    }
+  },
+  {
+    "network": "usf_en",
+    "N": 498,
+    "C": 0.1426774894249457,
+    "language": "American English",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9992784992784993,
+      "mean": -1.4712007349003742,
+      "std": 0.3197463408020267
+    },
+    "eta": 0.06221547534309104,
+    "E": 1386,
+    "category": "association",
+    "kavg": 5.566265060240964,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9372294372294372,
+      "mean": -7.920634920634921,
+      "std": 5.421928323447219
+    }
+  },
+  {
+    "network": "depression_minimum",
+    "N": 1634,
+    "C": 0.15868662382917287,
+    "language": "English",
+    "lly": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.9959485643825965,
+      "mean": -1.2416504483559347,
+      "std": 0.3744179557712344
+    },
+    "eta": 0.1181956829812238,
+    "E": 11354,
+    "category": "clinical",
+    "kavg": 13.89718482252142,
+    "forman": {
+      "geometry": "HYPERBOLIC",
+      "fraction_negative": 0.8921085080147966,
+      "mean": -58.24194116610886,
+      "std": 60.895909928320506
+    }
+  }
+]

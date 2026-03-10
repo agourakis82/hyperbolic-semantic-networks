@@ -1,0 +1,81 @@
+{
+  "network": "babelnet_ru",
+  "alpha": 0.5,
+  "n_relations": 92,
+  "min_edges": 10,
+  "n_nodes": 493,
+  "relations": [
+    {
+      "n_edges": 162,
+      "geometry": "SPHERICAL",
+      "relation": "SEMANTICALLY_RELATED",
+      "fraction_negative": 0.2037037037037037,
+      "kappa_mean": 0.05655496766607881,
+      "n_nodes": 166,
+      "kappa_std": 0.25666661294440624
+    },
+    {
+      "n_edges": 21,
+      "geometry": "SPHERICAL",
+      "relation": "HYPONYM_oewn~",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.19047619047619044,
+      "n_nodes": 25,
+      "kappa_std": 0.15398154909052406
+    },
+    {
+      "n_edges": 19,
+      "geometry": "SPHERICAL",
+      "relation": "INSTANCE_OF",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.8421052631578947,
+      "n_nodes": 35,
+      "kappa_std": 0.23878346647045964
+    },
+    {
+      "n_edges": 17,
+      "geometry": "SPHERICAL",
+      "relation": "INSTANCES_HYPONYM_oewn~i",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.17647058823529427,
+      "n_nodes": 20,
+      "kappa_std": 0.21465887210303938
+    },
+    {
+      "n_edges": 13,
+      "geometry": "SPHERICAL",
+      "relation": "COUNTRY",
+      "fraction_negative": 0.07692307692307693,
+      "kappa_mean": 0.30769230769230776,
+      "n_nodes": 17,
+      "kappa_std": 0.3654408413779288
+    },
+    {
+      "n_edges": 13,
+      "geometry": "SPHERICAL",
+      "relation": "WIKIDATA_HYPONYM",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.2307692307692308,
+      "n_nodes": 16,
+      "kappa_std": 0.14889191858124276
+    },
+    {
+      "n_edges": 11,
+      "geometry": "SPHERICAL",
+      "relation": "COUNTRY_OF_ORIGIN",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.5454545454545454,
+      "n_nodes": 17,
+      "kappa_std": 0.3256694736394648
+    },
+    {
+      "n_edges": 10,
+      "geometry": "SPHERICAL",
+      "relation": "PART_OF",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.4000000000000001,
+      "n_nodes": 14,
+      "kappa_std": 0.4140393356054124
+    }
+  ]
+}

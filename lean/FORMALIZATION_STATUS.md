@@ -23,7 +23,20 @@ $ lake build
 Build completed successfully.
 ```
 
-**Warnings**: 82 `sorry` declarations, 4 core axioms
+**Warnings**: 86 `sorry` declarations, 3 core axioms
+
+**Sorry breakdown by module** (86 total):
+| Module | sorry count |
+|--------|-------------|
+| RandomGraph.lean | 21 |
+| SpectralGeometry.lean | 20 |
+| RicciFlow.lean | 17 |
+| CliffordFMRI.lean | 14 |
+| RandomGeometric.lean | 4 |
+| HehlFormula.lean | 4 |
+| HypercomplexPhase.lean | 3 |
+| Visualization.lean | 2 |
+| WassersteinProven.lean | 1 |
 
 ---
 
@@ -96,7 +109,7 @@ Clifford.lean, CliffordFMRI.lean, ComputationalVerification.lean, HypercomplexPh
 | Random geometric | 4 | ORC convergence |
 | Cheeger inequality | 2 | Spectral graph theory |
 | Flow convergence | 3 | Discrete Ricci flow dynamics |
-| **Total** | **82** | (documented in code) |
+| **Total** | **86** | (documented in code) |
 
 ### What is Conjecture 🔮
 
@@ -126,7 +139,7 @@ structure PhaseTransitionConjecture where
 | Claim | Evidence | Confidence |
 |-------|----------|------------|
 | 25 Lean modules build successfully | `lake build` output | 100% |
-| 4 core axioms admitted | `grep -n "^axiom" *.lean` | 100% |
+| 3 core axioms admitted | `grep -n "^axiom" *.lean` | 100% |
 | 82 `sorry` declarations | `grep -r "sorry" *.lean | wc -l` | 100% |
 | Phase transition is conjecture | PhaseTransition.lean structure | 100% |
 | Curvature bounds proven | Curvature.lean:277-351 | 100% |
@@ -203,7 +216,7 @@ Current fast approximation:
   year = {2026},
   month = {feb},
   url = {https://github.com/agourakis82/hyperbolic-semantic-networks/tree/main/lean},
-  note = {25 modules, 82 sorry, 4 axioms. Build: lake build}
+  note = {25 modules, 86 sorry, 3 axioms. Build: lake build}
 }
 ```
 

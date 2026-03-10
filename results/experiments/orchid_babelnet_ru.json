@@ -1,0 +1,24 @@
+{
+  "n_hyperedges_total": 217,
+  "interpretation": "pairwise_more_negative",
+  "network": "babelnet_ru",
+  "alpha": 0.5,
+  "orchid": {
+    "kappa_min": 0.5045871559633035,
+    "kappa_max": 0.9625,
+    "fraction_negative": 0.0,
+    "kappa_mean": 0.598944040658284,
+    "n_valid": 208,
+    "kappa_std": 0.11239075006417289
+  },
+  "n_hyperedges_processed": 208,
+  "pairwise_clique_expansion": {
+    "fraction_negative": 0.048,
+    "kappa_mean": 0.44900111958051675,
+    "n_valid": 500,
+    "kappa_std": 0.18224857518880833
+  },
+  "delta_kappa": 0.14994292107776724,
+  "n_nodes": 493,
+  "max_size": 8
+}

@@ -1,0 +1,81 @@
+{
+  "network": "conceptnet_pt",
+  "alpha": 0.5,
+  "n_relations": 11,
+  "min_edges": 10,
+  "n_nodes": 489,
+  "relations": [
+    {
+      "n_edges": 961,
+      "geometry": "HYPERBOLIC",
+      "relation": "/r/AtLocation",
+      "fraction_negative": 0.8147762747138397,
+      "kappa_mean": -0.20773078058218325,
+      "n_nodes": 353,
+      "kappa_std": 0.21188124826444768
+    },
+    {
+      "n_edges": 356,
+      "geometry": "HYPERBOLIC",
+      "relation": "/r/UsedFor",
+      "fraction_negative": 0.4803370786516854,
+      "kappa_mean": -0.03327222870762193,
+      "n_nodes": 283,
+      "kappa_std": 0.30159873608988047
+    },
+    {
+      "n_edges": 67,
+      "geometry": "SPHERICAL",
+      "relation": "/r/RelatedTo",
+      "fraction_negative": 0.02985074626865672,
+      "kappa_mean": 0.14925373134328357,
+      "n_nodes": 77,
+      "kappa_std": 0.18181347046511576
+    },
+    {
+      "n_edges": 42,
+      "geometry": "SPHERICAL",
+      "relation": "/r/DefinedAs",
+      "fraction_negative": 0.09523809523809523,
+      "kappa_mean": 0.3908730158730159,
+      "n_nodes": 52,
+      "kappa_std": 0.3340886235925864
+    },
+    {
+      "n_edges": 53,
+      "geometry": "SPHERICAL",
+      "relation": "/r/NotUsedFor",
+      "fraction_negative": 0.07547169811320754,
+      "kappa_mean": 0.28679245283018867,
+      "n_nodes": 67,
+      "kappa_std": 0.36016019836866126
+    },
+    {
+      "n_edges": 32,
+      "geometry": "SPHERICAL",
+      "relation": "/r/MotivatedByGoal",
+      "fraction_negative": 0.21875,
+      "kappa_mean": 0.3125,
+      "n_nodes": 42,
+      "kappa_std": 0.4021670688339366
+    },
+    {
+      "n_edges": 24,
+      "geometry": "SPHERICAL",
+      "relation": "/r/IsA",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.3333333333333333,
+      "n_nodes": 32,
+      "kappa_std": 0.260990310220486
+    },
+    {
+      "n_edges": 23,
+      "geometry": "SPHERICAL",
+      "relation": "/r/HasSubevent",
+      "fraction_negative": 0.21739130434782608,
+      "kappa_mean": 0.1884057971014493,
+      "n_nodes": 25,
+      "kappa_std": 0.24517746523654158
+    }
+  ]
+}

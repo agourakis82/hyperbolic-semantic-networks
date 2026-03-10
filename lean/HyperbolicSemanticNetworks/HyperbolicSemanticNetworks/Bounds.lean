@@ -3,6 +3,7 @@ import Mathlib.Order.Interval.Set.Basic
 import «HyperbolicSemanticNetworks».Basic
 import «HyperbolicSemanticNetworks».Curvature
 import «HyperbolicSemanticNetworks».Wasserstein
+import «HyperbolicSemanticNetworks».WassersteinProven
 import «HyperbolicSemanticNetworks».PhaseTransition
 /-!
 # Provable Bounds for Network Metrics
@@ -132,18 +133,23 @@ theorem wasserstein_nonneg
     0 ≤ Wasserstein.wasserstein1 d μ ν :=
   Wasserstein.wasserstein_nonneg hμ hν h_nonneg
 
-/-- Wasserstein distance is symmetric. -/
+/-- Wasserstein distance is symmetric. Uses proven theorem (not axiom). -/
 theorem wasserstein_symmetric (h_sym : ∀ u v, d u v = d v u) :
-    Wasserstein.wasserstein1 d μ ν = Wasserstein.wasserstein1 d ν μ := by
-  apply Wasserstein.wasserstein_symmetric
-  assumption
+    Wasserstein.wasserstein1 d μ ν = Wasserstein.wasserstein1 d ν μ :=
+  Wasserstein.wasserstein_symmetric_proven d h_sym
 
-/-- Wasserstein distance satisfies triangle inequality. -/
-theorem wasserstein_triangle (h_metric : ∀ u v w, d u w ≤ d u v + d v w) :
-    ∀ (μ ν ρ : V → ℝ),
-    Wasserstein.wasserstein1 d μ ρ ≤ Wasserstein.wasserstein1 d μ ν + Wasserstein.wasserstein1 d ν ρ := by
-  apply Wasserstein.wasserstein_triangle
-  assumption
+/-- Wasserstein distance satisfies triangle inequality.
+    Now proven via the glued coupling construction (see WassersteinProven.lean). -/
+theorem wasserstein_triangle
+    (h_nonneg : ∀ u v, d u v ≥ 0)
+    (h_sym : ∀ u v, d u v = d v u)
+    (h_tri : ∀ u v w, d u w ≤ d u v + d v w)
+    (μ ν ρ : V → ℝ)
+    (hμ : ProbabilityMeasure.IsProbabilityMeasure μ)
+    (hν : ProbabilityMeasure.IsProbabilityMeasure ν)
+    (hρ : ProbabilityMeasure.IsProbabilityMeasure ρ) :
+    Wasserstein.wasserstein1 d μ ρ ≤ Wasserstein.wasserstein1 d μ ν + Wasserstein.wasserstein1 d ν ρ :=
+  Wasserstein.wasserstein_triangle_proven d hμ hν hρ h_nonneg h_sym h_tri
 
 end WassersteinBounds
 

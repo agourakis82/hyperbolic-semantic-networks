@@ -29,7 +29,7 @@ end
 println("\nRunning basic tests...\n")
 
 @testset "Basic Functionality" begin
-    using LightGraphs
+    using Graphs
     
     # Test 1: Can create graphs
     @test begin

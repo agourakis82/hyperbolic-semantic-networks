@@ -1,0 +1,24 @@
+{
+  "n_hyperedges_total": 325,
+  "interpretation": "pairwise_more_negative",
+  "network": "conceptnet_en",
+  "alpha": 0.5,
+  "orchid": {
+    "kappa_min": 0.5011630171369194,
+    "kappa_max": 0.7292772630865302,
+    "fraction_negative": 0.0,
+    "kappa_mean": 0.5044413623691503,
+    "n_valid": 305,
+    "kappa_std": 0.015156383469591347
+  },
+  "n_hyperedges_processed": 305,
+  "pairwise_clique_expansion": {
+    "fraction_negative": 0.0,
+    "kappa_mean": 0.38879764228036684,
+    "n_valid": 500,
+    "kappa_std": 0.07338666760133088
+  },
+  "delta_kappa": 0.11564372008878343,
+  "n_nodes": 467,
+  "max_size": 8
+}

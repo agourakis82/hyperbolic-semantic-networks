@@ -1,0 +1,180 @@
+{
+  "network": "conceptnet_en",
+  "alpha": 0.5,
+  "n_relations": 27,
+  "min_edges": 10,
+  "n_nodes": 467,
+  "relations": [
+    {
+      "n_edges": 637,
+      "geometry": "HYPERBOLIC",
+      "relation": "/r/RelatedTo",
+      "fraction_negative": 0.7394034536891679,
+      "kappa_mean": -0.1805980221775892,
+      "n_nodes": 322,
+      "kappa_std": 0.30659013410354957
+    },
+    {
+      "n_edges": 416,
+      "geometry": "HYPERBOLIC",
+      "relation": "/r/IsA",
+      "fraction_negative": 0.6153846153846154,
+      "kappa_mean": -0.13405586801019492,
+      "n_nodes": 324,
+      "kappa_std": 0.38147304801978676
+    },
+    {
+      "n_edges": 409,
+      "geometry": "HYPERBOLIC",
+      "relation": "/r/MannerOf",
+      "fraction_negative": 0.7701711491442543,
+      "kappa_mean": -0.1979672953183829,
+      "n_nodes": 206,
+      "kappa_std": 0.2410530317858646
+    },
+    {
+      "n_edges": 237,
+      "geometry": "SPHERICAL",
+      "relation": "/r/Synonym",
+      "fraction_negative": 0.5316455696202531,
+      "kappa_mean": 0.011365615163083528,
+      "n_nodes": 219,
+      "kappa_std": 0.432316196104232
+    },
+    {
+      "n_edges": 214,
+      "geometry": "HYPERBOLIC",
+      "relation": "/r/AtLocation",
+      "fraction_negative": 0.6448598130841121,
+      "kappa_mean": -0.11915652493923519,
+      "n_nodes": 145,
+      "kappa_std": 0.30154424012184383
+    },
+    {
+      "n_edges": 178,
+      "geometry": "HYPERBOLIC",
+      "relation": "/r/HasContext",
+      "fraction_negative": 0.3820224719101124,
+      "kappa_mean": -0.012493311931514171,
+      "n_nodes": 172,
+      "kappa_std": 0.3216976825314113
+    },
+    {
+      "n_edges": 119,
+      "geometry": "SPHERICAL",
+      "relation": "/r/UsedFor",
+      "fraction_negative": 0.36134453781512604,
+      "kappa_mean": 0.14285714285714285,
+      "n_nodes": 128,
+      "kappa_std": 0.4255663747359415
+    },
+    {
+      "n_edges": 65,
+      "geometry": "SPHERICAL",
+      "relation": "/r/PartOf",
+      "fraction_negative": 0.15384615384615385,
+      "kappa_mean": 0.3846153846153845,
+      "n_nodes": 90,
+      "kappa_std": 0.4352851445331923
+    },
+    {
+      "n_edges": 24,
+      "geometry": "SPHERICAL",
+      "relation": "/r/SimilarTo",
+      "fraction_negative": 0.2916666666666667,
+      "kappa_mean": 0.2875,
+      "n_nodes": 30,
+      "kappa_std": 0.47002543871952107
+    },
+    {
+      "n_edges": 28,
+      "geometry": "SPHERICAL",
+      "relation": "/r/Desires",
+      "fraction_negative": 0.10714285714285714,
+      "kappa_mean": 0.1785714285714284,
+      "n_nodes": 33,
+      "kappa_std": 0.38524368705106443
+    },
+    {
+      "n_edges": 23,
+      "geometry": "SPHERICAL",
+      "relation": "/r/HasProperty",
+      "fraction_negative": 0.17391304347826086,
+      "kappa_mean": 0.34782608695652173,
+      "n_nodes": 31,
+      "kappa_std": 0.41957483133109563
+    },
+    {
+      "n_edges": 23,
+      "geometry": "SPHERICAL",
+      "relation": "/r/HasPrerequisite",
+      "fraction_negative": 0.08695652173913043,
+      "kappa_mean": 0.5108695652173914,
+      "n_nodes": 33,
+      "kappa_std": 0.406935104387832
+    },
+    {
+      "n_edges": 15,
+      "geometry": "SPHERICAL",
+      "relation": "/r/DistinctFrom",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.7333333333333333,
+      "n_nodes": 26,
+      "kappa_std": 0.2581988897471611
+    },
+    {
+      "n_edges": 15,
+      "geometry": "SPHERICAL",
+      "relation": "/r/CapableOf",
+      "fraction_negative": 0.06666666666666667,
+      "kappa_mean": 0.5333333333333333,
+      "n_nodes": 23,
+      "kappa_std": 0.3842122429322726
+    },
+    {
+      "n_edges": 14,
+      "geometry": "SPHERICAL",
+      "relation": "/r/HasSubevent",
+      "fraction_negative": 0.07142857142857144,
+      "kappa_mean": 0.5714285714285714,
+      "n_nodes": 22,
+      "kappa_std": 0.3314967720658979
+    },
+    {
+      "n_edges": 14,
+      "geometry": "SPHERICAL",
+      "relation": "/r/HasA",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.6428571428571429,
+      "n_nodes": 23,
+      "kappa_std": 0.3356149022873726
+    },
+    {
+      "n_edges": 10,
+      "geometry": "SPHERICAL",
+      "relation": "/r/CausesDesire",
+      "fraction_negative": 0.1,
+      "kappa_mean": 0.3,
+      "n_nodes": 13,
+      "kappa_std": 0.3496029493900505
+    },
+    {
+      "n_edges": 10,
+      "geometry": "SPHERICAL",
+      "relation": "/r/Causes",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.9,
+      "n_nodes": 19,
+      "kappa_std": 0.21081851067789198
+    },
+    {
+      "n_edges": 10,
+      "geometry": "SPHERICAL",
+      "relation": "/r/NotDesires",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.4,
+      "n_nodes": 14,
+      "kappa_std": 0.41403933560541245
+    }
+  ]
+}

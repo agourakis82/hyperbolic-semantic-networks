@@ -1,0 +1,25 @@
+semantic_orc.sio — Phase 3: Real semantic network classification
+=================================================================
+alpha=0.5  epsilon=0.1  sinkhorn_iter=300  date=2026-03-06
+
+Network         N     E      kappa              Geometry    Julia_ref  Match
+--------        ---   ----   -----              --------    ---------  -----
+babelnet_ar     142   151    -0.012362          HYPERBOLIC  -0.012     PASS
+babelnet_ru     493   522    -0.029935          HYPERBOLIC  -0.030     PASS
+wordnet_en      500   527    -0.001590          EUCLIDEAN   -0.002     PASS
+swow_es         443   583    -0.051697          HYPERBOLIC  -0.068     PASS
+swow_en         467   661    -0.115418          HYPERBOLIC  -0.137     PASS
+swow_zh         476   768    -0.136633          HYPERBOLIC  -0.144     PASS
+conceptnet_pt   489   1578   -0.237334          HYPERBOLIC  -0.236     PASS
+conceptnet_en   467   2383   -0.236921          HYPERBOLIC  -0.233     PASS
+swow_nl         500   15368  eta=7.558>>eta_c   SPHERICAL   +0.099     PASS (eta-theory)
+
+Score: 9/9 networks correctly classified
+- 8/8 by Sinkhorn ORC (sign match vs Julia LP reference)
+- 1/1 by eta-theory (swow_nl: eta=7.558 >> eta_c=3.10, exceeds MAX_DEG=60)
+
+Notes:
+- Sounio kappa values use Sinkhorn (epsilon=0.1) vs Julia exact LP (HiGHS)
+- Sign agreement is perfect; magnitude bias ~0.01-0.02 expected (known Sinkhorn bias)
+- wordnet_en correctly classified as Euclidean (kappa=-0.002, near-zero)
+- swow_nl classified by eta-theory (max_deg=458 exceeds SparseGraph MAX_DEG=60)

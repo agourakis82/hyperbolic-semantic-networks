@@ -7,6 +7,7 @@ Provides Julia bindings to Rust curvature computation library.
 module FFI
 
 using Libdl
+using LinearAlgebra
 
 # Load Rust library
 const LIB_CURVATURE = Ref{String}()
@@ -84,45 +85,27 @@ function wasserstein1_julia(
     epsilon::Float64,
     max_iterations::Int
 )::Float64
-    # Simplified Julia implementation (will be replaced by proper Sinkhorn)
     n = length(mu)
-    
-    # Normalize
+    C = reshape(cost_matrix, n, n)
     mu_norm = mu / sum(mu)
     nu_norm = nu / sum(nu)
-    
-    # Simple greedy matching (placeholder)
-    W1 = 0.0
-    mu_remaining = copy(mu_norm)
-    nu_remaining = copy(nu_norm)
-    
-    for _ in 1:min(n, 100)  # Limit iterations
-        min_cost = Inf
-        min_i, min_j = 0, 0
-        
-        for i in 1:n
-            for j in 1:n
-                if mu_remaining[i] > 0 && nu_remaining[j] > 0
-                    cost = cost_matrix[(i-1)*n + j]
-                    if cost < min_cost
-                        min_cost = cost
-                        min_i, min_j = i, j
-                    end
-                end
-            end
-        end
-        
-        if min_i > 0 && min_j > 0
-            transport = min(mu_remaining[min_i], nu_remaining[min_j])
-            W1 += transport * min_cost
-            mu_remaining[min_i] -= transport
-            nu_remaining[min_j] -= transport
-        else
+
+    K = exp.(-C / epsilon)
+    u = ones(n)
+    v = ones(n)
+    tol = 1e-6
+
+    for iter in 1:max_iterations
+        u_old = copy(u)
+        u = mu_norm ./ (K * v)
+        v = nu_norm ./ (K' * u)
+        if iter % 10 == 0 && norm(u - u_old, 1) < tol
             break
         end
     end
-    
-    return W1
+
+    P = Diagonal(u) * K * Diagonal(v)
+    return sum(P .* C)
 end
 
 # Export functions

@@ -1,0 +1,42 @@
+{
+  "n_hyperedges": 3088,
+  "max_edges": 300,
+  "n_seeds": 1,
+  "network": "wordnet_en",
+  "n_base_edges": 0,
+  "resolution_curve": [
+    {
+      "time_sec": 0.0001270771026611328,
+      "n_seeds": 0,
+      "n_edges": 0,
+      "r": 0.0,
+      "kappa_mean": null,
+      "eta": 0.0,
+      "k_mean": 0.0,
+      "kappa_std": null
+    },
+    {
+      "time_sec": 2.238785982131958,
+      "n_seeds": 1,
+      "n_edges": 2251,
+      "r": 0.5,
+      "kappa_mean": -0.18969946724987133,
+      "eta": 0.162144032,
+      "k_mean": 9.004,
+      "kappa_std": null
+    },
+    {
+      "time_sec": 0.21164703369140625,
+      "n_seeds": 1,
+      "n_edges": 4004,
+      "r": 1.0,
+      "kappa_mean": -0.11074550971009241,
+      "eta": 0.5130245119999999,
+      "k_mean": 16.016,
+      "kappa_std": null
+    }
+  ],
+  "n_nodes": 500,
+  "n_points": 3,
+  "sinkhorn_epsilon": 0.1
+}

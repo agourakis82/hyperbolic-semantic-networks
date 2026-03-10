@@ -80,3 +80,15 @@ wheels/
 *.csv.gz
 data/raw/conceptnet/*
 data/raw/SWOW-ZH24/*
+
+# Rust build artifacts
+rust/target/
+
+# IDE / editor configs
+.continue/
+
+# Scratch data
+data/scratch/
+
+# Julia package manifest (lock file — reproducibility via Project.toml)
+julia/Manifest.toml

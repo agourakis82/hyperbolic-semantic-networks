@@ -1,0 +1,469 @@
+// phase_transition_full.sio — ORC phase transition sweep, N=100, 15 k-values
+//
+// PHASE 1.4: Puts it all together.
+//   - SparseGraph     (Phase 1.1) — CSR adjacency, no N×N distance matrix
+//   - Dynamic BFS     (Phase 1.2) — on-demand O(N) distance rows
+//   - SinkhornConfig  (Phase 1.3) — configurable ε with sc_exp()
+//
+// Reproduces the N=100 phase transition table from the Julia reference:
+//   eta_c ≈ 2.29 (between k=14/eta=1.96 and k=16/eta=2.56)
+//
+// Output (CSV to stdout):
+//   N,k,eta,kappa_mean,n_edges,geometry
+//
+// Key parameters (matching Julia/manuscript):
+//   alpha   = 0.5   (Ollivier idleness)
+//   epsilon = 0.1   (Sinkhorn regularisation — validated in experiment 08)
+//   seeds   = 3     (fast; use 10 for publication quality)
+//   n_edges = computed from actual graph degree sequence
+//
+// Author: Hyperbolic Semantic Networks Project
+// Version: 1.0.0 (Phase 1.4 deep integration)
+
+// ============================================================================
+// Configuration
+// ============================================================================
+
+let MAX_N:    usize = 500
+let MAX_DEG:  usize = 60
+let MAX_SUP:  usize = 41    // max Sinkhorn support (MAX_DEG + self)
+let N_SEEDS:  usize = 3
+let FLOOR:    f64   = 1e-300
+let SINKHORN_CHECK_PERIOD: usize = 10
+let SINKHORN_TOL: f64 = 1e-6
+
+// ============================================================================
+// Pure-Sounio exp() (no .exp() method in this compiler version)
+// ============================================================================
+
+fn sc_exp(x: f64) -> f64 with Mut, Div, Panic {
+    let ln2     = 0.6931471805599453
+    let inv_ln2 = 1.4426950408889634
+    if x >  709.0 { return 1.0e308 }
+    if x < -709.0 { return 0.0 }
+    var k_f = x * inv_ln2
+    var k: i64 = 0
+    if k_f >= 0.0 { k = (k_f + 0.5) as i64 } else { k = (k_f - 0.5) as i64 }
+    let r = x - (k as f64) * ln2
+    var sum  = 1.0
+    var term = 1.0
+    var n = 1
+    while n <= 20 { term = term * r / (n as f64); sum = sum + term; n = n + 1 }
+    var result = sum
+    if k > 0 {
+        var j: i64 = 0
+        while j < k       { result = result * 2.0; j = j + 1 }
+    } else if k < 0 {
+        var j: i64 = 0
+        while j < (0 - k) { result = result * 0.5; j = j + 1 }
+    }
+    result
+}
+
+// ============================================================================
+// SparseGraph (Phase 1.1)
+// ============================================================================
+
+struct SparseGraph {
+    adj: [usize; 30000],
+    deg: [usize; 500],
+    n:   usize,
+}
+
+fn sparse_graph_new(n: usize) -> SparseGraph with Mut, Panic {
+    if n > MAX_N { let _: usize = 0 / 0 }
+    var adj: [usize; 30000] = [0; 30000]
+    var deg: [usize; 500]   = [0; 500]
+    SparseGraph { adj: adj, deg: deg, n: n }
+}
+
+fn sparse_add_edge(g: &! SparseGraph, u: usize, v: usize) with Mut, Div, Panic {
+    let du = g.deg[u]
+    let dv = g.deg[v]
+    var already: bool = false
+    var ci: usize = 0
+    while ci < du {
+        if g.adj[u * MAX_DEG + ci] == v { already = true }
+        ci = ci + 1
+    }
+    if !already && u != v && du < MAX_DEG && dv < MAX_DEG {
+        g.adj[u * MAX_DEG + du] = v
+        g.deg[u] = du + 1
+        g.adj[v * MAX_DEG + dv] = u
+        g.deg[v] = dv + 1
+    }
+}
+
+fn sparse_degree(g: &SparseGraph, u: usize) -> usize { g.deg[u] }
+fn sparse_neighbor(g: &SparseGraph, u: usize, i: usize) -> usize { g.adj[u * MAX_DEG + i] }
+
+fn count_edges(g: &SparseGraph) -> usize {
+    var total: usize = 0
+    var u: usize = 0
+    while u < g.n { total = total + g.deg[u]; u = u + 1 }
+    total / 2
+}
+
+// ============================================================================
+// LCG random number generator
+// ============================================================================
+
+fn lcg_step(state: u64) -> u64 {
+    let a: u64 = 6364136223846793005
+    let c: u64 = 1442695040888963407
+    state * a + c
+}
+
+fn lcg_umod(state: u64, m: usize) -> usize with Div, Panic {
+    if m == 0 { return 0 }
+    ((state as usize) & 4294967295) % m
+}
+
+fn build_k_regular_sparse(n: usize, k: usize, seed: u64) -> SparseGraph
+    with Mut, Div, Panic
+{
+    var g = sparse_graph_new(n)
+    var stubs: [usize; 30000] = [0; 30000]
+    var si: usize = 0
+    var i: usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < k { stubs[si] = i; si = si + 1; j = j + 1 }
+        i = i + 1
+    }
+    let stub_count = si
+    var rng: u64 = if seed == 0 { 12345 } else { seed }
+    var s: usize = stub_count
+    while s > 1 {
+        s   = s - 1
+        rng = lcg_step(rng)
+        let t   = lcg_umod(rng, s + 1)
+        let tmp = stubs[s]
+        stubs[s] = stubs[t]
+        stubs[t] = tmp
+    }
+    i = 0
+    while i + 1 < stub_count {
+        sparse_add_edge(&! g, stubs[i], stubs[i + 1])
+        i = i + 2
+    }
+    g
+}
+
+// ============================================================================
+// BFS Queue (Phase 1.2)
+// ============================================================================
+
+struct Queue {
+    data: [usize; 500],
+    head: usize,
+    tail: usize,
+    size: usize,
+}
+
+fn queue_new() -> Queue with Mut, Panic {
+    var data: [usize; 500] = [0; 500]
+    Queue { data: data, head: 0, tail: 0, size: 0 }
+}
+
+fn queue_push(q: &! Queue, x: usize) with Mut, Panic {
+    if q.size >= MAX_N { let _: usize = 0 / 0 }
+    q.data[q.tail] = x
+    q.tail = (q.tail + 1) % MAX_N
+    q.size = q.size + 1
+}
+
+fn queue_pop(q: &! Queue) -> usize with Mut, Panic {
+    if q.size == 0 { let _: usize = 0 / 0 }
+    let x = q.data[q.head]
+    q.head = (q.head + 1) % MAX_N
+    q.size = q.size - 1
+    x
+}
+
+fn queue_empty(q: &Queue) -> bool { q.size == 0 }
+
+// Single-source BFS: returns dist[v] from src, -1 if unreachable.
+fn bfs_from(g: &SparseGraph, src: usize, n: usize) -> [i64; 500]
+    with Mut, Div, Panic
+{
+    var dist: [i64; 500]   = [-1; 500]
+    var vis:  [bool; 500]  = [false; 500]
+    dist[src] = 0; vis[src] = true
+    var q = queue_new()
+    queue_push(&! q, src)
+    while q.size > 0 {
+        let u = queue_pop(&! q)
+        let du = sparse_degree(g, u)
+        var i: usize = 0
+        while i < du {
+            let v = sparse_neighbor(g, u, i)
+            if !vis[v] { vis[v] = true; dist[v] = dist[u] + 1; queue_push(&! q, v) }
+            i = i + 1
+        }
+    }
+    dist
+}
+
+// Cache one BFS row per node so we do not recompute bfs_from(g, u)
+// once per incident edge during mean_orc().
+struct DistCache {
+    d: [i64; 250000],
+    n: usize,
+}
+
+fn build_dist_cache(g: &SparseGraph) -> DistCache with Mut, Div, Panic {
+    var d: [i64; 250000] = [0; 250000]
+    let n = g.n
+    var src: usize = 0
+    while src < n {
+        let row = bfs_from(g, src, n)
+        var dst: usize = 0
+        while dst < n {
+            d[src * MAX_N + dst] = row[dst]
+            dst = dst + 1
+        }
+        src = src + 1
+    }
+    DistCache { d: d, n: n }
+}
+
+fn cached_dist(cache: &DistCache, u: usize, v: usize) -> i64 {
+    cache.d[u * MAX_N + v]
+}
+
+// ============================================================================
+// Lazy measure (ORC α-idle random walk)
+// ============================================================================
+
+struct Measure {
+    nodes: [usize; 41],
+    probs: [f64;   41],
+    len:   usize,
+}
+
+fn lazy_measure(g: &SparseGraph, node: usize, alpha: f64) -> Measure
+    with Mut, Div, Panic
+{
+    var nodes: [usize; 41] = [0;   41]
+    var probs: [f64;   41] = [0.0; 41]
+    var len:   usize       = 0
+    let d = sparse_degree(g, node)
+    if d == 0 {
+        nodes[0] = node; probs[0] = 1.0
+        return Measure { nodes: nodes, probs: probs, len: 1 }
+    }
+    let w = (1.0 - alpha) / (d as f64)
+    if alpha > 0.0 { nodes[0] = node; probs[0] = alpha; len = 1 }
+    var i: usize = 0
+    while i < d {
+        nodes[len] = sparse_neighbor(g, node, i)
+        probs[len] = w
+        len = len + 1
+        i   = i + 1
+    }
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+// ============================================================================
+// Sinkhorn W1 (Phase 1.3) — uses dynamic BFS row for cost matrix
+// ============================================================================
+
+// Compute W1(mu, nu) using the full N×N DistCache for exact cost matrix.
+fn wasserstein1_dynamic(
+    mu:       &Measure,
+    nu:       &Measure,
+    cache:    &DistCache,
+    epsilon:  f64,
+    max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let nm = mu.len
+    let nn = nu.len
+    if nm == 0 || nn == 0 { return 0.0 }
+
+    var cost: [f64; 1681] = [0.0; 1681]
+    var kmat: [f64; 1681] = [0.0; 1681]
+    var u_s:  [f64;   41] = [1.0;   41]
+    var u_prev: [f64; 41] = [1.0;   41]
+    var v_s:  [f64;   41] = [1.0;   41]
+
+    // Build cost matrix: C[i,j] = d(mu.nodes[i], nu.nodes[j])
+    // Uses the precomputed DistCache (N×N BFS distances) for O(1) lookup.
+    // This is the EXACT Wasserstein-1 cost (not the src-only approximation).
+    var i: usize = 0
+    while i < nm {
+        let ui = mu.nodes[i]
+        var j: usize = 0
+        while j < nn {
+            let vj  = nu.nodes[j]
+            let dv  = cached_dist(cache, ui, vj)
+            let c   = if dv >= 0 { dv as f64 } else { 100.0 }
+            cost[i * MAX_SUP + j] = c
+            kmat[i * MAX_SUP + j] = sc_exp(-(c / epsilon))
+            j = j + 1
+        }
+        i = i + 1
+    }
+
+    // Sinkhorn iterations
+    var iter: usize = 0
+    while iter < max_iter {
+        i = 0
+        while i < nm {
+            u_prev[i] = u_s[i]
+            i = i + 1
+        }
+        i = 0
+        while i < nm {
+            var s: f64 = 0.0
+            var j: usize = 0
+            while j < nn { s = s + kmat[i * MAX_SUP + j] * v_s[j]; j = j + 1 }
+            if s > FLOOR { u_s[i] = mu.probs[i] / s }
+            i = i + 1
+        }
+        var j: usize = 0
+        while j < nn {
+            var s: f64 = 0.0
+            i = 0
+            while i < nm { s = s + kmat[i * MAX_SUP + j] * u_s[i]; i = i + 1 }
+            if s > FLOOR { v_s[j] = nu.probs[j] / s }
+            j = j + 1
+        }
+        if (iter + 1) % SINKHORN_CHECK_PERIOD == 0 {
+            var diff: f64 = 0.0
+            i = 0
+            while i < nm {
+                let delta = u_s[i] - u_prev[i]
+                let abs_delta = if delta >= 0.0 { delta } else { 0.0 - delta }
+                diff = diff + abs_delta
+                i = i + 1
+            }
+            if diff < SINKHORN_TOL { iter = max_iter }
+        }
+        iter = iter + 1
+    }
+
+    var w1: f64 = 0.0
+    i = 0
+    while i < nm {
+        var j: usize = 0
+        while j < nn {
+            w1 = w1 + u_s[i] * kmat[i * MAX_SUP + j] * v_s[j] * cost[i * MAX_SUP + j]
+            j  = j + 1
+        }
+        i = i + 1
+    }
+    w1
+}
+
+// ============================================================================
+// ORC κ(u, v) = 1 − W1(μ_u, μ_v) / d(u,v)
+// ============================================================================
+
+fn ollivier_ricci_edge(
+    g: &SparseGraph, cache: &DistCache, u: usize, v: usize, alpha: f64,
+    epsilon: f64, max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let d_uv = cached_dist(cache, u, v)
+    if d_uv <= 0 { return 0.0 }
+    let mu = lazy_measure(g, u, alpha)
+    let nu = lazy_measure(g, v, alpha)
+    let w1 = wasserstein1_dynamic(&mu, &nu, cache, epsilon, max_iter)
+    1.0 - w1 / (d_uv as f64)
+}
+
+// Mean ORC over all edges of g.
+fn mean_orc(
+    g: &SparseGraph, alpha: f64, epsilon: f64, max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    var sum_k: f64  = 0.0
+    var n_edge: usize = 0
+    let cache = build_dist_cache(g)
+
+    var u: usize = 0
+    while u < g.n {
+        let du = sparse_degree(g, u)
+        var i: usize = 0
+        while i < du {
+            let v = sparse_neighbor(g, u, i)
+            if v > u {   // each undirected edge once
+                let k = ollivier_ricci_edge(g, &cache, u, v, alpha, epsilon, max_iter)
+                sum_k  = sum_k + k
+                n_edge = n_edge + 1
+            }
+            i = i + 1
+        }
+        u = u + 1
+    }
+
+    if n_edge == 0 { return 0.0 }
+    sum_k / (n_edge as f64)
+}
+
+// ============================================================================
+// Main: N=100 phase transition sweep
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    let n: usize = 100
+    let alpha:    f64   = 0.5
+    let epsilon:  f64   = 0.1
+    let max_iter: usize = 300
+
+    // 15 k-values matching Julia reference experiment
+    var k_vals: [usize; 15] = [2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 20, 25, 30, 35, 40]
+
+    // Header
+    println("# ORC Phase Transition — Sounio N=100 (Phase 1.4 deep integration)")
+    print("# alpha=")
+    print(alpha)
+    print("  epsilon=")
+    print(epsilon)
+    print("  sinkhorn_iter=")
+    print(max_iter)
+    print("  n_seeds=")
+    println(N_SEEDS)
+    println("# eta_c expected: ~2.29 (between k=14/eta=1.96 and k=16/eta=2.56)")
+    println("N,k,eta,kappa_mean,n_edges,geometry")
+
+    var ki: usize = 0
+    while ki < 15 {
+        let k = k_vals[ki]
+
+        // Skip invalid: k=0, odd k*n (configuration model requires even stub count)
+        if k > 0 && k < n && (k * n) % 2 == 0 && k < MAX_DEG {
+            let eta = ((k * k) as f64) / (n as f64)
+
+            // Average over N_SEEDS
+            var sum_kappa: f64 = 0.0
+            var n_edges_last: usize = 0
+            var si: usize = 0
+            while si < N_SEEDS {
+                let seed: u64 = (si + 1) as u64 * 1000 + k as u64 * 7 + 42
+                let g = build_k_regular_sparse(n, k, seed)
+                n_edges_last = count_edges(&g)
+                let kappa = mean_orc(&g, alpha, epsilon, max_iter)
+                sum_kappa = sum_kappa + kappa
+                si = si + 1
+            }
+            let kappa_mean = sum_kappa / (N_SEEDS as f64)
+
+            let geom = if kappa_mean < -0.01 { 0 }    // Hyperbolic
+                       else if kappa_mean > 0.01 { 2 } // Spherical
+                       else { 1 }                       // Euclidean
+
+            let geom_str = if geom == 0 { "Hyperbolic" }
+                           else if geom == 2 { "Spherical" }
+                           else { "Euclidean" }
+
+            print(n);          print(",")
+            print(k);          print(",")
+            print(eta);        print(",")
+            print(kappa_mean); print(",")
+            print(n_edges_last); print(",")
+            println(geom_str)
+        }
+
+        ki = ki + 1
+    }
+}

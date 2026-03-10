@@ -18,6 +18,7 @@ import «HyperbolicSemanticNetworks».TestExtraction
 import «HyperbolicSemanticNetworks».LaTeXExport
 import «HyperbolicSemanticNetworks».ComputationalVerification
 import «HyperbolicSemanticNetworks».RandomGeometric
+import «HyperbolicSemanticNetworks».SounioVerification
 /-!
 # Hyperbolic Semantic Networks - Lean 4 Formalization
 

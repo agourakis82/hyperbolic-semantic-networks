@@ -5,7 +5,7 @@ Tests null models, bootstrap, and Ricci flow.
 """
 
 using Test
-using LightGraphs
+using Graphs
 using HyperbolicSemanticNetworks
 
 @testset "Null Models" begin

@@ -6,7 +6,7 @@
   "language": "English",
   "kappa_mean": -0.130267,
   "diameter": 6,
-  "elapsed_orc_seconds": 358.0,
+  "elapsed_orc_seconds": 390.0,
   "degree_std": 19.2446,
   "min_degree": 1,
   "n_threads": 24,
@@ -11375,7 +11375,7 @@
   ],
   "alpha": 0.5,
   "experiment": "unified_semantic_orc",
-  "elapsed_apsp_seconds": 0.1,
+  "elapsed_apsp_seconds": 0.3,
   "mean_degree": 13.8972,
   "eta": 0.118196,
   "E": 11354,
@@ -22742,7 +22742,7 @@
   "frac_hyperbolic": 0.794,
   "kappa_median": -0.181981,
   "filename": "depression_networks_optimal/depression_minimum_edges.csv",
-  "elapsed_total_seconds": 358.0,
+  "elapsed_total_seconds": 390.3,
   "graph_type": "undirected_unweighted",
   "max_degree": 263
 }

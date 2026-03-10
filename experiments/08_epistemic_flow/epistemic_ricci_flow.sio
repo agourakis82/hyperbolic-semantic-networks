@@ -1,0 +1,602 @@
+// epistemic_ricci_flow.sio — Phase 8A: Uncertainty-Aware Discrete Ricci Flow
+//
+// Scientific question: Does epistemic uncertainty (CI width, GCI) narrow or
+// widen as discrete Ricci flow evolves? This is Sounio-unique: the EpistemicKappa
+// struct tracks (mean, sigma, CI) AT EACH FLOW STEP across n_seeds trajectories.
+//
+// Flow rule (Ni et al. 2019):
+//   w_e(t+1) = w_e(t) * (1 - dt * kappa_e(t))
+//   then normalize: sum_e w_e = n_edges
+//
+// The weighted lazy random walk measure mu_u changes with weights:
+//   mu_u(v) = (1-alpha) * w_{uv} / sum_w(u)     for neighbors v
+//   mu_u(u) = alpha                              (self-loop)
+//
+// Key finding (expected): For k=14 (hyperbolic), CI WIDENS as flow amplifies
+// bridge edges differentially. For k=16 (spherical), GCI INCREASES as all
+// edges converge to positive curvature.
+//
+// Output: CSV to stdout
+//   k,t,kappa_mean,sigma,ci_lo,ci_hi,gini
+//
+// Usage:
+//   souc run epistemic_ricci_flow.sio
+//
+// Author: Hyperbolic Semantic Networks Project
+// Version: 1.0.0 (Phase 8A)
+
+// ============================================================================
+// sc_exp: 20-term Taylor series (replaces broken .exp() in beta.4)
+// ============================================================================
+
+fn sc_exp(x: f64) -> f64 with Mut, Div {
+    let ln2     = 0.6931471805599453
+    let inv_ln2 = 1.4426950408889634
+    if x >  709.0 { return 1.0e308 }
+    if x < -709.0 { return 0.0 }
+    var k_f = x * inv_ln2
+    var k: i64 = 0
+    if k_f >= 0.0 { k = (k_f + 0.5) as i64 } else { k = (k_f - 0.5) as i64 }
+    let r = x - (k as f64) * ln2
+    var sum  = 1.0
+    var term = 1.0
+    var n = 1
+    while n <= 20 { term = term * r / (n as f64); sum = sum + term; n = n + 1 }
+    var result = sum
+    if k > 0 {
+        var j: i64 = 0
+        while j < k { result = result * 2.0; j = j + 1 }
+    } else if k < 0 {
+        var j: i64 = 0
+        while j < (0 - k) { result = result * 0.5; j = j + 1 }
+    }
+    result
+}
+
+fn sc_sqrt(x: f64) -> f64 with Mut, Div {
+    if x <= 0.0 { return 0.0 }
+    var r = x
+    var i: usize = 0
+    while i < 50 { r = (r + x / r) * 0.5; i = i + 1 }
+    r
+}
+
+// ============================================================================
+// Constants
+// ============================================================================
+
+let MAX_N:   usize = 500
+let MAX_DEG: usize = 60
+let MAX_SUP: usize = 41
+let MAX_SEEDS: usize = 5
+let MAX_T:   usize = 10
+let FLOOR:   f64   = 1e-300
+
+// ============================================================================
+// SparseGraph
+// ============================================================================
+
+struct SparseGraph {
+    adj: [usize; 30000],
+    deg: [usize; 500],
+    n:   usize,
+}
+
+fn sparse_graph_new(n: usize) -> SparseGraph with Mut, Panic {
+    if n > MAX_N { let _: usize = 0 / 0 }
+    var adj: [usize; 30000] = [0; 30000]
+    var deg: [usize; 500]   = [0; 500]
+    SparseGraph { adj: adj, deg: deg, n: n }
+}
+
+fn sparse_add_edge(g: &! SparseGraph, u: usize, v: usize) with Mut, Div, Panic {
+    let du = g.deg[u]
+    let dv = g.deg[v]
+    var already: bool = false
+    var ci: usize = 0
+    while ci < du {
+        if g.adj[u * MAX_DEG + ci] == v { already = true }
+        ci = ci + 1
+    }
+    if !already && u != v && du < MAX_DEG && dv < MAX_DEG {
+        g.adj[u * MAX_DEG + du] = v
+        g.deg[u] = du + 1
+        g.adj[v * MAX_DEG + dv] = u
+        g.deg[v] = dv + 1
+    }
+}
+
+fn sparse_degree(g: &SparseGraph, u: usize) -> usize { g.deg[u] }
+fn sparse_neighbor(g: &SparseGraph, u: usize, i: usize) -> usize { g.adj[u * MAX_DEG + i] }
+
+// ============================================================================
+// LCG random number generator + k-regular graph builder
+// ============================================================================
+
+fn lcg_step(state: u64) -> u64 {
+    let a: u64 = 6364136223846793005
+    let c: u64 = 1442695040888963407
+    state * a + c
+}
+
+fn lcg_umod(state: u64, m: usize) -> usize with Div, Panic {
+    if m == 0 { return 0 }
+    ((state as usize) & 4294967295) % m
+}
+
+fn build_k_regular_sparse(n: usize, k: usize, seed: u64) -> SparseGraph
+    with Mut, Div, Panic
+{
+    var g = sparse_graph_new(n)
+    var stubs: [usize; 30000] = [0; 30000]
+    var si: usize = 0
+    var i: usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < k { stubs[si] = i; si = si + 1; j = j + 1 }
+        i = i + 1
+    }
+    let stub_count = si
+    var rng: u64 = if seed == 0 { 12345 } else { seed }
+    var s: usize = stub_count
+    while s > 1 {
+        s   = s - 1
+        rng = lcg_step(rng)
+        let t   = lcg_umod(rng, s + 1)
+        let tmp = stubs[s]
+        stubs[s] = stubs[t]
+        stubs[t] = tmp
+    }
+    i = 0
+    while i + 1 < stub_count {
+        sparse_add_edge(&! g, stubs[i], stubs[i + 1])
+        i = i + 2
+    }
+    g
+}
+
+// ============================================================================
+// BFS + DistCache
+// ============================================================================
+
+struct Queue {
+    data: [usize; 500],
+    head: usize,
+    tail: usize,
+    size: usize,
+}
+
+fn queue_new() -> Queue with Mut, Panic {
+    var data: [usize; 500] = [0; 500]
+    Queue { data: data, head: 0, tail: 0, size: 0 }
+}
+
+fn queue_push(q: &! Queue, x: usize) with Mut, Panic {
+    if q.size >= MAX_N { let _: usize = 0 / 0 }
+    q.data[q.tail] = x
+    q.tail = (q.tail + 1) % MAX_N
+    q.size = q.size + 1
+}
+
+fn queue_pop(q: &! Queue) -> usize with Mut, Panic {
+    if q.size == 0 { let _: usize = 0 / 0 }
+    let x = q.data[q.head]
+    q.head = (q.head + 1) % MAX_N
+    q.size = q.size - 1
+    x
+}
+
+fn queue_empty(q: &Queue) -> bool { q.size == 0 }
+
+fn bfs_from(g: &SparseGraph, src: usize, n: usize) -> [i64; 500]
+    with Mut, Div, Panic
+{
+    var dist:    [i64;  500] = [-1;    500]
+    var visited: [bool; 500] = [false; 500]
+    dist[src]    = 0
+    visited[src] = true
+    var q = queue_new()
+    queue_push(&! q, src)
+    while !queue_empty(&q) {
+        let u  = queue_pop(&! q)
+        let du = sparse_degree(g, u)
+        var i: usize = 0
+        while i < du {
+            let v = sparse_neighbor(g, u, i)
+            if !visited[v] {
+                visited[v] = true
+                dist[v]    = dist[u] + 1
+                queue_push(&! q, v)
+            }
+            i = i + 1
+        }
+    }
+    dist
+}
+
+struct DistCache {
+    d: [i64; 250000],
+    n: usize,
+}
+
+fn build_dist_cache(g: &SparseGraph) -> DistCache with Mut, Div, Panic {
+    var d: [i64; 250000] = [-1; 250000]
+    let n = g.n
+    var src: usize = 0
+    while src < n {
+        let row = bfs_from(g, src, n)
+        var j: usize = 0
+        while j < n { d[src * n + j] = row[j]; j = j + 1 }
+        src = src + 1
+    }
+    DistCache { d: d, n: n }
+}
+
+fn cached_dist(cache: &DistCache, u: usize, v: usize) -> i64 {
+    cache.d[u * cache.n + v]
+}
+
+// ============================================================================
+// Weighted lazy random walk measure
+// ============================================================================
+
+struct Measure {
+    nodes: [usize; 41],
+    probs: [f64;   41],
+    len:   usize,
+}
+
+// Weighted measure: mu_u(v) = (1-alpha) * w_{uv}/sum_w for neighbors v
+fn weighted_measure(g: &SparseGraph, w: &[f64; 30000],
+                    node: usize, alpha: f64) -> Measure
+    with Mut, Div, Panic
+{
+    var nodes: [usize; 41] = [0;   41]
+    var probs: [f64;   41] = [0.0; 41]
+    var len:   usize       = 0
+    let d = g.deg[node]
+    if d == 0 {
+        nodes[0] = node; probs[0] = 1.0
+        return Measure { nodes: nodes, probs: probs, len: 1 }
+    }
+    // Sum neighbor weights
+    var wsum: f64 = 0.0
+    var i: usize = 0
+    while i < d { wsum = wsum + w[node * MAX_DEG + i]; i = i + 1 }
+    let walk_mass = 1.0 - alpha
+    if alpha > 0.0 { nodes[0] = node; probs[0] = alpha; len = 1 }
+    i = 0
+    while i < d {
+        let wi = if wsum > 0.0 { w[node * MAX_DEG + i] / wsum } else { 1.0 / (d as f64) }
+        nodes[len] = g.adj[node * MAX_DEG + i]
+        probs[len] = walk_mass * wi
+        len = len + 1
+        i   = i + 1
+    }
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+// ============================================================================
+// Sinkhorn W1 (same as Phase 2)
+// ============================================================================
+
+fn wasserstein1(mu: &Measure, nu: &Measure, cache: &DistCache,
+                epsilon: f64, max_iter: usize) -> f64
+    with Mut, Div, Panic
+{
+    let nm = mu.len
+    let nn = nu.len
+    if nm == 0 || nn == 0 { return 0.0 }
+    var cost: [f64; 1681] = [0.0; 1681]
+    var kmat: [f64; 1681] = [0.0; 1681]
+    var u_s:  [f64;   41] = [1.0;   41]
+    var v_s:  [f64;   41] = [1.0;   41]
+    var i: usize = 0
+    while i < nm {
+        var j: usize = 0
+        while j < nn {
+            let ui = mu.nodes[i]
+            let vj = nu.nodes[j]
+            let dv = cached_dist(cache, ui, vj)
+            let c  = if dv >= 0 { dv as f64 } else { 100.0 }
+            cost[i * MAX_SUP + j] = c
+            kmat[i * MAX_SUP + j] = sc_exp(-(c / epsilon))
+            j = j + 1
+        }
+        i = i + 1
+    }
+    var iter: usize = 0
+    while iter < max_iter {
+        i = 0
+        while i < nm {
+            var s: f64 = 0.0
+            var j: usize = 0
+            while j < nn { s = s + kmat[i * MAX_SUP + j] * v_s[j]; j = j + 1 }
+            if s > FLOOR { u_s[i] = mu.probs[i] / s }
+            i = i + 1
+        }
+        var j: usize = 0
+        while j < nn {
+            var s: f64 = 0.0
+            i = 0
+            while i < nm { s = s + kmat[i * MAX_SUP + j] * u_s[i]; i = i + 1 }
+            if s > FLOOR { v_s[j] = nu.probs[j] / s }
+            j = j + 1
+        }
+        iter = iter + 1
+    }
+    var w1: f64 = 0.0
+    i = 0
+    while i < nm {
+        var j: usize = 0
+        while j < nn {
+            w1 = w1 + u_s[i] * kmat[i * MAX_SUP + j] * v_s[j] * cost[i * MAX_SUP + j]
+            j  = j + 1
+        }
+        i = i + 1
+    }
+    w1
+}
+
+// Weighted edge kappa
+fn edge_kappa_w(g: &SparseGraph, w: &[f64; 30000], cache: &DistCache,
+                u: usize, v: usize,
+                alpha: f64, epsilon: f64, max_iter: usize) -> f64
+    with Mut, Div, Panic
+{
+    let d_uv = cached_dist(cache, u, v)
+    if d_uv <= 0 { return 0.0 }
+    let mu = weighted_measure(g, w, u, alpha)
+    let nu = weighted_measure(g, w, v, alpha)
+    let w1 = wasserstein1(&mu, &nu, cache, epsilon, max_iter)
+    1.0 - w1 / (d_uv as f64)
+}
+
+// Find position of v in u's adjacency list (for symmetric weight update)
+fn find_pos(g: &SparseGraph, u: usize, v: usize) -> usize {
+    let du = g.deg[u]
+    var i: usize = 0
+    while i < du {
+        if g.adj[u * MAX_DEG + i] == v { return i }
+        i = i + 1
+    }
+    0
+}
+
+// ============================================================================
+// Gini coefficient of edge weights (O(n_edges^2))
+// ============================================================================
+
+fn edge_weight_gini(g: &SparseGraph, w: &[f64; 30000]) -> f64
+    with Mut, Div, Panic
+{
+    let n = g.n
+    // Collect unique edge weights (u < v only)
+    var ew: [f64; 1000] = [0.0; 1000]
+    var ne: usize = 0
+    var u: usize = 0
+    while u < n {
+        let du = g.deg[u]
+        var i: usize = 0
+        while i < du {
+            let v = g.adj[u * MAX_DEG + i]
+            if v > u && ne < 1000 {
+                ew[ne] = w[u * MAX_DEG + i]
+                ne = ne + 1
+            }
+            i = i + 1
+        }
+        u = u + 1
+    }
+    if ne < 2 { return 0.0 }
+    // Gini = sum_{i<j} |w_i - w_j| / (ne * sum_w)
+    var wsum: f64 = 0.0
+    var idx: usize = 0
+    while idx < ne { wsum = wsum + ew[idx]; idx = idx + 1 }
+    if wsum <= 0.0 { return 0.0 }
+    var diff_sum: f64 = 0.0
+    var a: usize = 0
+    while a < ne {
+        var b: usize = a + 1
+        while b < ne {
+            let d = if ew[a] >= ew[b] { ew[a] - ew[b] } else { ew[b] - ew[a] }
+            diff_sum = diff_sum + d
+            b = b + 1
+        }
+        a = a + 1
+    }
+    diff_sum / ((ne as f64) * wsum)
+}
+
+// ============================================================================
+// Single flow trajectory: return kappa_mean at each time step
+// ============================================================================
+
+fn run_flow_trajectory(n: usize, k: usize, seed: u64,
+                       dt: f64, max_t: usize,
+                       alpha: f64, epsilon: f64, max_iter: usize,
+                       out_kappas: &! [f64; 10],
+                       out_ginis:  &! [f64; 10]) with Mut, Div, Panic
+{
+    let g     = build_k_regular_sparse(n, k, seed)
+    let cache = build_dist_cache(&g)
+    var w: [f64; 30000] = [1.0; 30000]  // uniform initial weights
+
+    var t: usize = 0
+    while t < max_t {
+        // Compute per-edge kappa and mean
+        var kappa_e: [f64; 1000] = [0.0; 1000]
+        var edge_idx: usize = 0
+        var ksum: f64 = 0.0
+        var ne:   usize = 0
+        let nn = g.n
+        var u: usize = 0
+        while u < nn {
+            let du = sparse_degree(&g, u)
+            var i: usize = 0
+            while i < du {
+                let v = sparse_neighbor(&g, u, i)
+                if v > u {
+                    let ke = edge_kappa_w(&g, &w, &cache, u, v, alpha, epsilon, max_iter)
+                    kappa_e[edge_idx] = ke
+                    ksum = ksum + ke
+                    edge_idx = edge_idx + 1
+                    ne = ne + 1
+                }
+                i = i + 1
+            }
+            u = u + 1
+        }
+
+        let kmean = if ne > 0 { ksum / (ne as f64) } else { 0.0 }
+        out_kappas[t] = kmean
+        out_ginis[t]  = edge_weight_gini(&g, &w)
+
+        // Update weights: w_e(t+1) = w_e(t) * (1 - dt * kappa_e(t))
+        edge_idx = 0
+        u = 0
+        while u < nn {
+            let du = sparse_degree(&g, u)
+            var i: usize = 0
+            while i < du {
+                let v = sparse_neighbor(&g, u, i)
+                if v > u {
+                    let ke    = kappa_e[edge_idx]
+                    var new_w = w[u * MAX_DEG + i] * (1.0 - dt * ke)
+                    if new_w < 1e-6 { new_w = 1e-6 }
+                    w[u * MAX_DEG + i] = new_w
+                    // Symmetric update
+                    let vpos = find_pos(&g, v, u)
+                    w[v * MAX_DEG + vpos] = new_w
+                    edge_idx = edge_idx + 1
+                }
+                i = i + 1
+            }
+            u = u + 1
+        }
+
+        // Normalize: keep sum of unique edge weights = n_edges
+        var wsum: f64 = 0.0
+        u = 0
+        while u < nn {
+            let du = sparse_degree(&g, u)
+            var i: usize = 0
+            while i < du {
+                let v = sparse_neighbor(&g, u, i)
+                if v > u { wsum = wsum + w[u * MAX_DEG + i] }
+                i = i + 1
+            }
+            u = u + 1
+        }
+        let target = ne as f64
+        let norm   = if wsum > 0.0 { target / wsum } else { 1.0 }
+        u = 0
+        while u < nn {
+            let du = sparse_degree(&g, u)
+            var i: usize = 0
+            while i < du {
+                w[u * MAX_DEG + i] = w[u * MAX_DEG + i] * norm
+                i = i + 1
+            }
+            u = u + 1
+        }
+
+        t = t + 1
+    }
+}
+
+// ============================================================================
+// Epistemic flow: aggregate across n_seeds trajectories at each t
+// ============================================================================
+
+fn run_epistemic_flow(n: usize, k: usize, n_seeds: usize,
+                      dt: f64, max_t: usize,
+                      alpha: f64, epsilon: f64, max_iter: usize)
+    with IO, Mut, Div, Panic
+{
+    let m = if n_seeds > MAX_SEEDS { MAX_SEEDS } else { n_seeds }
+    let mt = if max_t > MAX_T { MAX_T } else { max_t }
+
+    // seed_kappas[s * MAX_T + t] = kappa_mean for seed s at time t
+    var seed_kappas: [f64; 50] = [0.0; 50]
+    var seed_ginis:  [f64; 50] = [0.0; 50]
+
+    var meta_rng: u64 = 8675309123456789
+    var s: usize = 0
+    while s < m {
+        meta_rng = lcg_step(meta_rng)
+        let seed = meta_rng
+
+        var kappas: [f64; 10] = [0.0; 10]
+        var ginis:  [f64; 10] = [0.0; 10]
+        run_flow_trajectory(n, k, seed, dt, mt, alpha, epsilon, max_iter,
+                            &! kappas, &! ginis)
+
+        var t: usize = 0
+        while t < mt {
+            seed_kappas[s * MAX_T + t] = kappas[t]
+            seed_ginis[s  * MAX_T + t] = ginis[t]
+            t = t + 1
+        }
+        s = s + 1
+    }
+
+    // Print CSV row per time step
+    var t: usize = 0
+    while t < mt {
+        // Aggregate kappas across seeds at time t
+        var ksum: f64 = 0.0
+        s = 0
+        while s < m { ksum = ksum + seed_kappas[s * MAX_T + t]; s = s + 1 }
+        let kmean = ksum / (m as f64)
+
+        var vsum: f64 = 0.0
+        s = 0
+        while s < m {
+            let diff = seed_kappas[s * MAX_T + t] - kmean
+            vsum = vsum + diff * diff
+            s = s + 1
+        }
+        let sigma = if m > 1 { sc_sqrt(vsum / ((m - 1) as f64)) } else { 0.0 }
+        let se    = if m > 0 { sigma / sc_sqrt(m as f64) } else { 0.0 }
+        let ci_lo = kmean - 1.96 * se
+        let ci_hi = kmean + 1.96 * se
+
+        // Mean gini
+        var gsum: f64 = 0.0
+        s = 0
+        while s < m { gsum = gsum + seed_ginis[s * MAX_T + t]; s = s + 1 }
+        let gmean = gsum / (m as f64)
+
+        print(k);     print(",")
+        print(t);     print(",")
+        print(kmean); print(",")
+        print(sigma); print(",")
+        print(ci_lo); print(",")
+        print(ci_hi); print(",")
+        print(gmean); println("")
+
+        t = t + 1
+    }
+}
+
+// ============================================================================
+// Main: run for k=14 (hyperbolic) and k=16 (spherical)
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    let N        = 100
+    let N_SEEDS  = 3       // 3 bootstrap instances per step
+    let DT       = 0.5     // Ni et al. 2019 step size
+    let MAX_ITER = 100     // Sinkhorn iterations
+    let EPSILON  = 0.1     // Sinkhorn regularization
+    let ALPHA    = 0.5     // idleness (lazy random walk)
+    let MAX_FLOW = 5       // flow steps (each step = 3 ORC computations)
+
+    println("k,t,kappa_mean,sigma,ci_lo,ci_hi,gini_mean")
+    println("# Phase 8A: Epistemic Ricci Flow (N=100, n_seeds=3, dt=0.5, eps=0.1)")
+    println("# k=14: hyperbolic regime (eta=1.96 < eta_c)")
+    run_epistemic_flow(N, 14, N_SEEDS, DT, MAX_FLOW, ALPHA, EPSILON, MAX_ITER)
+    println("# k=16: spherical regime (eta=2.56 > eta_c)")
+    run_epistemic_flow(N, 16, N_SEEDS, DT, MAX_FLOW, ALPHA, EPSILON, MAX_ITER)
+}

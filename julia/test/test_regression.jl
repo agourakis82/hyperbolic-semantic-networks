@@ -5,7 +5,7 @@ These tests ensure numerical equivalence with the Python implementation.
 """
 
 using Test
-using LightGraphs
+using Graphs
 using Statistics
 using HyperbolicSemanticNetworks
 

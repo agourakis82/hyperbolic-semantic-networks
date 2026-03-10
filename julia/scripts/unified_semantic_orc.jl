@@ -65,6 +65,30 @@ const NETWORKS = [
     NetworkSpec("babelnet_ru", "babelnet_ru_edges.csv", "taxonomy", "Russian", true),
     NetworkSpec("babelnet_ar", "babelnet_ar_edges.csv", "taxonomy", "Arabic", true),
 
+    # --- EXTENDED NETWORKS (out-of-sample validation set) ---
+
+    # EAT: Edinburgh Associative Thesaurus (British English, ~1970, N=500)
+    # Alternative collection protocol: validates methodology generalization
+    # Predicted: Hyperbolic (eta=1.85 < eta_c(500)=3.10, C>0.05 expected)
+    NetworkSpec("eat_en", "eat_en_edges.csv", "association", "British English", false),
+
+    # FrameNet 1.7: semantic frame relations (English, N~1200)
+    # Domain-extension test: taxonomy-like, predicted Euclidean (eta~0.009, low C)
+    NetworkSpec("framenet_en", "framenet_en_edges.csv", "frames", "English", false),
+
+    # SWOW-RP22: Rioplatense Spanish word associations (Argentine/Uruguayan Spanish)
+    # Same methodology as SWOW-ES/EN/ZH; predicted Hyperbolic (eta<<eta_c, low density)
+    NetworkSpec("swow_rp", "swow_rp_edges.csv", "association", "Arg. Spanish", false),
+
+    # OdeNet (German WordNet): hypernymy taxonomy, similar structure to WordNet-EN
+    # Predicted: Euclidean (low C, low eta, taxonomy structure like WordNet-EN)
+    NetworkSpec("wordnet_de", "wordnet_de_edges.csv", "taxonomy", "German", false),
+
+    # USF Free Association Norms (Nelson, McEvoy & Schreiber 1998): American English
+    # Alternative collection protocol: validates EAT finding with different culture/era
+    # Predicted: Hyperbolic (association network, expected low eta, C~0.1)
+    NetworkSpec("usf_en", "usf_en_edges.csv", "association", "American English", false),
+
     # Depression severity networks (source,target,weight — no relation column)
     NetworkSpec("depression_minimum", "depression_networks_optimal/depression_minimum_edges.csv", "clinical", "English", false),
     NetworkSpec("depression_mild", "depression_networks_optimal/depression_mild_edges.csv", "clinical", "English", false),

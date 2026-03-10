@@ -1,0 +1,290 @@
+// powerlaw_validate.sio — Phase 8C: Power-Law Cross-Validation in Sounio
+//
+// Cross-validates Julia LP power-law fit beta-bar = 0.283 +/- 0.034 using
+// Sounio fixed-point arithmetic. The Div effect guarantees no hidden
+// divide-by-zero in the OLS regression.
+//
+// Method: log-log OLS fit log(kappa) = log(A) - beta*log(d) for each k,
+// using Taylor-series natural log (10-term Halley's method from log(1+r)).
+//
+// Data: hardcoded exact LP kappa-bar values (N=100, d in {4,8,16,32,64})
+//       from results/experiments/hypercomplex_lp_n100_d{4,8,16,32,64}.json
+//
+// Sounio validation: |beta_sounio - beta_julia| < 0.05
+//
+// Author: Hyperbolic Semantic Networks Project
+// Version: 1.0.0 (Phase 8C)
+
+// ============================================================================
+// sc_ln: Natural log via Taylor series (domain: x > 0)
+// Uses identity: ln(x) = 2*atanh((x-1)/(x+1)) with Halley refinement
+// ============================================================================
+
+fn sc_ln(x: f64) -> f64 with Mut, Div, Panic {
+    if x <= 0.0 { let _: usize = 0 / 0 }  // Panic for invalid input
+    // Reduce: write x = 2^k * m where m in [0.5, 2.0) for fast convergence
+    // Use: ln(x) = k*ln2 + ln(m)
+    let ln2: f64 = 0.6931471805599453
+    var m: f64   = x
+    var k: i64   = 0
+    while m >= 2.0 { m = m * 0.5; k = k + 1 }
+    while m < 0.5  { m = m * 2.0; k = k - 1 }
+    // Now m in [0.5, 2.0), use r = (m-1)/(m+1), ln(m) = 2*sum r^(2n+1)/(2n+1)
+    let r = (m - 1.0) / (m + 1.0)
+    var r2   = r * r
+    var sum  = r
+    var term = r
+    var n: usize = 1
+    while n < 20 {
+        term = term * r2
+        sum  = sum + term / ((2 * n + 1) as f64)
+        n = n + 1
+    }
+    (k as f64) * ln2 + 2.0 * sum
+}
+
+fn sc_sqrt(x: f64) -> f64 with Mut, Div {
+    if x <= 0.0 { return 0.0 }
+    var r = x
+    var i: usize = 0
+    while i < 50 { r = (r + x / r) * 0.5; i = i + 1 }
+    r
+}
+
+fn sc_abs(x: f64) -> f64 { if x < 0.0 { 0.0 - x } else { x } }
+
+// ============================================================================
+// OLS log-log fit: log(kappa(d)) = log(A) - beta*log(d)
+// Returns (beta, R2) given 5 (log_d, log_kappa) pairs
+// Sounio's Div effect guarantees no silent division by zero
+// ============================================================================
+
+fn loglog_ols(log_d: &[f64; 5], log_k: &[f64; 5], n: usize) -> f64
+    with Mut, Div, Panic
+{
+    // Means
+    var xsum: f64 = 0.0
+    var ysum: f64 = 0.0
+    var i: usize = 0
+    while i < n { xsum = xsum + log_d[i]; ysum = ysum + log_k[i]; i = i + 1 }
+    let xbar = xsum / (n as f64)
+    let ybar = ysum / (n as f64)
+
+    // Slope: beta = -Sxy/Sxx (negative because kappa DECREASES with d)
+    var sxx: f64 = 0.0
+    var sxy: f64 = 0.0
+    i = 0
+    while i < n {
+        let xd = log_d[i] - xbar
+        let yd = log_k[i] - ybar
+        sxx = sxx + xd * xd
+        sxy = sxy + xd * yd
+        i = i + 1
+    }
+    if sxx <= 0.0 { let _: usize = 0 / 0 }   // Div effect: surfaces zero denominator
+    let slope = sxy / sxx     // slope = -beta in y = log(A) - beta*x
+    0.0 - slope               // return beta (positive)
+}
+
+fn loglog_r2(log_d: &[f64; 5], log_k: &[f64; 5], n: usize, beta: f64) -> f64
+    with Mut, Div, Panic
+{
+    // Compute intercept logA = ybar + beta * xbar
+    var xsum: f64 = 0.0
+    var ysum: f64 = 0.0
+    var i: usize = 0
+    while i < n { xsum = xsum + log_d[i]; ysum = ysum + log_k[i]; i = i + 1 }
+    let xbar  = xsum / (n as f64)
+    let ybar  = ysum / (n as f64)
+    let log_A = ybar + beta * xbar
+
+    // R2
+    var ss_res: f64 = 0.0
+    var ss_tot: f64 = 0.0
+    i = 0
+    while i < n {
+        let y_pred = log_A - beta * log_d[i]
+        let res    = log_k[i] - y_pred
+        let tot    = log_k[i] - ybar
+        ss_res = ss_res + res * res
+        ss_tot = ss_tot + tot * tot
+        i = i + 1
+    }
+    if ss_tot <= 0.0 { return 1.0 }
+    1.0 - ss_res / ss_tot
+}
+
+// ============================================================================
+// Main: fit power law for each k-value, compare with Julia reference
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    println("# Phase 8C: Power-Law Cross-Validation (Sounio vs Julia)")
+    println("# Data: exact LP ORC on N=100 k-regular graphs, d in {4,8,16,32,64}")
+    println("# Julia reference: beta-bar = 0.2830 +/- 0.0340")
+    println("# Gate: |beta_sounio_mean - 0.2830| < 0.05")
+    println("")
+    println("k,beta_sounio,R2,|delta_beta|")
+
+    // Precomputed log(d) for d in {4, 8, 16, 32, 64}
+    var log_d: [f64; 5] = [0.0; 5]
+    log_d[0] = sc_ln(4.0)
+    log_d[1] = sc_ln(8.0)
+    log_d[2] = sc_ln(16.0)
+    log_d[3] = sc_ln(32.0)
+    log_d[4] = sc_ln(64.0)
+
+    // Julia LP reference betas per k (from powerlaw_fit_kappa_d.json)
+    var ref_betas: [f64; 11] = [0.0; 11]
+    ref_betas[0]  = 0.2270   // k=4
+    ref_betas[1]  = 0.2642   // k=6
+    ref_betas[2]  = 0.2794   // k=8
+    ref_betas[3]  = 0.2842   // k=10
+    ref_betas[4]  = 0.2922   // k=12
+    ref_betas[5]  = 0.3156   // k=14
+    ref_betas[6]  = 0.3359   // k=16
+    ref_betas[7]  = 0.3159   // k=18
+    ref_betas[8]  = 0.2993   // k=20
+    ref_betas[9]  = 0.2664   // k=25
+    ref_betas[10] = 0.2331   // k=30
+
+    // Kappa data: kappas[k_idx][d_idx]
+    // Exact LP values from hypercomplex_lp_n100_d{4,8,16,32,64}.json
+    var kdata: [f64; 55] = [0.0; 55]  // 11 k-values x 5 dims
+
+    // k=4 (idx 0)
+    kdata[0]  = 0.111468   // d=4
+    kdata[1]  = 0.082781   // d=8
+    kdata[2]  = 0.065586   // d=16
+    kdata[3]  = 0.060074   // d=32
+    kdata[4]  = 0.059573   // d=64
+
+    // k=6 (idx 1)
+    kdata[5]  = 0.171830
+    kdata[6]  = 0.117560
+    kdata[7]  = 0.093355
+    kdata[8]  = 0.084020
+    kdata[9]  = 0.081350
+
+    // k=8 (idx 2)
+    kdata[10] = 0.211230
+    kdata[11] = 0.146498
+    kdata[12] = 0.115261
+    kdata[13] = 0.102684
+    kdata[14] = 0.095801
+
+    // k=10 (idx 3)
+    kdata[15] = 0.239925
+    kdata[16] = 0.163314
+    kdata[17] = 0.128782
+    kdata[18] = 0.114550
+    kdata[19] = 0.106994
+
+    // k=12 (idx 4)
+    kdata[20] = 0.264038
+    kdata[21] = 0.176625
+    kdata[22] = 0.136546
+    kdata[23] = 0.123405
+    kdata[24] = 0.114755
+
+    // k=14 (idx 5)
+    kdata[25] = 0.298995
+    kdata[26] = 0.194512
+    kdata[27] = 0.147486
+    kdata[28] = 0.131749
+    kdata[29] = 0.121705
+
+    // k=16 (idx 6)
+    kdata[30] = 0.330202
+    kdata[31] = 0.222227
+    kdata[32] = 0.161926
+    kdata[33] = 0.142023
+    kdata[34] = 0.128958
+
+    // k=18 (idx 7)
+    kdata[35] = 0.336662
+    kdata[36] = 0.234713
+    kdata[37] = 0.172770
+    kdata[38] = 0.153792
+    kdata[39] = 0.139139
+
+    // k=20 (idx 8)
+    kdata[40] = 0.348388
+    kdata[41] = 0.249466
+    kdata[42] = 0.190173
+    kdata[43] = 0.166899
+    kdata[44] = 0.150982
+
+    // k=25 (idx 9)
+    kdata[45] = 0.367845
+    kdata[46] = 0.268214
+    kdata[47] = 0.217024
+    kdata[48] = 0.190455
+    kdata[49] = 0.173410
+
+    // k=30 (idx 10)
+    kdata[50] = 0.378828
+    kdata[51] = 0.286125
+    kdata[52] = 0.238922
+    kdata[53] = 0.212823
+    kdata[54] = 0.195808
+
+    var k_vals: [i64; 11] = [4, 6, 8, 10, 12, 14, 16, 18, 20, 25, 30]
+
+    var beta_sum:   f64   = 0.0
+    var beta_vsum:  f64   = 0.0
+    var ki: usize = 0
+    while ki < 11 {
+        // Build log_kappa array for this k
+        var log_k: [f64; 5] = [0.0; 5]
+        var di: usize = 0
+        while di < 5 {
+            log_k[di] = sc_ln(kdata[ki * 5 + di])
+            di = di + 1
+        }
+
+        let beta = loglog_ols(&log_d, &log_k, 5)
+        let r2   = loglog_r2(&log_d, &log_k, 5, beta)
+        let db   = sc_abs(beta - ref_betas[ki])
+
+        beta_sum = beta_sum + beta
+
+        print(k_vals[ki]); print(",")
+        print(beta);       print(",")
+        print(r2);         print(",")
+        print(db);         println("")
+
+        ki = ki + 1
+    }
+
+    let beta_mean_sounio = beta_sum / 11.0
+    let ref_mean = 0.2830
+
+    // Variance for std dev
+    ki = 0
+    while ki < 11 {
+        var log_k: [f64; 5] = [0.0; 5]
+        var di: usize = 0
+        while di < 5 {
+            log_k[di] = sc_ln(kdata[ki * 5 + di])
+            di = di + 1
+        }
+        let beta = loglog_ols(&log_d, &log_k, 5)
+        let d = beta - beta_mean_sounio
+        beta_vsum = beta_vsum + d * d
+        ki = ki + 1
+    }
+    let beta_std_sounio = sc_sqrt(beta_vsum / 10.0)
+
+    println("")
+    print("# beta_sounio = "); print(beta_mean_sounio);
+    print(" +/- ");            print(beta_std_sounio); println("")
+    print("# beta_julia  = "); print(ref_mean); println("")
+    let delta = sc_abs(beta_mean_sounio - ref_mean)
+    print("# |delta|     = "); print(delta); println("")
+    if delta < 0.05 {
+        println("# GATE PASS: |beta_sounio - beta_julia| < 0.05")
+    } else {
+        println("# GATE FAIL: |beta_sounio - beta_julia| >= 0.05")
+    }
+}

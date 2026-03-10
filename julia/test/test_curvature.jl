@@ -5,7 +5,7 @@ Tests Ollivier-Ricci curvature computation with various scenarios.
 """
 
 using Test
-using LightGraphs
+using Graphs
 using HyperbolicSemanticNetworks
 
 @testset "Curvature Computation" begin

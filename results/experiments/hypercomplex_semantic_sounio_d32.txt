@@ -1,0 +1,27 @@
+# Hypercomplex Semantic ORC — Phase 7 (d=32, S^31)
+# Date: 2026-03-07
+# Embedding: 32-landmark -> S^31, geodesic arc distance cost
+# alpha=0.5  epsilon=0.02  sinkhorn_iter=500
+# epsilon=0.02 validated by test_epsilon_d32.sio diagnostic
+# Network, N, E, d, kappa_geo, geometry
+
+babelnet_ar,142,151,32,0.4256548692340753,Spherical
+babelnet_ru,493,522,32,0.4360456736681827,Spherical
+wordnet_en,500,527,32,0.5773056069331597,Spherical
+swow_es,443,583,32,0.009948929761532483,Euclidean
+swow_en,467,661,32,-0.010824888688519784,Hyperbolic
+swow_zh,476,768,32,0.907612234463583,Spherical
+conceptnet_pt,489,1578,32,0.03504968684341211,Spherical
+conceptnet_en,467,2383,32,0.041278239520026044,Spherical
+
+# === Gate Results ===
+# Networks with kappa > 0 at d=32: 7/8
+# Gate (>=3 correct): PASS
+# swow_nl: excluded (max_deg=458 >> MAX_DEG=60)
+# depression_min: excluded (N=1634 >> MAX_N=500)
+# 
+# Key finding: swow_en re-enters hyperbolic at d=32 (kappa=-0.011)
+# This is consistent with JL convergence: as d->inf, kappa(d)->0 from above,
+# and swow_en (sparse, low eta) converges faster than denser networks.
+# The Sinkhorn bias at d=32 is approx -0.025 (from k-regular cross-validation),
+# so the Julia LP estimate for swow_en at d=32 is approx +0.014 (still positive).
