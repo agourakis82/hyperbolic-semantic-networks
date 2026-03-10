@@ -1,0 +1,75 @@
+{
+  "test_classification_accuracy": "4/5",
+  "test_mae": 0.11079173645072829,
+  "model": {
+    "eta_c_inf": 3.75,
+    "linear_coefs": [
+      0.024903282640789705,
+      0.017543326564111183,
+      -0.5257346116493004
+    ],
+    "C_star": 0.05,
+    "r2_train": 0.08136776010197722
+  },
+  "test_rmse": 0.13389784772326713,
+  "experiment": "heldout_generalization",
+  "test_r2": -0.28725894364371785,
+  "description": "Two-parameter model (η,C) generalization to 5 held-out test networks",
+  "test_results": [
+    {
+      "label": "SWOW Rioplatense",
+      "network_id": "swow_rp",
+      "correct": true,
+      "C": 0.154,
+      "kappa_obs": -0.264,
+      "kappa_pred": -0.11252963731818814,
+      "pred_geometry": "Hyperbolic",
+      "eta": 0.04,
+      "true_geometry": "Hyperbolic"
+    },
+    {
+      "label": "EAT",
+      "network_id": "eat_en",
+      "correct": true,
+      "C": 0.143,
+      "kappa_obs": -0.046,
+      "kappa_pred": -0.039474883943742115,
+      "pred_geometry": "Hyperbolic",
+      "eta": 1.851,
+      "true_geometry": "Hyperbolic"
+    },
+    {
+      "label": "USF",
+      "network_id": "usf_en",
+      "correct": true,
+      "C": 0.143,
+      "kappa_obs": -0.321,
+      "kappa_pred": -0.09905810721838859,
+      "pred_geometry": "Hyperbolic",
+      "eta": 0.062,
+      "true_geometry": "Hyperbolic"
+    },
+    {
+      "label": "WordNet DE",
+      "network_id": "wordnet_de",
+      "correct": true,
+      "C": 0.022,
+      "kappa_obs": -0.023,
+      "kappa_pred": -0.07641446400663521,
+      "pred_geometry": "Euclidean",
+      "eta": 0.006,
+      "true_geometry": "Euclidean"
+    },
+    {
+      "label": "FrameNet",
+      "network_id": "framenet",
+      "correct": false,
+      "C": 0.045,
+      "kappa_obs": -0.202,
+      "kappa_pred": -0.08139315327267493,
+      "pred_geometry": "Euclidean",
+      "eta": 0.009,
+      "true_geometry": "Hyperbolic"
+    }
+  ]
+}
