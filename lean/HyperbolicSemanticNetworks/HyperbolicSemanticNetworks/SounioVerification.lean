@@ -802,6 +802,94 @@ theorem adhd_phase_boundary_margin :
     subj4.eta_ref < subj5.eta_ref := by
   norm_num [subj4, subj5]
 
+-- ============================================================
+-- Group 15: Discovery L — LLM vs Human Semantic Geometry
+-- ============================================================
+-- Source: julia/scripts/discovery_l_llm_orc.jl (exact LP ORC, α=0.5)
+-- Matched 438-cue vocabulary (SWOW-EN nodes)
+-- All values: κ̄ = exact LP mean ORC; η = ⟨k⟩²/N; C = clustering
+
+structure LLMNetworkResult where
+  label     : String
+  N         : ℕ
+  eta       : ℝ   -- density parameter η = ⟨k⟩²/N
+  C         : ℝ   -- clustering coefficient
+  kappa_bar : ℝ   -- mean ORC κ̄ (exact LP, α=0.5)
+
+def swow_en_human : LLMNetworkResult :=
+    ⟨"SWOW-EN (Human)", 438, 0.0195, 0.1277, -0.1371⟩
+
+def lwow_haiku : LLMNetworkResult :=
+    ⟨"LWOW-Haiku", 344, 0.0287, 0.1888, -0.0890⟩
+
+def lwow_mistral : LLMNetworkResult :=
+    ⟨"LWOW-Mistral", 418, 0.1643, 0.1821, -0.2241⟩
+
+def lwow_llama3 : LLMNetworkResult :=
+    ⟨"LWOW-Llama3", 417, 0.5061, 0.1303, -0.1399⟩
+
+/-- All LLM-generated association networks are hyperbolic (κ̄ < 0). -/
+theorem lwow_all_hyperbolic :
+    lwow_haiku.kappa_bar < 0 ∧
+    lwow_mistral.kappa_bar < 0 ∧
+    lwow_llama3.kappa_bar < 0 := by
+  norm_num [lwow_haiku, lwow_mistral, lwow_llama3]
+
+/-- Human SWOW-EN is hyperbolic (reference baseline). -/
+theorem swow_en_hyperbolic :
+    swow_en_human.kappa_bar < 0 := by
+  norm_num [swow_en_human]
+
+/-- All networks (human + LLM) share the same sign of κ̄ — geometric invariance. -/
+theorem discovery_l_geometry_invariance :
+    swow_en_human.kappa_bar < 0 ∧
+    lwow_haiku.kappa_bar < 0 ∧
+    lwow_mistral.kappa_bar < 0 ∧
+    lwow_llama3.kappa_bar < 0 := by
+  norm_num [swow_en_human, lwow_haiku, lwow_mistral, lwow_llama3]
+
+/-- All networks have η << η_c^∞ = 3.75 — firmly in hyperbolic regime. -/
+theorem discovery_l_all_below_eta_c_inf :
+    swow_en_human.eta < 3.75 ∧
+    lwow_haiku.eta < 3.75 ∧
+    lwow_mistral.eta < 3.75 ∧
+    lwow_llama3.eta < 3.75 := by
+  norm_num [swow_en_human, lwow_haiku, lwow_mistral, lwow_llama3]
+
+/-- Δκ̄(Haiku) = +0.0481: Haiku is less negative than human (less hyperbolic). -/
+theorem discovery_l_haiku_delta :
+    lwow_haiku.kappa_bar - swow_en_human.kappa_bar = 0.0481 := by
+  norm_num [lwow_haiku, swow_en_human]
+
+/-- Δκ̄(Mistral) = -0.0870: Mistral is more negative than human (more hyperbolic). -/
+theorem discovery_l_mistral_delta :
+    lwow_mistral.kappa_bar - swow_en_human.kappa_bar = -0.0870 := by
+  norm_num [lwow_mistral, swow_en_human]
+
+/-- Δκ̄(Llama3) = -0.0028: Llama3 nearly matches human SWOW-EN. -/
+theorem discovery_l_llama3_delta :
+    lwow_llama3.kappa_bar - swow_en_human.kappa_bar = -0.0028 := by
+  norm_num [lwow_llama3, swow_en_human]
+
+/-- All Δκ̄ magnitudes are bounded by 0.09 (within inter-human variability). -/
+theorem discovery_l_delta_kappa_bounded :
+    lwow_haiku.kappa_bar - swow_en_human.kappa_bar ≤ 0.09 ∧
+    -(lwow_mistral.kappa_bar - swow_en_human.kappa_bar) ≤ 0.09 ∧
+    -(lwow_llama3.kappa_bar - swow_en_human.kappa_bar) ≤ 0.09 := by
+  norm_num [lwow_haiku, lwow_mistral, lwow_llama3, swow_en_human]
+
+/-- Llama3 is the closest LLM match to human SWOW-EN: |Δκ̄(Llama3)|=0.0028 < |Δκ̄(Haiku)|=0.0481. -/
+theorem llama3_closest_to_human :
+    -(lwow_llama3.kappa_bar - swow_en_human.kappa_bar) <
+    lwow_haiku.kappa_bar - swow_en_human.kappa_bar := by
+  norm_num [lwow_llama3, lwow_haiku, swow_en_human]
+
+/-- Mistral produces the most negative κ̄ (deepest hyperbolic) among LLMs. -/
+theorem mistral_most_hyperbolic :
+    lwow_mistral.kappa_bar < lwow_haiku.kappa_bar ∧
+    lwow_mistral.kappa_bar < lwow_llama3.kappa_bar := by
+  norm_num [lwow_mistral, lwow_haiku, lwow_llama3]
+
 end SounioVerification
 
 end HyperbolicSemanticNetworks

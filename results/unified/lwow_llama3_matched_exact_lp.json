@@ -1,0 +1,22 @@
+{
+  "label": "LWOW-Llama3 (matched vocab)",
+  "C": 0.13027371887219594,
+  "kappa_min": -0.6041666666666665,
+  "model": "lwow_llama3",
+  "kappa_mean": -0.13990803867988982,
+  "kappa_max": 0.6666666666666666,
+  "N": 417,
+  "geometry": "HYPERBOLIC",
+  "id": "lwow_llama3_matched",
+  "frac_spherical": 0.09541102674149884,
+  "lcc_fraction": 1.0,
+  "k_mean": 14.52757793764988,
+  "eta_c": 3.0340555197496393,
+  "comparison": "matched_to_swow_en",
+  "eta": 0.5061163566774378,
+  "E": 3029,
+  "frac_euclidean": 0.0036315615714757345,
+  "kappa_std": 0.1162934141341644,
+  "frac_hyperbolic": 0.9009574116870254,
+  "source": "llm"
+}

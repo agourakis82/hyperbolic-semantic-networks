@@ -19,6 +19,10 @@
 *.cache
 *.csv
 *.csv.gz
+# But track LWOW edge lists (public dataset, needed for reproducibility)
+!data/processed/lwow_haiku_edges.csv
+!data/processed/lwow_mistral_edges.csv
+!data/processed/lwow_llama3_edges.csv
 *.egg
 *.egg-info/
 *.fdb_latexmk
