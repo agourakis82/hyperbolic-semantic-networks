@@ -1,0 +1,366 @@
+// orc_trace.sio — Phase 4: Lean bridge computation witnesses
+// Outputs per-edge witnesses in parseable format for Lean stub generation.
+// Validates on small known graphs: K4 (spherical), P4 (hyperbolic), C5 (cycle).
+//
+// KEY PATTERN: BFS returns array by value (not &! ref) — Sounio copies on return.
+
+// ============================================================
+// Math primitives (from Phase 1)
+// ============================================================
+
+fn sc_abs(x: f64) -> f64 {
+    if x < 0.0 { return 0.0 - x; }
+    return x;
+}
+
+fn sc_exp(x: f64) -> f64 with Mut, Div {
+    var result: f64 = 1.0;
+    var term: f64 = 1.0;
+    var i: usize = 1;
+    while i <= 20 {
+        term = term * x / (i as f64);
+        result = result + term;
+        i = i + 1;
+    }
+    return result;
+}
+
+// ============================================================
+// Constants
+// ============================================================
+
+// Max graph size for trace (small graphs only)
+// MAX_N = 20, so arrays are 20*20=400
+
+// ============================================================
+// Graph (small, inline)
+// ============================================================
+
+struct TraceGraph {
+    adj: [usize; 400],   // 20*20 adjacency matrix
+    deg: [usize; 20],
+    n: usize
+}
+
+fn tg_init(g: &! TraceGraph, n: usize) with Mut {
+    g.n = n;
+    var i: usize = 0;
+    while i < 400 {
+        g.adj[i] = 0;
+        i = i + 1;
+    }
+    i = 0;
+    while i < 20 {
+        g.deg[i] = 0;
+        i = i + 1;
+    }
+}
+
+fn tg_add_edge(g: &! TraceGraph, u: usize, v: usize) with Mut, Panic {
+    if g.adj[u * 20 + v] == 0 {
+        g.adj[u * 20 + v] = 1;
+        g.adj[v * 20 + u] = 1;
+        g.deg[u] = g.deg[u] + 1;
+        g.deg[v] = g.deg[v] + 1;
+    }
+}
+
+// ============================================================
+// BFS — returns array by value (Phase 1 pattern)
+// ============================================================
+
+fn tg_bfs(g: & TraceGraph, src: usize) -> [i64; 20] with Mut, Panic {
+    var dist: [i64; 20] = [-1; 20];
+    var queue: [usize; 20] = [0; 20];
+    var head: usize = 0;
+    var tail: usize = 0;
+
+    dist[src] = 0;
+    queue[tail] = src;
+    tail = tail + 1;
+
+    while head < tail {
+        let u: usize = queue[head];
+        head = head + 1;
+        var v: usize = 0;
+        while v < g.n {
+            if g.adj[u * 20 + v] == 1 {
+                if dist[v] == -1 {
+                    dist[v] = dist[u] + 1;
+                    queue[tail] = v;
+                    tail = tail + 1;
+                }
+            }
+            v = v + 1;
+        }
+    }
+    return dist;
+}
+
+// Distance matrix: flat [i64; 400] indexed as d[u * 20 + v]
+struct DistMat {
+    d: [i64; 400]
+}
+
+fn build_dist_mat(g: & TraceGraph) -> DistMat with Mut, Panic {
+    var d: [i64; 400] = [0; 400];
+    var u: usize = 0;
+    while u < g.n {
+        let row: [i64; 20] = tg_bfs(g, u);
+        var v: usize = 0;
+        while v < g.n {
+            d[u * 20 + v] = row[v];
+            v = v + 1;
+        }
+        u = u + 1;
+    }
+    return DistMat { d: d };
+}
+
+// ============================================================
+// Probability measures
+// ============================================================
+
+struct Measure {
+    nodes: [usize; 21],
+    weights: [f64; 21],
+    size: usize
+}
+
+fn build_measure(g: & TraceGraph, u: usize, alpha: f64) -> Measure
+    with Mut, Panic, Div
+{
+    var mu: Measure = Measure { nodes: [0; 21], weights: [0.0; 21], size: 0 };
+    // Self-mass
+    mu.nodes[mu.size] = u;
+    mu.weights[mu.size] = alpha;
+    mu.size = mu.size + 1;
+    // Neighbor mass
+    let deg: usize = g.deg[u];
+    if deg == 0 { return mu; }
+    let w: f64 = (1.0 - alpha) / (deg as f64);
+    var v: usize = 0;
+    while v < g.n {
+        if g.adj[u * 20 + v] == 1 {
+            mu.nodes[mu.size] = v;
+            mu.weights[mu.size] = w;
+            mu.size = mu.size + 1;
+        }
+        v = v + 1;
+    }
+    return mu;
+}
+
+fn measure_sum(mu: & Measure) -> f64 with Mut {
+    var s: f64 = 0.0;
+    var i: usize = 0;
+    while i < mu.size {
+        s = s + mu.weights[i];
+        i = i + 1;
+    }
+    return s;
+}
+
+// ============================================================
+// Sinkhorn W1 (small support, max 21 nodes per measure)
+// ============================================================
+
+fn sinkhorn_w1(mu: & Measure, nu: & Measure, dm: & DistMat,
+               epsilon: f64, max_iter: usize) -> f64
+    with Mut, Div, Panic
+{
+    let m: usize = mu.size;
+    let n: usize = nu.size;
+    // Cost matrix and Gibbs kernel
+    var cost: [f64; 441] = [0.0; 441];  // 21*21
+    var kmat: [f64; 441] = [0.0; 441];
+    var i: usize = 0;
+    while i < m {
+        var j: usize = 0;
+        while j < n {
+            let c: f64 = dm.d[mu.nodes[i] * 20 + nu.nodes[j]] as f64;
+            cost[i * 21 + j] = c;
+            kmat[i * 21 + j] = sc_exp(0.0 - c / epsilon);
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+    // Scaling vectors
+    var u_vec: [f64; 21] = [0.0; 21];
+    var v_vec: [f64; 21] = [0.0; 21];
+    i = 0;
+    while i < m { u_vec[i] = 1.0; i = i + 1; }
+    i = 0;
+    while i < n { v_vec[i] = 1.0; i = i + 1; }
+    // Iterate
+    var iter: usize = 0;
+    while iter < max_iter {
+        // Update u
+        i = 0;
+        while i < m {
+            var s: f64 = 0.0;
+            var j: usize = 0;
+            while j < n {
+                s = s + kmat[i * 21 + j] * v_vec[j];
+                j = j + 1;
+            }
+            if s > 1e-30 { u_vec[i] = mu.weights[i] / s; }
+            i = i + 1;
+        }
+        // Update v
+        var j2: usize = 0;
+        while j2 < n {
+            var s: f64 = 0.0;
+            i = 0;
+            while i < m {
+                s = s + kmat[i * 21 + j2] * u_vec[i];
+                i = i + 1;
+            }
+            if s > 1e-30 { v_vec[j2] = nu.weights[j2] / s; }
+            j2 = j2 + 1;
+        }
+        iter = iter + 1;
+    }
+    // Compute W1 = sum_ij cost_ij * u_i * K_ij * v_j
+    var w1: f64 = 0.0;
+    i = 0;
+    while i < m {
+        var j: usize = 0;
+        while j < n {
+            w1 = w1 + cost[i * 21 + j] * u_vec[i] * kmat[i * 21 + j] * v_vec[j];
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+    return w1;
+}
+
+// ============================================================
+// ORC per-edge with trace output
+// ============================================================
+
+fn trace_edge(g: & TraceGraph, dm: & DistMat, u: usize, v: usize,
+              alpha: f64, epsilon: f64, max_iter: usize) -> f64
+    with IO, Mut, Div, Panic
+{
+    let mu: Measure = build_measure(g, u, alpha);
+    let nu: Measure = build_measure(g, v, alpha);
+    let d_uv: i64 = dm.d[u * 20 + v];
+    if d_uv <= 0 { return 0.0; }
+    let w1: f64 = sinkhorn_w1(&mu, &nu, dm, epsilon, max_iter);
+    let kappa: f64 = 1.0 - w1 / (d_uv as f64);
+    let mu_sum: f64 = measure_sum(&mu);
+    let nu_sum: f64 = measure_sum(&nu);
+    // TRACE output line
+    print("TRACE|");
+    print("u="); print(u as i64);
+    print("|v="); print(v as i64);
+    print("|d="); print(d_uv);
+    print("|w1="); print(w1);
+    print("|kappa="); print(kappa);
+    print("|mu_sum="); print(mu_sum);
+    print("|nu_sum="); print(nu_sum);
+    println("");
+    return kappa;
+}
+
+// Compute mean ORC over all edges, print graph-level summary
+fn trace_graph(g: & TraceGraph, dm: & DistMat, graph_id: i64,
+               alpha: f64, epsilon: f64, max_iter: usize) -> f64
+    with IO, Mut, Div, Panic
+{
+    var kappa_sum: f64 = 0.0;
+    var n_edges: usize = 0;
+    var u: usize = 0;
+    while u < g.n {
+        var v: usize = u + 1;
+        while v < g.n {
+            if g.adj[u * 20 + v] == 1 {
+                let k: f64 = trace_edge(g, dm, u, v, alpha, epsilon, max_iter);
+                kappa_sum = kappa_sum + k;
+                n_edges = n_edges + 1;
+            }
+            v = v + 1;
+        }
+        u = u + 1;
+    }
+    let kappa_mean: f64 = if n_edges > 0 { kappa_sum / (n_edges as f64) } else { 0.0 };
+    // Print graph summary
+    print("GRAPH|id="); print(graph_id);
+    print("|n="); print(g.n as i64);
+    print("|edges="); print(n_edges as i64);
+    print("|kappa_mean="); print(kappa_mean);
+    print("|alpha="); print(alpha);
+    println("");
+    return kappa_mean;
+}
+
+// ============================================================
+// Test graphs
+// ============================================================
+
+fn main() with IO, Mut, Div, Panic {
+    println("orc_trace.sio — Phase 4: Lean bridge computation witnesses");
+    println("============================================================");
+    let alpha: f64 = 0.5;
+    let epsilon: f64 = 0.1;   // Must be >= 0.1 for integer costs (exp(-1/eps) ≈ 0 kills transport)
+    let max_iter: usize = 300;
+
+    // === K4 (complete graph on 4 nodes) ===
+    println("--- K4 (complete, expect spherical) ---");
+    var g_k4: TraceGraph = TraceGraph { adj: [0; 400], deg: [0; 20], n: 0 };
+    tg_init(&! g_k4, 4);
+    tg_add_edge(&! g_k4, 0, 1);
+    tg_add_edge(&! g_k4, 0, 2);
+    tg_add_edge(&! g_k4, 0, 3);
+    tg_add_edge(&! g_k4, 1, 2);
+    tg_add_edge(&! g_k4, 1, 3);
+    tg_add_edge(&! g_k4, 2, 3);
+    let dm_k4: DistMat = build_dist_mat(&g_k4);
+    // Debug: check distances
+    print("DEBUG K4 d(0,1)="); print(dm_k4.d[0 * 20 + 1]);
+    print(" d(0,2)="); print(dm_k4.d[0 * 20 + 2]);
+    print(" d(1,2)="); print(dm_k4.d[1 * 20 + 2]);
+    print(" deg[0]="); print(g_k4.deg[0] as i64);
+    println("");
+    let k4_mean: f64 = trace_graph(&g_k4, &dm_k4, 1, alpha, epsilon, max_iter);
+    print("K4 kappa_mean = "); println(k4_mean);
+
+    // === P4 (path on 4 nodes: 0-1-2-3) ===
+    println("--- P4 (path, expect hyperbolic) ---");
+    var g_p4: TraceGraph = TraceGraph { adj: [0; 400], deg: [0; 20], n: 0 };
+    tg_init(&! g_p4, 4);
+    tg_add_edge(&! g_p4, 0, 1);
+    tg_add_edge(&! g_p4, 1, 2);
+    tg_add_edge(&! g_p4, 2, 3);
+    let dm_p4: DistMat = build_dist_mat(&g_p4);
+    let p4_mean: f64 = trace_graph(&g_p4, &dm_p4, 2, alpha, epsilon, max_iter);
+    print("P4 kappa_mean = "); println(p4_mean);
+
+    // === C5 (cycle on 5 nodes) ===
+    println("--- C5 (cycle, expect near-zero/slightly positive) ---");
+    var g_c5: TraceGraph = TraceGraph { adj: [0; 400], deg: [0; 20], n: 0 };
+    tg_init(&! g_c5, 5);
+    tg_add_edge(&! g_c5, 0, 1);
+    tg_add_edge(&! g_c5, 1, 2);
+    tg_add_edge(&! g_c5, 2, 3);
+    tg_add_edge(&! g_c5, 3, 4);
+    tg_add_edge(&! g_c5, 4, 0);
+    let dm_c5: DistMat = build_dist_mat(&g_c5);
+    let c5_mean: f64 = trace_graph(&g_c5, &dm_c5, 3, alpha, epsilon, max_iter);
+    print("C5 kappa_mean = "); println(c5_mean);
+
+    // === Star S4 (center=0, leaves=1,2,3) ===
+    println("--- S4 (star, expect hyperbolic) ---");
+    var g_s4: TraceGraph = TraceGraph { adj: [0; 400], deg: [0; 20], n: 0 };
+    tg_init(&! g_s4, 4);
+    tg_add_edge(&! g_s4, 0, 1);
+    tg_add_edge(&! g_s4, 0, 2);
+    tg_add_edge(&! g_s4, 0, 3);
+    let dm_s4: DistMat = build_dist_mat(&g_s4);
+    let s4_mean: f64 = trace_graph(&g_s4, &dm_s4, 4, alpha, epsilon, max_iter);
+    print("S4 kappa_mean = "); println(s4_mean);
+
+    println("============================================================");
+    println("Trace complete. Parse TRACE| and GRAPH| lines for Lean stub generation.");
+}

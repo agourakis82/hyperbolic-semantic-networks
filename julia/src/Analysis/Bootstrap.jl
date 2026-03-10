@@ -4,7 +4,7 @@ Bootstrap.jl - Bootstrap resampling analysis
 Parallel bootstrap resampling for statistical validation.
 """
 
-using LightGraphs
+using Graphs
 using Statistics
 using Random
 using ProgressMeter
@@ -97,9 +97,6 @@ function bootstrap_curvature(
     sample_size::Float64 = 0.8,
     parallel::Bool = true
 )
-    # Import curvature function
-    using ..HyperbolicSemanticNetworks: compute_graph_curvature
-    
     function curvature_statistic(g::SimpleGraph)::Float64
         curvatures = compute_graph_curvature(g, alpha=alpha, parallel=false)
         if length(curvatures) > 0

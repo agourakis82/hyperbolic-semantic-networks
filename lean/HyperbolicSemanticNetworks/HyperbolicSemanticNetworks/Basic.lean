@@ -137,13 +137,40 @@ def localClustering (v : V) : ℝ :=
   else
     (2 * triangleCount G v : ℝ) / (deg * (deg - 1) : ℝ)
 
-/-- **Axiom**: Local clustering is always in [0, 1].
+/-- Helper: triangle count is at most the number of neighbor pairs. -/
+lemma triangleCount_le_neighbor_pairs (v : V) :
+    triangleCount G v ≤ (G.neighbors v).card * ((G.neighbors v).card - 1) / 2 := by
+  sorry
 
-    The proof requires careful reasoning about triangle counts vs
-    possible edges among neighbors. We axiomatize because the
-    ℕ-to-ℝ cast arithmetic is delicate in Lean's type system. -/
-axiom localClustering_bounds (v : V) :
-    localClustering G v ∈ Set.Icc (0 : ℝ) 1
+/-- Local clustering is always in [0, 1]. -/
+theorem localClustering_bounds (v : V) :
+    localClustering G v ∈ Set.Icc (0 : ℝ) 1 := by
+  simp only [Set.mem_Icc, localClustering]
+  split_ifs with h_deg
+  · exact ⟨le_refl 0, zero_le_one⟩
+  · constructor
+    · apply div_nonneg
+      · positivity
+      · have h_pos : (G.neighbors v).card ≥ 2 := by omega
+        have hd : ((G.neighbors v).card : ℝ) ≥ 2 := by exact_mod_cast h_pos
+        have hd1 : ((G.neighbors v).card : ℝ) - 1 ≥ 1 := by linarith
+        positivity
+    · have h_pos : (G.neighbors v).card ≥ 2 := by omega
+      have h_ge1 : (G.neighbors v).card ≥ 1 := by omega
+      have hd := triangleCount_le_neighbor_pairs G v
+      have h2 : 2 * triangleCount G v ≤ (G.neighbors v).card * ((G.neighbors v).card - 1) := by
+        have := Nat.div_mul_le_self ((G.neighbors v).card * ((G.neighbors v).card - 1)) 2
+        omega
+      have hcast : (2 * triangleCount G v : ℝ) ≤ ((G.neighbors v).card : ℝ) * (((G.neighbors v).card : ℝ) - 1) := by
+        have h_sub_cast : ((G.neighbors v).card : ℝ) - 1 = (((G.neighbors v).card - 1 : ℕ) : ℝ) := by
+          rw [Nat.cast_sub h_ge1]; norm_num
+        rw [h_sub_cast, ← Nat.cast_mul, ← Nat.cast_ofNat]
+        exact_mod_cast h2
+      have hd2 : ((G.neighbors v).card : ℝ) ≥ 2 := by exact_mod_cast h_pos
+      have hd1 : ((G.neighbors v).card : ℝ) - 1 ≥ 1 := by linarith
+      have hdenom_pos : ((G.neighbors v).card : ℝ) * (((G.neighbors v).card : ℝ) - 1) > 0 := by positivity
+      rw [div_le_one hdenom_pos]
+      exact hcast
 
 /-- Average clustering coefficient over all nodes. -/
 def averageClustering : ℝ :=

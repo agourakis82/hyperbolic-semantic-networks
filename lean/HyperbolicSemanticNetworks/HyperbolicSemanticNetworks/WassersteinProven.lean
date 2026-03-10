@@ -197,28 +197,103 @@ lemma couplingCost_γ2_eq {ν ρ : V → ℝ} (d : V → V → ℝ)
     ∑ v : V, ∑ w : V, d v w * γ₂.γ v w = couplingCost d γ₂ := by
   simp [couplingCost]
 
--- The triangle inequality proof is quite involved due to sum manipulations.
--- We provide a complete proof sketch here.
+-- The triangle inequality proof is decomposed into three sub-lemmas
+-- to avoid kernel timeout on the monolithic proof.
+
+/-- Step 1: Expand couplingCost of the glued coupling into a triple sum. -/
+lemma glued_coupling_cost_expand {μ ν ρ : V → ℝ} (d : V → V → ℝ)
+    (γ₁ : Coupling μ ν) (γ₂ : Coupling ν ρ) :
+    couplingCost d (gluedCoupling' γ₁ γ₂) =
+    ∑ u : V, ∑ w : V, ∑ v : V,
+      (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) * d u w := by
+  simp [couplingCost, gluedCoupling', gluedCouplingVal]
+  congr 1; ext u; congr 1; ext w
+  rw [Finset.mul_sum]; congr 1; ext v; split_ifs <;> ring
+
+/-- Step 2: Apply pointwise triangle inequality d(u,w) ≤ d(u,v) + d(v,w) under the sum. -/
+lemma glued_cost_triangle_pointwise {μ ν ρ : V → ℝ} (d : V → V → ℝ)
+    (γ₁ : Coupling μ ν) (γ₂ : Coupling ν ρ)
+    (h_tri : ∀ u v w, d u w ≤ d u v + d v w)
+    (h_nn : ∀ u v w, 0 ≤ (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v)) :
+    ∑ u : V, ∑ w : V, ∑ v : V,
+      (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) * d u w ≤
+    ∑ u : V, ∑ w : V, ∑ v : V,
+      (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) * (d u v + d v w) := by
+  apply Finset.sum_le_sum; intro u _
+  apply Finset.sum_le_sum; intro w _
+  apply Finset.sum_le_sum; intro v _
+  apply mul_le_mul_of_nonneg_left (h_tri u v w) (h_nn u v w)
+
+/-- Step 3: Factor the expanded sum into couplingCost d γ₁ + couplingCost d γ₂. -/
+lemma split_glued_cost {μ ν ρ : V → ℝ} (d : V → V → ℝ)
+    (γ₁ : Coupling μ ν) (γ₂ : Coupling ν ρ) :
+    ∑ u : V, ∑ w : V, ∑ v : V,
+      (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) * (d u v + d v w) ≤
+    couplingCost d γ₁ + couplingCost d γ₂ := by
+  simp_rw [mul_add, Finset.sum_add_distrib]
+  apply add_le_add
+  · -- Part 1: ∑ u w v, (if …) * d u v ≤ couplingCost d γ₁
+    apply le_of_eq
+    conv_lhs => arg 2; ext u; rw [Finset.sum_comm]
+    unfold couplingCost
+    congr 1; ext u; congr 1; ext v
+    split_ifs with h
+    · simp [coupling_zero_of_marginal_zero_proven γ₁ v h u]
+    · have h₂ : ∑ w : V, γ₂.γ v w = ν v := γ₂.marginal_μ v
+      have hν_ne : ν v ≠ 0 := ne_of_gt (lt_of_le_of_ne (nu_nonneg_from_coupling γ₁ v) (Ne.symm h))
+      conv_lhs => arg 2; ext i; rw [show γ₁.γ u v * γ₂.γ v i / ν v * d u v = d u v * γ₁.γ u v / ν v * γ₂.γ v i from by ring]
+      rw [← Finset.mul_sum, h₂, div_mul_cancel₀ _ hν_ne]
+  · -- Part 2: ∑ u w v, (if …) * d v w ≤ couplingCost d γ₂
+    apply le_of_eq
+    unfold couplingCost
+    -- LHS: ∑ u, ∑ w, ∑ v, (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) * d v w
+    -- RHS: ∑ v, ∑ w, d v w * γ₂.γ v w
+    -- Step 1: swap innermost two sums in LHS:  ∑ u, ∑ w, ∑ v → ∑ u, ∑ v, ∑ w
+    conv_lhs => arg 2; ext u; rw [Finset.sum_comm]
+    -- Step 2: swap outermost: ∑ u, ∑ v → ∑ v, ∑ u
+    rw [Finset.sum_comm]
+    -- Now LHS: ∑ v, ∑ u, ∑ w, (if ν v = 0 then ...) * d v w
+    -- Step 3: swap middle sums: ∑ u, ∑ w → ∑ w, ∑ u
+    congr 1; ext v
+    rw [Finset.sum_comm]
+    -- Now: ∑ w, ∑ u, (if ν v = 0 then ...) * d v w
+    congr 1; ext w
+    -- Goal: ∑ u, (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) * d v w = d v w * γ₂.γ v w
+    split_ifs with h
+    · -- ν v = 0 case: everything is 0
+      simp
+      have h_zero : γ₂.γ v w = 0 := by
+        have hmarg := γ₂.marginal_μ v
+        rw [h] at hmarg
+        have := Finset.sum_eq_zero_iff_of_nonneg (fun i _ => γ₂.γ_nonneg v i) |>.mp hmarg w (Finset.mem_univ w)
+        linarith [γ₂.γ_nonneg v w]
+      simp [h_zero]
+    · -- ν v ≠ 0: collapse ∑ u γ₁(u,v) = ν v, then cancel
+      have h₁ : ∑ u : V, γ₁.γ u v = ν v := γ₁.marginal_ν v
+      have hν_ne : ν v ≠ 0 := ne_of_gt (lt_of_le_of_ne (nu_nonneg_from_coupling γ₁ v) (Ne.symm h))
+      conv_lhs => arg 2; ext u; rw [show γ₁.γ u v * γ₂.γ v w / ν v * d v w = d v w * γ₂.γ v w / ν v * γ₁.γ u v from by ring]
+      rw [← Finset.mul_sum, h₁, div_mul_cancel₀ _ hν_ne]
 
 /-- Key lemma: The cost of the glued coupling is bounded by the sum of costs.
-This is the heart of the triangle inequality proof.
-
-The proof uses the gluing construction from optimal transport theory.
-Given couplings γ₁ ∈ Γ(μ,ν) and γ₂ ∈ Γ(ν,ρ), we construct γ' ∈ Γ(μ,ρ):
-  γ'(u,w) = Σ_v [γ₁(u,v) · γ₂(v,w) / ν(v)]
-
-The cost bound follows from the metric triangle inequality:
-  d(u,w) ≤ d(u,v) + d(v,w)
-
-And the marginal constraints:
-  Σ_w γ₂(v,w) = ν(v)
-  Σ_u γ₁(u,v) = ν(v)
--/
+    Composed from three sub-lemmas to avoid kernel timeout. -/
 lemma glued_coupling_cost_bound {μ ν ρ : V → ℝ} (d : V → V → ℝ)
     (γ₁ : Coupling μ ν) (γ₂ : Coupling ν ρ)
     (h_tri : ∀ u v w, d u w ≤ d u v + d v w) :
     couplingCost d (gluedCoupling' γ₁ γ₂) ≤ couplingCost d γ₁ + couplingCost d γ₂ := by
-  sorry  -- cost bound proof (attempted proof times out; statement is correct)
+  have h_nn : ∀ u v w, 0 ≤ (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) := by
+    intro u v w
+    split_ifs with h
+    · rfl
+    · apply div_nonneg
+      · exact mul_nonneg (γ₁.γ_nonneg u v) (γ₂.γ_nonneg v w)
+      · exact le_of_lt (lt_of_le_of_ne (nu_nonneg_from_coupling γ₁ v) (Ne.symm h))
+  calc couplingCost d (gluedCoupling' γ₁ γ₂)
+      = ∑ u, ∑ w, ∑ v, (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) * d u w :=
+          glued_coupling_cost_expand d γ₁ γ₂
+    _ ≤ ∑ u, ∑ w, ∑ v, (if ν v = 0 then 0 else γ₁.γ u v * γ₂.γ v w / ν v) * (d u v + d v w) :=
+          glued_cost_triangle_pointwise d γ₁ γ₂ h_tri h_nn
+    _ ≤ couplingCost d γ₁ + couplingCost d γ₂ :=
+          split_glued_cost d γ₁ γ₂
 
 /-- **Theorem**: Triangle inequality for Wasserstein distance.
 

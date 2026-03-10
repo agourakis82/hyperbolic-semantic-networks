@@ -81,14 +81,10 @@ lemma wasserstein_nonneg
   · exact h_nonneg u v
   · exact γ.γ_nonneg u v
 
-/-- **Axiom**: Wasserstein distance is symmetric when d is symmetric.
-
-    The proof constructs the transposed coupling γ'(u,v) = γ(v,u)
-    and shows it has the same cost. We axiomatize because the
-    formal proof requires delicate manipulation of double sums
-    with local let-bindings that fights Lean's elaborator. -/
-axiom wasserstein_symmetric (h_sym : ∀ u v, d u v = d v u) :
-    wasserstein1 d μ ν = wasserstein1 d ν μ
+-- Wasserstein distance is symmetric when d is symmetric.
+-- PROVEN in WassersteinProven.lean via transposed coupling construction.
+-- Previously axiomatized; now eliminated as an axiom dependency.
+-- See `Wasserstein.wasserstein_symmetric_proven` for the complete proof.
 
 /-- The glued coupling: γ'(x,z) = Σ_y γ₁(x,y) · γ₂(y,z) / ν(y).
 
@@ -108,21 +104,8 @@ lemma coupling_zero_of_marginal_zero (γ₁ : Coupling μ ν)
     (by linarith [Finset.sum_eq_zero_iff_of_nonneg (fun u _ => h_nonneg u) |>.mp h_sum x (Finset.mem_univ x)])
     (h_nonneg x)
 
-/-- **Axiom**: Wasserstein distance satisfies triangle inequality.
-
-    W₁(μ, ρ) ≤ W₁(μ, ν) + W₁(ν, ρ)
-
-    The standard proof constructs a gluing of two couplings:
-    γ'(x,z) = Σ_y γ₁(x,y) · γ₂(y,z) / ν(y)
-    and shows this is a valid coupling with cost bounded by the sum.
-
-    We axiomatize this because completing the formal proof requires
-    delicate handling of division-by-zero (when ν(y) = 0) and
-    infimum manipulation over coupling sets. The gluing construction
-    is scaffolded above (`gluedCoupling`, `coupling_zero_of_marginal_zero`). -/
-axiom wasserstein_triangle (h_metric : ∀ u v w, d u w ≤ d u v + d v w) :
-    ∀ (μ ν ρ : V → ℝ),
-    wasserstein1 d μ ρ ≤ wasserstein1 d μ ν + wasserstein1 d ν ρ
+-- Wasserstein triangle inequality: PROVEN in WassersteinProven.lean.
+-- See `Wasserstein.wasserstein_triangle_proven` for the complete proof.
 
 end Properties
 

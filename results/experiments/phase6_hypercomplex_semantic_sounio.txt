@@ -1,0 +1,51 @@
+# Hypercomplex Semantic ORC — Phase 6
+# Embedding: landmark -> S^(d-1), cost = geodesic arc distance
+# alpha=0.5  epsilon=0.02  sinkhorn_iter=500 (geodesic cost)
+# Network, N, E, d, kappa_geo, geometry
+
+Loading babelnet_ar... N=142 E=151
+babelnet_ar,142,151,4,0.392185871980138,Spherical
+babelnet_ar,142,151,8,0.4414039938617492,Spherical
+babelnet_ar,142,151,16,0.4222188092663276,Spherical
+
+Loading babelnet_ru... N=493 E=522
+babelnet_ru,493,522,4,0.19616669673488715,Spherical
+babelnet_ru,493,522,8,0.41724401046033416,Spherical
+babelnet_ru,493,522,16,0.4262762521277124,Spherical
+
+Loading wordnet_en... N=500 E=527
+wordnet_en,500,527,4,0.6435979739373949,Spherical
+wordnet_en,500,527,8,0.6271970287829975,Spherical
+wordnet_en,500,527,16,0.5938820349449534,Spherical
+
+Loading swow_es... N=443 E=583
+swow_es,443,583,4,-0.03518411922783994,Hyperbolic
+swow_es,443,583,8,-0.017871847280524177,Hyperbolic
+swow_es,443,583,16,-0.00726166834359438,Euclidean
+
+Loading swow_en... N=467 E=661
+swow_en,467,661,4,-0.07444226953386937,Hyperbolic
+swow_en,467,661,8,-0.0554666550380514,Hyperbolic
+swow_en,467,661,16,-0.033411844691012334,Hyperbolic
+
+Loading swow_zh... N=476 E=768
+swow_zh,476,768,4,0.677682834534229,Spherical
+swow_zh,476,768,8,0.7905952421553188,Spherical
+swow_zh,476,768,16,0.8619625921819968,Spherical
+
+Loading conceptnet_pt... N=489 E=1578
+conceptnet_pt,489,1578,4,0.11821944602914103,Spherical
+conceptnet_pt,489,1578,8,0.0451042671806112,Spherical
+conceptnet_pt,489,1578,16,0.03661308593598224,Spherical
+
+Loading conceptnet_en... N=467 E=2383
+conceptnet_en,467,2383,4,0.1818933743782273,Spherical
+conceptnet_en,467,2383,8,0.08543027464907464,Spherical
+conceptnet_en,467,2383,16,0.05267510048170056,Spherical
+
+# === Phase 6 Semantic Gate ===
+# Networks with kappa > 0 at d=4: 6/8
+# Gate (>=3 correct): PASS
+# swow_nl: excluded (max_deg=458 >> MAX_DEG=60)
+# depression_min: excluded (N=1634 >> MAX_N=500)
+# Phase 6 semantic analysis complete

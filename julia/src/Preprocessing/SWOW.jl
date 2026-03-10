@@ -4,7 +4,7 @@ SWOW.jl - Small World of Words data loader
 Loads and preprocesses SWOW association data.
 """
 
-using LightGraphs
+using Graphs
 using DataFrames
 using CSV
 

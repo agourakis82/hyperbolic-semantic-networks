@@ -1,0 +1,11 @@
+# Hypercomplex ORC Phase 6 — Sounio N=100
+# Embedding: landmark -> S^(d-1), cost = geodesic arc distance
+# alpha=0.5  epsilon=0.02  sinkhorn_iter=500 (geodesic cost)
+N,k,eta,kappa_mean,d,n_seeds,geometry
+# sc_acos validation: acos(-1)=3.141592653589793  acos(0)=1.5707963267948966  acos(0.5)=1.0472002074990856
+# --- d=4 (S3) ---
+100,4,0.16,0.08035268962767012,4,3,Spherical
+100,6,0.36,0.1486268835582696,4,3,Spherical
+100,8,0.64,0.1878511702254773,4,3,Spherical
+100,10,1,0.23052788749852912,4,3,Spherical
+100,12,1.44,0.24671601434424506,4,3,Spherical

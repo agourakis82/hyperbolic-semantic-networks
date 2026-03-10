@@ -4,7 +4,7 @@ Taxonomies.jl - Taxonomy (WordNet/BabelNet) loader
 Loads hierarchical taxonomy data.
 """
 
-using LightGraphs
+using Graphs
 using CSV
 using DataFrames
 

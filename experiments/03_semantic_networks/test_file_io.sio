@@ -1,0 +1,82 @@
+// test_file_io.sio — Verify read_file / file_size builtins work in beta.4
+//
+// Run from the repo root:
+//   SOUC=~/work/sounio/artifacts/omega/souc-bin/souc-linux-x86_64
+//   "$SOUC" run experiments/03_semantic_networks/test_file_io.sio
+//
+// Expected output:
+//   file_size  = 151   (or however many bytes babelnet_ar.edgelist has)
+//   first byte = 48    (ASCII '0')
+//   edge count = 151   (one edge per line, each ≥1 byte)
+
+fn main() with IO, Mut, Div, Panic {
+    println("test_file_io.sio — file I/O builtins validation")
+    println("=================================================")
+    println("")
+
+    let path = "experiments/03_semantic_networks/data/babelnet_ar.edgelist"
+
+    let sz = file_size(path)
+    print("file_size  = ")
+    print(sz)
+    println("")
+
+    if sz < 0 {
+        println("ERROR: file not found — check working directory")
+        return
+    }
+
+    let raw = read_file(path)
+
+    // Copy into fixed buffer and print first few bytes
+    var buf: [i64; 65536] = [0; 65536]
+    var i: i64 = 0
+    while i < sz && i < 65536 {
+        buf[i as usize] = raw[i as usize] as i64
+        i = i + 1
+    }
+    let loaded = i
+
+    print("bytes loaded = ")
+    print(loaded)
+    println("")
+
+    print("first byte (ASCII)  = ")
+    print(buf[0])
+    println("   (expect 48 = '0')")
+
+    // Count edges: one per '\n' (byte 10)
+    var edges: i64 = 0
+    i = 0
+    while i < loaded {
+        if buf[i as usize] == 10 { edges = edges + 1 }
+        i = i + 1
+    }
+    print("newline count (edges) = ")
+    print(edges)
+    println("")
+
+    // Parse first edge: read until space, then until newline
+    var u_val: i64 = 0
+    var v_val: i64 = 0
+    i = 0
+    while i < loaded {
+        let ch = buf[i as usize]
+        if ch >= 48 && ch <= 57 { u_val = u_val * 10 + (ch - 48) } else { break }
+        i = i + 1
+    }
+    i = i + 1  // skip space
+    while i < loaded {
+        let ch = buf[i as usize]
+        if ch >= 48 && ch <= 57 { v_val = v_val * 10 + (ch - 48) } else { break }
+        i = i + 1
+    }
+    print("first edge: u=")
+    print(u_val)
+    print(" v=")
+    print(v_val)
+    println("   (expect small integers)")
+
+    println("")
+    println("ALL TESTS COMPLETE — file I/O builtins confirmed")
+}

@@ -1,0 +1,27 @@
+{
+  "network": "babelnet_ar",
+  "alpha": 0.5,
+  "n_relations": 36,
+  "min_edges": 10,
+  "n_nodes": 142,
+  "relations": [
+    {
+      "n_edges": 69,
+      "geometry": "SPHERICAL",
+      "relation": "SEMANTICALLY_RELATED",
+      "fraction_negative": 0.2753623188405797,
+      "kappa_mean": 0.03763515067862897,
+      "n_nodes": 65,
+      "kappa_std": 0.2330816845587941
+    },
+    {
+      "n_edges": 10,
+      "geometry": "SPHERICAL",
+      "relation": "INSTANCE_OF",
+      "fraction_negative": 0.0,
+      "kappa_mean": 0.7,
+      "n_nodes": 17,
+      "kappa_std": 0.32203059435976533
+    }
+  ]
+}

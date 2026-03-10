@@ -4,7 +4,7 @@ Metrics.jl - Network metrics computation
 Fast computation of network metrics: clustering, degree stats, etc.
 """
 
-using LightGraphs
+using Graphs
 using Statistics
 using LinearAlgebra
 

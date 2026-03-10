@@ -5,7 +5,7 @@ Tests complete workflows from data loading to analysis.
 """
 
 using Test
-using LightGraphs
+using Graphs
 using HyperbolicSemanticNetworks
 
 @testset "Full Pipeline Integration" begin

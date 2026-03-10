@@ -5,7 +5,7 @@ Tests performance-critical operations and validates speedups.
 """
 
 using Test
-using LightGraphs
+using Graphs
 using BenchmarkTools
 using HyperbolicSemanticNetworks
 

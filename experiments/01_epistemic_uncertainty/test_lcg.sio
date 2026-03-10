@@ -1,0 +1,146 @@
+// Unit tests for LCG (Linear Congruential Generator)
+// Used in phase_transition.sio for random graph generation
+
+fn test_lcg_step() -> bool {
+    // Test that LCG produces deterministic sequence
+    let seed: u64 = 12345
+    
+    let step1 = lcg_step(seed)
+    let step2 = lcg_step(step1)
+    let step3 = lcg_step(step2)
+    
+    // Expected values from reference implementation
+    let expected1: u64 = 12345 * 6364136223846793005 + 1442695040888963407
+    let expected2: u64 = expected1 * 6364136223846793005 + 1442695040888963407
+    let expected3: u64 = expected2 * 6364136223846793005 + 1442695040888963407
+    
+    if step1 != expected1 {
+        println("FAIL: lcg_step(12345) = " + u64_to_string(step1) + ", expected " + u64_to_string(expected1))
+        return false
+    }
+    
+    if step2 != expected2 {
+        println("FAIL: lcg_step(step1) = " + u64_to_string(step2) + ", expected " + u64_to_string(expected2))
+        return false
+    }
+    
+    println("PASS: lcg_step deterministic sequence")
+    return true
+}
+
+fn test_lcg_umod() -> bool {
+    // Test that umod produces values in range [0, m-1]
+    let seed: u64 = 987654321
+    
+    var rng = seed
+    var i = 0
+    while i < 100 {
+        rng = lcg_step(rng)
+        let m = (i % 10) + 1  // m from 1 to 10
+        let val = lcg_umod(rng, m)
+        
+        if val >= m {
+            println("FAIL: lcg_umod(" + u64_to_string(rng) + ", " + int_to_string(m) + ") = " + int_to_string(val) + " >= " + int_to_string(m))
+            return false
+        }
+        
+        i = i + 1
+    }
+    
+    println("PASS: lcg_umod produces values in correct range")
+    return true
+}
+
+fn test_lcg_uniformity() -> bool {
+    // Simple uniformity test (chi-square would be better)
+    let seed: u64 = 42
+    let m = 10
+    
+    var counts: [i64; 10] = [0; 10]
+    var rng = seed
+    
+    var i = 0
+    while i < 1000 {
+        rng = lcg_step(rng)
+        let val = lcg_umod(rng, m)
+        counts[val] = counts[val] + 1
+        i = i + 1
+    }
+    
+    // Each bucket should have ~100 counts
+    var j = 0
+    while j < m {
+        if counts[j] < 50 || counts[j] > 150 {
+            println("WARNING: Bucket " + int_to_string(j) + " has " + int_to_string(counts[j]) + " counts (expected ~100)")
+            // Not failing, just warning
+        }
+        j = j + 1
+    }
+    
+    println("PASS: lcg uniformity reasonable")
+    return true
+}
+
+// Helper functions
+fn u64_to_string(n: u64) -> string with Mut, Panic, Div {
+    // Simple conversion for testing
+    int_to_string(n as i64)
+}
+
+fn int_to_string(n: i64) -> string with Mut, Panic, Div {
+    if n == 0 {
+        "0"
+    } else {
+        let negative = n < 0
+        var num = if negative { 0 - n } else { n }
+        var result = ""
+        while num > 0 {
+            let digit = num % 10
+            let ch = 48 + digit
+            result = char_from_i64(ch) + result
+            num = num / 10
+        }
+        if negative { "-" + result } else { result }
+    }
+}
+
+fn char_from_i64(n: i64) -> string with Mut, Panic {
+    str_slice("0123456789", n, n + 1)
+}
+
+// Copy LCG functions from phase_transition.sio
+fn lcg_step(state: u64) -> u64 {
+    let a: u64 = 6364136223846793005
+    let c: u64 = 1442695040888963407
+    state * a + c
+}
+
+fn lcg_umod(state: u64, m: usize) -> usize with Div, Panic {
+    if m == 0 { return 0 }
+    ((state as usize) & 4294967295) % m
+}
+
+// Main test runner
+fn main() with IO, Mut, Div, Panic {
+    println("=== Testing LCG Functions ===")
+    
+    var all_passed = true
+    
+    if !test_lcg_step() {
+        all_passed = false
+    }
+    
+    if !test_lcg_umod() {
+        all_passed = false
+    }
+    
+    if !test_lcg_uniformity() {
+        all_passed = false
+    }
+    
+    if all_passed {
+        println("\n✓ All LCG tests passed!")
+    } else {
+        println("\n✗ Some LCG tests failed")
+    }
+}

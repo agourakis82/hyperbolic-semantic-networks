@@ -4,7 +4,7 @@ ConceptNet.jl - ConceptNet knowledge graph loader
 Loads ConceptNet data and constructs semantic graphs.
 """
 
-using LightGraphs
+using Graphs
 using JSON
 
 """

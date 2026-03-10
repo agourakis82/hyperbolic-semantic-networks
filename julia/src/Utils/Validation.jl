@@ -4,7 +4,7 @@ Validation.jl - Data and graph validation
 Validation utilities for ensuring data quality and graph structure.
 """
 
-using LightGraphs
+using Graphs
 
 """
     validate_graph(graph::SimpleGraph; check_connected::Bool=true, check_weights::Bool=true)

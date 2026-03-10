@@ -1,0 +1,762 @@
+// hypercomplex_semantic_orc.sio — Phase 6: Hypercomplex ORC on semantic networks
+//
+// Loads real semantic networks from disk, embeds into S^(d-1) for d in {4,8,16},
+// computes ORC with geodesic transport cost. Validates against Julia reference.
+//
+// Networks (8 loadable; swow_nl excluded — max_deg=458; depression excluded — N=1634):
+//   babelnet_ar, babelnet_ru, wordnet_en, swow_es, swow_en, swow_zh,
+//   conceptnet_en, conceptnet_pt
+//
+// Gate: at least 3 networks classified correctly (kappa > 0) at d=4
+//
+// Author: Hyperbolic Semantic Networks Project
+// Version: 1.0.0 (Phase 6 semantic hypercomplex analysis)
+
+// ============================================================================
+// Configuration
+// ============================================================================
+
+let MAX_N:    usize = 500
+let MAX_DEG:  usize = 60
+let MAX_SUP:  usize = 61     // MAX_DEG + 1 (semantic networks have higher degree)
+let MAX_DIM:  usize = 16
+let MAX_BUF:  usize = 65536
+let FLOOR:    f64   = 1e-300
+let SINKHORN_CHECK_PERIOD: usize = 10
+let SINKHORN_TOL: f64 = 1e-6
+
+// ============================================================================
+// Math helpers (sc_exp, sc_sqrt, sc_acos)
+// ============================================================================
+
+fn sc_exp(x: f64) -> f64 with Mut, Div, Panic {
+    let ln2     = 0.6931471805599453
+    let inv_ln2 = 1.4426950408889634
+    if x >  709.0 { return 1.0e308 }
+    if x < -709.0 { return 0.0 }
+    var k_f = x * inv_ln2
+    var k: i64 = 0
+    if k_f >= 0.0 { k = (k_f + 0.5) as i64 } else { k = (k_f - 0.5) as i64 }
+    let r = x - (k as f64) * ln2
+    var sum  = 1.0
+    var term = 1.0
+    var n = 1
+    while n <= 20 { term = term * r / (n as f64); sum = sum + term; n = n + 1 }
+    var result = sum
+    if k > 0 {
+        var j: i64 = 0
+        while j < k       { result = result * 2.0; j = j + 1 }
+    } else if k < 0 {
+        var j: i64 = 0
+        while j < (0 - k) { result = result * 0.5; j = j + 1 }
+    }
+    result
+}
+
+fn sc_sqrt(x: f64) -> f64 with Mut, Div {
+    if x <= 0.0 { return 0.0 }
+    var r = x
+    var i: usize = 0
+    while i < 50 { r = (r + x / r) * 0.5; i = i + 1 }
+    r
+}
+
+fn sc_asin_core(x: f64) -> f64 with Mut, Div {
+    let x2 = x * x
+    x + x * x2 * (0.16666666666666666
+        + x2 * (0.075
+        + x2 * (0.044642857142857144
+        + x2 * (0.030381944444444444
+        + x2 * 0.022372159090909091))))
+}
+
+fn sc_asin(x: f64) -> f64 with Mut, Div {
+    let PI_HALF = 1.5707963267948966
+    if x > 0.5 {
+        var arg = (1.0 - x) * 0.5
+        if arg < 0.0 { arg = 0.0 }
+        PI_HALF - 2.0 * sc_asin_core(sc_sqrt(arg))
+    } else if x < -0.5 {
+        let PI_HALF_NEG = -1.5707963267948966
+        var arg = (1.0 + x) * 0.5
+        if arg < 0.0 { arg = 0.0 }
+        PI_HALF_NEG + 2.0 * sc_asin_core(sc_sqrt(arg))
+    } else {
+        sc_asin_core(x)
+    }
+}
+
+fn sc_acos(x: f64) -> f64 with Mut, Div {
+    let PI_HALF = 1.5707963267948966
+    var cx = x
+    if cx > 1.0 { cx = 1.0 }
+    if cx < -1.0 { cx = -1.0 }
+    PI_HALF - sc_asin(cx)
+}
+
+// ============================================================================
+// SparseGraph
+// ============================================================================
+
+struct SparseGraph {
+    adj: [usize; 30000],
+    deg: [usize; 500],
+    n:   usize,
+}
+
+fn sparse_graph_new(n: usize) -> SparseGraph with Mut, Panic {
+    if n > MAX_N { let _: usize = 0 / 0 }
+    var adj: [usize; 30000] = [0; 30000]
+    var deg: [usize; 500]   = [0; 500]
+    SparseGraph { adj: adj, deg: deg, n: n }
+}
+
+fn sparse_add_edge(g: &! SparseGraph, u: usize, v: usize) with Mut, Div, Panic {
+    let du = g.deg[u]
+    let dv = g.deg[v]
+    var already: bool = false
+    var ci: usize = 0
+    while ci < du {
+        if g.adj[u * MAX_DEG + ci] == v { already = true }
+        ci = ci + 1
+    }
+    if !already && u != v && du < MAX_DEG && dv < MAX_DEG {
+        g.adj[u * MAX_DEG + du] = v
+        g.deg[u] = du + 1
+        g.adj[v * MAX_DEG + dv] = u
+        g.deg[v] = dv + 1
+    }
+}
+
+fn sparse_degree(g: &SparseGraph, u: usize) -> usize { g.deg[u] }
+fn sparse_neighbor(g: &SparseGraph, u: usize, i: usize) -> usize { g.adj[u * MAX_DEG + i] }
+
+fn count_edges(g: &SparseGraph) -> usize {
+    var total: usize = 0
+    var u: usize = 0
+    while u < g.n { total = total + g.deg[u]; u = u + 1 }
+    total / 2
+}
+
+// ============================================================================
+// Edge list loader (from Phase 3)
+// ============================================================================
+
+fn load_edgelist(path: string, g: &! SparseGraph) -> i64
+    with IO, Mut, Div, Panic
+{
+    let sz = file_size(path)
+    if sz < 0 { return -1 }
+    if sz > MAX_BUF as i64 { return -2 }
+
+    let raw = read_file(path)
+    var buf: [i64; 65536] = [0; 65536]
+    var i: i64 = 0
+    while i < sz && i < MAX_BUF as i64 {
+        buf[i as usize] = raw[i as usize] as i64
+        i = i + 1
+    }
+    let loaded = i
+
+    var edges: i64 = 0
+    i = 0
+    while i < loaded {
+        while i < loaded && (buf[i as usize] < 48 || buf[i as usize] > 57) {
+            i = i + 1
+        }
+        if i >= loaded { break }
+        var u_val: i64 = 0
+        while i < loaded && buf[i as usize] >= 48 && buf[i as usize] <= 57 {
+            u_val = u_val * 10 + (buf[i as usize] - 48)
+            i = i + 1
+        }
+        while i < loaded && buf[i as usize] == 32 { i = i + 1 }
+        var v_val: i64 = 0
+        while i < loaded && buf[i as usize] >= 48 && buf[i as usize] <= 57 {
+            v_val = v_val * 10 + (buf[i as usize] - 48)
+            i = i + 1
+        }
+        if u_val >= 0 && v_val >= 0 && u_val < MAX_N as i64 && v_val < MAX_N as i64 {
+            sparse_add_edge(g, u_val as usize, v_val as usize)
+            edges = edges + 1
+        }
+    }
+    edges
+}
+
+fn infer_n(g: &SparseGraph, file_max_n: usize) -> usize {
+    var n: usize = 0
+    var u: usize = 0
+    while u < file_max_n {
+        if g.deg[u] > 0 { n = u + 1 }
+        u = u + 1
+    }
+    n
+}
+
+// ============================================================================
+// BFS & DistCache
+// ============================================================================
+
+struct Queue {
+    data: [usize; 500],
+    head: usize,
+    tail: usize,
+    size: usize,
+}
+
+fn queue_new() -> Queue with Mut, Panic {
+    var data: [usize; 500] = [0; 500]
+    Queue { data: data, head: 0, tail: 0, size: 0 }
+}
+
+fn queue_push(q: &! Queue, x: usize) with Mut, Panic {
+    if q.size >= MAX_N { let _: usize = 0 / 0 }
+    q.data[q.tail] = x
+    q.tail = (q.tail + 1) % MAX_N
+    q.size = q.size + 1
+}
+
+fn queue_pop(q: &! Queue) -> usize with Mut, Panic {
+    if q.size == 0 { let _: usize = 0 / 0 }
+    let x = q.data[q.head]
+    q.head = (q.head + 1) % MAX_N
+    q.size = q.size - 1
+    x
+}
+
+fn bfs_from(g: &SparseGraph, src: usize, n: usize) -> [i64; 500]
+    with Mut, Div, Panic
+{
+    var dist: [i64; 500]   = [-1; 500]
+    var vis:  [bool; 500]  = [false; 500]
+    dist[src] = 0; vis[src] = true
+    var q = queue_new()
+    queue_push(&! q, src)
+    while q.size > 0 {
+        let u = queue_pop(&! q)
+        let du = sparse_degree(g, u)
+        var i: usize = 0
+        while i < du {
+            let v = sparse_neighbor(g, u, i)
+            if !vis[v] { vis[v] = true; dist[v] = dist[u] + 1; queue_push(&! q, v) }
+            i = i + 1
+        }
+    }
+    dist
+}
+
+struct DistCache {
+    d: [i64; 250000],
+    n: usize,
+}
+
+fn build_dist_cache(g: &SparseGraph) -> DistCache with Mut, Div, Panic {
+    var d: [i64; 250000] = [-1; 250000]
+    let n = g.n
+    var src: usize = 0
+    while src < n {
+        let row = bfs_from(g, src, n)
+        var j: usize = 0
+        while j < n { d[src * n + j] = row[j]; j = j + 1 }
+        src = src + 1
+    }
+    DistCache { d: d, n: n }
+}
+
+fn cached_dist(cache: &DistCache, u: usize, v: usize) -> i64 {
+    cache.d[u * cache.n + v]
+}
+
+// ============================================================================
+// Lazy measure (MAX_SUP=61 for semantic networks)
+// ============================================================================
+
+struct Measure {
+    nodes: [usize; 61],
+    probs: [f64;   61],
+    len:   usize,
+}
+
+fn lazy_measure(g: &SparseGraph, node: usize, alpha: f64) -> Measure
+    with Mut, Div, Panic
+{
+    var nodes: [usize; 61] = [0;   61]
+    var probs: [f64;   61] = [0.0; 61]
+    var len:   usize       = 0
+    let d = sparse_degree(g, node)
+    if d == 0 {
+        nodes[0] = node; probs[0] = 1.0
+        return Measure { nodes: nodes, probs: probs, len: 1 }
+    }
+    let w = (1.0 - alpha) / (d as f64)
+    if alpha > 0.0 { nodes[0] = node; probs[0] = alpha; len = 1 }
+    var i: usize = 0
+    while i < d {
+        nodes[len] = sparse_neighbor(g, node, i)
+        probs[len] = w
+        len = len + 1
+        i   = i + 1
+    }
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+// ============================================================================
+// Landmark embedding
+// ============================================================================
+
+struct Landmarks {
+    idx:  [usize; 16],
+    n_lm: usize,
+}
+
+fn select_landmarks(cache: &DistCache, n: usize, dim: usize, start: usize) -> Landmarks
+    with Mut, Div, Panic
+{
+    var lm = Landmarks { idx: [0; 16], n_lm: 0 }
+    if dim > MAX_DIM { let _: usize = 0 / 0 }
+
+    lm.idx[0] = start
+    lm.n_lm = 1
+
+    var min_dists: [i64; 500] = [0; 500]
+    var v: usize = 0
+    while v < n {
+        min_dists[v] = cached_dist(cache, start, v)
+        v = v + 1
+    }
+
+    var li: usize = 1
+    while li < dim {
+        var best: usize = 0
+        var best_d: i64 = -1
+        v = 0
+        while v < n {
+            if min_dists[v] > best_d {
+                best_d = min_dists[v]
+                best = v
+            }
+            v = v + 1
+        }
+        lm.idx[li] = best
+        lm.n_lm = li + 1
+
+        v = 0
+        while v < n {
+            let nd = cached_dist(cache, best, v)
+            if nd >= 0 && nd < min_dists[v] { min_dists[v] = nd }
+            v = v + 1
+        }
+        li = li + 1
+    }
+    lm
+}
+
+struct EmbedMatrix {
+    data: [f64; 8000],
+    n:    usize,
+    dim:  usize,
+}
+
+fn landmark_embed(cache: &DistCache, lm: &Landmarks, n: usize, dim: usize) -> EmbedMatrix
+    with Mut, Div, Panic
+{
+    var em = EmbedMatrix { data: [0.0; 8000], n: n, dim: dim }
+
+    var i: usize = 0
+    while i < n {
+        var norm_sq: f64 = 0.0
+        var k: usize = 0
+        while k < dim {
+            let dv = cached_dist(cache, i, lm.idx[k])
+            let fv = if dv >= 0 { dv as f64 } else { 0.0 }
+            em.data[i * MAX_DIM + k] = fv
+            norm_sq = norm_sq + fv * fv
+            k = k + 1
+        }
+
+        let norm = sc_sqrt(norm_sq)
+        if norm < 1e-10 {
+            let uniform = 1.0 / sc_sqrt(dim as f64)
+            k = 0
+            while k < dim { em.data[i * MAX_DIM + k] = uniform; k = k + 1 }
+        } else {
+            let inv_norm = 1.0 / norm
+            k = 0
+            while k < dim { em.data[i * MAX_DIM + k] = em.data[i * MAX_DIM + k] * inv_norm; k = k + 1 }
+        }
+        i = i + 1
+    }
+    em
+}
+
+// ============================================================================
+// Geodesic cost matrix
+// ============================================================================
+
+struct GeoCostMatrix {
+    d: [f64; 250000],
+    n: usize,
+}
+
+fn build_geo_cost(em: &EmbedMatrix) -> GeoCostMatrix with Mut, Div, Panic {
+    var geo = GeoCostMatrix { d: [0.0; 250000], n: em.n }
+    let n = em.n
+    let dim = em.dim
+
+    var i: usize = 0
+    while i < n {
+        var j: usize = 0
+        while j < n {
+            if i == j {
+                geo.d[i * n + j] = 0.0
+            } else {
+                var dot: f64 = 0.0
+                var k: usize = 0
+                while k < dim {
+                    dot = dot + em.data[i * MAX_DIM + k] * em.data[j * MAX_DIM + k]
+                    k = k + 1
+                }
+                geo.d[i * n + j] = sc_acos(dot)
+            }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    geo
+}
+
+// ============================================================================
+// Sinkhorn W1 with geodesic cost (61x61 support for semantic networks)
+// ============================================================================
+
+fn wasserstein1_geo(
+    mu:       &Measure,
+    nu:       &Measure,
+    geo:      &GeoCostMatrix,
+    epsilon:  f64,
+    max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let nm = mu.len
+    let nn = nu.len
+    let stride = geo.n
+    if nm == 0 || nn == 0 { return 0.0 }
+
+    var cost: [f64; 3721] = [0.0; 3721]   // 61x61
+    var kmat: [f64; 3721] = [0.0; 3721]
+    var u_s:  [f64;   61] = [1.0;   61]
+    var u_prev: [f64; 61] = [1.0;   61]
+    var v_s:  [f64;   61] = [1.0;   61]
+
+    var i: usize = 0
+    while i < nm {
+        let ui = mu.nodes[i]
+        var j: usize = 0
+        while j < nn {
+            let vj = nu.nodes[j]
+            let c  = geo.d[ui * stride + vj]
+            cost[i * MAX_SUP + j] = c
+            kmat[i * MAX_SUP + j] = sc_exp(-(c / epsilon))
+            j = j + 1
+        }
+        i = i + 1
+    }
+
+    var iter: usize = 0
+    while iter < max_iter {
+        i = 0
+        while i < nm { u_prev[i] = u_s[i]; i = i + 1 }
+        i = 0
+        while i < nm {
+            var s: f64 = 0.0
+            var j: usize = 0
+            while j < nn { s = s + kmat[i * MAX_SUP + j] * v_s[j]; j = j + 1 }
+            if s > FLOOR { u_s[i] = mu.probs[i] / s }
+            i = i + 1
+        }
+        var j: usize = 0
+        while j < nn {
+            var s: f64 = 0.0
+            i = 0
+            while i < nm { s = s + kmat[i * MAX_SUP + j] * u_s[i]; i = i + 1 }
+            if s > FLOOR { v_s[j] = nu.probs[j] / s }
+            j = j + 1
+        }
+        if (iter + 1) % SINKHORN_CHECK_PERIOD == 0 {
+            var diff: f64 = 0.0
+            i = 0
+            while i < nm {
+                let delta = u_s[i] - u_prev[i]
+                let abs_delta = if delta >= 0.0 { delta } else { 0.0 - delta }
+                diff = diff + abs_delta
+                i = i + 1
+            }
+            if diff < SINKHORN_TOL { iter = max_iter }
+        }
+        iter = iter + 1
+    }
+
+    var w1: f64 = 0.0
+    i = 0
+    while i < nm {
+        var j: usize = 0
+        while j < nn {
+            w1 = w1 + u_s[i] * kmat[i * MAX_SUP + j] * v_s[j] * cost[i * MAX_SUP + j]
+            j  = j + 1
+        }
+        i = i + 1
+    }
+    w1
+}
+
+// ============================================================================
+// Hypercomplex ORC
+// ============================================================================
+
+fn hyper_edge_kappa(
+    g: &SparseGraph, geo: &GeoCostMatrix, u: usize, v: usize,
+    alpha: f64, epsilon: f64, max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    let stride = geo.n
+    let d_uv = geo.d[u * stride + v]
+    if d_uv < 1e-6 { return -999.0 }
+    let mu = lazy_measure(g, u, alpha)
+    let nu = lazy_measure(g, v, alpha)
+    let w1 = wasserstein1_geo(&mu, &nu, geo, epsilon, max_iter)
+    1.0 - w1 / d_uv
+}
+
+fn mean_hyper_orc(
+    g: &SparseGraph, geo: &GeoCostMatrix,
+    alpha: f64, epsilon: f64, max_iter: usize
+) -> f64 with Mut, Div, Panic {
+    var sum_k: f64  = 0.0
+    var n_edge: usize = 0
+
+    var u: usize = 0
+    while u < g.n {
+        let du = sparse_degree(g, u)
+        var i: usize = 0
+        while i < du {
+            let v = sparse_neighbor(g, u, i)
+            if v > u {
+                let k = hyper_edge_kappa(g, geo, u, v, alpha, epsilon, max_iter)
+                if k > -998.0 {
+                    sum_k  = sum_k + k
+                    n_edge = n_edge + 1
+                }
+            }
+            i = i + 1
+        }
+        u = u + 1
+    }
+
+    if n_edge == 0 { return 0.0 }
+    sum_k / (n_edge as f64)
+}
+
+// ============================================================================
+// Process one network at one embedding dimension
+// ============================================================================
+
+fn process_hyper(
+    g: &SparseGraph, cache: &DistCache, dim: usize
+) -> f64 with IO, Mut, Div, Panic {
+    let n = g.n
+    let start: usize = 0   // deterministic landmark start
+    let lm = select_landmarks(cache, n, dim, start)
+    let em = landmark_embed(cache, &lm, n, dim)
+    let geo = build_geo_cost(&em)
+    // epsilon=0.02 for geodesic costs (mean d_geo ~ 0.2, need eps << d_geo)
+    mean_hyper_orc(g, &geo, 0.5, 0.02, 500)
+}
+
+// ============================================================================
+// Main: 8 semantic networks x 3 dimensions
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    println("# Hypercomplex Semantic ORC — Phase 6")
+    println("# Embedding: landmark -> S^(d-1), cost = geodesic arc distance")
+    println("# alpha=0.5  epsilon=0.02  sinkhorn_iter=500 (geodesic cost)")
+    println("# Network, N, E, d, kappa_geo, geometry")
+    println("")
+
+    // Process each network for d=4, d=8, d=16
+    var d_vals: [usize; 3] = [4, 8, 16]
+    var n_correct: usize = 0
+
+    // --- babelnet_ar ---
+    print("Loading babelnet_ar... ")
+    var g1 = sparse_graph_new(200)
+    let ne1 = load_edgelist("experiments/03_semantic_networks/data/babelnet_ar.edgelist", &! g1)
+    let n1 = infer_n(&g1, 200)
+    g1.n = n1
+    print("N="); print(n1); print(" E="); println(ne1)
+    let cache1 = build_dist_cache(&g1)
+    var di: usize = 0
+    while di < 3 {
+        let dim = d_vals[di]
+        let kappa = process_hyper(&g1, &cache1, dim)
+        let geom = if kappa < -0.01 { "Hyperbolic" } else if kappa > 0.01 { "Spherical" } else { "Euclidean" }
+        print("babelnet_ar,"); print(n1); print(","); print(ne1); print(",")
+        print(dim); print(","); print(kappa); print(","); println(geom)
+        if dim == 4 && kappa > 0.0 { n_correct = n_correct + 1 }
+        di = di + 1
+    }
+    println("")
+
+    // --- babelnet_ru ---
+    print("Loading babelnet_ru... ")
+    var g2 = sparse_graph_new(500)
+    let ne2 = load_edgelist("experiments/03_semantic_networks/data/babelnet_ru.edgelist", &! g2)
+    let n2 = infer_n(&g2, 500)
+    g2.n = n2
+    print("N="); print(n2); print(" E="); println(ne2)
+    let cache2 = build_dist_cache(&g2)
+    di = 0
+    while di < 3 {
+        let dim = d_vals[di]
+        let kappa = process_hyper(&g2, &cache2, dim)
+        let geom = if kappa < -0.01 { "Hyperbolic" } else if kappa > 0.01 { "Spherical" } else { "Euclidean" }
+        print("babelnet_ru,"); print(n2); print(","); print(ne2); print(",")
+        print(dim); print(","); print(kappa); print(","); println(geom)
+        if dim == 4 && kappa > 0.0 { n_correct = n_correct + 1 }
+        di = di + 1
+    }
+    println("")
+
+    // --- wordnet_en ---
+    print("Loading wordnet_en... ")
+    var g3 = sparse_graph_new(500)
+    let ne3 = load_edgelist("experiments/03_semantic_networks/data/wordnet_en.edgelist", &! g3)
+    let n3 = infer_n(&g3, 500)
+    g3.n = n3
+    print("N="); print(n3); print(" E="); println(ne3)
+    let cache3 = build_dist_cache(&g3)
+    di = 0
+    while di < 3 {
+        let dim = d_vals[di]
+        let kappa = process_hyper(&g3, &cache3, dim)
+        let geom = if kappa < -0.01 { "Hyperbolic" } else if kappa > 0.01 { "Spherical" } else { "Euclidean" }
+        print("wordnet_en,"); print(n3); print(","); print(ne3); print(",")
+        print(dim); print(","); print(kappa); print(","); println(geom)
+        if dim == 4 && kappa > 0.0 { n_correct = n_correct + 1 }
+        di = di + 1
+    }
+    println("")
+
+    // --- swow_es ---
+    print("Loading swow_es... ")
+    var g4 = sparse_graph_new(500)
+    let ne4 = load_edgelist("experiments/03_semantic_networks/data/swow_es.edgelist", &! g4)
+    let n4 = infer_n(&g4, 500)
+    g4.n = n4
+    print("N="); print(n4); print(" E="); println(ne4)
+    let cache4 = build_dist_cache(&g4)
+    di = 0
+    while di < 3 {
+        let dim = d_vals[di]
+        let kappa = process_hyper(&g4, &cache4, dim)
+        let geom = if kappa < -0.01 { "Hyperbolic" } else if kappa > 0.01 { "Spherical" } else { "Euclidean" }
+        print("swow_es,"); print(n4); print(","); print(ne4); print(",")
+        print(dim); print(","); print(kappa); print(","); println(geom)
+        if dim == 4 && kappa > 0.0 { n_correct = n_correct + 1 }
+        di = di + 1
+    }
+    println("")
+
+    // --- swow_en ---
+    print("Loading swow_en... ")
+    var g5 = sparse_graph_new(500)
+    let ne5 = load_edgelist("experiments/03_semantic_networks/data/swow_en.edgelist", &! g5)
+    let n5 = infer_n(&g5, 500)
+    g5.n = n5
+    print("N="); print(n5); print(" E="); println(ne5)
+    let cache5 = build_dist_cache(&g5)
+    di = 0
+    while di < 3 {
+        let dim = d_vals[di]
+        let kappa = process_hyper(&g5, &cache5, dim)
+        let geom = if kappa < -0.01 { "Hyperbolic" } else if kappa > 0.01 { "Spherical" } else { "Euclidean" }
+        print("swow_en,"); print(n5); print(","); print(ne5); print(",")
+        print(dim); print(","); print(kappa); print(","); println(geom)
+        if dim == 4 && kappa > 0.0 { n_correct = n_correct + 1 }
+        di = di + 1
+    }
+    println("")
+
+    // --- swow_zh ---
+    print("Loading swow_zh... ")
+    var g6 = sparse_graph_new(500)
+    let ne6 = load_edgelist("experiments/03_semantic_networks/data/swow_zh.edgelist", &! g6)
+    let n6 = infer_n(&g6, 500)
+    g6.n = n6
+    print("N="); print(n6); print(" E="); println(ne6)
+    let cache6 = build_dist_cache(&g6)
+    di = 0
+    while di < 3 {
+        let dim = d_vals[di]
+        let kappa = process_hyper(&g6, &cache6, dim)
+        let geom = if kappa < -0.01 { "Hyperbolic" } else if kappa > 0.01 { "Spherical" } else { "Euclidean" }
+        print("swow_zh,"); print(n6); print(","); print(ne6); print(",")
+        print(dim); print(","); print(kappa); print(","); println(geom)
+        if dim == 4 && kappa > 0.0 { n_correct = n_correct + 1 }
+        di = di + 1
+    }
+    println("")
+
+    // --- conceptnet_pt ---
+    print("Loading conceptnet_pt... ")
+    var g7 = sparse_graph_new(500)
+    let ne7 = load_edgelist("experiments/03_semantic_networks/data/conceptnet_pt.edgelist", &! g7)
+    let n7 = infer_n(&g7, 500)
+    g7.n = n7
+    print("N="); print(n7); print(" E="); println(ne7)
+    let cache7 = build_dist_cache(&g7)
+    di = 0
+    while di < 3 {
+        let dim = d_vals[di]
+        let kappa = process_hyper(&g7, &cache7, dim)
+        let geom = if kappa < -0.01 { "Hyperbolic" } else if kappa > 0.01 { "Spherical" } else { "Euclidean" }
+        print("conceptnet_pt,"); print(n7); print(","); print(ne7); print(",")
+        print(dim); print(","); print(kappa); print(","); println(geom)
+        if dim == 4 && kappa > 0.0 { n_correct = n_correct + 1 }
+        di = di + 1
+    }
+    println("")
+
+    // --- conceptnet_en ---
+    print("Loading conceptnet_en... ")
+    var g8 = sparse_graph_new(500)
+    let ne8 = load_edgelist("experiments/03_semantic_networks/data/conceptnet_en.edgelist", &! g8)
+    let n8 = infer_n(&g8, 500)
+    g8.n = n8
+    print("N="); print(n8); print(" E="); println(ne8)
+    let cache8 = build_dist_cache(&g8)
+    di = 0
+    while di < 3 {
+        let dim = d_vals[di]
+        let kappa = process_hyper(&g8, &cache8, dim)
+        let geom = if kappa < -0.01 { "Hyperbolic" } else if kappa > 0.01 { "Spherical" } else { "Euclidean" }
+        print("conceptnet_en,"); print(n8); print(","); print(ne8); print(",")
+        print(dim); print(","); print(kappa); print(","); println(geom)
+        if dim == 4 && kappa > 0.0 { n_correct = n_correct + 1 }
+        di = di + 1
+    }
+    println("")
+
+    // Gate check
+    println("# === Phase 6 Semantic Gate ===")
+    print("# Networks with kappa > 0 at d=4: ")
+    print(n_correct)
+    println("/8")
+    let gate_pass = if n_correct >= 3 { "PASS" } else { "FAIL" }
+    print("# Gate (>=3 correct): ")
+    println(gate_pass)
+
+    // swow_nl and depression_min excluded
+    println("# swow_nl: excluded (max_deg=458 >> MAX_DEG=60)")
+    println("# depression_min: excluded (N=1634 >> MAX_N=500)")
+    println("# Phase 6 semantic analysis complete")
+}

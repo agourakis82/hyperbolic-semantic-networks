@@ -5,7 +5,7 @@ Tests mathematical properties and invariants.
 """
 
 using Test
-using LightGraphs
+using Graphs
 using Statistics
 using HyperbolicSemanticNetworks
 

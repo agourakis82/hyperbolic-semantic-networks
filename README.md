@@ -16,29 +16,30 @@ This repository contains research on **network geometry** using Ollivier-Ricci c
 - **Rust**: Performance-focused implementation
 - **Sounio**: Type-safe implementation with epistemic computing
 
-**Latest Discovery**: Universal phase transition at **⟨k⟩²/N ≈ 2.5** determines network geometry
+**Key result**: Curvature sign change in random regular graphs at density η = ⟨k⟩²/N, with finite-size scaling η_c(N) = 3.75 − 14.62/√N (R² = 0.995). Semantic network geometry follows from two parameters: η (density) and C (clustering).
 
 ---
 
 ## Key Findings
 
-### Phase Transition Discovery (Dec 2024)
+### Curvature Sign Change (Feb 2026 — updated)
 
-- **Universal law**: Sparsity ratio ⟨k⟩²/N determines geometry
-  - ⟨k⟩²/N < 2.0 → **Hyperbolic** (negative curvature)
-  - ⟨k⟩²/N ≈ 2.5 → **Critical point** (phase transition)
-  - ⟨k⟩²/N > 3.5 → **Spherical** (positive curvature)
+- **Density parameter**: η = ⟨k⟩²/N determines the sign of mean ORC in random k-regular graphs
+  - η < η_c(N) → **Negative curvature** (hyperbolic regime)
+  - η > η_c(N) → **Positive curvature** (spherical regime)
+  - η_c(N) = 3.75 − 14.62/√N (fitted on N ∈ {50, 100, 200, 500, 1000}, R² = 0.995)
+  - η_c(100) ≈ 2.29, η_c(200) ≈ 2.72, η_c(500) ≈ 3.10, η_c^∞ ≈ 3.75
 
-- **Validated on**:
-  - 11 synthetic networks (N=200, k=2..50)
-  - 4 real semantic networks (SWOW: Spanish, English, Chinese, Dutch)
-  - Transition at k≈22 (ratio≈2.49) for N=200
+- **Validated on 11 real semantic networks** (SWOW ES/EN/ZH/NL, ConceptNet EN/PT, WordNet, BabelNet, depression)
+  - Dutch SWOW (η = 7.56 >> η_c) is spherical (κ̄ = +0.10): confirms prediction
+  - Clustering coefficient C modulates curvature within sub-critical regime
+  - Two-parameter model (η + C) classifies all 11 networks (post-hoc; validation pending)
 
 ### Original Findings
 
-- **8 semantic networks** analyzed (SWOW, ConceptNet, taxonomies)
-- **Hyperbolic geometry** in moderate clustering regime (C ≈ 0.02–0.15)
-- **Broad-scale topology**: α = 1.90 ± 0.03
+- **11 semantic networks** analyzed across 7 languages (SWOW, ConceptNet, WordNet, BabelNet, depression)
+- **Three geometric regimes**: Hyperbolic (C > 0.10, η < η_c), Euclidean (C < 0.02), Spherical (η > η_c)
+- **Metric dependence**: All networks flip to spherical under sphere-embedded ORC (Cayley-Dickson tower)
 - **Cross-linguistic consistency** across language families
 
 ---

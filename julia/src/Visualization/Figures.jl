@@ -6,7 +6,7 @@ Generate figures for papers using Plots.jl.
 
 using Plots
 using Statistics
-using LightGraphs
+using Graphs
 
 """
     plot_phase_diagram(results::Vector; output_file::Union{String, Nothing}=nothing)

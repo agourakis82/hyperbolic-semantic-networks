@@ -1,0 +1,24 @@
+{
+  "n_hyperedges_total": 3088,
+  "interpretation": "pairwise_more_negative",
+  "network": "wordnet_en",
+  "alpha": 0.5,
+  "orchid": {
+    "kappa_min": 0.5037462400875042,
+    "kappa_max": 0.75,
+    "fraction_negative": 0.0,
+    "kappa_mean": 0.5340781987014216,
+    "n_valid": 3088,
+    "kappa_std": 0.02333653404347461
+  },
+  "n_hyperedges_processed": 3088,
+  "pairwise_clique_expansion": {
+    "fraction_negative": 0.8414085914085914,
+    "kappa_mean": -0.1013270856642368,
+    "n_valid": 4004,
+    "kappa_std": 0.10550074881113383
+  },
+  "delta_kappa": 0.6354052843656584,
+  "n_nodes": 500,
+  "max_size": 8
+}

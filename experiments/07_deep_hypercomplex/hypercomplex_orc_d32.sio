@@ -1,0 +1,345 @@
+// hypercomplex_orc_d32.sio — Phase 7: Deep Hypercomplex ORC, d=32 (S^31)
+//
+// Extension of Phase 6 (experiments/06_hypercomplex/hypercomplex_orc.sio) to
+// d=32 (trigintaduonions). Tests whether κ(d) > 0 persists and measures
+// the convergence rate toward 0 predicted by Johnson-Lindenstrauss.
+//
+// Key finding from test_epsilon_d32.sio:
+//   Mean geodesic cost at d=32 ≈ 0.273 (same order as d=16)
+//   → epsilon=0.02 remains valid (no kernel collapse at d=32)
+//
+// Algorithm (identical to Phase 6, only array sizes differ):
+//   1. BFS all-pairs distance matrix
+//   2. Greedy farthest-first: select 32 landmarks
+//   3. Landmark embed: v_i = [d(i,l_1),...,d(i,l_32)] / ||v_i||  (unit vector on S^31)
+//   4. Geodesic cost: c(u,v) = acos(v_u · v_v)
+//   5. Sinkhorn W1 with epsilon=0.02, alpha=0.5
+//   6. ORC: κ(u,v) = 1 - W1(μ_u, μ_v) / c(u,v)
+//
+// Gate conditions (to be filled after Julia LP Task A completes):
+//   G1: k=4 d=32 kappa > 0  (Julia d=32 reference TBD)
+//   G2: kappa(d=32) < kappa(d=16)  (monotone decrease, JL prediction)
+//   G3: ALL kappas positive for k=4..30 at d=32
+//
+// Output (CSV to stdout):
+//   N,k,eta,kappa_mean,d,n_seeds,geometry
+
+let MAX_N:    usize = 500
+let MAX_DEG:  usize = 60
+let MAX_SUP:  usize = 41
+let MAX_DIM:  usize = 32   // d=32 trigintaduonions / S^31
+let N_SEEDS:  usize = 3
+let FLOOR:    f64   = 1e-300
+let SINKHORN_CHECK_PERIOD: usize = 10
+let SINKHORN_TOL: f64 = 1e-6
+
+// ============================================================================
+// Math helpers (identical to Phase 6)
+// ============================================================================
+
+fn sc_exp(x: f64) -> f64 with Mut, Div, Panic {
+    let ln2     = 0.6931471805599453
+    let inv_ln2 = 1.4426950408889634
+    if x >  709.0 { return 1.0e308 }
+    if x < -709.0 { return 0.0 }
+    var k_f = x * inv_ln2
+    var k: i64 = 0
+    if k_f >= 0.0 { k = (k_f + 0.5) as i64 } else { k = (k_f - 0.5) as i64 }
+    let r = x - (k as f64) * ln2
+    var sum  = 1.0
+    var term = 1.0
+    var n = 1
+    while n <= 20 { term = term * r / (n as f64); sum = sum + term; n = n + 1 }
+    var result = sum
+    if k > 0 {
+        var j: i64 = 0
+        while j < k       { result = result * 2.0; j = j + 1 }
+    } else if k < 0 {
+        var j: i64 = 0
+        while j < (0 - k) { result = result * 0.5; j = j + 1 }
+    }
+    result
+}
+
+fn sc_sqrt(x: f64) -> f64 with Mut, Div {
+    if x <= 0.0 { return 0.0 }
+    var r = x
+    var i: usize = 0
+    while i < 50 { r = (r + x / r) * 0.5; i = i + 1 }
+    r
+}
+
+fn sc_asin_core(x: f64) -> f64 with Mut, Div {
+    let x2 = x * x
+    x + x * x2 * (0.16666666666666666
+        + x2 * (0.075
+        + x2 * (0.044642857142857144
+        + x2 * (0.030381944444444444
+        + x2 * 0.022372159090909091))))
+}
+
+fn sc_asin(x: f64) -> f64 with Mut, Div {
+    let PI_HALF = 1.5707963267948966
+    if x > 0.5 {
+        var arg = (1.0 - x) * 0.5
+        if arg < 0.0 { arg = 0.0 }
+        PI_HALF - 2.0 * sc_asin_core(sc_sqrt(arg))
+    } else if x < -0.5 {
+        let PI_HALF_NEG = -1.5707963267948966
+        var arg = (1.0 + x) * 0.5
+        if arg < 0.0 { arg = 0.0 }
+        PI_HALF_NEG + 2.0 * sc_asin_core(sc_sqrt(arg))
+    } else {
+        sc_asin_core(x)
+    }
+}
+
+fn sc_acos(x: f64) -> f64 with Mut, Div {
+    let PI_HALF = 1.5707963267948966
+    var cx = x
+    if cx > 1.0 { cx = 1.0 }
+    if cx < -1.0 { cx = -1.0 }
+    PI_HALF - sc_asin(cx)
+}
+
+// ============================================================================
+// Graph infrastructure (identical to Phase 6)
+// ============================================================================
+
+struct SparseGraph { adj: [usize; 30000], deg: [usize; 500], n: usize }
+fn sparse_graph_new(n: usize) -> SparseGraph with Mut, Panic {
+    if n > MAX_N { let _: usize = 0 / 0 }
+    SparseGraph { adj: [0; 30000], deg: [0; 500], n: n }
+}
+fn sparse_add_edge(g: &! SparseGraph, u: usize, v: usize) with Mut, Div, Panic {
+    let du = g.deg[u]; let dv = g.deg[v]
+    var already: bool = false
+    var ci: usize = 0
+    while ci < du { if g.adj[u * MAX_DEG + ci] == v { already = true }; ci = ci + 1 }
+    if !already && u != v && du < MAX_DEG && dv < MAX_DEG {
+        g.adj[u * MAX_DEG + du] = v; g.deg[u] = du + 1
+        g.adj[v * MAX_DEG + dv] = u; g.deg[v] = dv + 1
+    }
+}
+fn sparse_degree(g: &SparseGraph, u: usize) -> usize { g.deg[u] }
+fn sparse_neighbor(g: &SparseGraph, u: usize, i: usize) -> usize { g.adj[u * MAX_DEG + i] }
+
+fn lcg_step(state: u64) -> u64 { state * 6364136223846793005 + 1442695040888963407 }
+fn lcg_umod(state: u64, m: usize) -> usize with Div, Panic {
+    if m == 0 { return 0 }; ((state as usize) & 4294967295) % m
+}
+
+fn build_k_regular_sparse(n: usize, k: usize, seed: u64) -> SparseGraph with Mut, Div, Panic {
+    var g = sparse_graph_new(n)
+    var stubs: [usize; 30000] = [0; 30000]
+    var si: usize = 0; var i: usize = 0
+    while i < n { var j: usize = 0; while j < k { stubs[si] = i; si = si + 1; j = j + 1 }; i = i + 1 }
+    let stub_count = si
+    var rng: u64 = if seed == 0 { 12345 } else { seed }
+    var s: usize = stub_count
+    while s > 1 { s = s - 1; rng = lcg_step(rng); let t = lcg_umod(rng, s + 1); let tmp = stubs[s]; stubs[s] = stubs[t]; stubs[t] = tmp }
+    i = 0; while i + 1 < stub_count { sparse_add_edge(&! g, stubs[i], stubs[i + 1]); i = i + 2 }
+    g
+}
+
+struct Queue { data: [usize; 500], head: usize, tail: usize, size: usize }
+fn queue_new() -> Queue with Mut, Panic { Queue { data: [0; 500], head: 0, tail: 0, size: 0 } }
+fn queue_push(q: &! Queue, x: usize) with Mut, Panic { q.data[q.tail] = x; q.tail = (q.tail + 1) % MAX_N; q.size = q.size + 1 }
+fn queue_pop(q: &! Queue) -> usize with Mut, Panic { let x = q.data[q.head]; q.head = (q.head + 1) % MAX_N; q.size = q.size - 1; x }
+
+fn bfs_from(g: &SparseGraph, src: usize, n: usize) -> [i64; 500] with Mut, Div, Panic {
+    var dist: [i64; 500] = [-1; 500]; var vis: [bool; 500] = [false; 500]
+    dist[src] = 0; vis[src] = true
+    var q = queue_new(); queue_push(&! q, src)
+    while q.size > 0 { let u = queue_pop(&! q); let du = sparse_degree(g, u); var i: usize = 0
+        while i < du { let v = sparse_neighbor(g, u, i); if !vis[v] { vis[v] = true; dist[v] = dist[u] + 1; queue_push(&! q, v) }; i = i + 1 } }
+    dist
+}
+
+struct DistCache { d: [i64; 250000], n: usize }
+fn build_dist_cache(g: &SparseGraph) -> DistCache with Mut, Div, Panic {
+    var d: [i64; 250000] = [0; 250000]; let n = g.n; var src: usize = 0
+    while src < n { let row = bfs_from(g, src, n); var dst: usize = 0; while dst < n { d[src * MAX_N + dst] = row[dst]; dst = dst + 1 }; src = src + 1 }
+    DistCache { d: d, n: n }
+}
+fn cached_dist(cache: &DistCache, u: usize, v: usize) -> i64 { cache.d[u * MAX_N + v] }
+
+// ============================================================================
+// d=32 specific structures
+// ============================================================================
+
+struct Landmarks { idx: [usize; 32], n_lm: usize }
+
+fn select_landmarks(cache: &DistCache, n: usize, dim: usize, start: usize) -> Landmarks with Mut, Div, Panic {
+    var lm = Landmarks { idx: [0; 32], n_lm: 0 }
+    lm.idx[0] = start; lm.n_lm = 1
+    var min_dists: [i64; 500] = [0; 500]; var v: usize = 0
+    while v < n { min_dists[v] = cached_dist(cache, start, v); v = v + 1 }
+    var li: usize = 1
+    while li < dim { var best: usize = 0; var best_d: i64 = -1; v = 0
+        while v < n { if min_dists[v] > best_d { best_d = min_dists[v]; best = v }; v = v + 1 }
+        lm.idx[li] = best; lm.n_lm = li + 1; v = 0
+        while v < n { let nd = cached_dist(cache, best, v); if nd < min_dists[v] { min_dists[v] = nd }; v = v + 1 }
+        li = li + 1 }
+    lm
+}
+
+// EmbedMatrix: 500 × 32 = 16000 entries
+struct EmbedMatrix { data: [f64; 16000], n: usize, dim: usize }
+
+fn landmark_embed(cache: &DistCache, lm: &Landmarks, n: usize, dim: usize) -> EmbedMatrix with Mut, Div, Panic {
+    var em = EmbedMatrix { data: [0.0; 16000], n: n, dim: dim }
+    var i: usize = 0
+    while i < n {
+        var norm_sq: f64 = 0.0; var k: usize = 0
+        while k < dim { let dv = cached_dist(cache, i, lm.idx[k]); let fv = if dv >= 0 { dv as f64 } else { 0.0 }
+            em.data[i * MAX_DIM + k] = fv; norm_sq = norm_sq + fv * fv; k = k + 1 }
+        let norm = sc_sqrt(norm_sq)
+        if norm < 1e-10 { let uniform = 1.0 / sc_sqrt(dim as f64); k = 0; while k < dim { em.data[i * MAX_DIM + k] = uniform; k = k + 1 }
+        } else { let inv_norm = 1.0 / norm; k = 0; while k < dim { em.data[i * MAX_DIM + k] = em.data[i * MAX_DIM + k] * inv_norm; k = k + 1 } }
+        i = i + 1
+    }
+    em
+}
+
+// GeoCostMatrix: N×N geodesic arc distances
+struct GeoCostMatrix { d: [f64; 250000], n: usize }
+
+fn build_geo_cost(em: &EmbedMatrix) -> GeoCostMatrix with Mut, Div, Panic {
+    let n = em.n; let dim = em.dim
+    var geo = GeoCostMatrix { d: [0.0; 250000], n: n }
+    var i: usize = 0
+    while i < n { var j: usize = 0
+        while j < n {
+            if i == j { geo.d[i * MAX_N + j] = 0.0 } else {
+                var dot: f64 = 0.0; var k: usize = 0
+                while k < dim { dot = dot + em.data[i * MAX_DIM + k] * em.data[j * MAX_DIM + k]; k = k + 1 }
+                geo.d[i * MAX_N + j] = sc_acos(dot) }
+            j = j + 1 }; i = i + 1 }
+    geo
+}
+
+struct Measure { nodes: [usize; 41], probs: [f64; 41], len: usize }
+
+fn lazy_measure(g: &SparseGraph, node: usize, alpha: f64) -> Measure with Mut, Div, Panic {
+    var nodes: [usize; 41] = [0; 41]; var probs: [f64; 41] = [0.0; 41]; var len: usize = 0
+    let d = sparse_degree(g, node)
+    if d == 0 { nodes[0] = node; probs[0] = 1.0; return Measure { nodes: nodes, probs: probs, len: 1 } }
+    let w = (1.0 - alpha) / (d as f64)
+    if alpha > 0.0 { nodes[0] = node; probs[0] = alpha; len = 1 }
+    var i: usize = 0
+    while i < d { nodes[len] = sparse_neighbor(g, node, i); probs[len] = w; len = len + 1; i = i + 1 }
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+fn sinkhorn_w1_geo(mu: &Measure, nu: &Measure, geo: &GeoCostMatrix,
+                   epsilon: f64, max_iter: usize) -> f64 with Mut, Div, Panic {
+    let nm = mu.len; let nn = nu.len
+    if nm == 0 || nn == 0 { return 0.0 }
+    var cost: [f64; 1681] = [0.0; 1681]; var kmat: [f64; 1681] = [0.0; 1681]
+    var u_s: [f64; 41] = [1.0; 41]; var v_s: [f64; 41] = [1.0; 41]
+    var i: usize = 0
+    while i < nm { let ui = mu.nodes[i]; var j: usize = 0
+        while j < nn { let vj = nu.nodes[j]; let c = geo.d[ui * MAX_N + vj]
+            cost[i * MAX_SUP + j] = c; kmat[i * MAX_SUP + j] = sc_exp(-(c / epsilon)); j = j + 1 }; i = i + 1 }
+    var iter: usize = 0
+    while iter < max_iter {
+        i = 0; while i < nm { var s: f64 = 0.0; var j: usize = 0
+            while j < nn { s = s + kmat[i * MAX_SUP + j] * v_s[j]; j = j + 1 }
+            if s > FLOOR { u_s[i] = mu.probs[i] / s }; i = i + 1 }
+        var j: usize = 0; while j < nn { var s: f64 = 0.0; i = 0
+            while i < nm { s = s + kmat[i * MAX_SUP + j] * u_s[i]; i = i + 1 }
+            if s > FLOOR { v_s[j] = nu.probs[j] / s }; j = j + 1 }
+        iter = iter + 1 }
+    var w1: f64 = 0.0; i = 0
+    while i < nm { var j: usize = 0
+        while j < nn { w1 = w1 + u_s[i] * kmat[i * MAX_SUP + j] * v_s[j] * cost[i * MAX_SUP + j]; j = j + 1 }; i = i + 1 }
+    w1
+}
+
+fn hyper_edge_kappa(g: &SparseGraph, geo: &GeoCostMatrix, u: usize, v: usize,
+                    alpha: f64, epsilon: f64, max_iter: usize) -> f64 with Mut, Div, Panic {
+    let d_geo = geo.d[u * MAX_N + v]
+    if d_geo < 1e-10 { return -999.0 }
+    let mu_u = lazy_measure(g, u, alpha)
+    let nu_v = lazy_measure(g, v, alpha)
+    let w1 = sinkhorn_w1_geo(&mu_u, &nu_v, geo, epsilon, max_iter)
+    1.0 - w1 / d_geo
+}
+
+fn mean_hyper_orc(g: &SparseGraph, geo: &GeoCostMatrix,
+                  alpha: f64, epsilon: f64, max_iter: usize) -> f64 with Mut, Div, Panic {
+    var sum_k: f64 = 0.0; var n_edge: usize = 0
+    var u: usize = 0
+    while u < g.n {
+        let du = sparse_degree(g, u); var i: usize = 0
+        while i < du { let v = sparse_neighbor(g, u, i)
+            if v > u { let k = hyper_edge_kappa(g, geo, u, v, alpha, epsilon, max_iter)
+                if k > -998.0 { sum_k = sum_k + k; n_edge = n_edge + 1 } }
+            i = i + 1 }; u = u + 1 }
+    if n_edge == 0 { return 0.0 }
+    sum_k / (n_edge as f64)
+}
+
+fn hypercomplex_pipeline_d32(g: &SparseGraph, seed: u64) -> f64 with Mut, Div, Panic {
+    let n = g.n
+    let cache = build_dist_cache(g)
+    let start = lcg_umod(lcg_step(seed), n)
+    let lm = select_landmarks(&cache, n, 32, start)
+    let em = landmark_embed(&cache, &lm, n, 32)
+    let geo = build_geo_cost(&em)
+    // epsilon=0.02: valid at d=32 (mean geodesic ≈ 0.273, same order as d=16)
+    // Confirmed by test_epsilon_d32.sio: eps=0.02 gives kappa>0; eps≥0.05 bias negative
+    mean_hyper_orc(g, &geo, 0.5, 0.02, 500)
+}
+
+// ============================================================================
+// Main: N=100 k-regular sweep at d=32
+// ============================================================================
+
+fn main() with IO, Mut, Div, Panic {
+    println("# Hypercomplex ORC Phase 7 — Sounio N=100, d=32 (S^31)")
+    println("# Embedding: 32-landmark -> S^31, cost = geodesic arc distance")
+    println("# alpha=0.5  epsilon=0.02  sinkhorn_iter=500")
+    println("# epsilon=0.02 validated by test_epsilon_d32.sio diagnostic")
+    println("N,k,eta,kappa_mean,d,n_seeds,geometry")
+
+    let pi_val = sc_acos(-1.0)
+    print("# sc_acos(-1)="); print(pi_val)
+    print("  (expected 3.14159)")
+    println("")
+
+    var k_vals: [usize; 11] = [4, 6, 8, 10, 12, 14, 16, 18, 20, 25, 30]
+    let n: usize = 100
+
+    var ki: usize = 0
+    while ki < 11 {
+        let k = k_vals[ki]
+        if k > 0 && k < n && (k * n) % 2 == 0 && k < MAX_DEG {
+            let eta = ((k * k) as f64) / (n as f64)
+            var sum_kappa: f64 = 0.0
+            var si: usize = 0
+            while si < N_SEEDS {
+                let seed: u64 = (si + 1) as u64 * 1000 + k as u64 * 7 + 42
+                let g = build_k_regular_sparse(n, k, seed)
+                let kappa = hypercomplex_pipeline_d32(&g, seed)
+                sum_kappa = sum_kappa + kappa
+                si = si + 1
+            }
+            let kappa_mean = sum_kappa / (N_SEEDS as f64)
+            let geom = if kappa_mean < -0.01 { "Hyperbolic" }
+                       else if kappa_mean > 0.01 { "Spherical" }
+                       else { "Euclidean" }
+            print(n);          print(",")
+            print(k);          print(",")
+            print(eta);        print(",")
+            print(kappa_mean); print(",")
+            print(32);         print(",")
+            print(N_SEEDS);    print(",")
+            println(geom)
+        }
+        ki = ki + 1
+    }
+
+    println("# Phase 7 d=32 sweep complete")
+}
