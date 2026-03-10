@@ -198,7 +198,7 @@ for (nid, csv_file, kappa_json, kappa_field, expected_geom, label) in NETWORKS
 
     t_bfs = @elapsed D = all_pairs_distances(g)
     # Count connected pairs
-    n_connected = count(D[i,j] > 0 for i in 1:N, j in i+1:N)
+    n_connected = sum(1 for ii in 1:N for jj in ii+1:N if D[ii,jj] > 0)
     t_delta = @elapsed δ = gromov_delta(D; n_samples=n_samples, rng=rng)
 
     @printf("%-25s N=%4d E=%5d  δ=%5.2f  κ̄=%+.4f  [%s]  BFS=%.1fs\n",
@@ -277,7 +277,7 @@ geom_shapes = Dict("Hyperbolic"=>:circle,    "Euclidean"=>:square, "Spherical"=>
 p = plot(
     xlabel    = L"\delta_{\max} \; \textrm{(Gromov hyperbolicity)}",
     ylabel    = L"\bar{\kappa} \; \textrm{(mean ORC)}",
-    title     = "Gromov δ vs.\ ORC: cross-validation of geometry measures",
+    title     = "Gromov delta vs. ORC: cross-validation of geometry measures",
     legend    = :bottomright,
     size      = (720, 520),
     dpi       = 150,

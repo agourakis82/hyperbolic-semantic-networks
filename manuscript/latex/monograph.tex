@@ -497,6 +497,35 @@ The classifier was trained on semantic networks with $C \in [0, 0.24]$ and $\eta
 Despite the model's extrapolation failure, the phase framework itself is vindicated: the same ORC quantity that distinguishes Dutch from Spanish SWOW ($\Delta\kbar = 0.167$) cleanly separates biological network classes (dense PPIs spherical at $\eta > \etac$; sparse regulatory and neural networks spherical via topology). No biological network is hyperbolic. This suggests that $\kbar > 0$ (spherical geometry) may be a \emph{universal property of evolved biological networks}---consistent with the hypothesis that evolution selects for redundant, triangle-rich, failure-tolerant connectivity patterns~\cite{barabasi2004network}.~[EMPIRICAL]
 
 % ============================================================
+\subsection{Gromov $\delta$-Hyperbolicity vs.\ ORC: Complementary Geometry Measures}
+\label{sec:gromov}
+
+\paragraph{First cross-validation of ORC and Gromov $\delta$.}
+Gromov $\delta$-hyperbolicity~\cite{gromov1987hyperbolic} quantifies how closely a metric space resembles a tree via the four-point condition: for any four nodes $\{x,y,u,v\}$, sort the three pairwise sums $s_1 \geq s_2 \geq s_3$ and define $\delta(x,y,u,v) = (s_1 - s_2)/2$. A perfect tree has $\delta = 0$; larger $\delta$ indicates departure from tree-likeness. We computed $\delta_{\max}$ on 16 networks with exact LP ORC (50K--100K random 4-tuple samples, all-pairs BFS distances) to obtain the first joint evaluation of ORC and Gromov $\delta$ on semantic and biological networks.
+
+\paragraph{ORC and Gromov $\delta$ are statistically uncorrelated.}
+The Pearson correlation between $\delta_{\max}$ and $\kbar$ is $r = -0.35$ ($n=16$, not significant at $\alpha=0.05$), and 62.5\% of sign assignments disagree. The mean $\delta_{\max}$ by ORC class:
+\begin{center}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ORC class & $n$ & Mean $\delta_{\max}$ & Mean $\kbar$ \\
+\midrule
+Hyperbolic ($\kbar < -0.03$) & 8 & $2.63 \pm 0.92$ & $-0.20$ \\
+Euclidean ($|\kbar| < 0.03$)  & 3 & $1.83 \pm 1.04$ & $-0.02$ \\
+Spherical ($\kbar > 0.03$)    & 5 & $1.60 \pm 0.65$ & $+0.37$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+ORC-hyperbolic networks have the \emph{largest} mean $\delta_{\max}$ (2.63), while ORC-spherical networks have the \emph{smallest} (1.60)---opposite to Gromov's convention (small $\delta$ = tree-like = globally hyperbolic).
+
+\paragraph{Why do the measures disagree?}
+ORC is \emph{local}: it averages the Wasserstein cost of one-hop random walks. A network can be locally spherical (abundant triangles, high ORC) yet globally tree-like (small $\delta$) if its triangle-rich communities are connected via bridges. Conversely, a network can be globally non-tree-like (large $\delta$) yet locally hyperbolic (sparse local neighbourhoods) if it has long cycles but no dense hubs. For word association networks, hyperbolic ORC arises from sparse, path-like local neighbourhoods (mean degree $\approx 3$, few triangles), yet long diameter paths inflate $\delta$. Biological spherical networks (dense clique-like structure) have low $\delta$ because dense communities are tree-like at global scale.
+
+\paragraph{Practical implication.}
+ORC and Gromov $\delta$ should \emph{not} be used interchangeably. For semantic networks, ORC (local) predicts retrieval and navigation structure; $\delta$ (global) predicts metric distortion under tree embeddings. Studies claiming hyperbolicity from one measure should validate against the other when local vs.\ global geometry is consequential.~[EMPIRICAL]
+
+% ============================================================
 \subsection{Revised Classification Model and Domain-Shift Analysis}
 \label{sec:revised_model}
 
@@ -1166,6 +1195,11 @@ D.~Szklarczyk et~al.,
 A.-L. Barab\'asi and Z.~N. Oltvai,
 ``Network biology: understanding the cell's functional organization,''
 \emph{Nat.~Rev.~Genet.}, 5(2):101--113, 2004.
+
+\bibitem{gromov1987hyperbolic}
+M.~Gromov,
+``Hyperbolic groups,''
+in \emph{Essays in Group Theory}, S.~M.~Gersten, Ed. Springer, New York, 1987, pp.~75--263.
 
 \end{thebibliography}
 
