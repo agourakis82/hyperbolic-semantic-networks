@@ -45,7 +45,7 @@
 \begin{abstract}
 Semantic networks encode relationships between concepts through patterns of word association. Whether these networks exhibit hyperbolic geometry---and why---remains an open question with implications for cognitive architecture and network embedding. We present an empirically supported two-parameter model that combines (i) a curvature sign change in random graphs with (ii) analysis of 16 semantic networks across seven languages and one clinical dataset, including an explicit train/test split for out-of-sample validation.
 
-Using exact linear programming to compute Ollivier--Ricci curvature (eliminating Sinkhorn regularization bias), we find that the density parameter $\eta = \kavg^2/N$ is necessary but not sufficient for predicting hyperbolicity. Random $k$-regular graphs undergo a sign change in mean curvature $\kbar$ at a critical density $\etac(N) = 3.75 - 14.62/\sqrt{N}$ ($R^2 = 0.995$, $N \in \{50, 100, 200, 500, 1000\}$). All semantic networks except Dutch SWOW fall below this threshold ($\eta \ll \etac$), yet taxonomies (WordNet, BabelNet) are near-Euclidean while association networks (SWOW, ConceptNet) are hyperbolic. A second parameter, the clustering coefficient $C$, separates these: networks with $C > 0.10$ are hyperbolic ($\kbar \in [-0.24, -0.07]$), those with $C < 0.02$ are Euclidean ($\kbar \approx 0$), and those with $\eta > \etac$ are spherical ($\kbar > 0$). The clustering threshold ($\Cstar \approx 0.05$) is fitted on the 11-network training set and validated on 5 held-out networks (4/5 correct; the borderline FrameNet case refines $\Cstar \to 0.04$).
+Using exact linear programming to compute Ollivier--Ricci curvature (eliminating Sinkhorn regularization bias), we find that the density parameter $\eta = \kavg^2/N$ is necessary but not sufficient for predicting hyperbolicity. Random $k$-regular graphs undergo a sign change in mean curvature $\kbar$ at a critical density $\etac(N) = 3.75 - 14.62/\sqrt{N}$ (bootstrap 95\% CI: $\eta_c^\infty \in [3.61,3.84]$; $N \in \{50, 100, 200, 500, 1000\}$). All semantic networks except Dutch SWOW fall below this threshold ($\eta \ll \etac$), yet taxonomies (WordNet, BabelNet) are near-Euclidean while association networks (SWOW, ConceptNet) are hyperbolic. A second parameter, the clustering coefficient $C$, separates these: networks with $C > 0.10$ are hyperbolic ($\kbar \in [-0.24, -0.07]$), those with $C < 0.02$ are Euclidean ($\kbar \approx 0$), and those with $\eta > \etac$ are spherical ($\kbar > 0$). The clustering threshold ($\Cstar \approx 0.05$) is fitted on the 11-network training set and validated on 5 held-out networks (4/5 correct; 80\% held-out accuracy).
 
 Dutch SWOW ($\eta = 7.56 \gg \etac = 3.10$) is spherical ($\kbar = +0.10$), confirming the sign-change prediction. Sphere-embedded ORC across the Cayley--Dickson tower ($S^3$, $S^7$, $S^{15}$) flips 10 of 11 networks to positive curvature at $d=4$ and all 11 by $d=8$, demonstrating that semantic hyperbolicity is entirely metric-dependent---an artifact of the hop-count metric, not an intrinsic topological property. Extended to $d=32$ and $d=64$ on $k$-regular random graphs, curvature \emph{saturates} to a positive asymptote rather than decaying toward zero, with an empirical power-law exponent $\bar{\beta}=0.28 < 0.5$ (Johnson--Lindenstrauss bound), indicating convergence to a positive $\kbar_\infty > 0$ determined by the ambient sphere's Riemannian structure. Degree-matched null models show that semantic organization makes networks \emph{less} hyperbolic than random graphs with the same degree, the opposite of naive expectation. A Lean~4 formalization (25 modules, 0 \texttt{sorry} in 7 core ORC-theory modules) provides machine-checked proofs of Wasserstein non-negativity, curvature bounds, and regime exclusivity. The universal phase boundary maps structurally onto the loop-condensation critical point of Combinatorial Quantum Gravity, and the curvature saturation ($\bar\beta=0.28 \ll 0.5$) parallels the vanishing of trainable curvature in high-dimensional knowledge-graph embeddings, suggesting deep geometric universality across cognitive, physical, and machine-learning systems.
 
@@ -69,7 +69,7 @@ Two questions have remained separate in the literature:
     \item \textbf{Theoretical}: Why should some networks be hyperbolic and not others? What are the boundary conditions?
 \end{enumerate}
 
-Prior work addressed these independently. Empirical studies applied Ollivier--Ricci curvature to specific datasets and found hyperbolicity in some but not all networks~\cite{ni2015ricci,sandhu2015graph}. A recent roadmap survey~\cite{samal2025roadmap} unifies the many definitions of discrete curvature (ORC, Forman, Lin--Lu--Yau, Bakry--\'Emery) and identifies open problems in network geometry. Theoretical studies established sign changes in discrete curvature for random graph models~\cite{mitsche2024curvature}. No work has connected the two: using the theoretical phase transition to \emph{predict} which real networks should be hyperbolic.
+Prior work addressed these independently. Empirical studies applied Ollivier--Ricci curvature to specific datasets and found hyperbolicity in some but not all networks~\cite{ni2015ricci,sandhu2015graph}. Jost and Liu~\cite{jost2014ollivier} established fundamental bounds on ORC for graphs; Lin, Lu and Yau~\cite{lin2011ricci} introduced an $\alpha=0$ variant with closed-form expressions on regular graphs; Sia, Jonckheere and Bogdan~\cite{sia2021forman} applied ORC to brain and cognitive networks; and Topping et al.~\cite{topping2022over} connected negative ORC to over-squashing in graph neural networks. A recent roadmap survey~\cite{samal2025roadmap} unifies the many definitions of discrete curvature (ORC, Forman, Lin--Lu--Yau, Bakry--\'Emery) and identifies open problems in network geometry. Theoretical studies established sign changes in discrete curvature for random graph models~\cite{mitsche2024curvature}. No work has connected the two: using the theoretical phase transition to \emph{predict} which real networks should be hyperbolic.
 
 \subsection{Our Contribution}
 
@@ -95,7 +95,7 @@ For an edge $(u,v)$ in a graph $G$:
     \kappa(u,v) = 1 - \frac{W_1(\mu_u, \mu_v)}{d(u,v)}
     \label{eq:orc}
 \end{equation}
-where $\mu_u = \alpha\,\delta_u + (1-\alpha) \cdot \mathrm{Uniform}(N(u))$ is the probability measure with idleness $\alpha = 0.5$, and $W_1$ is the Wasserstein-1 distance~\cite{ollivier2009ricci}. The sign of $\kappa$ classifies local geometry: $\kappa < 0$ (hyperbolic), $\kappa = 0$ (flat), $\kappa > 0$ (spherical).
+where $\mu_u = \alpha\,\delta_u + (1-\alpha) \cdot \mathrm{Uniform}(N(u))$ is the probability measure with idleness $\alpha \in [0,1]$, and $W_1$ is the Wasserstein-1 distance~\cite{ollivier2009ricci}. The sign of $\kappa$ classifies local geometry: $\kappa < 0$ (hyperbolic), $\kappa = 0$ (flat), $\kappa > 0$ (spherical). We set $\alpha = 0.5$ throughout, following the standard choice of Ollivier~\cite{ollivier2009ricci} and the ORC literature~\cite{lin2011ricci,jost2014ollivier}. A sensitivity analysis over $\alpha \in \{0, 0.25, 0.5, 0.75\}$ on SWOW-EN confirms that the sign of $\kbar$ is invariant (HYPERBOLIC for all $\alpha < 1$; $\alpha=1$ is degenerate---all mass on self, $\kappa \equiv 0$); only the magnitude varies (Supplementary Table~S1).
 
 We compute $W_1$ via exact linear programming~\cite{dunning2017jump}:
 \begin{equation}
@@ -114,11 +114,11 @@ For random $k$-regular graphs on $N$ vertices, the mean curvature $\kbar$ underg
 
 Multi-$N$ scaling ($N \in \{50, 100, 200, 500, 1000\}$, 5--10 random seeds each) reveals finite-size scaling:
 \begin{equation}
-    \etac(N) = \eta_c^\infty - \frac{a}{\sqrt{N}}, \quad \eta_c^\infty \approx 3.75, \quad a \approx 14.62, \quad R^2 = 0.995
+    \etac(N) = \eta_c^\infty - \frac{a}{\sqrt{N}}, \quad \eta_c^\infty = 3.75\ [3.61,\,3.84], \quad a = 14.61\ [13.44,\,16.20]
     \label{eq:scaling}
 \end{equation}
 
-A free-exponent fit gives $\beta = 0.35$ (95\% CI $[0.20, 0.53]$), consistent with $\beta = 1/2$. The transition slope at $\etac$ scales as $N^{-0.20}$, indicating a crossover rather than a sharp phase transition.
+Brackets denote 95\% bootstrap confidence intervals (10\,000 resamples, $n=5$ points); the fixed-exponent fit ($\beta=1/2$) achieves $R^2=0.995$ and $\beta$ lies within the free-exponent CI $[0.20, 0.53]$. The transition slope at $\etac$ scales as $N^{-0.20}$, indicating a crossover rather than a sharp phase transition.
 
 \begin{figure}[t]
 \centering
@@ -159,9 +159,9 @@ This provides a mechanistic explanation for why taxonomies ($C \approx 0$) are E
 \textbf{Clustering monotonicity.} Setting $n_{\mathrm{exc}} = (1-C)(k-1)$ and differentiating $W_1$ with respect to $C$ at fixed $k$ and $\eta$ gives $\partial W_1/\partial C < 0$, hence:
 
 \medskip
-\noindent\textbf{Theorem~2} (Clustering monotonicity of ORC).
+\noindent\textbf{Proposition~2} (Clustering monotonicity of ORC).
 \emph{For any $k$-regular graph with fixed $\eta$, mean ORC is strictly monotone increasing in $C$:
-$\partial\kbar/\partial C > 0$.}
+$\partial\kbar/\partial C > 0$.}\footnote{The proof derives from the Hehl approximation formula~\cite{hehl2024curvature}, which is validated empirically (MAE\,=\,0.009 on $N=1000$) but not formally proved; accordingly we label this a Proposition rather than a Theorem. A rigorous proof without the Hehl approximation remains open.}
 \medskip
 
 Higher clustering reduces the exclusive-neighbor count $n_{\mathrm{exc}}$, lowering the Wasserstein-1 transport cost and raising curvature. This is confirmed empirically across three degree values: Watts--Strogatz sweeps ($N=200$, $k \in \{4,6,8\}$, $\eta \in \{0.08, 0.18, 0.32\}$, 10 $\beta$-values each, exact LP ORC) yield positive slopes in all cases (Fig.~\ref{fig:ws_sweep}):
@@ -170,12 +170,12 @@ Higher clustering reduces the exclusive-neighbor count $n_{\mathrm{exc}}$, lower
   \item $k=6$: $\partial\kbar/\partial C = +0.422 \pm 0.005$ (95\% CI: $[0.410, 0.434]$, $R^2 = 0.999$)
   \item $k=8$: $\partial\kbar/\partial C = +0.441 \pm 0.004$ (95\% CI: $[0.433, 0.450]$, $R^2 = 0.999$)
 \end{itemize}
-Mean slope $0.417 \pm 0.026$ across $k$; all slopes $p \ll 0.001$. The slope increases weakly with $k$, consistent with the Hehl formula (higher degree amplifies the exclusive-neighbor reduction effect). This universality across degree upgrades Theorem~2 from a single-$k$ observation to a robust empirical law.~[EMPIRICAL]
+Mean slope $0.417 \pm 0.026$ across $k$; all slopes $p \ll 0.001$. The slope increases weakly with $k$, consistent with the Hehl formula (higher degree amplifies the exclusive-neighbor reduction effect). This universality across degree upgrades Proposition~2 from a single-$k$ observation to a robust empirical law.~[EMPIRICAL]
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.85\textwidth]{../../figures/monograph/figure12_watts_strogatz.pdf}
-\caption{Theorem~2 validated across $k \in \{4,6,8\}$: mean ORC $\kbar$ vs.\ clustering coefficient $C$ for Watts--Strogatz graphs ($N=200$, 10 $\beta$-values $\in [0.001, 1.0]$, exact LP ORC). Each colour/marker denotes a degree value; lines are linear fits. All three slopes are positive ($+0.389$, $+0.422$, $+0.441$ for $k=4,6,8$; $R^2 > 0.993$ in all cases), confirming strict monotonicity $\partial\kbar/\partial C > 0$ at fixed $\eta$ across degree values.}
+\caption{Proposition~2 validated across $k \in \{4,6,8\}$: mean ORC $\kbar$ vs.\ clustering coefficient $C$ for Watts--Strogatz graphs ($N=200$, 10 $\beta$-values $\in [0.001, 1.0]$, exact LP ORC). Each colour/marker denotes a degree value; lines are linear fits. All three slopes are positive ($+0.389$, $+0.422$, $+0.441$ for $k=4,6,8$; $R^2 > 0.993$ in all cases), confirming strict monotonicity $\partial\kbar/\partial C > 0$ at fixed $\eta$ across degree values.}
 \label{fig:ws_sweep}
 \end{figure}
 
@@ -215,7 +215,7 @@ All networks are converted to undirected unweighted graphs (largest connected co
 
 \subsection{Exact LP ORC Computation}
 
-For each network: (1) precompute all-pairs shortest paths via BFS; (2) for each edge $(u,v)$, construct measures $\mu_u$, $\mu_v$ with $\alpha=0.5$; (3) extract the support; (4) solve the LP for exact $W_1$; (5) compute $\kappa(u,v) = 1 - W_1/d(u,v)$. Multi-threaded over edges.
+All networks are pre-processed to their largest connected component (LCC) before ORC computation, following standard practice (disconnected components produce undefined $d(u,v)=\infty$). LCC extraction retains $\geq\!96\%$ of nodes for all 16 networks (Table~\ref{tab:results}, LCC\% column); the bias on $\eta$ is negligible ($<\!0.3\%$ relative). For each network: (1) precompute all-pairs shortest paths via BFS; (2) for each edge $(u,v)$, construct measures $\mu_u$, $\mu_v$ with $\alpha=0.5$; (3) extract the support; (4) solve the LP for exact $W_1$; (5) compute $\kappa(u,v) = 1 - W_1/d(u,v)$. Uncertainty is reported as the standard error of the per-edge curvature distribution: $\mathrm{SE}(\kbar) = \sigma_\kappa/\sqrt{E}$.
 
 \subsection{Sphere-Embedded (Hypercomplex) ORC}
 
@@ -238,37 +238,37 @@ A Lean~4 formalization (25 modules, 8097 lines) provides machine-checked proofs.
 
 \begin{table}[t]
 \centering
-\caption{Exact LP Ollivier--Ricci curvature for 16 semantic networks. Networks above the horizontal rule constitute the \emph{training set} (used to derive $\Cstar$); those below constitute the \emph{held-out test set}. $\eta = \kavg^2/N$; $C$ = global clustering coefficient; $\kbar$ = mean edge curvature. Pred.\ = model prediction; Corr.\ = correct classification.}
+\caption{Exact LP Ollivier--Ricci curvature for 16 semantic networks. Networks above the horizontal rule constitute the \emph{training set} (used to derive $\Cstar$); those below constitute the \emph{held-out test set}. $\eta = \kavg^2/N$; $C$ = global clustering coefficient; $\kbar \pm \mathrm{SE}$ = mean edge curvature $\pm$ standard error ($\sigma_\kappa/\sqrt{E}$); LCC\% = fraction of nodes in largest connected component. Pred.\ = model prediction; Corr.\ = correct classification.}
 \label{tab:results}
 \small
-\begin{tabular}{@{}lllrrrrrll@{}}
+\begin{tabular}{@{}lllrrrrrrll@{}}
 \toprule
-Network & Category & Language & $N$ & $C$ & $\eta$ & $\kbar$ & Pred. & Corr. \\
+Network & Category & Lang. & $N$ & LCC\% & $C$ & $\eta$ & $\kbar \pm \mathrm{SE}$ & Pred. & Corr. \\
 \midrule
-\multicolumn{9}{@{}l}{\textit{Training set (11 networks; $\Cstar = 0.05$ fitted here)}} \\
+\multicolumn{11}{@{}l}{\textit{Training set (11 networks; $\Cstar = 0.05$ fitted here)}} \\
 \midrule
-SWOW Spanish & Assoc. & Spanish & 422 & 0.136 & 0.017 & $-0.068$ & Hyp. & \checkmark \\
-SWOW English & Assoc. & English & 438 & 0.128 & 0.020 & $-0.137$ & Hyp. & \checkmark \\
-SWOW Chinese & Assoc. & Chinese & 465 & 0.173 & 0.023 & $-0.144$ & Hyp. & \checkmark \\
-SWOW Dutch & Assoc. & Dutch & 500 & 0.238 & 7.558 & $+0.099$ & \textbf{Sph.} & \checkmark \\
-ConceptNet EN & Knowledge & English & 467 & 0.108 & 0.223 & $-0.233$ & Hyp. & \checkmark \\
-ConceptNet PT & Knowledge & Portuguese & 489 & 0.106 & 0.085 & $-0.236$ & Hyp. & \checkmark \\
-WordNet EN & Taxonomy & English & 500 & 0.013 & 0.009 & $-0.002$ & Euc. & \checkmark \\
-WordNet EN-2K & Taxonomy & English & 2000 & 0.002 & 0.002 & $-0.005$ & Euc. & \checkmark \\
-BabelNet RU & Taxonomy & Russian & 493 & 0.001 & 0.009 & $-0.030$ & Euc. & \checkmark \\
-BabelNet AR & Taxonomy & Arabic & 142 & 0.000 & 0.032 & $-0.012$ & Euc. & \checkmark \\
-Depression & Clinical & English & 1634 & 0.159 & 0.118 & $-0.130$ & Hyp. & \checkmark \\
+SWOW Spanish & Assoc. & ES & 422 & 100 & 0.136 & 0.017 & $-0.068 \pm 0.013$ & Hyp. & \checkmark \\
+SWOW English & Assoc. & EN & 438 & 100 & 0.128 & 0.020 & $-0.137 \pm 0.012$ & Hyp. & \checkmark \\
+SWOW Chinese & Assoc. & ZH & 465 & 100 & 0.173 & 0.023 & $-0.144 \pm 0.011$ & Hyp. & \checkmark \\
+SWOW Dutch & Assoc. & NL & 500 & 100 & 0.238 & 7.558 & $+0.099 \pm 0.000$ & \textbf{Sph.} & \checkmark \\
+ConceptNet EN & Knowledge & EN & 467 & 100 & 0.108 & 0.223 & $-0.233 \pm 0.003$ & Hyp. & \checkmark \\
+ConceptNet PT & Knowledge & PT & 489 & 100 & 0.106 & 0.085 & $-0.236 \pm 0.005$ & Hyp. & \checkmark \\
+WordNet EN & Taxonomy & EN & 500 & 99 & 0.013 & 0.009 & $-0.002 \pm 0.012$ & Euc. & \checkmark \\
+WordNet EN-2K & Taxonomy & EN & 2000 & 99 & 0.002 & 0.002 & $-0.005 \pm 0.005$ & Euc. & \checkmark \\
+BabelNet RU & Taxonomy & RU & 493 & 98 & 0.001 & 0.009 & $-0.030 \pm 0.011$ & Euc. & \checkmark \\
+BabelNet AR & Taxonomy & AR & 142 & 96 & 0.000 & 0.032 & $-0.012 \pm 0.019$ & Euc. & \checkmark \\
+Depression & Clinical & EN & 1634 & 100 & 0.159 & 0.118 & $-0.130 \pm 0.002$ & Hyp. & \checkmark \\
 \midrule
-\multicolumn{9}{@{}l}{\textit{Held-out test set (5 networks; $\Cstar = 0.05$ applied without re-fitting)}} \\
+\multicolumn{11}{@{}l}{\textit{Held-out test set (5 networks; $\Cstar = 0.05$ applied without re-fitting)}} \\
 \midrule
-SWOW Rioplatense & Assoc. & Arg.\ Spanish & 489 & 0.154 & 0.040 & $-0.264$ & Hyp. & \checkmark \\
-EAT & Assoc. & British Eng. & 500 & 0.143 & 1.851 & $-0.046$ & Hyp. & \checkmark \\
-USF Free Assoc. & Assoc. & American Eng. & 498 & 0.143 & 0.062 & $-0.321$ & Hyp. & \checkmark \\
-WordNet DE & Taxonomy & German & 759 & 0.022 & 0.006 & $-0.023$ & Euc. & \checkmark \\
-FrameNet & Frames & English & 1173 & 0.045 & 0.009 & $-0.202$ & Euc.? & \textsection \\
+SWOW Rioplatense & Assoc. & ES & 489 & 100 & 0.154 & 0.040 & $-0.264 \pm 0.008$ & Hyp. & \checkmark \\
+EAT & Assoc. & EN & 500 & 100 & 0.143 & 1.851 & $-0.046 \pm 0.001$ & Hyp. & \checkmark \\
+USF Free Assoc. & Assoc. & EN & 498 & 100 & 0.143 & 0.062 & $-0.321 \pm 0.006$ & Hyp. & \checkmark \\
+WordNet DE & Taxonomy & DE & 759 & 97 & 0.022 & 0.006 & $-0.023 \pm 0.012$ & Euc. & \checkmark \\
+FrameNet & Frames & EN & 1173 & 98 & 0.045 & 0.009 & $-0.202 \pm 0.007$ & Euc.? & \textsection \\
 \bottomrule
-\multicolumn{9}{@{}l}{\footnotesize\textsection FrameNet: $C=0.045 \approx \Cstar$; borderline case; predicted Euclidean but measured Hyperbolic ($\kbar=-0.202$).}\\
-\multicolumn{9}{@{}l}{\footnotesize Test set accuracy: 4/5 correct by ($\eta$, $C$) rule; FrameNet borderline refines $\Cstar$ estimate.}\\
+\multicolumn{11}{@{}l}{\footnotesize\textsection FrameNet: $C=0.045 \approx \Cstar$; borderline; predicted Euc.\ but observed Hyp.\ ($\kbar=-0.202$, $p\ll0.001$).}\\
+\multicolumn{11}{@{}l}{\footnotesize Test set accuracy: 4/5 (80\%). SE $= \sigma_\kappa/\sqrt{E}$; LCC extracted to ensure connectivity (bias toward higher $\eta$; see text).}\\
 \end{tabular}
 \end{table}
 
@@ -284,7 +284,7 @@ Every network except Dutch SWOW has $\eta \ll \etac(N)$---the theory predicts al
 \emph{$\eta < \etac$ is necessary but not sufficient for hyperbolicity.}
 \end{quote}
 
-The key test is Dutch SWOW: with $\eta = 7.56$ and $\etac(500) = 3.10$, the theory predicts spherical geometry. The observation $\kbar = +0.099$ confirms this---the first empirical validation of the curvature phase transition in a real (non-synthetic) network.
+The key test is Dutch SWOW: with $\eta = 7.56$ and $\etac(500) = 3.10$, the theory predicts spherical geometry. The observation $\kbar = +0.099$ confirms this---a compelling empirical demonstration of the curvature sign-change in a real (non-synthetic) network; no prior ORC study has reported a validated phase-boundary crossing on empirical data.
 
 \begin{figure}[t]
 \centering
@@ -491,7 +491,7 @@ Every biological network lies in the spherical regime ($\kbar > 0$), but via two
 \end{enumerate}
 
 \paragraph{Domain-shift limitation of the two-parameter model.}
-The classifier was trained on semantic networks with $C \in [0, 0.24]$ and $\eta \in [0.009, 7.56]$. Biological networks operate at $C \in [0.23, 0.88]$---outside the training distribution. Three of four mispredictions arise because $C^* = 0.05$ is too low a threshold for a network class where even the sparsest biological graph ($C = 0.226$) exceeds the entire semantic clustering range. The appropriate biological threshold appears to be $C^*_{\mathrm{bio}} \lesssim 0.20$: at $C = 0.226$, positive curvature already emerges via hub topology. Formally, the Theorem~2 result $\partial\kbar/\partial C > 0$ implies that the hyperbolic$\to$spherical crossing in $C$-space occurs at a network-type-dependent $C^*(\eta, \mathrm{type})$, not a universal constant.
+The classifier was trained on semantic networks with $C \in [0, 0.24]$ and $\eta \in [0.009, 7.56]$. Biological networks operate at $C \in [0.23, 0.88]$---outside the training distribution. Three of four mispredictions arise because $C^* = 0.05$ is too low a threshold for a network class where even the sparsest biological graph ($C = 0.226$) exceeds the entire semantic clustering range. The appropriate biological threshold appears to be $C^*_{\mathrm{bio}} \lesssim 0.20$: at $C = 0.226$, positive curvature already emerges via hub topology. Formally, the Proposition~2 result $\partial\kbar/\partial C > 0$ implies that the hyperbolic$\to$spherical crossing in $C$-space occurs at a network-type-dependent $C^*(\eta, \mathrm{type})$, not a universal constant.
 
 \paragraph{Universality across domains.}
 Despite the model's extrapolation failure, the phase framework itself is vindicated: the same ORC quantity that distinguishes Dutch from Spanish SWOW ($\Delta\kbar = 0.167$) cleanly separates biological network classes (dense PPIs spherical at $\eta > \etac$; sparse regulatory and neural networks spherical via topology). No biological network is hyperbolic. This suggests that $\kbar > 0$ (spherical geometry) may be a \emph{universal property of evolved biological networks}---consistent with the hypothesis that evolution selects for redundant, triangle-rich, failure-tolerant connectivity patterns~\cite{barabasi2004network}.~[EMPIRICAL]
@@ -594,6 +594,10 @@ We provide a Lean~4 formalization comprising 25 modules and 8097 lines. The 7 co
 
 The formalization relies on 5 axioms: Wasserstein symmetry, triangle inequality, coupling bound, local clustering bound, and specification bridge---all mathematically standard.
 
+\begin{quote}
+\small\textit{Guide for non-Lean readers.} In Lean~4, \texttt{sorry} is a tactic that closes a proof goal without proof (analogous to a ``\textit{proof omitted}'' placeholder). A file with \textbf{0 \texttt{sorry}} declarations is fully machine-checked with no gaps. The 18 auxiliary modules (e.g., RicciFlow, SpectralGeometry) contain documented \texttt{sorry} declarations for results not yet formally proved; these do not affect the core ORC theorems. The 5 axioms are standard: (i) $W_1(\mu,\nu)=W_1(\nu,\mu)$ (Villani~\cite{villani2009optimal}, Thm.\ 6.1); (ii) $W_1$ triangle inequality (ibid.); (iii) coupling bound (standard optimal transport); (iv) local clustering bound (combinatorial identity); (v) specification bridge (connects Julia numeric output to Lean real arithmetic). The complete code is available at \url{https://github.com/chiuratto-AIgourakis/hyperbolic-semantic-networks}.
+\end{quote}
+
 
 % ============================================================
 \section{Discussion}
@@ -601,7 +605,7 @@ The formalization relies on 5 axioms: Wasserstein symmetry, triangle inequality,
 
 \subsection{An Empirical Two-Parameter Model}
 
-The geometry of the 16 semantic networks studied here is well-described by two parameters: density ($\eta$) and clustering ($C$). The random-graph sign change provides the necessary condition; clustering modulates curvature magnitude. This three-regime classification is consistent with all 11 training networks and 4 of 5 held-out test networks (Fig.~\ref{fig:phasediag}). The clustering threshold $\Cstar \approx 0.05$ was fitted on the training set and applied unchanged to the test set---converting what would otherwise be a post-hoc description of 11 cases into a validated predictive rule. The borderline FrameNet case ($C=0.045$, $\kbar=-0.202$) is the only failure and suggests tightening $\Cstar \to 0.04$, which would yield 5/5 test accuracy.
+The geometry of the 16 semantic networks studied here is well-described by two parameters: density ($\eta$) and clustering ($C$). The random-graph sign change provides the necessary condition; clustering modulates curvature magnitude. This three-regime classification is consistent with all 11 training networks and 4 of 5 held-out test networks (Fig.~\ref{fig:phasediag}). The clustering threshold $\Cstar \approx 0.05$ was fitted on the training set and applied unchanged to the test set---converting what would otherwise be a post-hoc description of 11 cases into a validated predictive rule. The borderline FrameNet case ($C=0.045$, $\kbar=-0.202$) is the only failure; it lies within $\pm 0.005$ of $\Cstar$, within the estimation uncertainty of the training-set threshold. Refining $\Cstar$ would require a third independent dataset to avoid test-set contamination.
 
 \begin{figure}[t]
 \centering
@@ -703,7 +707,7 @@ ORC sign change (order parameter) & $\kbar$ sign change \\
 Loop condensation density (critical coupling) & $\etac(N) = 3.75 - 14.62/\sqrt{N}$ \\
 Geometric phase ($\kbar > 0$, manifold-like) & Spherical: Dutch SWOW ($\eta = 7.56 \gg \etac$) \\
 Random phase ($\kbar < 0$, tree-like) & Hyperbolic: ConceptNet, SWOW ES/EN/ZH \\
-Finite-size scaling & $\etac(N) \sim \etac^\infty - a/\sqrt{N}$, $R^2 = 0.995$ \\
+Finite-size scaling & $\etac(N) \sim \etac^\infty - a/\sqrt{N}$; bootstrap CI: $\eta_c^\infty\in[3.61,3.84]$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -726,6 +730,30 @@ All code, data, and results are available at:
 
 % ============================================================
 \appendix
+
+% ============================================================
+\section{Alpha Sensitivity Analysis}
+\label{sec:alpha_sensitivity}
+% ============================================================
+
+\begin{table}[h]
+\centering
+\caption{Supplementary Table S1: ORC on SWOW-EN ($N=438$, $E=640$) for five values of the idleness parameter $\alpha$. The sign of $\kbar$ is invariant for $\alpha \in [0, 0.75]$; $\alpha=1$ is degenerate (all mass on self, $\kappa\equiv0$ identically). Standard choice $\alpha=0.5$ (Ollivier 2009) lies at the center of the meaningful range.}
+\label{tab:alpha_sens}
+\small
+\begin{tabular}{@{}rrrrl@{}}
+\toprule
+$\alpha$ & $\kbar$ & $\sigma_\kappa$ & SE & Geometry \\
+\midrule
+0.00 & $-0.308$ & 0.553 & 0.0218 & Hyperbolic \\
+0.25 & $-0.214$ & 0.452 & 0.0179 & Hyperbolic \\
+0.50 & $-0.137$ & 0.312 & 0.0124 & Hyperbolic \\
+0.75 & $-0.069$ & 0.156 & 0.0062 & Hyperbolic \\
+1.00 & $\phantom{-}0.000$ & 0.000 & 0.0000 & Degenerate\,$^\dagger$ \\
+\bottomrule
+\multicolumn{5}{@{}l}{\footnotesize $^\dagger$ At $\alpha=1$, $\mu_u=\delta_u$ (all mass on self), so $W_1(\mu_u,\mu_v)=d(u,v)$ and $\kappa\equiv0$ trivially.}\\
+\end{tabular}
+\end{table}
 
 % ============================================================
 \section{Scale-Free Robustness of the Phase Transition}
@@ -1214,6 +1242,16 @@ arXiv:2502.16465, 2025.
 D.~Leal, D.~Wölfel, M.~Rieck, and others,
 ``Ollivier--Ricci curvature for hypergraphs: A unified framework (ORCHID),''
 in \emph{ICLR}, 2023. arXiv:2210.12048.
+
+\bibitem{jost2014ollivier}
+J.~Jost and S.~Liu,
+``Ollivier's Ricci curvature, local clustering and curvature-dimension inequalities on graphs,''
+\emph{Discrete Comput.\ Geom.}, vol.~51, pp.~300--322, 2014.
+
+\bibitem{villani2009optimal}
+C.~Villani,
+\emph{Optimal Transport: Old and New}.
+Springer, Berlin, 2009.
 
 \bibitem{sia2021forman}
 R.~Sia, E.~Jonckheere, and P.~Bogdan,
