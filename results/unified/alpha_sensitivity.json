@@ -1,0 +1,62 @@
+{
+  "network": "SWOW-EN",
+  "N": 438,
+  "E": 640,
+  "alphas_tested": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "results": [
+    {
+      "alpha": 0.0,
+      "kappa_mean": -0.3083,
+      "kappa_std": 0.5527,
+      "kappa_se": 0.02184,
+      "geometry": "HYPERBOLIC",
+      "N": 438,
+      "E": 640
+    },
+    {
+      "alpha": 0.25,
+      "kappa_mean": -0.2143,
+      "kappa_std": 0.4519,
+      "kappa_se": 0.01786,
+      "geometry": "HYPERBOLIC",
+      "N": 438,
+      "E": 640
+    },
+    {
+      "alpha": 0.5,
+      "kappa_mean": -0.1371,
+      "kappa_std": 0.3124,
+      "kappa_se": 0.01235,
+      "geometry": "HYPERBOLIC",
+      "N": 438,
+      "E": 640
+    },
+    {
+      "alpha": 0.75,
+      "kappa_mean": -0.0686,
+      "kappa_std": 0.1562,
+      "kappa_se": 0.00617,
+      "geometry": "HYPERBOLIC",
+      "N": 438,
+      "E": 640
+    },
+    {
+      "alpha": 1.0,
+      "kappa_mean": 0.0,
+      "kappa_std": 0.0,
+      "kappa_se": 0.0,
+      "geometry": "EUCLIDEAN",
+      "N": 438,
+      "E": 640
+    }
+  ],
+  "sign_invariant_for_alpha_lt_1": true,
+  "conclusion": "Geometry classification (HYPERBOLIC) is robust to alpha in [0,1). At alpha=1 (all mass on self), kappa=0 trivially (degenerate case). Standard choice alpha=0.5 (Ollivier 2009) lies at the center of the meaningful range.",
+  "note_alpha1": "alpha=1 is degenerate: all mass on self-node, W1=d(u,v) always, kappa=0 identically. Not a meaningful geometry."
+}
