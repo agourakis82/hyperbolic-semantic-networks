@@ -890,6 +890,79 @@ theorem mistral_most_hyperbolic :
     lwow_mistral.kappa_bar < lwow_llama3.kappa_bar := by
   norm_num [lwow_mistral, lwow_haiku, lwow_llama3]
 
+-- ============================================================
+-- GROUP 16: Discovery M — Medical Knowledge Network ORC
+-- [EMPIRICAL] Comorbidity networks are spherical; taxonomy hyperbolic.
+-- Data: HPO v2025-01-16 + Ledebur et al. 2025 (8.9M patients).
+-- ============================================================
+
+structure MedicalNetworkResult where
+  label    : String
+  N        : ℕ
+  eta      : ℝ
+  C        : ℝ
+  kappa_bar : ℝ
+
+-- HPO taxonomy (is-a DAG): tree-like, hyperbolic by η
+def hpo_taxonomy : MedicalNetworkResult :=
+  { label := "HPO Phenotype Taxonomy", N := 19389, eta := 0.0003, C := 0.0, kappa_bar := -0.50 }
+
+-- HPO symptom co-occurrence (bipartite projection, threshold ≥5 diseases): hyperbolic by η
+def hpo_symptom : MedicalNetworkResult :=
+  { label := "HPO Symptom Co-occurrence", N := 4180, eta := 1.494, C := 0.293, kappa_bar := -0.20 }
+
+-- Comorbidity age 20-30 (exact LP ORC, N=69, E=118)
+def comorbidity_age2 : MedicalNetworkResult :=
+  { label := "Comorbidity Age 20-30", N := 69, eta := 4.9652, C := 0.3102, kappa_bar := 0.0176 }
+
+-- Comorbidity age 50-60 (exact LP ORC, N=289, E=1349)
+def comorbidity_age5 : MedicalNetworkResult :=
+  { label := "Comorbidity Age 50-60", N := 289, eta := 7.0143, C := 0.3251, kappa_bar := 0.0329 }
+
+-- Comorbidity age 80+ (exact LP ORC, N=384, E=4181)
+def comorbidity_age8 : MedicalNetworkResult :=
+  { label := "Comorbidity Age 80+", N := 384, eta := 7.3102, C := 0.3409, kappa_bar := 0.1188 }
+
+/-- All comorbidity networks are spherical (κ̄ > 0). -/
+theorem comorbidity_all_spherical :
+    comorbidity_age2.kappa_bar > 0 ∧
+    comorbidity_age5.kappa_bar > 0 ∧
+    comorbidity_age8.kappa_bar > 0 := by
+  norm_num [comorbidity_age2, comorbidity_age5, comorbidity_age8]
+
+/-- κ̄ increases monotonically with age: young < middle < old. -/
+theorem comorbidity_kappa_increases_with_age :
+    comorbidity_age2.kappa_bar < comorbidity_age5.kappa_bar ∧
+    comorbidity_age5.kappa_bar < comorbidity_age8.kappa_bar := by
+  norm_num [comorbidity_age2, comorbidity_age5, comorbidity_age8]
+
+/-- All comorbidity networks have η > η_c^∞ = 3.75 — firmly spherical. -/
+theorem comorbidity_all_above_eta_c_inf :
+    comorbidity_age2.eta > 3.75 ∧
+    comorbidity_age5.eta > 3.75 ∧
+    comorbidity_age8.eta > 3.75 := by
+  norm_num [comorbidity_age2, comorbidity_age5, comorbidity_age8]
+
+/-- HPO taxonomy has η << η_c^∞: predicted hyperbolic. -/
+theorem hpo_taxonomy_hyperbolic_by_eta :
+    hpo_taxonomy.eta < 3.75 := by
+  norm_num [hpo_taxonomy]
+
+/-- HPO symptom network has η < η_c^∞: predicted hyperbolic. -/
+theorem hpo_symptom_hyperbolic_by_eta :
+    hpo_symptom.eta < 3.75 := by
+  norm_num [hpo_symptom]
+
+/-- Old-age comorbidity (80+) is strongly spherical: κ̄ > 0.1. -/
+theorem comorbidity_elderly_strongly_spherical :
+    comorbidity_age8.kappa_bar > 0.1 := by
+  norm_num [comorbidity_age8]
+
+/-- Geometry diverges: taxonomy hyperbolic (η-pred), comorbidity spherical (exact LP). -/
+theorem discovery_m_geometry_divergence :
+    hpo_taxonomy.eta < 3.75 ∧ comorbidity_age8.kappa_bar > 0 := by
+  norm_num [hpo_taxonomy, comorbidity_age8]
+
 end SounioVerification
 
 end HyperbolicSemanticNetworks

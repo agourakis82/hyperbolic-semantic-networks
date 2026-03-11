@@ -1,0 +1,15 @@
+{
+  "label": "HPO Phenotype Taxonomy",
+  "method": "eta_prediction_only",
+  "C": 0.0,
+  "kappa_mean": null,
+  "N": 19389,
+  "geometry": "HYPERBOLIC",
+  "id": "hpo_taxonomy",
+  "k_mean": 2.4423126515034297,
+  "eta_c": 3.645004746293746,
+  "eta": 0.00030764304954838896,
+  "E": 23677,
+  "network_type": "ontology_taxonomy",
+  "source": "HPO v2025-01-16"
+}

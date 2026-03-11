@@ -1,0 +1,16 @@
+{
+  "label": "HPO Symptom Co-occurrence",
+  "method": "eta_prediction_only",
+  "C": 0.29336436111038067,
+  "kappa_mean": null,
+  "N": 4180,
+  "geometry": "HYPERBOLIC",
+  "id": "hpo_symptom_cooccur",
+  "k_mean": 79.01722488038277,
+  "eta_c": 3.523869453802798,
+  "eta": 1.4937133559322922,
+  "E": 165146,
+  "network_type": "symptom_disease_bipartite_projection",
+  "source": "HPO v2025-01-16 phenotype.hpoa",
+  "threshold": "≥5 shared diseases"
+}
