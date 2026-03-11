@@ -1,0 +1,21 @@
+{
+  "label": "Comorbidity Age 50-60",
+  "method": "exact_lp",
+  "C": 0.29644454382826474,
+  "kappa_min": -0.7076923076923072,
+  "kappa_mean": 0.03292415510804773,
+  "kappa_max": 0.75,
+  "N": 289,
+  "frac_spherical": 0.6412157153446998,
+  "id": "comorbidity_age5",
+  "geometry": "SPHERICAL",
+  "k_mean": 9.335640138408305,
+  "eta_c": 2.89,
+  "age_group": "50-60",
+  "eta": 0.30157154599951635,
+  "E": 1349,
+  "kappa_std": 0.16548906423720186,
+  "network_type": "clinical_comorbidity",
+  "frac_hyperbolic": 0.3558191252779837,
+  "source": "Ledebur et al. 2025 Scientific Data, 8.9M patients"
+}
