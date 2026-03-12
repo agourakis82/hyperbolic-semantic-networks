@@ -500,8 +500,8 @@ Despite the model's extrapolation failure, the phase framework itself is vindica
 \subsection{Gromov $\delta$-Hyperbolicity vs.\ ORC: Complementary Geometry Measures}
 \label{sec:gromov}
 
-\paragraph{First cross-validation of ORC and Gromov $\delta$.}
-Gromov $\delta$-hyperbolicity~\cite{gromov1987hyperbolic} quantifies how closely a metric space resembles a tree via the four-point condition: for any four nodes $\{x,y,u,v\}$, sort the three pairwise sums $s_1 \geq s_2 \geq s_3$ and define $\delta(x,y,u,v) = (s_1 - s_2)/2$. A perfect tree has $\delta = 0$; larger $\delta$ indicates departure from tree-likeness. We computed $\delta_{\max}$ on 16 networks with exact LP ORC (50K--100K random 4-tuple samples, all-pairs BFS distances) to obtain the first joint evaluation of ORC and Gromov $\delta$ on semantic and biological networks.
+\paragraph{Cross-validation of ORC and Gromov $\delta$.}
+Gromov $\delta$-hyperbolicity~\cite{gromov1987hyperbolic} quantifies how closely a metric space resembles a tree via the four-point condition: for any four nodes $\{x,y,u,v\}$, sort the three pairwise sums $s_1 \geq s_2 \geq s_3$ and define $\delta(x,y,u,v) = (s_1 - s_2)/2$. A perfect tree has $\delta = 0$; larger $\delta$ indicates departure from tree-likeness. We computed $\delta_{\max}$ on 16 networks with exact LP ORC (50K--100K random 4-tuple samples, all-pairs BFS distances) to obtain a joint evaluation of ORC and Gromov $\delta$ on semantic and biological networks.
 
 \paragraph{ORC and Gromov $\delta$ are statistically uncorrelated.}
 The Pearson correlation between $\delta_{\max}$ and $\kbar$ is $r = -0.35$ ($n=16$, not significant at $\alpha=0.05$), and 62.5\% of sign assignments disagree. The mean $\delta_{\max}$ by ORC class:
@@ -1185,7 +1185,7 @@ The WordNet result is the most striking: at the hyperedge (synset) level, curvat
   \item \textbf{Spherical within synsets} ($\kbar_{\text{ORCHID}} = +0.534$, fraction negative $= 0\%$),
   \item \textbf{Hyperbolic between synsets} ($\kbar_{\text{pair}} = -0.101$, fraction negative $= 84\%$).
 \end{itemize}
-The near-Euclidean aggregate $\kbar \approx 0$ is a cancellation artefact from mixing two distinct geometric scales. This is the first empirical demonstration of \emph{multi-scale geometric phase coexistence} in a semantic network.~[EMPIRICAL]
+The near-Euclidean aggregate $\kbar \approx 0$ is a cancellation artefact from mixing two distinct geometric scales. To our knowledge, this is the first empirical demonstration of \emph{multi-scale geometric phase coexistence} in a semantic network.~[EMPIRICAL]
 
 Recent extensions of ORCHID to Lin--Lu--Yau curvature on hypergraphs~\cite{lly2025hypergraph} and edge-transport-based hypergraph clustering~\cite{coupette2025hypergraph} provide the computational infrastructure for extending this analysis to BabelNet and ConceptNet at full scale.
 
