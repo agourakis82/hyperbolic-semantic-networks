@@ -22,7 +22,7 @@ let deps = Pkg.project().dependencies
     end
 end
 
-using JuMP, HiGHS, Graphs, Statistics, JSON, Printf
+using JuMP, HiGHS, Graphs, Statistics, Random, JSON, Printf
 
 const DATA_DIR    = joinpath(@__DIR__, "..", "..", "data", "processed")
 const RESULTS_DIR = joinpath(@__DIR__, "..", "..", "results", "experiments")
@@ -197,47 +197,72 @@ end
 
 function exact_wasserstein1(mu::Vector{Float64}, nu::Vector{Float64},
                              C::Matrix{Float64})::Float64
-    n = length(mu)
+    m = length(mu); n = length(nu)
+    @assert size(C) == (m, n)
     model = Model(HiGHS.Optimizer)
     set_silent(model)
     set_optimizer_attribute(model, "primal_feasibility_tolerance", 1e-7)
     set_optimizer_attribute(model, "dual_feasibility_tolerance",   1e-7)
-    @variable(model, T[1:n, 1:n] >= 0)
-    @objective(model, Min, sum(C[i,j] * T[i,j] for i in 1:n, j in 1:n))
-    @constraint(model, [i=1:n], sum(T[i,:]) == mu[i])
+    @variable(model, T[1:m, 1:n] >= 0)
+    @objective(model, Min, sum(C[i,j] * T[i,j] for i in 1:m, j in 1:n))
+    @constraint(model, [i=1:m], sum(T[i,:]) == mu[i])
     @constraint(model, [j=1:n], sum(T[:,j]) == nu[j])
     optimize!(model)
     termination_status(model) == MOI.OPTIMAL || return NaN
     return objective_value(model)
 end
 
-function orc_edge(g::SimpleGraph, u::Int, v::Int, alpha::Float64=0.5)
-    dist = dijkstra_shortest_paths(g, [u]).dists
+"""
+Local BFS distance from `source` to all nodes in `targets` only,
+using BFS limited to depth `max_depth`. Returns Dict{Int,Int}.
+Much faster than full-graph BFS when the support is small and local.
+"""
+function local_bfs_distances(g::SimpleGraph, source::Int, targets::Set{Int}, max_depth::Int=6)
+    dist = Dict{Int,Int}(source => 0)
+    queue = [source]
+    found = source ∈ targets ? 1 : 0
+    head = 1
+    while head <= length(queue) && found < length(targets)
+        v = queue[head]; head += 1
+        d = dist[v]
+        d >= max_depth && continue
+        for nb in neighbors(g, v)
+            if !haskey(dist, nb)
+                dist[nb] = d + 1
+                push!(queue, nb)
+                nb ∈ targets && (found += 1)
+            end
+        end
+    end
+    return dist
+end
 
+function orc_edge(g::SimpleGraph, u::Int, v::Int, alpha::Float64=0.5)
     u_nb = [u; neighbors(g, u)]
     v_nb = [v; neighbors(g, v)]
     nu_u = length(u_nb); nu_v = length(v_nb)
+    (nu_u < 2 || nu_v < 2) && return NaN   # isolated endpoint
 
     mu = zeros(Float64, nu_u)
-    nu = zeros(Float64, nu_v)
-    mu[1] = alpha; for i in 2:nu_u; mu[i] = (1-alpha)/(nu_u-1); end
-    nu[1] = alpha; for i in 2:nu_v; nu[i] = (1-alpha)/(nu_v-1); end
+    nu_vec = zeros(Float64, nu_v)
+    mu[1] = alpha;     for i in 2:nu_u; mu[i]     = (1-alpha)/(nu_u-1); end
+    nu_vec[1] = alpha; for i in 2:nu_v; nu_vec[i] = (1-alpha)/(nu_v-1); end
 
-    # Cost matrix: distances between support points
-    all_nodes = unique(vcat(u_nb, v_nb))
-    dist_all  = Dict{Int,Vector{Float64}}()
-    for nd in all_nodes
-        dist_all[nd] = dijkstra_shortest_paths(g, [nd]).dists
+    # Cost matrix: local BFS from each support node to all other support nodes
+    all_support = Set{Int}(vcat(u_nb, v_nb))
+    dist_all = Dict{Int, Dict{Int,Int}}()
+    for nd in u_nb
+        dist_all[nd] = local_bfs_distances(g, nd, all_support, 8)
     end
 
     C = Matrix{Float64}(undef, nu_u, nu_v)
     for i in 1:nu_u, j in 1:nu_v
-        C[i,j] = dist_all[u_nb[i]][v_nb[j]]
+        C[i,j] = Float64(get(dist_all[u_nb[i]], v_nb[j], 999))
     end
 
-    W1 = exact_wasserstein1(mu, nu, C)
+    W1 = exact_wasserstein1(mu, nu_vec, C)
     isnan(W1) && return NaN
-    return 1.0 - W1   # κ = 1 - W1(μ_u, μ_v) / d(u,v), d(u,v)=1
+    return 1.0 - W1
 end
 
 """Compute mean ORC over all edges; subsample if too many edges."""
@@ -299,7 +324,7 @@ function main()
             m_hpo.N, m_hpo.E, m_hpo.mean_k, m_hpo.eta, m_hpo.clustering)
 
     println("  Computing ORC (subsampled)…")
-    kappas_hpo = compute_graph_orc(g_hpo; max_edges=1500, label="HPO IS-A")
+    kappas_hpo = compute_graph_orc(g_hpo; max_edges=400, label="HPO IS-A")
     k_mean_hpo = mean(kappas_hpo); k_std_hpo = std(kappas_hpo)
     geom_hpo   = geometry_label(m_hpo.eta, k_mean_hpo)
     @printf("  Result: κ̄=%.4f ± %.4f  [%s]\n", k_mean_hpo, k_std_hpo, geom_hpo)

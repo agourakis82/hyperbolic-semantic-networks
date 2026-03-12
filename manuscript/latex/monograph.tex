@@ -1120,7 +1120,7 @@ The Human Phenotype Ontology (HPO, release 2026-02-16, \cite{kohler2021hpo}) pro
 Both networks are drawn from the same ontology database; their geometry is determined entirely by their structural type, not by different data sources.
 
 \paragraph{Predictions from $\eta$-theory (no free parameters).}
-A tree on $N$ nodes has $E = N-1$ edges, $\langle k \rangle = 2(N-1)/N \approx 2$, and $\eta = \langle k \rangle^2/N \approx 4/N \to 0$ as $N \to \infty$. The HPO IS-A graph is predicted \textbf{Hyperbolic} since $\eta \approx 4/17000 = 0.00024 \ll \eta_c = 3.75$. For the co-occurrence network (top-600 most-annotated diseases, min-shared=3), mean degree $\langle k \rangle \approx 25$, giving $\eta \approx 625/500 = 1.25$.
+A tree on $N$ nodes has $\langle k \rangle \approx 2$ and $\eta \approx 4/N \to 0$ as $N \to \infty$. The HPO IS-A graph (N=19,389, $\langle k \rangle=2.44$) has $\eta = 0.0003 \ll \eta_c = 3.75$: \textbf{Hyperbolic} predicted. For the co-occurrence network (top-600 diseases, $\geq 3$ shared phenotypes), the actual density is far higher than anticipated: $\langle k \rangle = 489$, giving $\eta = 399 \gg \eta_c$: \textbf{Spherical} predicted. The $\eta$ range across both networks spans six orders of magnitude.
 
 \paragraph{Measured ORC (exact LP, $\alpha=0.5$, subsampled edges).}
 \begin{center}
@@ -1129,20 +1129,20 @@ A tree on $N$ nodes has $E = N-1$ edges, $\langle k \rangle = 2(N-1)/N \approx 2
 \toprule
 Network & $N$ & $E$ & $\langle k \rangle$ & $\eta$ & $\kbar$ & Predicted & Measured \\
 \midrule
-HPO IS-A hierarchy      & $\sim$17K & $\sim$18K & 2.1  & 0.00026 & $<0$ & Hyperbolic & \textbf{Hyperbolic} \\
-Disease co-occurrence   & $\sim$500 & $\sim$6K  & 25.0 & 1.25    & $>0$ & Spherical  & \textbf{Spherical}  \\
+HPO IS-A hierarchy    & 19,389 & 23,677 & 2.44  & 0.0003  & $-0.112\pm0.34$ & Hyperbolic & \textbf{Hyperbolic} \\
+Disease co-occurrence & 600    & 146,728 & 489.1 & 398.7  & $+0.430\pm0.08$ & Spherical  & \textbf{Spherical}  \\
 \bottomrule
 \end{tabular}
 \end{center}
-\emph{Note: exact values will be filled from} \texttt{results/experiments/discovery\_j\_hpo\_orc.json} \emph{after script completes.}
+\noindent Exact LP ($\alpha=0.5$, HiGHS tol $10^{-7}$): 400 sampled edges for HPO IS-A; 2000 for co-occurrence. Striking asymmetry: $\eta_{\text{cooc}} = 398.7$ vs $\eta_{\text{HPO}} = 0.0003$---a factor of $10^6$.
 
 \paragraph{Interpretation.}
 The result demonstrates that the ORC phase transition is not a property of \emph{semantic content} but of \emph{network topology encoded by $\eta$}. Two networks built from the same HPO database differ in geometry because:
 \begin{itemize}
-  \item The IS-A hierarchy imposes a \emph{strict parent-child tree}---the information-theoretic ideal for hierarchical knowledge organisation. Tree graphs have minimal $\eta$, maximal negative ORC, and shortest path lengths grow logarithmically.
-  \item Disease co-occurrence is driven by \emph{clinical comorbidity}---diseases cluster in phenotypic syndromes (metabolic, neurological, skeletal), creating dense local cliques that inflate $\eta$ and drive ORC positive.
+  \item The IS-A hierarchy imposes a \emph{strict parent-child tree}---the information-theoretic ideal for hierarchical knowledge organisation. With $\eta = 0.0003$ (a factor of 12,500 below $\eta_c$), tree graphs have minimal $\eta$, maximal negative ORC ($\kbar = -0.11$), and logarithmically growing path lengths.
+  \item Disease co-occurrence is driven by \emph{clinical comorbidity}---diseases cluster in phenotypic syndromes (metabolic, neurological, skeletal), creating near-complete cliques ($C = 0.908$, $\eta = 399$, $\kbar = +0.43$). This is the most spherical network in the entire study.
 \end{itemize}
-This echoes Discovery M (aging comorbidity networks are spherical) and provides a \emph{within-domain control}: the ontology itself is hyperbolic; only the clinical co-occurrence layer is spherical. The HPO IS-A graph is the closest real-world approximation to a perfect tree available in biomedical data, making it an ideal ground-truth test of the theory.~[EMPIRICAL]
+This is a \emph{within-domain control}: the same HPO database produces both the most hyperbolic and most spherical networks in this study, purely by changing the edge-formation rule (is-a hierarchy vs.\ co-annotation count). This echoes Discovery M (aging comorbidity networks are spherical) and confirms that geometry encodes \emph{how knowledge is organised}, not what it is about.~[EMPIRICAL]
 
 \paragraph{Formal verification (Lean 4, Group 17).}
 The parameter bounds $\eta_{\text{HPO}} < \eta_c$ and $\kbar_{\text{HPO}} < 0 < \kbar_{\text{cooc}}$ are verified as numerical theorems in \texttt{SounioVerification.lean} (Group 17, 8 theorems, 0 sorry). The \texttt{discovery\_j\_geometry\_dichotomy} theorem captures the full claim; \texttt{hpo\_cooc\_curvature\_separation} proves the strict separation $\kbar_{\text{HPO}} < \kbar_{\text{cooc}}$.~[FORMALIZED]

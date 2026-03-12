@@ -1,0 +1,44 @@
+{
+  "all_correct": true,
+  "discovery": "J",
+  "eta_c_inf": 3.75,
+  "title": "HPO Ontology is Hyperbolic; Disease Co-Occurrence is Spherical",
+  "date": "2026-03-12",
+  "results": [
+    {
+      "label": "HPO IS-A hierarchy",
+      "eta_predicted": "Hyperbolic",
+      "kappa_min": -0.8545454545454536,
+      "kappa_mean": -0.1123093707129669,
+      "n_edges_computed": 400,
+      "kappa_max": 0.5,
+      "N": 19389,
+      "geometry": "Hyperbolic",
+      "eta": 0.00030764304954838896,
+      "E": 23677,
+      "clustering": 0.0,
+      "kappa_std": 0.3395623981252357,
+      "network_id": "hpo_isa",
+      "type": "ontology",
+      "mean_k": 2.4423126515034297
+    },
+    {
+      "label": "HPO disease co-occurrence (≥3 shared phenotypes)",
+      "eta_predicted": "Spherical",
+      "kappa_min": 0.050925925925941584,
+      "kappa_mean": 0.4303526848248897,
+      "n_edges_computed": 2000,
+      "kappa_max": 0.49445148658285254,
+      "N": 600,
+      "geometry": "Spherical",
+      "eta": 398.6871478518518,
+      "E": 146728,
+      "clustering": 0.9079619112309173,
+      "kappa_std": 0.07526039176471515,
+      "network_id": "disease_cooccurrence",
+      "type": "comorbidity",
+      "mean_k": 489.0933333333333
+    }
+  ],
+  "notes": "HPO IS-A is a tree-like DAG → η<<η_c → Hyperbolic. Disease co-occurrence (≥3 shared phenotypes) is clique-like → η>η_c → Spherical."
+}

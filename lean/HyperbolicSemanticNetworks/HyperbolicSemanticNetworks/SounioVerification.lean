@@ -1170,18 +1170,19 @@ theorem dual_analysis_10_gates_summary :
 
 /-! ## Group 17: Discovery J — HPO Ontology Geometry (Tree → Hyperbolic; Co-occurrence → Spherical) -/
 
--- HPO IS-A graph parameters (Julia LP, hpo_orc.jl, LCC of full HPO OBO 2026-02-16)
--- Preliminary estimates; will be updated after script completes.
-def hpo_isa_N     : ℕ := 17000   -- approx nodes in HPO LCC
-def hpo_isa_mean_k : ℝ := 2.1    -- tree-like: mean degree ≈ 2
-def hpo_isa_eta    : ℝ := 0.00026 -- η = <k>²/N ≈ 2.1²/17000 << η_c
-def hpo_isa_kappa  : ℝ := -0.15  -- predicted negative (tree structure)
+-- HPO IS-A graph parameters (Julia LP, hpo_orc.jl, HPO OBO 2026-02-16, CONFIRMED)
+-- Source: results/experiments/discovery_j_hpo_orc.json
+def hpo_isa_N      : ℕ := 19389   -- LCC nodes
+def hpo_isa_mean_k : ℝ := 2.44    -- tree-like: mean degree (confirmed)
+def hpo_isa_eta    : ℝ := 0.0003  -- η = 2.44²/19389 = 0.000307 (confirmed)
+def hpo_isa_kappa  : ℝ := -0.112  -- measured κ̄ (400 edges, α=0.5, confirmed)
 
--- Disease co-occurrence parameters (≥3 shared phenotypes, top-600 diseases)
-def cooc_N      : ℕ := 500       -- LCC size (≈ top-600 minus isolated)
-def cooc_mean_k : ℝ := 25.0      -- dense clique-like: high mean degree
-def cooc_eta    : ℝ := 1.25      -- η = 25²/500 = 1.25 (< η_c=3.75 but high C)
-def cooc_kappa  : ℝ := 0.05      -- expected positive (dense comorbidity clusters)
+-- Disease co-occurrence parameters (≥3 shared phenotypes, top-600 diseases, CONFIRMED)
+-- Source: results/experiments/discovery_j_hpo_orc.json
+def cooc_N      : ℕ := 600        -- LCC = full subgraph
+def cooc_mean_k : ℝ := 489.1      -- near-complete: 146K edges / 600 nodes (confirmed)
+def cooc_eta    : ℝ := 398.7      -- η = 489.1²/600 >> η_c = 3.75 (confirmed)
+def cooc_kappa  : ℝ := 0.430      -- measured κ̄ (2000 edges, α=0.5, confirmed)
 
 -- η_c threshold (finite-size scaling, N→∞)
 def eta_c_inf : ℝ := 3.75
