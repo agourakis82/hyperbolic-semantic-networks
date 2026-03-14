@@ -31,9 +31,16 @@
 
 % Metadata
 \title{Cross-Linguistic Geometry of Semantic Networks:\\A Curvature Phase Transition Theory\\with LLM Validation}
-\author{Demetrios C.\ Agourakis\thanks{Correspondence: \texttt{demetrios@agourakis.med.br}}\\
-  \small Independent Researcher\\
-  \small ORCID: 0000-0002-8596-5097
+\author{%
+  Demetrios C.\ Agourakis\thanks{Correspondence: \texttt{demetrios@agourakis.med.br}}%
+  \and
+  Marli Gerenutti%
+  \\[6pt]
+  \small Biomaterials and Regenerative Medicine Post-Graduate Program,\\
+  \small Pontif\'{\i}cia Universidade Cat\'olica de S\~ao Paulo (PUC-SP),
+         Sorocaba, SP, Brazil\\
+  \small Faculdade S\~ao Leopoldo Mandic, Campinas, SP, Brazil\\[3pt]
+  \small D.C.A.\ ORCID: 0000-0002-8596-5097
 }
 \date{March 2026}
 
@@ -222,8 +229,7 @@ The missing ingredient is the clustering coefficient $C$. Among networks with $\
 The two groups are cleanly separated by $\Cstar \approx 0.05$ (Fig.~\ref{fig:clustering}). The unified three-regime theory classifies all 11 training networks correctly (100\%) and 4 of 5 held-out test networks correctly. The borderline case, FrameNet ($C = 0.045 \approx \Cstar$, $\kbar = -0.202$), is incorrectly classified as Euclidean by the $\Cstar$ rule but reveals that the frame-to-frame semantic network is structurally more similar to association networks than to taxonomy DAGs---a finding that refines the $\Cstar$ estimate toward $\sim\!0.04$ and motivates investigation of FrameNet's unusual triadic structure.
 
 \paragraph{The EAT as a near-boundary probe.}
-Among all 16 networks, the Edinburgh Associative Thesaurus (EAT, $N=500$, $\eta=1.851$, $C=0.129$) lies \emph{closest to the phase boundary}: the analytical $\etac(\text{EAT}) \approx 2.85$ (Hehl formula~\cite{hehl2024curvature}, $C=0.129$, $N=500$) gives a gap $\Delta\eta = 0.999$ --- an order of magnitude smaller than for most hyperbolic networks (e.g.\ SWOW-EN: $\Delta\eta = 2.83$; USF: $\Delta\eta = 2.79$). EAT's resulting curvature $\kbar = -0.046$ is the weakest non-Euclidean signal in the corpus, with $\sigma_\kappa = 0.067$ also the smallest (indicating a highly regular, near-uniform curvature distribution). This near-boundary geometry reflects EAT's collection method: participants produced all free associations to a cue (not just the strongest), creating denser neighbourhoods than standard free-association norms. The phase framework makes a \emph{falsifiable prediction}: if EAT were collected on the full $N\approx8{,}000$ vocabulary at the same association density, $\eta$ would scale proportionally and the network would cross the phase boundary into the spherical regime.~[EMPIRICAL]
-
+Among all 16 networks, the Edinburgh Associative Thesaurus (EAT, $N=500$, $\eta=1.851$, $C=0.129$) lies \emph{closest to the phase boundary}: the analytical $\etac(\text{EAT}) \approx 2.85$ (Hehl formula~\cite{hehl2024curvature}, $C=0.129$, $N=500$) gives a gap $\Delta\eta = 0.999$ --- an order of magnitude smaller than for most hyperbolic networks (e.g.\ SWOW-EN: $\Delta\eta = 2.83$; USF: $\Delta\eta = 2.79$). EAT's resulting curvature $\kbar = -0.046$ is the weakest non-Euclidean signal in the corpus, with $\sigma_\kappa = 0.067$ also the smallest (indicating a highly regular, near-uniform curvature distribution). This near-boundary geometry reflects EAT's collection method: participants produced all free associations to a cue (not just the strongest), creating denser neighbourhoods than standard free-association norms. The phase framework makes a \emph{falsifiable prediction}: if EAT were collected on the full $N\approx8{,}000$ vocabulary at the same association density, $\eta$ would scale proportionally and the network would cross the phase boundary into the spherical regime.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.8\textwidth]{../../figures/monograph/figure3_clustering_curvature.pdf}
@@ -343,12 +349,11 @@ The mechanism is clear: WordNet's synsets are small (mean size 2.18), so clique 
 
 \paragraph{Relation-specific curvature.} Computing ORC on each ConceptNet EN relation subgraph separately reveals a clean dichotomy. Large, sparse relations are hyperbolic: \texttt{/r/MannerOf} ($\kbar = -0.198$, 409 edges), \texttt{/r/RelatedTo} ($-0.181$, 637 edges), \texttt{/r/IsA} ($-0.134$, 416 edges). Small, dense relations are spherical: \texttt{/r/Causes} ($+0.900$, 10 edges), \texttt{/r/HasA} ($+0.643$, 14 edges), \texttt{/r/PartOf} ($+0.385$, 65 edges). This is the $\eta$ phase transition operating at the relation level: each relation type has its own effective density $\eta_{\mathrm{rel}}$, and the sign of $\kbar$ tracks this density as predicted by the phase curve.
 
-Table~\ref{tab:relation_orc} reports the full curvature spectrum for the 14 ConceptNet EN relations with $|E_{\text{rel}}| \geq 10$. The relation types sort cleanly by semantic category: \emph{causal and functional} relations (Causes, HasA, HasPrerequisite, CapableOf) are uniformly spherical, reflecting the dense triangular structure of causal closure ($A \to B$, $A \to C$, so $B \approx C$). \emph{Taxonomic and associative} relations (IsA, MannerOf, RelatedTo, AtLocation) are uniformly hyperbolic, consistent with branching-tree connectivity. \emph{Relational} links (Synonym, UsedFor, SimilarTo) sit near the Euclidean boundary, reflecting intermediate density. Importantly, the 27-relation full ConceptNet network is hyperbolic in aggregate ($\kbar = -0.233$) because the high-edge-count hyperbolic relations dominate. This shows that phase classification of knowledge graphs is \emph{relation-mix-dependent}.~[EMPIRICAL]
-
+Table~\ref{tab:relation_orc} reports the full curvature spectrum for the 14 ConceptNet EN relations with $|E_{\text{rel}}| \geq 10$. The relation types sort cleanly by semantic category: \emph{causal and functional} relations (Causes, HasA, HasPrerequisite, CapableOf) are uniformly spherical, reflecting the dense triangular structure of causal closure ($A \to B$, $A \to C$, so $B \approx C$). \emph{Taxonomic and associative} relations (IsA, MannerOf, RelatedTo, AtLocation) are uniformly hyperbolic, consistent with branching-tree connectivity. \emph{Relational} links (Synonym, UsedFor, SimilarTo) sit near the Euclidean boundary, reflecting intermediate density. Importantly, the 27-relation full ConceptNet network is hyperbolic in aggregate ($\kbar = -0.233$) because the high-edge-count hyperbolic relations dominate. This shows that phase classification of knowledge graphs is \emph{relation-mix-dependent}.
 \begin{table}[h]
 \centering
 \small
-\caption{Relation-specific ORC for ConceptNet EN ($\geq$10 edges per relation). $f_-$: fraction of edges with negative curvature. Relations sorted by $\kbar$.~[EMPIRICAL]}
+\caption{Relation-specific ORC for ConceptNet EN ($\geq$10 edges per relation). $f_-$: fraction of edges with negative curvature. Relations sorted by $\kbar$.}
 \label{tab:relation_orc}
 \begin{tabular}{@{}lrrrl@{}}
 \toprule
@@ -404,8 +409,7 @@ ORC-hyperbolic networks have the \emph{largest} mean $\delta_{\max}$ (2.63), whi
 ORC is \emph{local}: it averages the Wasserstein cost of one-hop random walks. A network can be locally spherical (abundant triangles, high ORC) yet globally tree-like (small $\delta$) if its triangle-rich communities are connected via bridges. Conversely, a network can be globally non-tree-like (large $\delta$) yet locally hyperbolic (sparse local neighbourhoods) if it has long cycles but no dense hubs. For word association networks, hyperbolic ORC arises from sparse, path-like local neighbourhoods (mean degree $\approx 3$, few triangles), yet long diameter paths inflate $\delta$. Biological spherical networks (dense clique-like structure) have low $\delta$ because dense communities are tree-like at global scale.
 
 \paragraph{Practical implication.}
-ORC and Gromov $\delta$ should \emph{not} be used interchangeably. For semantic networks, ORC (local) predicts retrieval and navigation structure; $\delta$ (global) predicts metric distortion under tree embeddings. Studies claiming hyperbolicity from one measure should validate against the other when local vs.\ global geometry is consequential.~[EMPIRICAL]
-
+ORC and Gromov $\delta$ should \emph{not} be used interchangeably. For semantic networks, ORC (local) predicts retrieval and navigation structure; $\delta$ (global) predicts metric distortion under tree embeddings. Studies claiming hyperbolicity from one measure should validate against the other when local vs.\ global geometry is consequential.
 
 % ============================================================
 \subsection{Revised Classification Model and Domain-Shift Analysis}
@@ -417,7 +421,7 @@ We tested whether adding degree heterogeneity $G = \sigma_k/\langle k\rangle$ as
 \begin{table}[h]
 \centering
 \small
-\caption{Two-parameter vs.\ three-parameter model cross-domain evaluation. The 3-param model hurts semantic accuracy without fixing biological mispredictions---confirming a fundamental domain-shift.~[EMPIRICAL]}
+\caption{Two-parameter vs.\ three-parameter model cross-domain evaluation. The 3-param model hurts semantic accuracy without fixing biological mispredictions---confirming a fundamental domain-shift.}
 \label{tab:revised_model}
 \begin{tabular}{@{}lccc@{}}
 \toprule
@@ -434,8 +438,7 @@ Biological test   & 4  & 1/4   (25\%)  & 1/4 (25\%) \\
 The biological networks occupy $C \in [0.23, 0.88]$---entirely outside the semantic training range $C \in [0, 0.24]$---making extrapolation unreliable by construction. The optimal $C^*$ across all 19 networks is $0.03$ (accuracy $= 84\%$), but this fails to recover the three topology-driven biological spherical cases because they have $C > 0.05$ yet moderate $\eta$. No scalar threshold on $(\eta{}, C, G)$ simultaneously classifies all semantic and biological networks correctly without adding domain identity as an implicit fourth feature.
 
 \paragraph{Domain-shift finding.}
-The two-parameter model is \emph{domain-specific}, not universal. It was trained on word association and knowledge graph networks with $C \in [0, 0.24]$, and correctly classifies $14/15$ such networks (93\%), but degrades to $25\%$ on biological networks with $C \in [0.23, 0.88]$. This is the expected behavior of any model trained outside its feature support. Correcting it requires either: (a) biological training data to recalibrate $C^*_{\mathrm{bio}} \approx 0.22$, which fixes C.\ elegans neural ($C=0.46 > C^*_{\mathrm{bio}}$), C.\ elegans metabolic ($C=0.71$), and borderline E.\ coli GRN ($C=0.23 \approx C^*_{\mathrm{bio}}$) at the cost of mislabeling clustered hyperbolic semantic networks if applied universally; or (b) a network-type-aware classifier that applies domain-specific thresholds. Both paths require additional validation data.~[EMPIRICAL]
-
+The two-parameter model is \emph{domain-specific}, not universal. It was trained on word association and knowledge graph networks with $C \in [0, 0.24]$, and correctly classifies $14/15$ such networks (93\%), but degrades to $25\%$ on biological networks with $C \in [0.23, 0.88]$. This is the expected behavior of any model trained outside its feature support. Correcting it requires either: (a) biological training data to recalibrate $C^*_{\mathrm{bio}} \approx 0.22$, which fixes C.\ elegans neural ($C=0.46 > C^*_{\mathrm{bio}}$), C.\ elegans metabolic ($C=0.71$), and borderline E.\ coli GRN ($C=0.23 \approx C^*_{\mathrm{bio}}$) at the cost of mislabeling clustered hyperbolic semantic networks if applied universally; or (b) a network-type-aware classifier that applies domain-specific thresholds. Both paths require additional validation data.
 
 % ============================================================
 \subsection{Ricci Flow Fingerprinting: Spherical Stability}
@@ -447,7 +450,7 @@ We ran 50-step discrete Ricci flow ($dt = 0.5$) on all 10 semantic networks with
 \begin{table}[h]
 \centering
 \small
-\caption{Discrete Ricci flow signatures by geometry class ($dt=0.5$, 50 steps). $\Delta\kbar = \kbar(50) - \kbar(0)$; $\Delta w_{\mathrm{Gini}}$ = growth in edge-weight Gini coefficient.~[EMPIRICAL]}
+\caption{Discrete Ricci flow signatures by geometry class ($dt=0.5$, 50 steps). $\Delta\kbar = \kbar(50) - \kbar(0)$; $\Delta w_{\mathrm{Gini}}$ = growth in edge-weight Gini coefficient.}
 \label{tab:ricci_flow}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
@@ -467,8 +470,7 @@ The spherical phase (SWOW Dutch, $\kbar_0 = +0.087$) drifts by only $\Delta\kbar
 The edge-weight Gini coefficient $w_{\text{Gini}}$ (concentration of curvature-adjusted weights) grows most rapidly for Euclidean networks ($0.546$) and least for spherical ($0.071$), indicating that Euclidean networks develop highly inhomogeneous edge weight distributions under flow. The physical picture is: discrete Ricci flow amplifies existing curvature heterogeneity---networks with initially heterogeneous curvature (high $\sigma_\kappa$) experience faster weight concentration and larger $|\Delta\kbar|$.
 
 \paragraph{Implication for geometry classification.}
-The flow trajectory is a \emph{geometry fingerprint}: a short ($t \leq 10$ step) Ricci flow experiment suffices to distinguish spherical from non-spherical networks by their $|\Delta\kbar|$. Spherical networks resist flow; non-spherical networks diverge, with Euclidean networks diverging fastest. This provides an alternative, dynamics-based geometry classifier that does not require computing the exact Wasserstein-1 distance---a computational shortcut for large networks.~[EMPIRICAL]
-
+The flow trajectory is a \emph{geometry fingerprint}: a short ($t \leq 10$ step) Ricci flow experiment suffices to distinguish spherical from non-spherical networks by their $|\Delta\kbar|$. Spherical networks resist flow; non-spherical networks diverge, with Euclidean networks diverging fastest. This provides an alternative, dynamics-based geometry classifier that does not require computing the exact Wasserstein-1 distance---a computational shortcut for large networks.
 \paragraph{Fixed-point convergence and the curvature-sign invariant.}
 A key quantitative feature of the flow is its rapid convergence to a fixed-point weight distribution. For ConceptNet EN ($\kbar_0 = -0.237$), the per-edge curvature variance drops from $\sigma_\kappa = 0.130$ at $t=0$ to $\sigma_\kappa = 1.0 \times 10^{-5}$ at $t=50$---a $\mathbf{10{,}000\times}$ reduction in 50 iterations, with effective convergence ($|\Delta\sigma_\kappa| < 10^{-4}$) by $t \approx 20$. For SWOW Dutch ($\kbar_0 = +0.087$), variance drops from $0.045$ to $1.4 \times 10^{-5}$ ($\mathbf{3{,}200\times}$), also by $t \approx 20$. In both cases, the edge-weight Gini coefficient plateaus within 5\% of its asymptotic value by $t = 30$.
 
@@ -479,8 +481,7 @@ Crucially, in no network does the flow change the \emph{sign} of $\kbar$: hyperb
 \emph{For any connected weighted graph $G$ and any step size $\Delta t \in (0, 1)$, the sign of the mean ORC $\mathrm{sgn}(\bar\kappa(t))$ is invariant under the normalised discrete Ricci flow $w_e(t+1) = w_e(t)(1 - \Delta t\,\kappa_e(t))$.}
 \medskip
 
-This is the discrete analogue of Hamilton's theorem that Ricci flow preserves the sign of sectional curvature in the continuous setting. It implies that $\bar\kappa$ is a \emph{topological invariant} of the graph's connectivity structure, not just a function of edge weights. If proven, this would give a stopping criterion for flow-based community detection: once the sign is determined, flow can be halted.~[EMPIRICAL]
-
+This is the discrete analogue of Hamilton's theorem that Ricci flow preserves the sign of sectional curvature in the continuous setting. It implies that $\bar\kappa$ is a \emph{topological invariant} of the graph's connectivity structure, not just a function of edge weights. If proven, this would give a stopping criterion for flow-based community detection: once the sign is determined, flow can be halted.
 A theoretical grounding for the Euclidean regime is provided by recent work on weighted Forman and Lin--Lu--Yau Ricci flow on graphs~\cite{munch2026weighted}: \emph{caterpillar trees} are the unique graph class that converges to \emph{zero} curvature under LLY flow, with all other graph families converging to non-zero limiting values. WordNet's IS-A hyponymy chains and BabelNet's multilingual synset trees are structurally caterpillar-like, and our measured $\kbar \approx 0$ is therefore not a measurement artefact but the theoretically predicted fixed point under curvature flow. This constitutes the first theoretical explanation of the Euclidean classification: taxonomic networks are near-Euclidean because their tree-like backbones drive ORC toward zero, independent of sparsity.
 
 \begin{figure}[t]
@@ -558,7 +559,7 @@ produce denser local triangles, while the larger Llama3 produces a more globally
 sparse structure closer to human norms.
 
 \paragraph{Epistemic status.}
-This finding is~[EMPIRICAL]: validated on three LLMs and four human SWOW languages,
+This finding is empirical: validated on three LLMs and four human SWOW languages,
 but not yet tested on other association paradigms (e.g., Edinburgh Associative Thesaurus,
 USF norms under LLM generation) or on LLMs trained beyond 2024.
 
@@ -581,7 +582,7 @@ We applied ORCHID to ConceptNet EN ($n_{\text{hyp}}=305$ valid hyperedges) and W
 \begin{table}[h]
 \centering
 \small
-\caption{ORCHID hyperedge ORC vs.\ pairwise clique-expansion ORC. $\Delta\kbar = \kbar_{\text{ORCHID}} - \kbar_{\text{pair}}$. The fraction negative is computed over all processed hyperedges.~[EMPIRICAL]}
+\caption{ORCHID hyperedge ORC vs.\ pairwise clique-expansion ORC. $\Delta\kbar = \kbar_{\text{ORCHID}} - \kbar_{\text{pair}}$. The fraction negative is computed over all processed hyperedges.}
 \label{tab:orchid_results}
 \begin{tabular}{@{}lrrrrl@{}}
 \toprule
@@ -600,8 +601,7 @@ The WordNet result is the most striking: at the hyperedge (synset) level, curvat
   \item \textbf{Spherical within synsets} ($\kbar_{\text{ORCHID}} = +0.534$, fraction negative $= 0\%$),
   \item \textbf{Hyperbolic between synsets} ($\kbar_{\text{pair}} = -0.101$, fraction negative $= 84\%$).
 \end{itemize}
-The near-Euclidean aggregate $\kbar \approx 0$ is a cancellation artefact from mixing two distinct geometric scales. To our knowledge, this is the first empirical demonstration of \emph{multi-scale geometric phase coexistence} in a semantic network.~[EMPIRICAL]
-
+The near-Euclidean aggregate $\kbar \approx 0$ is a cancellation artefact from mixing two distinct geometric scales. To our knowledge, this is the first empirical demonstration of \emph{multi-scale geometric phase coexistence} in a semantic network.
 Recent extensions of ORCHID to Lin--Lu--Yau curvature on hypergraphs~\cite{lly2025hypergraph} and edge-transport-based hypergraph clustering~\cite{coupette2025hypergraph} provide the computational infrastructure for extending this analysis to BabelNet and ConceptNet at full scale.
 
 
@@ -784,7 +784,7 @@ X.~Ramos~Oliv\'e, ``Integral Ricci curvature for graphs,'' arXiv:2502.16465, 202
 A.~Clauset, C.~R.~Shalizi, and M.~E.~J.~Newman, ``Power-law distributions in empirical data,'' \emph{SIAM Rev.}, vol.~51, no.~4, pp.~661--703, 2009.
 
 \bibitem{paper1_theory}
-D.~C.~Agourakis, ``Finite-size crossover in Ollivier--Ricci curvature of random regular graphs,'' arXiv preprint, 2026.
+D.~C.~Agourakis and M.~Gerenutti, ``A finite-size crossover in Ollivier--Ricci curvature of random regular graphs,'' Authorea preprint, 2026.
 
 \end{thebibliography}
 

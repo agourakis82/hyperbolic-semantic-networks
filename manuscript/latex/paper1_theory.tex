@@ -30,9 +30,16 @@
 
 % Metadata
 \title{A Finite-Size Crossover in Ollivier--Ricci Curvature\\of Random Regular Graphs}
-\author{Demetrios C.\ Agourakis\thanks{Correspondence: \texttt{demetrios@agourakis.med.br}}\\
-  \small Independent Researcher\\
-  \small ORCID: 0000-0002-8596-5097
+\author{%
+  Demetrios C.\ Agourakis\thanks{Correspondence: \texttt{demetrios@agourakis.med.br}}%
+  \and
+  Marli Gerenutti%
+  \\[6pt]
+  \small Biomaterials and Regenerative Medicine Post-Graduate Program,\\
+  \small Pontif\'{\i}cia Universidade Cat\'olica de S\~ao Paulo (PUC-SP),
+         Sorocaba, SP, Brazil\\
+  \small Faculdade S\~ao Leopoldo Mandic, Campinas, SP, Brazil\\[3pt]
+  \small D.C.A.\ ORCID: 0000-0002-8596-5097
 }
 \date{March 2026}
 
@@ -383,7 +390,7 @@ We provide a Lean~4 formalization comprising 25 modules and 8097 lines. The 7 co
 The formalization relies on 5 axioms: Wasserstein symmetry, triangle inequality, coupling bound, local clustering bound, and specification bridge---all mathematically standard.
 
 \begin{quote}
-\small\textit{Guide for non-Lean readers.} In Lean~4, \texttt{sorry} is a tactic that closes a proof goal without proof (analogous to a ``\textit{proof omitted}'' placeholder). A file with \textbf{0 \texttt{sorry}} declarations is fully machine-checked with no gaps. The 18 auxiliary modules (e.g., RicciFlow, SpectralGeometry) contain documented \texttt{sorry} declarations for results not yet formally proved; these do not affect the core ORC theorems. The 5 axioms are standard: (i) $W_1(\mu,\nu)=W_1(\nu,\mu)$ (Villani~\cite{villani2009optimal}, Thm.\ 6.1); (ii) $W_1$ triangle inequality (ibid.); (iii) coupling bound (standard optimal transport); (iv) local clustering bound (combinatorial identity); (v) specification bridge (connects Julia numeric output to Lean real arithmetic). The complete code is available at \url{https://github.com/chiuratto-AIgourakis/hyperbolic-semantic-networks}.
+\small\textit{Guide for non-Lean readers.} In Lean~4, \texttt{sorry} is a tactic that closes a proof goal without proof (analogous to a ``\textit{proof omitted}'' placeholder). A file with \textbf{0 \texttt{sorry}} declarations is fully machine-checked with no gaps. The 18 auxiliary modules (e.g., RicciFlow, SpectralGeometry) contain documented \texttt{sorry} declarations for results not yet formally proved; these do not affect the core ORC theorems. The 5 axioms are standard: (i) $W_1(\mu,\nu)=W_1(\nu,\mu)$ (Villani~\cite{villani2009optimal}, Thm.\ 6.1); (ii) $W_1$ triangle inequality (ibid.); (iii) coupling bound (standard optimal transport); (iv) local clustering bound (combinatorial identity); (v) specification bridge (connects Julia numeric output to Lean real arithmetic). The complete code is available at \url{https://github.com/agourakis82/hyperbolic-semantic-networks}.
 \end{quote}
 
 
@@ -487,7 +494,7 @@ $\alpha$ & $\kbar$ & $\sigma_\kappa$ & SE & Geometry \\
 All code, data, and results are available at:
 
 \smallskip
-\noindent\url{https://github.com/chiuratto-AIgourakis/hyperbolic-semantic-networks}
+\noindent\url{https://github.com/agourakis82/hyperbolic-semantic-networks}
 \smallskip
 
 \noindent Julia scripts: \texttt{phase\_transition\_pure\_julia.jl}, \texttt{run\_n1000.jl}, \texttt{run\_er\_comparison.jl}, \texttt{hypercomplex\_lp.jl}. Lean~4 formalization: \texttt{lean/HyperbolicSemanticNetworks/}. Results: \texttt{results/experiments/}.
@@ -625,7 +632,7 @@ M.~Hehl,
 arXiv:2509.22362, 2025.
 
 \bibitem{paper2}
-D.~C.~Agourakis, ``When are semantic networks hyperbolic? A curvature phase transition theory with cross-linguistic validation,'' in preparation, 2026.
+D.~C.~Agourakis and M.~Gerenutti, ``Cross-linguistic geometry of semantic networks: A curvature phase transition theory with LLM validation,'' PsyArXiv preprint, 2026.
 
 \end{thebibliography}
 
