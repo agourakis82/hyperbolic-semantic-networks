@@ -1,0 +1,150 @@
+{
+  "n_networks": 16,
+  "method": "maslov_sneppen_edge_rewiring_10E",
+  "alpha": 0.5,
+  "experiment": "config_model_nulls_16",
+  "seed": 42,
+  "results": [
+    {
+      "network_id": "swow_es",
+      "status": "SKIPPED",
+      "N": 422,
+      "E": 571,
+      "kappa_real": -0.068341
+    },
+    {
+      "network_id": "swow_en",
+      "status": "SKIPPED",
+      "N": 438,
+      "E": 640,
+      "kappa_real": -0.137147
+    },
+    {
+      "kappa_null_mean": -0.34940155535627976,
+      "n_nulls": 1,
+      "null_kappas": [
+        -0.34940155535627976
+      ],
+      "N": 465,
+      "p_empirical": 0.0,
+      "delta_kappa": 0.20540455535627974,
+      "z_score": null,
+      "mean_degree": 3.2774193548387096,
+      "E": 762,
+      "category": "association",
+      "network_id": "swow_zh",
+      "kappa_null_std": null,
+      "kappa_real": -0.143997
+    },
+    {
+      "kappa_null_mean": 0.07602259548936831,
+      "n_nulls": 5,
+      "null_kappas": [
+        0.07597141557311762,
+        0.07594715299139705,
+        0.07620369458637798,
+        0.07589200142147297,
+        0.07609871287447588
+      ],
+      "N": 500,
+      "p_empirical": 0.0,
+      "delta_kappa": 0.022672404510631697,
+      "z_score": 179.3020349334864,
+      "mean_degree": 61.472,
+      "E": 15368,
+      "category": "association",
+      "network_id": "swow_nl",
+      "kappa_null_std": 0.00012644811599066467,
+      "kappa_real": 0.098695
+    },
+    {
+      "kappa_null_mean": -0.2713584740192331,
+      "n_nulls": 5,
+      "null_kappas": [
+        -0.2716043614057184,
+        -0.2707137742619211,
+        -0.27211439534103316,
+        -0.2696555946168711,
+        -0.2727042444706218
+      ],
+      "N": 467,
+      "p_empirical": 0.0,
+      "delta_kappa": 0.038148474019233075,
+      "z_score": 31.7947787046138,
+      "mean_degree": 10.205567451820128,
+      "E": 2383,
+      "category": "knowledge",
+      "network_id": "conceptnet_en",
+      "kappa_null_std": 0.0011998345506237878,
+      "kappa_real": -0.23321
+    },
+    {
+      "kappa_null_mean": -0.3656677871856349,
+      "n_nulls": 4,
+      "null_kappas": [
+        -0.36327590445891256,
+        -0.36775677054263484,
+        -0.36385819096395866,
+        -0.3677802827770336
+      ],
+      "N": 489,
+      "p_empirical": 0.0,
+      "delta_kappa": 0.12949478718563492,
+      "z_score": 53.12902975037999,
+      "mean_degree": 6.45398773006135,
+      "E": 1578,
+      "category": "knowledge",
+      "network_id": "conceptnet_pt",
+      "kappa_null_std": 0.0024373640511420923,
+      "kappa_real": -0.236173
+    },
+    {
+      "network_id": "wordnet_en",
+      "status": "SKIPPED",
+      "N": 500,
+      "E": 527,
+      "kappa_real": -0.001532
+    },
+    {
+      "network_id": "wordnet_en_2k",
+      "status": "SKIPPED",
+      "N": 2000,
+      "E": 2075,
+      "kappa_real": -0.004524
+    },
+    {
+      "network_id": "babelnet_ru",
+      "status": "SKIPPED",
+      "N": 493,
+      "E": 522,
+      "kappa_real": -0.029929
+    },
+    {
+      "network_id": "babelnet_ar",
+      "status": "SKIPPED",
+      "N": 142,
+      "E": 151,
+      "kappa_real": -0.012362
+    },
+    {
+      "kappa_null_mean": -0.2642396733459276,
+      "n_nulls": 3,
+      "null_kappas": [
+        -0.26386248957747366,
+        -0.2644902030849566,
+        -0.26436632737535254
+      ],
+      "N": 1634,
+      "p_empirical": 0.0,
+      "delta_kappa": 0.13397267334592758,
+      "z_score": 402.9604270209234,
+      "mean_degree": 13.89718482252142,
+      "E": 11354,
+      "category": "clinical",
+      "network_id": "depression_minimum",
+      "kappa_null_std": 0.00033247104271847305,
+      "kappa_real": -0.130267
+    }
+  ],
+  "orc_method": "exact_LP_HiGHS"
+}
