@@ -1,0 +1,407 @@
+{
+  "loo_accuracy": 0.8125,
+  "n_networks": 16,
+  "cstar_min": 0.02,
+  "cstar_max": 0.045,
+  "experiment": "loo_classifier_16",
+  "eta_c_formula": "3.75 - 14.62/sqrt(N)",
+  "cstar_std": 0.0062499999999999995,
+  "cstar_mean": 0.0215625,
+  "loo_correct": 13,
+  "sensitivity": [
+    {
+      "n_correct": 13,
+      "accuracy": 0.8125,
+      "cstar": 0.005
+    },
+    {
+      "n_correct": 13,
+      "accuracy": 0.8125,
+      "cstar": 0.01
+    },
+    {
+      "n_correct": 14,
+      "accuracy": 0.875,
+      "cstar": 0.015
+    },
+    {
+      "n_correct": 14,
+      "accuracy": 0.875,
+      "cstar": 0.02
+    },
+    {
+      "n_correct": 13,
+      "accuracy": 0.8125,
+      "cstar": 0.025
+    },
+    {
+      "n_correct": 13,
+      "accuracy": 0.8125,
+      "cstar": 0.03
+    },
+    {
+      "n_correct": 13,
+      "accuracy": 0.8125,
+      "cstar": 0.035
+    },
+    {
+      "n_correct": 13,
+      "accuracy": 0.8125,
+      "cstar": 0.04
+    },
+    {
+      "n_correct": 13,
+      "accuracy": 0.8125,
+      "cstar": 0.045
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.05
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.055
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.06
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.065
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.07
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.075
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.08
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.085
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.09
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.095
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.1
+    },
+    {
+      "n_correct": 12,
+      "accuracy": 0.75,
+      "cstar": 0.105
+    },
+    {
+      "n_correct": 10,
+      "accuracy": 0.625,
+      "cstar": 0.11
+    },
+    {
+      "n_correct": 10,
+      "accuracy": 0.625,
+      "cstar": 0.115
+    },
+    {
+      "n_correct": 10,
+      "accuracy": 0.625,
+      "cstar": 0.12
+    },
+    {
+      "n_correct": 10,
+      "accuracy": 0.625,
+      "cstar": 0.125
+    },
+    {
+      "n_correct": 8,
+      "accuracy": 0.5,
+      "cstar": 0.13
+    },
+    {
+      "n_correct": 8,
+      "accuracy": 0.5,
+      "cstar": 0.135
+    },
+    {
+      "n_correct": 7,
+      "accuracy": 0.4375,
+      "cstar": 0.14
+    },
+    {
+      "n_correct": 6,
+      "accuracy": 0.375,
+      "cstar": 0.145
+    },
+    {
+      "n_correct": 6,
+      "accuracy": 0.375,
+      "cstar": 0.15
+    },
+    {
+      "n_correct": 5,
+      "accuracy": 0.3125,
+      "cstar": 0.155
+    },
+    {
+      "n_correct": 4,
+      "accuracy": 0.25,
+      "cstar": 0.16
+    },
+    {
+      "n_correct": 4,
+      "accuracy": 0.25,
+      "cstar": 0.165
+    },
+    {
+      "n_correct": 4,
+      "accuracy": 0.25,
+      "cstar": 0.17
+    },
+    {
+      "n_correct": 3,
+      "accuracy": 0.1875,
+      "cstar": 0.175
+    },
+    {
+      "n_correct": 3,
+      "accuracy": 0.1875,
+      "cstar": 0.18
+    },
+    {
+      "n_correct": 3,
+      "accuracy": 0.1875,
+      "cstar": 0.185
+    },
+    {
+      "n_correct": 3,
+      "accuracy": 0.1875,
+      "cstar": 0.19
+    },
+    {
+      "n_correct": 3,
+      "accuracy": 0.1875,
+      "cstar": 0.195
+    },
+    {
+      "n_correct": 3,
+      "accuracy": 0.1875,
+      "cstar": 0.2
+    }
+  ],
+  "per_fold": [
+    {
+      "network_id": "swow_es",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 422,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.017354,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.13594,
+      "kappa_mean": -0.068341,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "swow_en",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 438,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.019498,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.127724,
+      "kappa_mean": -0.137147,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "swow_zh",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 465,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.0231,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.172798,
+      "kappa_mean": -0.143997,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "swow_nl",
+      "predicted": "SPHERICAL",
+      "correct": true,
+      "N": 500,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 7.557614,
+      "actual": "SPHERICAL",
+      "clustering": 0.238349,
+      "kappa_mean": 0.098695,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "conceptnet_en",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 467,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.223027,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.108358,
+      "kappa_mean": -0.23321,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "conceptnet_pt",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 489,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.085182,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.105699,
+      "kappa_mean": -0.236173,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "wordnet_en",
+      "predicted": "EUCLIDEAN",
+      "correct": true,
+      "N": 500,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.008887,
+      "actual": "EUCLIDEAN",
+      "clustering": 0.012712,
+      "kappa_mean": -0.001532,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "wordnet_en_2k",
+      "predicted": "EUCLIDEAN",
+      "correct": true,
+      "N": 2000,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.002153,
+      "actual": "EUCLIDEAN",
+      "clustering": 0.002139,
+      "kappa_mean": -0.004524,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "babelnet_ru",
+      "predicted": "EUCLIDEAN",
+      "correct": false,
+      "N": 493,
+      "train_accuracy": 0.9333333333333333,
+      "eta": 0.009096,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.001242,
+      "kappa_mean": -0.029929,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "babelnet_ar",
+      "predicted": "EUCLIDEAN",
+      "correct": false,
+      "N": 142,
+      "train_accuracy": 0.9333333333333333,
+      "eta": 0.031853,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.0,
+      "kappa_mean": -0.012362,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "depression_minimum",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 1634,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.118196,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.158687,
+      "kappa_mean": -0.130267,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "swow_rp",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 489,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.039679,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.154286,
+      "kappa_mean": -0.263919,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "eat_en",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 500,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 1.850753,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.128785,
+      "kappa_mean": -0.045628,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "usf_en",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 498,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.062215,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.142677,
+      "kappa_mean": -0.320666,
+      "cstar_fitted": 0.02
+    },
+    {
+      "network_id": "wordnet_de",
+      "predicted": "EUCLIDEAN",
+      "correct": false,
+      "N": 759,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.006272,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.022196,
+      "kappa_mean": -0.022799,
+      "cstar_fitted": 0.045
+    },
+    {
+      "network_id": "framenet_en",
+      "predicted": "HYPERBOLIC",
+      "correct": true,
+      "N": 1173,
+      "train_accuracy": 0.8666666666666667,
+      "eta": 0.009241,
+      "actual": "HYPERBOLIC",
+      "clustering": 0.045351,
+      "kappa_mean": -0.20155,
+      "cstar_fitted": 0.02
+    }
+  ]
+}
