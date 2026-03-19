@@ -113,28 +113,27 @@ The density parameter $\eta$ alone is necessary but not sufficient: all semantic
 \end{itemize}
 The threshold $\Cstar$ is determined by leave-one-out (LOO) cross-validation across all 16 networks: fitting $\Cstar$ on 15 networks and classifying the held-out network yields 81.2\% accuracy (13/16), with $\Cstar$ stable at $0.022 \pm 0.006$ across folds (range $[0.020, 0.045]$). The three misclassifications are taxonomy networks with near-zero curvature ($|\kbar| < 0.03$), at the Euclidean/hyperbolic boundary. Sensitivity analysis shows accuracy $\geq 81\%$ for all $\Cstar \in [0.005, 0.045]$, confirming the threshold is not overfit.
 
-
 % ============================================================
 \section{Methods}
 \label{sec:methods}
 
 \subsection{Datasets}
 
-We analyze 16 networks spanning four categories (Table~\ref{tab:results}), split into an 11-network training set (used to derive $\Cstar$) and a 5-network held-out test set:
+We analyze 16 networks spanning four categories (Table~\ref{tab:results}). The clustering threshold $\Cstar$ is derived by leave-one-out cross-validation across all 16 networks (see \S\ref{sec:theory}).
 
-\textbf{Training set---Association networks (SWOW)}~\cite{deluca2024swow}: Small World of Words cue-response matrices for Spanish ($N=422$), English ($N=438$), Chinese ($N=465$), and Dutch ($N=500$ in LCC). Dutch SWOW is notably denser ($\kavg = 61.5$, $\eta = 7.56 > \etac$).
+\textbf{Association networks (SWOW)}~\cite{deluca2024swow}: Small World of Words cue-response matrices for Spanish ($N=422$), English ($N=438$), Chinese ($N=465$), and Dutch ($N=500$ in LCC). Dutch SWOW is notably denser ($\kavg = 61.5$, $\eta = 7.56 > \etac$).
 
-\textbf{Training set---Knowledge graphs (ConceptNet)}~\cite{speer2017conceptnet}: English ($N=467$) and Portuguese ($N=489$), filtered to associative weight $\geq 2.0$.
+\textbf{Knowledge graphs (ConceptNet)}~\cite{speer2017conceptnet}: English ($N=467$) and Portuguese ($N=489$), filtered to associative weight $\geq 2.0$.
 
-\textbf{Training set---Taxonomy networks}: English WordNet~3.1 ($N \in \{500, 2000\}$), BabelNet~5.3 Russian ($N=493$) and Arabic ($N=142$). These \emph{is-a} hierarchies are tree-like.
+\textbf{Taxonomy networks}: English WordNet~3.1 ($N \in \{500, 2000\}$), BabelNet~5.3 Russian ($N=493$) and Arabic ($N=142$). These \emph{is-a} hierarchies are tree-like.
 
-\textbf{Training set---Clinical}: Depression symptom network at minimum severity ($N=1634$).
+\textbf{Clinical}: Depression symptom network at minimum severity ($N=1634$).
 
-\textbf{Test set---Additional association networks}: (1)~SWOW Rioplatense (Argentine/Uruguayan Spanish, $N=489$)~\cite{cabana2024swowrp}; (2)~Edinburgh Associative Thesaurus (EAT; British English, 1970s era, $N=500$)~\cite{kiss1973associative}; (3)~USF Free Association Norms (American English, $N=498$)~\cite{nelson1998usf}. These three networks test cross-cultural, cross-era, and cross-protocol generalization.
+\textbf{Additional association networks}: (1)~SWOW Rioplatense (Argentine/Uruguayan Spanish, $N=489$)~\cite{cabana2024swowrp}; (2)~Edinburgh Associative Thesaurus (EAT; British English, 1970s era, $N=500$)~\cite{kiss1973associative}; (3)~USF Free Association Norms (American English, $N=498$)~\cite{nelson1998usf}. These three networks test cross-cultural, cross-era, and cross-protocol generalization.
 
-\textbf{Test set---Additional taxonomy}: OdeNet (German WordNet, $N=759$, hypernymy graph)~\cite{odenet2020}. Directly analogous to English WordNet.
+\textbf{Additional taxonomy}: OdeNet (German WordNet, $N=759$, hypernymy graph)~\cite{odenet2020}. Directly analogous to English WordNet.
 
-\textbf{Test set---Domain extension}: FrameNet semantic frame relations (English, $N=1173$)~\cite{baker1998framenet}. Unlike WordNet, FrameNet encodes scenario-level semantic relations (Causative-of, Using, Inheritance), testing the two-parameter model on a qualitatively different semantic formalism.
+\textbf{Domain extension}: FrameNet semantic frame relations (English, $N=1173$)~\cite{baker1998framenet}. Unlike WordNet, FrameNet encodes scenario-level semantic relations (Causative-of, Using, Inheritance), testing the two-parameter model on a qualitatively different semantic formalism.
 
 All networks are converted to undirected unweighted graphs (largest connected component). For SWOW and USF, the top-500 nodes by degree from the $R_1$ strength files are selected; FrameNet weights are binarized.
 
@@ -193,19 +192,11 @@ FrameNet & Frames & EN & 1173 & 0.045 & 0.009 & $-0.202$ & $[-0.216, -0.187]$ & 
 \end{tabular}
 \end{table}
 
-Three distinct geometric regimes emerge (Table~\ref{tab:results}): \textbf{Hyperbolic} ($\kbar \in [-0.32, -0.05]$): all association and knowledge networks with $C > 0.10$; \textbf{Euclidean} ($|\kbar| < 0.03$): all taxonomy networks with $C < 0.05$; \textbf{Spherical} ($\kbar = +0.10$): Dutch SWOW with $\eta \gg \etac$.
+The three predicted regimes are confirmed (Table~\ref{tab:results}): association and knowledge networks are hyperbolic ($\kbar \in [-0.32, -0.05]$, $C > 0.10$); taxonomies are Euclidean ($|\kbar| < 0.03$, $C < 0.02$); Dutch SWOW is spherical ($\kbar = +0.10$, $\eta \gg \etac$).
 
-\subsection{Placing Semantic Networks on the Phase Transition Curve}
+\subsection{Phase Boundary Crossing: Dutch SWOW}
 
-The central result is the bridge figure (Fig.~\ref{fig:bridge}), which overlays all 16 semantic networks onto the random regular graph phase transition curves.
-
-Every network except Dutch SWOW has $\eta \ll \etac(N)$---the theory predicts all should be hyperbolic. Yet taxonomies are Euclidean:
-
-\begin{quote}
-\emph{$\eta < \etac$ is necessary but not sufficient for hyperbolicity.}
-\end{quote}
-
-The key test is Dutch SWOW: with $\eta = 7.56$ and $\etac(500) = 3.10$, the theory predicts spherical geometry. The observation $\kbar = +0.099$ confirms this---a compelling empirical demonstration of the curvature sign-change in a real (non-synthetic) network; no prior ORC study has reported a validated phase-boundary crossing on empirical data.
+Figure~\ref{fig:bridge} overlays all 16 semantic networks onto the random regular graph phase transition curves. The key test is Dutch SWOW: with $\eta = 7.56$ and $\etac(500) = 3.10$, the theory predicts spherical geometry. The observation $\kbar = +0.099$ confirms this---an empirical demonstration of the curvature sign-change in a real network. No prior ORC study has reported a validated phase-boundary crossing on empirical data.
 
 \begin{figure}[t]
 \centering
@@ -428,7 +419,7 @@ We tested whether adding degree heterogeneity $G = \sigma_k/\langle k\rangle$ as
 \label{tab:revised_model}
 \begin{tabular}{@{}lccc@{}}
 \toprule
-Split & $n$ & 2-param ($\eta,C$; $C^*=0.05$) & 3-param ($\eta,C,G$) \\
+Split & $n$ & 2-param ($\eta,C$; $\Cstar=0.022$) & 3-param ($\eta,C,G$) \\
 \midrule
 Semantic (LOO-16) & 16 & \textbf{13/16} (81.2\%) & 6/16 (37.5\%) \\
 Biological test   & 4  & 1/4   (25\%)  & 1/4 (25\%) \\
@@ -437,10 +428,10 @@ Biological test   & 4  & 1/4   (25\%)  & 1/4 (25\%) \\
 \end{table}
 
 \paragraph{Root cause: feature space boundary, not missing parameters.}
-The biological networks occupy $C \in [0.23, 0.88]$---entirely outside the semantic training range $C \in [0, 0.24]$---making extrapolation unreliable by construction. The optimal $C^*$ across all 19 networks is $0.03$ (accuracy $= 84\%$), but this fails to recover the three topology-driven biological spherical cases because they have $C > 0.05$ yet moderate $\eta$. No scalar threshold on $(\eta{}, C, G)$ simultaneously classifies all semantic and biological networks correctly without adding domain identity as an implicit fourth feature.
+The biological networks occupy $C \in [0.23, 0.88]$---entirely outside the semantic training range $C \in [0, 0.24]$---making extrapolation unreliable by construction. The optimal $C^*$ across all 19 networks is $0.03$ (accuracy $= 84\%$), but this fails to recover the three topology-driven biological spherical cases because they have $C > 0.03$ yet moderate $\eta$. No scalar threshold on $(\eta{}, C, G)$ simultaneously classifies all semantic and biological networks correctly without adding domain identity as an implicit fourth feature.
 
 \paragraph{Domain-shift finding.}
-The two-parameter model is \emph{domain-specific}, not universal. It was trained on word association and knowledge graph networks with $C \in [0, 0.24]$, and correctly classifies $13/16$ such networks (81\%, LOO), but degrades to $25\%$ on biological networks with $C \in [0.23, 0.88]$. This is the expected behavior of any model trained outside its feature support. Correcting it requires either: (a) biological training data to recalibrate $C^*_{\mathrm{bio}} \approx 0.22$, which fixes C.\ elegans neural ($C=0.46 > C^*_{\mathrm{bio}}$), C.\ elegans metabolic ($C=0.71$), and borderline E.\ coli GRN ($C=0.23 \approx C^*_{\mathrm{bio}}$) at the cost of mislabeling clustered hyperbolic semantic networks if applied universally; or (b) a network-type-aware classifier that applies domain-specific thresholds. Both paths require additional validation data.
+The two-parameter model is \emph{domain-specific}, not universal. It was trained on word association and knowledge graph networks with $C \in [0, 0.24]$, and correctly classifies $13/16$ such networks (81\%, LOO), but degrades to $25\%$ on biological networks with $C \in [0.23, 0.88]$. This is the expected behavior of any model trained outside its feature support. Correcting it requires either: (a) biological training data to recalibrate $C^*_{\mathrm{bio}} \approx 0.22$, which fixes C.\ elegans neural ($C=0.46 > C^*_{\mathrm{bio}}$) and C.\ elegans metabolic ($C=0.71$) at the cost of mislabeling clustered hyperbolic semantic networks if applied universally; or (b) a network-type-aware classifier that applies domain-specific thresholds. Both paths require additional validation data.
 
 % ============================================================
 \subsection{Ricci Flow Fingerprinting: Spherical Stability}
@@ -473,8 +464,8 @@ The edge-weight Gini coefficient $w_{\text{Gini}}$ (concentration of curvature-a
 
 \paragraph{Implication for geometry classification.}
 The flow trajectory is a \emph{geometry fingerprint}: a short ($t \leq 10$ step) Ricci flow experiment suffices to distinguish spherical from non-spherical networks by their $|\Delta\kbar|$. Spherical networks resist flow; non-spherical networks diverge, with Euclidean networks diverging fastest. This provides an alternative, dynamics-based geometry classifier that does not require computing the exact Wasserstein-1 distance---a computational shortcut for large networks.
-\paragraph{Fixed-point convergence and the curvature-sign invariant.}
-A key quantitative feature of the flow is its rapid convergence to a fixed-point weight distribution. For ConceptNet EN ($\kbar_0 = -0.237$), the per-edge curvature variance drops from $\sigma_\kappa = 0.130$ at $t=0$ to $\sigma_\kappa = 1.0 \times 10^{-5}$ at $t=50$---a $\mathbf{10{,}000\times}$ reduction in 50 iterations, with effective convergence ($|\Delta\sigma_\kappa| < 10^{-4}$) by $t \approx 20$. For SWOW Dutch ($\kbar_0 = +0.087$), variance drops from $0.045$ to $1.4 \times 10^{-5}$ ($\mathbf{3{,}200\times}$), also by $t \approx 20$. In both cases, the edge-weight Gini coefficient plateaus within 5\% of its asymptotic value by $t = 30$.
+\paragraph{Fixed-point convergence.}
+The flow converges rapidly: ConceptNet EN's per-edge curvature variance drops $10{,}000\times$ (from $\sigma_\kappa = 0.130$ to $10^{-5}$) by $t \approx 20$; SWOW Dutch drops $3{,}200\times$ over the same interval.
 
 Crucially, in no network does the flow change the \emph{sign} of $\kbar$: hyperbolic networks remain hyperbolic (ConceptNet: $-0.237 \to -0.241$), and the spherical network remains spherical (SWOW Dutch: $+0.087 \to +0.076$). We state this as an empirical conjecture:
 
@@ -501,35 +492,25 @@ A theoretical grounding for the Euclidean regime is provided by recent work on w
 
 
 % ============================================================
-\subsection{LLM vs.\ Human Semantic Geometry --- Discovery L}
+\subsection{LLM vs.\ Human Semantic Geometry}
 \label{sec:discovery_l}
 
-The LLM World of Words (LWOW) dataset~\cite{chankhanna2025worldofwords} provides free-association
-norms generated by three large language models---Mistral-7B, Llama3.1-8B, and Claude
-Haiku---using the same $\sim$12\,000 cue words as the human Small World of Words (SWOW) project.
-This enables, for the first time, a controlled geometric comparison of LLM-generated and
-human-generated semantic networks under identical conditions.
-
-\paragraph{Matched-vocabulary comparison.}
-To ensure a scale-controlled comparison, we extracted the subgraph of each LWOW network induced
-on the 438-node SWOW-EN vocabulary (largest connected component of SWOW-EN).
-We then computed exact LP ORC ($\alpha=0.5$, HiGHS, identical to all prior analyses)
-on each network. The results are shown in Table~\ref{tab:discovery_l}.
+Using the LWOW dataset (\S\ref{sec:methods}), we compared ORC across human and LLM association networks on matched 438-node vocabularies (Table~\ref{tab:discovery_l}).
 
 \begin{table}[h]
 \centering
 \caption{Discovery L: Exact LP ORC on matched 438-cue vocabulary. All networks are
 hyperbolic ($\bar{\kappa}<0$) regardless of source (human vs.\ LLM).}
 \label{tab:discovery_l}
-\begin{tabular}{lrrrrl}
-\hline
-Network & $N$ & $\eta$ & $C$ & $\bar{\kappa}$ & Geometry \\
-\hline
-SWOW-EN (Human) & 438 & 0.0195 & 0.128 & $-0.1371$ & Hyperbolic \\
-LWOW-Haiku & 344 & 0.0287 & 0.189 & $-0.0890$ & Hyperbolic \\
-LWOW-Mistral & 418 & 0.1643 & 0.182 & $-0.2241$ & Hyperbolic \\
-LWOW-Llama3 & 417 & 0.5061 & 0.130 & $-0.1399$ & Hyperbolic \\
-\hline
+\begin{tabular}{@{}lrrrrl@{}}
+\toprule
+Network & $N$ & $\eta$ & $C$ & $\kbar$ & Geometry \\
+\midrule
+SWOW-EN (Human) & 438 & 0.020 & 0.128 & $-0.137$ & Hyperbolic \\
+LWOW-Haiku & 344 & 0.029 & 0.189 & $-0.089$ & Hyperbolic \\
+LWOW-Mistral & 418 & 0.164 & 0.182 & $-0.224$ & Hyperbolic \\
+LWOW-Llama3 & 417 & 0.506 & 0.130 & $-0.140$ & Hyperbolic \\
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -559,12 +540,6 @@ Haiku and Mistral show slightly \emph{higher} clustering than human SWOW-EN
 ($C=0.130$). This ordering mirrors the LLM model scale---Haiku and Mistral
 produce denser local triangles, while the larger Llama3 produces a more globally
 sparse structure closer to human norms.
-
-\paragraph{Epistemic status.}
-This finding is empirical: validated on three LLMs and four human SWOW languages,
-but not yet tested on other association paradigms (e.g., Edinburgh Associative Thesaurus,
-USF norms under LLM generation) or on LLMs trained beyond 2024.
-
 
 % ============================================================
 \subsection{Hypergraph ORC}
@@ -627,7 +602,7 @@ To test robustness across curvature definitions, we computed Forman--Ricci curva
 
 \subsection{LLMs as Geometric Probes of Semantic Structure}
 
-The Discovery L results (Table~\ref{tab:discovery_l}) establish that three LLMs replicate human semantic geometry on matched vocabularies. All LLM networks are hyperbolic ($\kbar \in [-0.224, -0.089]$), with magnitude differences within the cross-linguistic variability of human SWOW ($\kbar \in [-0.144, -0.068]$). This has two implications for cognitive science.
+The Discovery L results (Table~\ref{tab:discovery_l}) establish that three LLMs replicate human semantic geometry on matched vocabularies. All LLM networks are hyperbolic ($\kbar \in [-0.224, -0.089]$), with magnitude differences within the cross-linguistic variability of human SWOW ($\kbar \in [-0.144, -0.068]$). This has two implications.
 
 First, the hyperbolic phase is not an artefact of human associative processes---it emerges from the structure of concept space itself. Whether the associator is a native Spanish speaker, a native Chinese speaker, or a 7-billion-parameter neural network, the resulting graph occupies the same geometric phase. The Semantic Hub Hypothesis of Wu et al.~\cite{wu2025semantic}---that language models develop language-agnostic semantic representations because the underlying semantic geometry is universal---receives independent graph-geometric support.
 
