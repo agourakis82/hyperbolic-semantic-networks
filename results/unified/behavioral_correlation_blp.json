@@ -1,0 +1,2864 @@
+{
+  "regime_rt": {
+    "hyperbolic_n": 231,
+    "spherical_n": 147,
+    "spherical_rt_mean": 532.9139757177888,
+    "euclidean_n": 27,
+    "euclidean_rt_mean": 536.1762795109114,
+    "hyperbolic_rt_mean": 528.9640547971791
+  },
+  "partial_r_ci_hi": 0.11631407249576539,
+  "swow_network": "swow_en",
+  "pearson_r_raw": 0.06971240417582565,
+  "n_matched": 405,
+  "spearman_rho_raw": 0.053805856776153814,
+  "controls": [
+    "degree",
+    "word_length"
+  ],
+  "n_bootstrap": 10000,
+  "coverage": 0.9246575342465754,
+  "experiment": "behavioral_correlation_blp",
+  "n_nodes": 438,
+  "partial_rho": 0.018559162977053047,
+  "source": "British Lexicon Project (Keuleers et al., 2012)",
+  "partial_r": 0.02691818239568521,
+  "partial_r_ci_lo": -0.06374582575781167,
+  "per_node": [
+    {
+      "kappa": 0.333333,
+      "rt": 505.153846153846,
+      "word_length": 3,
+      "degree": 1,
+      "word": "age"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 492.842105263158,
+      "word_length": 3,
+      "degree": 1,
+      "word": "air"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 627.837837837838,
+      "word_length": 8,
+      "degree": 2,
+      "word": "airplane"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 529.105263157895,
+      "word_length": 5,
+      "degree": 1,
+      "word": "alien"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 529.526315789474,
+      "word_length": 3,
+      "degree": 1,
+      "word": "all"
+    },
+    {
+      "kappa": -0.125,
+      "rt": 549.8,
+      "word_length": 5,
+      "degree": 2,
+      "word": "alone"
+    },
+    {
+      "kappa": -0.32222233333333333,
+      "rt": 532.368421052632,
+      "word_length": 5,
+      "degree": 3,
+      "word": "anger"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 495.815789473684,
+      "word_length": 5,
+      "degree": 2,
+      "word": "angry"
+    },
+    {
+      "kappa": -0.1438094,
+      "rt": 491.925,
+      "word_length": 5,
+      "degree": 5,
+      "word": "apple"
+    },
+    {
+      "kappa": -0.361111,
+      "rt": 506.6,
+      "word_length": 4,
+      "degree": 3,
+      "word": "area"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 543.189189189189,
+      "word_length": 3,
+      "degree": 1,
+      "word": "arm"
+    },
+    {
+      "kappa": 0.4166665,
+      "rt": 515.128205128205,
+      "word_length": 4,
+      "degree": 2,
+      "word": "army"
+    },
+    {
+      "kappa": 0.08333366666666668,
+      "rt": 507.756756756757,
+      "word_length": 3,
+      "degree": 3,
+      "word": "art"
+    },
+    {
+      "kappa": -0.18611133333333332,
+      "rt": 503.666666666667,
+      "word_length": 4,
+      "degree": 3,
+      "word": "away"
+    },
+    {
+      "kappa": -0.166667,
+      "rt": 551.794871794872,
+      "word_length": 4,
+      "degree": 2,
+      "word": "baby"
+    },
+    {
+      "kappa": -0.3366668,
+      "rt": 555.78947368421,
+      "word_length": 3,
+      "degree": 5,
+      "word": "bad"
+    },
+    {
+      "kappa": -0.266667,
+      "rt": 521.972222222222,
+      "word_length": 3,
+      "degree": 3,
+      "word": "bag"
+    },
+    {
+      "kappa": -0.5185186666666667,
+      "rt": 519.205128205128,
+      "word_length": 4,
+      "degree": 9,
+      "word": "ball"
+    },
+    {
+      "kappa": -0.12152775,
+      "rt": 523.2,
+      "word_length": 4,
+      "degree": 4,
+      "word": "band"
+    },
+    {
+      "kappa": -0.23958325,
+      "rt": 515.897435897436,
+      "word_length": 4,
+      "degree": 4,
+      "word": "bang"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 499.394736842105,
+      "word_length": 4,
+      "degree": 1,
+      "word": "bank"
+    },
+    {
+      "kappa": -0.07407400000000001,
+      "rt": 589.783783783784,
+      "word_length": 8,
+      "degree": 3,
+      "word": "baseball"
+    },
+    {
+      "kappa": -0.2708335,
+      "rt": 549.48717948718,
+      "word_length": 5,
+      "degree": 2,
+      "word": "beach"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 495.35,
+      "word_length": 3,
+      "degree": 2,
+      "word": "bed"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 558.459459459459,
+      "word_length": 3,
+      "degree": 2,
+      "word": "bee"
+    },
+    {
+      "kappa": 0.20833325,
+      "rt": 567.638888888889,
+      "word_length": 4,
+      "degree": 4,
+      "word": "beer"
+    },
+    {
+      "kappa": 0.013889000000000004,
+      "rt": 599.875,
+      "word_length": 5,
+      "degree": 3,
+      "word": "bible"
+    },
+    {
+      "kappa": -0.2416665,
+      "rt": 521.421052631579,
+      "word_length": 3,
+      "degree": 6,
+      "word": "big"
+    },
+    {
+      "kappa": -0.15,
+      "rt": 504.837837837838,
+      "word_length": 4,
+      "degree": 2,
+      "word": "bird"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 551.594594594595,
+      "word_length": 8,
+      "degree": 4,
+      "word": "birthday"
+    },
+    {
+      "kappa": -0.369048,
+      "rt": 536.578947368421,
+      "word_length": 5,
+      "degree": 3,
+      "word": "black"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 497.783783783784,
+      "word_length": 5,
+      "degree": 1,
+      "word": "blood"
+    },
+    {
+      "kappa": -0.55729175,
+      "rt": 500.194444444444,
+      "word_length": 4,
+      "degree": 8,
+      "word": "blue"
+    },
+    {
+      "kappa": -0.34722225,
+      "rt": 529.425,
+      "word_length": 5,
+      "degree": 4,
+      "word": "board"
+    },
+    {
+      "kappa": 0.041666499999999995,
+      "rt": 545.184210526316,
+      "word_length": 4,
+      "degree": 2,
+      "word": "boat"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 580.578947368421,
+      "word_length": 4,
+      "degree": 1,
+      "word": "body"
+    },
+    {
+      "kappa": 0.142857,
+      "rt": 522.0,
+      "word_length": 4,
+      "degree": 1,
+      "word": "bone"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 521.361111111111,
+      "word_length": 4,
+      "degree": 2,
+      "word": "book"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 541.897435897436,
+      "word_length": 5,
+      "degree": 1,
+      "word": "books"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 576.95,
+      "word_length": 6,
+      "degree": 1,
+      "word": "boring"
+    },
+    {
+      "kappa": -0.21111133333333335,
+      "rt": 525.684210526316,
+      "word_length": 4,
+      "degree": 3,
+      "word": "boss"
+    },
+    {
+      "kappa": -0.25,
+      "rt": 496.026315789474,
+      "word_length": 3,
+      "degree": 2,
+      "word": "box"
+    },
+    {
+      "kappa": -0.44127,
+      "rt": 549.631578947368,
+      "word_length": 3,
+      "degree": 3,
+      "word": "boy"
+    },
+    {
+      "kappa": -0.30208325,
+      "rt": 522.789473684211,
+      "word_length": 5,
+      "degree": 4,
+      "word": "brain"
+    },
+    {
+      "kappa": -0.30555566666666667,
+      "rt": 516.815789473684,
+      "word_length": 5,
+      "degree": 3,
+      "word": "brave"
+    },
+    {
+      "kappa": 0.1403845,
+      "rt": 538.783783783784,
+      "word_length": 5,
+      "degree": 2,
+      "word": "bread"
+    },
+    {
+      "kappa": -0.06730749999999999,
+      "rt": 536.0,
+      "word_length": 9,
+      "degree": 2,
+      "word": "breakfast"
+    },
+    {
+      "kappa": -0.195,
+      "rt": 546.947368421053,
+      "word_length": 6,
+      "degree": 5,
+      "word": "bright"
+    },
+    {
+      "kappa": 0.0833335,
+      "rt": 521.230769230769,
+      "word_length": 6,
+      "degree": 2,
+      "word": "broken"
+    },
+    {
+      "kappa": 0.2833335,
+      "rt": 532.947368421053,
+      "word_length": 3,
+      "degree": 2,
+      "word": "bug"
+    },
+    {
+      "kappa": -0.3125,
+      "rt": 597.105263157895,
+      "word_length": 8,
+      "degree": 2,
+      "word": "building"
+    },
+    {
+      "kappa": -0.240741,
+      "rt": 639.411764705882,
+      "word_length": 8,
+      "degree": 3,
+      "word": "business"
+    },
+    {
+      "kappa": 0.009259333333333323,
+      "rt": 520.525,
+      "word_length": 3,
+      "degree": 3,
+      "word": "buy"
+    },
+    {
+      "kappa": -0.37291675,
+      "rt": 506.648648648649,
+      "word_length": 4,
+      "degree": 4,
+      "word": "cake"
+    },
+    {
+      "kappa": -0.125,
+      "rt": 534.184210526316,
+      "word_length": 4,
+      "degree": 2,
+      "word": "calm"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 536.973684210526,
+      "word_length": 3,
+      "degree": 1,
+      "word": "can"
+    },
+    {
+      "kappa": -0.056249999999999994,
+      "rt": 515.375,
+      "word_length": 6,
+      "degree": 4,
+      "word": "cancer"
+    },
+    {
+      "kappa": 0.14444466666666667,
+      "rt": 540.473684210526,
+      "word_length": 5,
+      "degree": 3,
+      "word": "candy"
+    },
+    {
+      "kappa": -0.25,
+      "rt": 507.564102564103,
+      "word_length": 3,
+      "degree": 4,
+      "word": "car"
+    },
+    {
+      "kappa": -0.1666665,
+      "rt": 620.09375,
+      "word_length": 4,
+      "degree": 2,
+      "word": "card"
+    },
+    {
+      "kappa": -0.3229165,
+      "rt": 551.315789473684,
+      "word_length": 5,
+      "degree": 2,
+      "word": "cards"
+    },
+    {
+      "kappa": -0.428889,
+      "rt": 506.0,
+      "word_length": 3,
+      "degree": 5,
+      "word": "cat"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 533.625,
+      "word_length": 6,
+      "degree": 1,
+      "word": "change"
+    },
+    {
+      "kappa": -0.3,
+      "rt": 530.054054054054,
+      "word_length": 6,
+      "degree": 2,
+      "word": "cheese"
+    },
+    {
+      "kappa": 0.01388866666666666,
+      "rt": 524.972972972973,
+      "word_length": 7,
+      "degree": 3,
+      "word": "chicken"
+    },
+    {
+      "kappa": -0.22222233333333333,
+      "rt": 497.394736842105,
+      "word_length": 5,
+      "degree": 3,
+      "word": "child"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 536.736842105263,
+      "word_length": 5,
+      "degree": 2,
+      "word": "chips"
+    },
+    {
+      "kappa": 0.142857,
+      "rt": 587.72972972973,
+      "word_length": 9,
+      "degree": 1,
+      "word": "christmas"
+    },
+    {
+      "kappa": 0.18055566666666667,
+      "rt": 502.864864864865,
+      "word_length": 6,
+      "degree": 3,
+      "word": "church"
+    },
+    {
+      "kappa": -0.111111,
+      "rt": 516.894736842105,
+      "word_length": 6,
+      "degree": 3,
+      "word": "circle"
+    },
+    {
+      "kappa": 0.0625,
+      "rt": 489.333333333333,
+      "word_length": 5,
+      "degree": 2,
+      "word": "clean"
+    },
+    {
+      "kappa": 0.0625,
+      "rt": 491.763157894737,
+      "word_length": 5,
+      "degree": 2,
+      "word": "clear"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 542.410256410256,
+      "word_length": 5,
+      "degree": 1,
+      "word": "cloth"
+    },
+    {
+      "kappa": -0.019999999999999997,
+      "rt": 512.361111111111,
+      "word_length": 7,
+      "degree": 5,
+      "word": "clothes"
+    },
+    {
+      "kappa": 0.24722233333333332,
+      "rt": 534.589743589744,
+      "word_length": 6,
+      "degree": 3,
+      "word": "coffee"
+    },
+    {
+      "kappa": -0.18858033333333332,
+      "rt": 503.945945945946,
+      "word_length": 4,
+      "degree": 9,
+      "word": "cold"
+    },
+    {
+      "kappa": 0.416667,
+      "rt": 518.447368421053,
+      "word_length": 7,
+      "degree": 2,
+      "word": "college"
+    },
+    {
+      "kappa": 0.076923,
+      "rt": 492.225,
+      "word_length": 4,
+      "degree": 1,
+      "word": "cook"
+    },
+    {
+      "kappa": 0.076923,
+      "rt": 560.289473684211,
+      "word_length": 7,
+      "degree": 1,
+      "word": "cooking"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 498.921052631579,
+      "word_length": 4,
+      "degree": 1,
+      "word": "cool"
+    },
+    {
+      "kappa": -0.4222223333333333,
+      "rt": 534.72972972973,
+      "word_length": 4,
+      "degree": 3,
+      "word": "copy"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 549.025,
+      "word_length": 4,
+      "degree": 1,
+      "word": "corn"
+    },
+    {
+      "kappa": 0.416667,
+      "rt": 528.578947368421,
+      "word_length": 5,
+      "degree": 2,
+      "word": "court"
+    },
+    {
+      "kappa": -0.06481466666666667,
+      "rt": 512.205128205128,
+      "word_length": 3,
+      "degree": 3,
+      "word": "cow"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 522.051282051282,
+      "word_length": 5,
+      "degree": 1,
+      "word": "crazy"
+    },
+    {
+      "kappa": 0.375,
+      "rt": 509.342105263158,
+      "word_length": 5,
+      "degree": 2,
+      "word": "crime"
+    },
+    {
+      "kappa": -0.11111133333333334,
+      "rt": 528.777777777778,
+      "word_length": 3,
+      "degree": 3,
+      "word": "cry"
+    },
+    {
+      "kappa": 0.10624999999999998,
+      "rt": 541.666666666667,
+      "word_length": 3,
+      "degree": 4,
+      "word": "cup"
+    },
+    {
+      "kappa": -0.125,
+      "rt": 531.051282051282,
+      "word_length": 3,
+      "degree": 2,
+      "word": "cut"
+    },
+    {
+      "kappa": -0.08095233333333333,
+      "rt": 503.846153846154,
+      "word_length": 4,
+      "degree": 3,
+      "word": "cute"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 491.6,
+      "word_length": 5,
+      "degree": 1,
+      "word": "dance"
+    },
+    {
+      "kappa": -0.43273825,
+      "rt": 551.205128205128,
+      "word_length": 4,
+      "degree": 4,
+      "word": "dark"
+    },
+    {
+      "kappa": -0.354762,
+      "rt": 533.605263157895,
+      "word_length": 3,
+      "degree": 3,
+      "word": "day"
+    },
+    {
+      "kappa": -0.33666660000000004,
+      "rt": 501.3,
+      "word_length": 5,
+      "degree": 5,
+      "word": "death"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 543.717948717949,
+      "word_length": 4,
+      "degree": 1,
+      "word": "deer"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 609.472222222222,
+      "word_length": 6,
+      "degree": 1,
+      "word": "desert"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 547.526315789474,
+      "word_length": 9,
+      "degree": 2,
+      "word": "different"
+    },
+    {
+      "kappa": 0.096154,
+      "rt": 508.725,
+      "word_length": 6,
+      "degree": 2,
+      "word": "dinner"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 519.717948717949,
+      "word_length": 4,
+      "degree": 1,
+      "word": "dirt"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 515.052631578947,
+      "word_length": 5,
+      "degree": 1,
+      "word": "dirty"
+    },
+    {
+      "kappa": 0.1625,
+      "rt": 557.105263157895,
+      "word_length": 7,
+      "degree": 4,
+      "word": "disease"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 498.210526315789,
+      "word_length": 6,
+      "degree": 2,
+      "word": "doctor"
+    },
+    {
+      "kappa": -0.18666680000000002,
+      "rt": 525.175,
+      "word_length": 3,
+      "degree": 5,
+      "word": "dog"
+    },
+    {
+      "kappa": -0.30555566666666667,
+      "rt": 529.628571428571,
+      "word_length": 4,
+      "degree": 3,
+      "word": "down"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 533.166666666667,
+      "word_length": 5,
+      "degree": 2,
+      "word": "dress"
+    },
+    {
+      "kappa": -0.2441667,
+      "rt": 532.916666666667,
+      "word_length": 5,
+      "degree": 10,
+      "word": "drink"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 529.189189189189,
+      "word_length": 4,
+      "degree": 2,
+      "word": "drug"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 499.4,
+      "word_length": 5,
+      "degree": 2,
+      "word": "drugs"
+    },
+    {
+      "kappa": 0.2527776666666666,
+      "rt": 538.25,
+      "word_length": 5,
+      "degree": 3,
+      "word": "drunk"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 532.078947368421,
+      "word_length": 4,
+      "degree": 2,
+      "word": "dumb"
+    },
+    {
+      "kappa": -0.020833500000000005,
+      "rt": 520.897435897436,
+      "word_length": 3,
+      "degree": 2,
+      "word": "ear"
+    },
+    {
+      "kappa": -0.4416666,
+      "rt": 489.842105263158,
+      "word_length": 5,
+      "degree": 5,
+      "word": "earth"
+    },
+    {
+      "kappa": 0.1,
+      "rt": 493.837837837838,
+      "word_length": 4,
+      "degree": 1,
+      "word": "easy"
+    },
+    {
+      "kappa": -0.24115379999999997,
+      "rt": 524.0,
+      "word_length": 3,
+      "degree": 5,
+      "word": "eat"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 510.736842105263,
+      "word_length": 3,
+      "degree": 1,
+      "word": "egg"
+    },
+    {
+      "kappa": 0.125,
+      "rt": 506.794871794872,
+      "word_length": 4,
+      "degree": 2,
+      "word": "eggs"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 524.0,
+      "word_length": 3,
+      "degree": 2,
+      "word": "end"
+    },
+    {
+      "kappa": 0.15,
+      "rt": 518.243243243243,
+      "word_length": 4,
+      "degree": 2,
+      "word": "evil"
+    },
+    {
+      "kappa": -0.18518533333333334,
+      "rt": 476.026315789474,
+      "word_length": 3,
+      "degree": 3,
+      "word": "eye"
+    },
+    {
+      "kappa": -0.29000000000000004,
+      "rt": 506.378378378378,
+      "word_length": 4,
+      "degree": 5,
+      "word": "eyes"
+    },
+    {
+      "kappa": -0.06111099999999999,
+      "rt": 516.947368421053,
+      "word_length": 4,
+      "degree": 3,
+      "word": "face"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 529.95,
+      "word_length": 4,
+      "degree": 1,
+      "word": "fake"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 536.0,
+      "word_length": 4,
+      "degree": 2,
+      "word": "fall"
+    },
+    {
+      "kappa": -0.2546296666666667,
+      "rt": 530.378378378378,
+      "word_length": 4,
+      "degree": 3,
+      "word": "farm"
+    },
+    {
+      "kappa": -0.18541675000000002,
+      "rt": 499.131578947368,
+      "word_length": 4,
+      "degree": 4,
+      "word": "fast"
+    },
+    {
+      "kappa": -0.2283334,
+      "rt": 522.27027027027,
+      "word_length": 3,
+      "degree": 5,
+      "word": "fat"
+    },
+    {
+      "kappa": -0.18253966666666666,
+      "rt": 517.325,
+      "word_length": 6,
+      "degree": 3,
+      "word": "female"
+    },
+    {
+      "kappa": 0.166667,
+      "rt": 519.825,
+      "word_length": 5,
+      "degree": 1,
+      "word": "fight"
+    },
+    {
+      "kappa": 0.0,
+      "rt": 504.6,
+      "word_length": 4,
+      "degree": 2,
+      "word": "film"
+    },
+    {
+      "kappa": 0.1666665,
+      "rt": 537.648648648649,
+      "word_length": 4,
+      "degree": 2,
+      "word": "find"
+    },
+    {
+      "kappa": -0.166667,
+      "rt": 526.421052631579,
+      "word_length": 6,
+      "degree": 2,
+      "word": "finger"
+    },
+    {
+      "kappa": -0.28125,
+      "rt": 539.578947368421,
+      "word_length": 4,
+      "degree": 4,
+      "word": "fire"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 502.736842105263,
+      "word_length": 4,
+      "degree": 2,
+      "word": "fish"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 539.432432432432,
+      "word_length": 3,
+      "degree": 1,
+      "word": "fix"
+    },
+    {
+      "kappa": -0.125,
+      "rt": 513.425,
+      "word_length": 6,
+      "degree": 2,
+      "word": "flower"
+    },
+    {
+      "kappa": -0.26666700000000004,
+      "rt": 573.578947368421,
+      "word_length": 7,
+      "degree": 3,
+      "word": "flowers"
+    },
+    {
+      "kappa": -0.065,
+      "rt": 570.263157894737,
+      "word_length": 3,
+      "degree": 5,
+      "word": "fly"
+    },
+    {
+      "kappa": -0.255424,
+      "rt": 499.184210526316,
+      "word_length": 4,
+      "degree": 13,
+      "word": "food"
+    },
+    {
+      "kappa": -0.18518533333333334,
+      "rt": 492.025,
+      "word_length": 4,
+      "degree": 3,
+      "word": "foot"
+    },
+    {
+      "kappa": 0.263889,
+      "rt": 514.189189189189,
+      "word_length": 8,
+      "degree": 2,
+      "word": "football"
+    },
+    {
+      "kappa": 0.142857,
+      "rt": 519.513513513514,
+      "word_length": 6,
+      "degree": 1,
+      "word": "friend"
+    },
+    {
+      "kappa": 0.152778,
+      "rt": 522.657894736842,
+      "word_length": 5,
+      "degree": 3,
+      "word": "fruit"
+    },
+    {
+      "kappa": -0.2717595,
+      "rt": 499.447368421053,
+      "word_length": 3,
+      "degree": 6,
+      "word": "fun"
+    },
+    {
+      "kappa": 0.0,
+      "rt": 530.578947368421,
+      "word_length": 5,
+      "degree": 2,
+      "word": "funny"
+    },
+    {
+      "kappa": -0.26080233333333336,
+      "rt": 567.128205128205,
+      "word_length": 4,
+      "degree": 9,
+      "word": "game"
+    },
+    {
+      "kappa": -0.027778,
+      "rt": 556.157894736842,
+      "word_length": 5,
+      "degree": 3,
+      "word": "games"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 599.027777777778,
+      "word_length": 7,
+      "degree": 2,
+      "word": "garbage"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 519.333333333333,
+      "word_length": 6,
+      "degree": 2,
+      "word": "garden"
+    },
+    {
+      "kappa": -0.125,
+      "rt": 511.611111111111,
+      "word_length": 3,
+      "degree": 2,
+      "word": "gas"
+    },
+    {
+      "kappa": 0.142857,
+      "rt": 523.184210526316,
+      "word_length": 5,
+      "degree": 1,
+      "word": "ghost"
+    },
+    {
+      "kappa": -0.16309542857142856,
+      "rt": 542.027027027027,
+      "word_length": 4,
+      "degree": 7,
+      "word": "girl"
+    },
+    {
+      "kappa": -0.21805549999999999,
+      "rt": 508.789473684211,
+      "word_length": 5,
+      "degree": 6,
+      "word": "glass"
+    },
+    {
+      "kappa": 0.0333335,
+      "rt": 539.5,
+      "word_length": 7,
+      "degree": 2,
+      "word": "glasses"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 516.486486486486,
+      "word_length": 2,
+      "degree": 4,
+      "word": "go"
+    },
+    {
+      "kappa": 0.18750025,
+      "rt": 530.368421052632,
+      "word_length": 3,
+      "degree": 4,
+      "word": "god"
+    },
+    {
+      "kappa": -0.24867766666666669,
+      "rt": 508.74358974359,
+      "word_length": 4,
+      "degree": 3,
+      "word": "gold"
+    },
+    {
+      "kappa": -0.31,
+      "rt": 493.25,
+      "word_length": 4,
+      "degree": 5,
+      "word": "good"
+    },
+    {
+      "kappa": 0.1,
+      "rt": 520.575,
+      "word_length": 5,
+      "degree": 1,
+      "word": "grass"
+    },
+    {
+      "kappa": -0.16875,
+      "rt": 509.102564102564,
+      "word_length": 5,
+      "degree": 4,
+      "word": "great"
+    },
+    {
+      "kappa": -0.28275790000000006,
+      "rt": 559.5,
+      "word_length": 5,
+      "degree": 10,
+      "word": "green"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 535.825,
+      "word_length": 5,
+      "degree": 2,
+      "word": "group"
+    },
+    {
+      "kappa": 0.201389,
+      "rt": 554.684210526316,
+      "word_length": 6,
+      "degree": 2,
+      "word": "guitar"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 538.108108108108,
+      "word_length": 3,
+      "degree": 2,
+      "word": "gun"
+    },
+    {
+      "kappa": -0.2916665,
+      "rt": 510.794871794872,
+      "word_length": 4,
+      "degree": 4,
+      "word": "hair"
+    },
+    {
+      "kappa": -0.05555566666666667,
+      "rt": 524.789473684211,
+      "word_length": 4,
+      "degree": 3,
+      "word": "hand"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 490.342105263158,
+      "word_length": 5,
+      "degree": 4,
+      "word": "happy"
+    },
+    {
+      "kappa": -0.4544047,
+      "rt": 542.342105263158,
+      "word_length": 4,
+      "degree": 10,
+      "word": "hard"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 585.675675675676,
+      "word_length": 3,
+      "degree": 2,
+      "word": "hat"
+    },
+    {
+      "kappa": -0.2708335,
+      "rt": 527.775,
+      "word_length": 4,
+      "degree": 2,
+      "word": "hate"
+    },
+    {
+      "kappa": -0.2916666666666667,
+      "rt": 513.921052631579,
+      "word_length": 4,
+      "degree": 6,
+      "word": "head"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 542.923076923077,
+      "word_length": 6,
+      "degree": 2,
+      "word": "health"
+    },
+    {
+      "kappa": -0.361111,
+      "rt": 518.358974358974,
+      "word_length": 5,
+      "degree": 3,
+      "word": "heart"
+    },
+    {
+      "kappa": 0.08333325,
+      "rt": 517.710526315789,
+      "word_length": 4,
+      "degree": 4,
+      "word": "heat"
+    },
+    {
+      "kappa": -0.357143,
+      "rt": 535.075,
+      "word_length": 5,
+      "degree": 3,
+      "word": "heavy"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 533.210526315789,
+      "word_length": 4,
+      "degree": 1,
+      "word": "help"
+    },
+    {
+      "kappa": -0.3333336666666667,
+      "rt": 544.4,
+      "word_length": 4,
+      "degree": 3,
+      "word": "high"
+    },
+    {
+      "kappa": -0.26666650000000003,
+      "rt": 533.473684210526,
+      "word_length": 3,
+      "degree": 2,
+      "word": "hit"
+    },
+    {
+      "kappa": -0.44583316666666667,
+      "rt": 566.378378378378,
+      "word_length": 4,
+      "degree": 6,
+      "word": "home"
+    },
+    {
+      "kappa": 0.125,
+      "rt": 529.947368421053,
+      "word_length": 6,
+      "degree": 2,
+      "word": "honest"
+    },
+    {
+      "kappa": 0.1944445,
+      "rt": 510.55,
+      "word_length": 5,
+      "degree": 2,
+      "word": "horse"
+    },
+    {
+      "kappa": -0.15524688888888888,
+      "rt": 497.868421052632,
+      "word_length": 3,
+      "degree": 9,
+      "word": "hot"
+    },
+    {
+      "kappa": -0.49479175,
+      "rt": 510.275,
+      "word_length": 5,
+      "degree": 8,
+      "word": "house"
+    },
+    {
+      "kappa": -0.1666665,
+      "rt": 494.631578947368,
+      "word_length": 3,
+      "degree": 2,
+      "word": "ice"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 484.05,
+      "word_length": 4,
+      "degree": 1,
+      "word": "idea"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 512.230769230769,
+      "word_length": 5,
+      "degree": 2,
+      "word": "idiot"
+    },
+    {
+      "kappa": 0.375,
+      "rt": 608.297297297297,
+      "word_length": 7,
+      "degree": 2,
+      "word": "illness"
+    },
+    {
+      "kappa": -0.294872,
+      "rt": 549.447368421053,
+      "word_length": 6,
+      "degree": 2,
+      "word": "indian"
+    },
+    {
+      "kappa": 0.049999999999999996,
+      "rt": 552.1,
+      "word_length": 6,
+      "degree": 3,
+      "word": "insect"
+    },
+    {
+      "kappa": -0.3285715,
+      "rt": 538.075,
+      "word_length": 4,
+      "degree": 2,
+      "word": "iron"
+    },
+    {
+      "kappa": -0.16666666666666666,
+      "rt": 529.459459459459,
+      "word_length": 6,
+      "degree": 3,
+      "word": "island"
+    },
+    {
+      "kappa": 0.166667,
+      "rt": 520.405405405405,
+      "word_length": 3,
+      "degree": 1,
+      "word": "job"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 546.947368421053,
+      "word_length": 4,
+      "degree": 1,
+      "word": "join"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 543.756756756757,
+      "word_length": 4,
+      "degree": 1,
+      "word": "kind"
+    },
+    {
+      "kappa": 0.0,
+      "rt": 520.684210526316,
+      "word_length": 4,
+      "degree": 2,
+      "word": "king"
+    },
+    {
+      "kappa": 0.0,
+      "rt": 544.95,
+      "word_length": 5,
+      "degree": 2,
+      "word": "knife"
+    },
+    {
+      "kappa": -0.41666700000000007,
+      "rt": 567.225,
+      "word_length": 9,
+      "degree": 3,
+      "word": "knowledge"
+    },
+    {
+      "kappa": -0.27777766666666664,
+      "rt": 554.435897435897,
+      "word_length": 8,
+      "degree": 3,
+      "word": "language"
+    },
+    {
+      "kappa": -0.07083325,
+      "rt": 538.228571428571,
+      "word_length": 5,
+      "degree": 4,
+      "word": "large"
+    },
+    {
+      "kappa": -0.013889,
+      "rt": 534.342105263158,
+      "word_length": 5,
+      "degree": 3,
+      "word": "laugh"
+    },
+    {
+      "kappa": 0.138889,
+      "rt": 525.875,
+      "word_length": 3,
+      "degree": 3,
+      "word": "law"
+    },
+    {
+      "kappa": 0.138889,
+      "rt": 557.85,
+      "word_length": 6,
+      "degree": 3,
+      "word": "lawyer"
+    },
+    {
+      "kappa": -0.4222223333333333,
+      "rt": 538.55,
+      "word_length": 4,
+      "degree": 3,
+      "word": "lazy"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 519.864864864865,
+      "word_length": 6,
+      "degree": 1,
+      "word": "leader"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 522.128205128205,
+      "word_length": 5,
+      "degree": 1,
+      "word": "leave"
+    },
+    {
+      "kappa": -0.125,
+      "rt": 598.473684210526,
+      "word_length": 6,
+      "degree": 4,
+      "word": "letter"
+    },
+    {
+      "kappa": -0.20833333333333334,
+      "rt": 556.868421052632,
+      "word_length": 3,
+      "degree": 3,
+      "word": "lie"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 499.45,
+      "word_length": 4,
+      "degree": 2,
+      "word": "life"
+    },
+    {
+      "kappa": -0.2855442857142857,
+      "rt": 508.315789473684,
+      "word_length": 5,
+      "degree": 7,
+      "word": "light"
+    },
+    {
+      "kappa": -0.1875,
+      "rt": 513.51282051282,
+      "word_length": 4,
+      "degree": 2,
+      "word": "like"
+    },
+    {
+      "kappa": -0.15,
+      "rt": 546.153846153846,
+      "word_length": 4,
+      "degree": 2,
+      "word": "lion"
+    },
+    {
+      "kappa": -0.2333335,
+      "rt": 536.0,
+      "word_length": 4,
+      "degree": 2,
+      "word": "long"
+    },
+    {
+      "kappa": 0.0,
+      "rt": 545.775,
+      "word_length": 4,
+      "degree": 3,
+      "word": "look"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 582.666666666667,
+      "word_length": 4,
+      "degree": 1,
+      "word": "lost"
+    },
+    {
+      "kappa": 0.09722199999999998,
+      "rt": 527.472222222222,
+      "word_length": 4,
+      "degree": 4,
+      "word": "loud"
+    },
+    {
+      "kappa": -0.40625012499999996,
+      "rt": 546.684210526316,
+      "word_length": 4,
+      "degree": 8,
+      "word": "love"
+    },
+    {
+      "kappa": -0.34127,
+      "rt": 518.210526315789,
+      "word_length": 7,
+      "degree": 3,
+      "word": "machine"
+    },
+    {
+      "kappa": -0.05555566666666667,
+      "rt": 522.615384615385,
+      "word_length": 3,
+      "degree": 3,
+      "word": "mad"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 544.48717948718,
+      "word_length": 4,
+      "degree": 2,
+      "word": "mail"
+    },
+    {
+      "kappa": -0.46666679999999994,
+      "rt": 543.3,
+      "word_length": 3,
+      "degree": 5,
+      "word": "man"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 528.833333333333,
+      "word_length": 3,
+      "degree": 1,
+      "word": "map"
+    },
+    {
+      "kappa": -0.277778,
+      "rt": 572.15,
+      "word_length": 8,
+      "degree": 3,
+      "word": "marriage"
+    },
+    {
+      "kappa": -0.2,
+      "rt": 566.763157894737,
+      "word_length": 4,
+      "degree": 2,
+      "word": "math"
+    },
+    {
+      "kappa": 0.16666633333333333,
+      "rt": 542.054054054054,
+      "word_length": 2,
+      "degree": 3,
+      "word": "me"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 530.236842105263,
+      "word_length": 4,
+      "degree": 2,
+      "word": "mean"
+    },
+    {
+      "kappa": 0.1403845,
+      "rt": 517.820512820513,
+      "word_length": 4,
+      "degree": 2,
+      "word": "meat"
+    },
+    {
+      "kappa": -0.25,
+      "rt": 530.846153846154,
+      "word_length": 8,
+      "degree": 4,
+      "word": "medicine"
+    },
+    {
+      "kappa": -0.1145835,
+      "rt": 543.282051282051,
+      "word_length": 7,
+      "degree": 4,
+      "word": "meeting"
+    },
+    {
+      "kappa": -0.5091838571428572,
+      "rt": 510.15,
+      "word_length": 5,
+      "degree": 7,
+      "word": "metal"
+    },
+    {
+      "kappa": -0.4746033333333333,
+      "rt": 566.473684210526,
+      "word_length": 4,
+      "degree": 3,
+      "word": "milk"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 529.4,
+      "word_length": 4,
+      "degree": 3,
+      "word": "mind"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 560.815789473684,
+      "word_length": 4,
+      "degree": 1,
+      "word": "mine"
+    },
+    {
+      "kappa": -0.3222224444444444,
+      "rt": 520.95,
+      "word_length": 5,
+      "degree": 9,
+      "word": "money"
+    },
+    {
+      "kappa": -0.1875,
+      "rt": 516.210526315789,
+      "word_length": 4,
+      "degree": 2,
+      "word": "moon"
+    },
+    {
+      "kappa": -0.041666499999999995,
+      "rt": 506.717948717949,
+      "word_length": 6,
+      "degree": 2,
+      "word": "mother"
+    },
+    {
+      "kappa": -0.166667,
+      "rt": 568.526315789474,
+      "word_length": 8,
+      "degree": 2,
+      "word": "mountain"
+    },
+    {
+      "kappa": -0.27,
+      "rt": 560.717948717949,
+      "word_length": 5,
+      "degree": 5,
+      "word": "mouse"
+    },
+    {
+      "kappa": -0.3750003333333334,
+      "rt": 581.918918918919,
+      "word_length": 4,
+      "degree": 3,
+      "word": "move"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 534.8,
+      "word_length": 5,
+      "degree": 2,
+      "word": "movie"
+    },
+    {
+      "kappa": -0.22310411111111111,
+      "rt": 534.368421052632,
+      "word_length": 5,
+      "degree": 9,
+      "word": "music"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 530.945945945946,
+      "word_length": 4,
+      "degree": 1,
+      "word": "name"
+    },
+    {
+      "kappa": 0.21269866666666667,
+      "rt": 532.289473684211,
+      "word_length": 6,
+      "degree": 3,
+      "word": "nature"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 535.675,
+      "word_length": 6,
+      "degree": 1,
+      "word": "needle"
+    },
+    {
+      "kappa": -0.166667,
+      "rt": 583.945945945946,
+      "word_length": 3,
+      "degree": 2,
+      "word": "new"
+    },
+    {
+      "kappa": 0.45,
+      "rt": 558.027027027027,
+      "word_length": 4,
+      "degree": 2,
+      "word": "news"
+    },
+    {
+      "kappa": -0.24375,
+      "rt": 575.842105263158,
+      "word_length": 4,
+      "degree": 4,
+      "word": "nice"
+    },
+    {
+      "kappa": -0.39666680000000004,
+      "rt": 508.842105263158,
+      "word_length": 5,
+      "degree": 5,
+      "word": "night"
+    },
+    {
+      "kappa": 0.26388866666666666,
+      "rt": 503.657894736842,
+      "word_length": 5,
+      "degree": 3,
+      "word": "noise"
+    },
+    {
+      "kappa": -0.025,
+      "rt": 538.925,
+      "word_length": 4,
+      "degree": 4,
+      "word": "nose"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 564.971428571429,
+      "word_length": 6,
+      "degree": 2,
+      "word": "number"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 565.702702702703,
+      "word_length": 7,
+      "degree": 2,
+      "word": "numbers"
+    },
+    {
+      "kappa": -0.20833325,
+      "rt": 508.538461538462,
+      "word_length": 5,
+      "degree": 4,
+      "word": "ocean"
+    },
+    {
+      "kappa": -0.2962966666666667,
+      "rt": 518.111111111111,
+      "word_length": 3,
+      "degree": 3,
+      "word": "odd"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 486.325,
+      "word_length": 3,
+      "degree": 2,
+      "word": "oil"
+    },
+    {
+      "kappa": -3.3333333334291854e-7,
+      "rt": 502.975,
+      "word_length": 3,
+      "degree": 3,
+      "word": "old"
+    },
+    {
+      "kappa": -3.3333333334291854e-7,
+      "rt": 486.918918918919,
+      "word_length": 3,
+      "degree": 3,
+      "word": "one"
+    },
+    {
+      "kappa": 0.2833335,
+      "rt": 519.526315789474,
+      "word_length": 6,
+      "degree": 2,
+      "word": "orange"
+    },
+    {
+      "kappa": -0.4583333333333333,
+      "rt": 509.289473684211,
+      "word_length": 5,
+      "degree": 3,
+      "word": "paint"
+    },
+    {
+      "kappa": 0.416667,
+      "rt": 541.575,
+      "word_length": 8,
+      "degree": 2,
+      "word": "painting"
+    },
+    {
+      "kappa": 0.45,
+      "rt": 538.289473684211,
+      "word_length": 5,
+      "degree": 2,
+      "word": "pants"
+    },
+    {
+      "kappa": -0.05333340000000001,
+      "rt": 523.435897435897,
+      "word_length": 5,
+      "degree": 5,
+      "word": "paper"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 560.722222222222,
+      "word_length": 4,
+      "degree": 1,
+      "word": "part"
+    },
+    {
+      "kappa": -0.37777779999999994,
+      "rt": 598.368421052632,
+      "word_length": 5,
+      "degree": 5,
+      "word": "party"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 508.894736842105,
+      "word_length": 3,
+      "degree": 1,
+      "word": "pay"
+    },
+    {
+      "kappa": -0.32291675,
+      "rt": 530.789473684211,
+      "word_length": 5,
+      "degree": 4,
+      "word": "peace"
+    },
+    {
+      "kappa": -0.15,
+      "rt": 513.051282051282,
+      "word_length": 3,
+      "degree": 2,
+      "word": "pen"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 611.2,
+      "word_length": 5,
+      "degree": 1,
+      "word": "penis"
+    },
+    {
+      "kappa": -0.22222233333333333,
+      "rt": 531.358974358974,
+      "word_length": 6,
+      "degree": 3,
+      "word": "people"
+    },
+    {
+      "kappa": -0.32222233333333333,
+      "rt": 573.361111111111,
+      "word_length": 6,
+      "degree": 3,
+      "word": "person"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 527.368421052632,
+      "word_length": 5,
+      "degree": 1,
+      "word": "phone"
+    },
+    {
+      "kappa": 0.138889,
+      "rt": 510.128205128205,
+      "word_length": 7,
+      "degree": 3,
+      "word": "picture"
+    },
+    {
+      "kappa": -0.28803433333333334,
+      "rt": 545.641025641026,
+      "word_length": 3,
+      "degree": 3,
+      "word": "pie"
+    },
+    {
+      "kappa": -0.4166666666666667,
+      "rt": 544.777777777778,
+      "word_length": 5,
+      "degree": 3,
+      "word": "place"
+    },
+    {
+      "kappa": 0.13125,
+      "rt": 557.864864864865,
+      "word_length": 5,
+      "degree": 4,
+      "word": "plane"
+    },
+    {
+      "kappa": 0.11428550000000001,
+      "rt": 513.473684210526,
+      "word_length": 5,
+      "degree": 2,
+      "word": "plant"
+    },
+    {
+      "kappa": -0.3472223333333333,
+      "rt": 508.45,
+      "word_length": 4,
+      "degree": 6,
+      "word": "play"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 510.725,
+      "word_length": 6,
+      "degree": 2,
+      "word": "police"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 682.314285714286,
+      "word_length": 4,
+      "degree": 1,
+      "word": "poop"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 513.052631578947,
+      "word_length": 4,
+      "degree": 1,
+      "word": "poor"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 589.74358974359,
+      "word_length": 3,
+      "degree": 1,
+      "word": "pop"
+    },
+    {
+      "kappa": -0.29166675,
+      "rt": 519.085714285714,
+      "word_length": 5,
+      "degree": 4,
+      "word": "power"
+    },
+    {
+      "kappa": -0.10928580000000002,
+      "rt": 563.973684210526,
+      "word_length": 6,
+      "degree": 5,
+      "word": "pretty"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 601.131578947368,
+      "word_length": 6,
+      "degree": 1,
+      "word": "priest"
+    },
+    {
+      "kappa": 0.375,
+      "rt": 510.3,
+      "word_length": 6,
+      "degree": 2,
+      "word": "prison"
+    },
+    {
+      "kappa": 0.0,
+      "rt": 522.897435897436,
+      "word_length": 5,
+      "degree": 2,
+      "word": "queen"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 495.692307692308,
+      "word_length": 5,
+      "degree": 1,
+      "word": "quick"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 515.405405405405,
+      "word_length": 5,
+      "degree": 2,
+      "word": "quiet"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 546.189189189189,
+      "word_length": 4,
+      "degree": 1,
+      "word": "race"
+    },
+    {
+      "kappa": -0.020833500000000005,
+      "rt": 541.552631578947,
+      "word_length": 4,
+      "degree": 4,
+      "word": "rain"
+    },
+    {
+      "kappa": -0.32583339999999994,
+      "rt": 509.657894736842,
+      "word_length": 3,
+      "degree": 5,
+      "word": "red"
+    },
+    {
+      "kappa": 0.05555550000000001,
+      "rt": 557.5,
+      "word_length": 4,
+      "degree": 2,
+      "word": "rich"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 515.868421052632,
+      "word_length": 5,
+      "degree": 1,
+      "word": "right"
+    },
+    {
+      "kappa": -0.30555566666666667,
+      "rt": 523.810810810811,
+      "word_length": 4,
+      "degree": 3,
+      "word": "ring"
+    },
+    {
+      "kappa": 0.083333,
+      "rt": 510.325,
+      "word_length": 5,
+      "degree": 1,
+      "word": "river"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 520.75,
+      "word_length": 4,
+      "degree": 1,
+      "word": "road"
+    },
+    {
+      "kappa": -0.17152775,
+      "rt": 512.527777777778,
+      "word_length": 4,
+      "degree": 4,
+      "word": "rock"
+    },
+    {
+      "kappa": -0.40104175,
+      "rt": 561.526315789474,
+      "word_length": 4,
+      "degree": 4,
+      "word": "room"
+    },
+    {
+      "kappa": -0.32847225,
+      "rt": 538.475,
+      "word_length": 5,
+      "degree": 4,
+      "word": "round"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 561.333333333333,
+      "word_length": 4,
+      "degree": 1,
+      "word": "rude"
+    },
+    {
+      "kappa": -0.2033334,
+      "rt": 503.55,
+      "word_length": 3,
+      "degree": 5,
+      "word": "run"
+    },
+    {
+      "kappa": -0.32291675,
+      "rt": 517.0,
+      "word_length": 3,
+      "degree": 4,
+      "word": "sad"
+    },
+    {
+      "kappa": 0.0,
+      "rt": 493.078947368421,
+      "word_length": 4,
+      "degree": 2,
+      "word": "same"
+    },
+    {
+      "kappa": -0.010769200000000001,
+      "rt": 589.175,
+      "word_length": 8,
+      "degree": 5,
+      "word": "sandwich"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 546.55,
+      "word_length": 5,
+      "degree": 1,
+      "word": "scary"
+    },
+    {
+      "kappa": 0.30555566666666667,
+      "rt": 508.775,
+      "word_length": 6,
+      "degree": 3,
+      "word": "school"
+    },
+    {
+      "kappa": -0.22916675,
+      "rt": 604.657894736842,
+      "word_length": 7,
+      "degree": 4,
+      "word": "science"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 502.35,
+      "word_length": 3,
+      "degree": 1,
+      "word": "sea"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 523.51282051282,
+      "word_length": 6,
+      "degree": 1,
+      "word": "secret"
+    },
+    {
+      "kappa": -0.12916675,
+      "rt": 487.631578947368,
+      "word_length": 3,
+      "degree": 4,
+      "word": "see"
+    },
+    {
+      "kappa": -0.18055566666666667,
+      "rt": 489.447368421053,
+      "word_length": 3,
+      "degree": 3,
+      "word": "sex"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 478.102564102564,
+      "word_length": 4,
+      "degree": 1,
+      "word": "sexy"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 528.444444444444,
+      "word_length": 5,
+      "degree": 2,
+      "word": "sharp"
+    },
+    {
+      "kappa": 0.111111,
+      "rt": 548.078947368421,
+      "word_length": 5,
+      "degree": 1,
+      "word": "sheep"
+    },
+    {
+      "kappa": -0.32857166666666665,
+      "rt": 594.277777777778,
+      "word_length": 5,
+      "degree": 3,
+      "word": "shiny"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 517.078947368421,
+      "word_length": 4,
+      "degree": 1,
+      "word": "ship"
+    },
+    {
+      "kappa": 0.45,
+      "rt": 523.333333333333,
+      "word_length": 5,
+      "degree": 2,
+      "word": "shirt"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 545.135135135135,
+      "word_length": 4,
+      "degree": 1,
+      "word": "shoe"
+    },
+    {
+      "kappa": 0.416667,
+      "rt": 557.108108108108,
+      "word_length": 4,
+      "degree": 2,
+      "word": "shop"
+    },
+    {
+      "kappa": -0.27777799999999997,
+      "rt": 548.894736842105,
+      "word_length": 8,
+      "degree": 2,
+      "word": "shopping"
+    },
+    {
+      "kappa": -0.177778,
+      "rt": 546.702702702703,
+      "word_length": 5,
+      "degree": 3,
+      "word": "short"
+    },
+    {
+      "kappa": -0.32222233333333333,
+      "rt": 495.125,
+      "word_length": 4,
+      "degree": 3,
+      "word": "show"
+    },
+    {
+      "kappa": 0.05208325,
+      "rt": 516.0,
+      "word_length": 4,
+      "degree": 4,
+      "word": "sick"
+    },
+    {
+      "kappa": -0.388889,
+      "rt": 525.675,
+      "word_length": 4,
+      "degree": 3,
+      "word": "sign"
+    },
+    {
+      "kappa": -0.277778,
+      "rt": 536.025,
+      "word_length": 5,
+      "degree": 3,
+      "word": "silly"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 499.871794871795,
+      "word_length": 4,
+      "degree": 1,
+      "word": "skin"
+    },
+    {
+      "kappa": -0.32222233333333333,
+      "rt": 476.526315789474,
+      "word_length": 5,
+      "degree": 3,
+      "word": "sleep"
+    },
+    {
+      "kappa": -0.1516666,
+      "rt": 532.846153846154,
+      "word_length": 5,
+      "degree": 5,
+      "word": "small"
+    },
+    {
+      "kappa": -0.49166675000000004,
+      "rt": 515.605263157895,
+      "word_length": 5,
+      "degree": 4,
+      "word": "smart"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 488.684210526316,
+      "word_length": 5,
+      "degree": 2,
+      "word": "smell"
+    },
+    {
+      "kappa": -0.125,
+      "rt": 571.974358974359,
+      "word_length": 5,
+      "degree": 2,
+      "word": "smoke"
+    },
+    {
+      "kappa": -0.37748025,
+      "rt": 506.1,
+      "word_length": 4,
+      "degree": 4,
+      "word": "snow"
+    },
+    {
+      "kappa": 0.04999999999999999,
+      "rt": 515.714285714286,
+      "word_length": 4,
+      "degree": 2,
+      "word": "soft"
+    },
+    {
+      "kappa": -0.1944445,
+      "rt": 496.179487179487,
+      "word_length": 4,
+      "degree": 2,
+      "word": "song"
+    },
+    {
+      "kappa": 0.17129599999999998,
+      "rt": 542.051282051282,
+      "word_length": 5,
+      "degree": 3,
+      "word": "sound"
+    },
+    {
+      "kappa": -0.31789524999999996,
+      "rt": 519.975,
+      "word_length": 4,
+      "degree": 4,
+      "word": "soup"
+    },
+    {
+      "kappa": -0.138889,
+      "rt": 521.625,
+      "word_length": 5,
+      "degree": 3,
+      "word": "space"
+    },
+    {
+      "kappa": -0.333333,
+      "rt": 500.684210526316,
+      "word_length": 5,
+      "degree": 3,
+      "word": "speak"
+    },
+    {
+      "kappa": -0.25,
+      "rt": 540.368421052632,
+      "word_length": 5,
+      "degree": 2,
+      "word": "speed"
+    },
+    {
+      "kappa": -0.43376075000000003,
+      "rt": 526.621621621622,
+      "word_length": 5,
+      "degree": 4,
+      "word": "spice"
+    },
+    {
+      "kappa": 0.22222233333333333,
+      "rt": 532.897435897436,
+      "word_length": 5,
+      "degree": 3,
+      "word": "sport"
+    },
+    {
+      "kappa": -0.19791675,
+      "rt": 509.65,
+      "word_length": 6,
+      "degree": 4,
+      "word": "square"
+    },
+    {
+      "kappa": 0.134524,
+      "rt": 527.72972972973,
+      "word_length": 4,
+      "degree": 3,
+      "word": "star"
+    },
+    {
+      "kappa": -0.15,
+      "rt": 536.0,
+      "word_length": 5,
+      "degree": 2,
+      "word": "stars"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 537.894736842105,
+      "word_length": 5,
+      "degree": 1,
+      "word": "steal"
+    },
+    {
+      "kappa": -0.39153466666666664,
+      "rt": 552.972972972973,
+      "word_length": 5,
+      "degree": 3,
+      "word": "stick"
+    },
+    {
+      "kappa": -0.138889,
+      "rt": 527.225,
+      "word_length": 5,
+      "degree": 3,
+      "word": "stone"
+    },
+    {
+      "kappa": -0.35416675,
+      "rt": 479.45,
+      "word_length": 4,
+      "degree": 4,
+      "word": "stop"
+    },
+    {
+      "kappa": 0.138889,
+      "rt": 539.128205128205,
+      "word_length": 5,
+      "degree": 3,
+      "word": "store"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 557.025,
+      "word_length": 5,
+      "degree": 2,
+      "word": "story"
+    },
+    {
+      "kappa": 0.125,
+      "rt": 541.783783783784,
+      "word_length": 6,
+      "degree": 2,
+      "word": "street"
+    },
+    {
+      "kappa": -0.25,
+      "rt": 487.25641025641,
+      "word_length": 8,
+      "degree": 2,
+      "word": "strength"
+    },
+    {
+      "kappa": -0.24166675000000004,
+      "rt": 535.725,
+      "word_length": 6,
+      "degree": 4,
+      "word": "strong"
+    },
+    {
+      "kappa": -0.32916675,
+      "rt": 554.842105263158,
+      "word_length": 5,
+      "degree": 4,
+      "word": "study"
+    },
+    {
+      "kappa": -0.10416675,
+      "rt": 518.025,
+      "word_length": 6,
+      "degree": 4,
+      "word": "stupid"
+    },
+    {
+      "kappa": -0.09444433333333334,
+      "rt": 520.425,
+      "word_length": 5,
+      "degree": 3,
+      "word": "sugar"
+    },
+    {
+      "kappa": -0.355952375,
+      "rt": 509.416666666667,
+      "word_length": 3,
+      "degree": 8,
+      "word": "sun"
+    },
+    {
+      "kappa": -0.11666660000000002,
+      "rt": 546.358974358974,
+      "word_length": 5,
+      "degree": 5,
+      "word": "sweet"
+    },
+    {
+      "kappa": -0.05555566666666667,
+      "rt": 486.921052631579,
+      "word_length": 4,
+      "degree": 3,
+      "word": "talk"
+    },
+    {
+      "kappa": -0.30208349999999995,
+      "rt": 525.368421052632,
+      "word_length": 4,
+      "degree": 4,
+      "word": "tall"
+    },
+    {
+      "kappa": -0.19,
+      "rt": 490.275,
+      "word_length": 3,
+      "degree": 5,
+      "word": "tea"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 559.736842105263,
+      "word_length": 7,
+      "degree": 1,
+      "word": "teacher"
+    },
+    {
+      "kappa": 0.142857,
+      "rt": 542.243243243243,
+      "word_length": 5,
+      "degree": 1,
+      "word": "teeth"
+    },
+    {
+      "kappa": -0.27777766666666664,
+      "rt": 536.473684210526,
+      "word_length": 4,
+      "degree": 3,
+      "word": "tell"
+    },
+    {
+      "kappa": 0.1,
+      "rt": 544.7,
+      "word_length": 5,
+      "degree": 2,
+      "word": "thief"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 539.864864864865,
+      "word_length": 4,
+      "degree": 1,
+      "word": "thin"
+    },
+    {
+      "kappa": -0.13125,
+      "rt": 564.447368421053,
+      "word_length": 5,
+      "degree": 4,
+      "word": "think"
+    },
+    {
+      "kappa": -0.1666665,
+      "rt": 529.75,
+      "word_length": 5,
+      "degree": 2,
+      "word": "throw"
+    },
+    {
+      "kappa": -0.4266668,
+      "rt": 574.947368421053,
+      "word_length": 4,
+      "degree": 5,
+      "word": "time"
+    },
+    {
+      "kappa": 0.15,
+      "rt": 547.282051282051,
+      "word_length": 4,
+      "degree": 2,
+      "word": "tiny"
+    },
+    {
+      "kappa": -0.361111,
+      "rt": 579.205128205128,
+      "word_length": 5,
+      "degree": 3,
+      "word": "tired"
+    },
+    {
+      "kappa": 0.2,
+      "rt": 520.72972972973,
+      "word_length": 6,
+      "degree": 1,
+      "word": "toilet"
+    },
+    {
+      "kappa": 0.027777666666666662,
+      "rt": 533.666666666667,
+      "word_length": 3,
+      "degree": 3,
+      "word": "top"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 519.725,
+      "word_length": 5,
+      "degree": 2,
+      "word": "trash"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 498.15,
+      "word_length": 6,
+      "degree": 1,
+      "word": "travel"
+    },
+    {
+      "kappa": -0.12482985714285713,
+      "rt": 509.051282051282,
+      "word_length": 4,
+      "degree": 7,
+      "word": "tree"
+    },
+    {
+      "kappa": 0.07777766666666668,
+      "rt": 504.923076923077,
+      "word_length": 5,
+      "degree": 3,
+      "word": "trees"
+    },
+    {
+      "kappa": 0.125,
+      "rt": 503.921052631579,
+      "word_length": 5,
+      "degree": 2,
+      "word": "truth"
+    },
+    {
+      "kappa": 0.5,
+      "rt": 590.5,
+      "word_length": 2,
+      "degree": 1,
+      "word": "tv"
+    },
+    {
+      "kappa": 0.333333,
+      "rt": 520.35,
+      "word_length": 3,
+      "degree": 1,
+      "word": "two"
+    },
+    {
+      "kappa": -0.37500025000000003,
+      "rt": 505.4,
+      "word_length": 2,
+      "degree": 4,
+      "word": "up"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 526.388888888889,
+      "word_length": 4,
+      "degree": 2,
+      "word": "wait"
+    },
+    {
+      "kappa": -0.2333335,
+      "rt": 537.27027027027,
+      "word_length": 4,
+      "degree": 2,
+      "word": "walk"
+    },
+    {
+      "kappa": -0.14722233333333334,
+      "rt": 490.65,
+      "word_length": 3,
+      "degree": 6,
+      "word": "war"
+    },
+    {
+      "kappa": -0.0933334,
+      "rt": 523.027777777778,
+      "word_length": 4,
+      "degree": 5,
+      "word": "warm"
+    },
+    {
+      "kappa": -0.09999999999999999,
+      "rt": 525.216216216216,
+      "word_length": 5,
+      "degree": 3,
+      "word": "watch"
+    },
+    {
+      "kappa": -0.34166674999999996,
+      "rt": 539.0,
+      "word_length": 5,
+      "degree": 12,
+      "word": "water"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 514.236842105263,
+      "word_length": 4,
+      "degree": 1,
+      "word": "weak"
+    },
+    {
+      "kappa": 0.06944449999999999,
+      "rt": 538.763157894737,
+      "word_length": 7,
+      "degree": 2,
+      "word": "weather"
+    },
+    {
+      "kappa": -0.46428600000000003,
+      "rt": 555.871794871795,
+      "word_length": 7,
+      "degree": 4,
+      "word": "wedding"
+    },
+    {
+      "kappa": -0.2333335,
+      "rt": 514.611111111111,
+      "word_length": 6,
+      "degree": 2,
+      "word": "weight"
+    },
+    {
+      "kappa": -0.2083335,
+      "rt": 593.578947368421,
+      "word_length": 5,
+      "degree": 2,
+      "word": "weird"
+    },
+    {
+      "kappa": 0.004629666666666661,
+      "rt": 522.075,
+      "word_length": 3,
+      "degree": 3,
+      "word": "wet"
+    },
+    {
+      "kappa": -0.261905,
+      "rt": 515.0,
+      "word_length": 5,
+      "degree": 7,
+      "word": "white"
+    },
+    {
+      "kappa": -0.08333333333333333,
+      "rt": 490.135135135135,
+      "word_length": 4,
+      "degree": 3,
+      "word": "wife"
+    },
+    {
+      "kappa": -0.275,
+      "rt": 523.0,
+      "word_length": 4,
+      "degree": 5,
+      "word": "wine"
+    },
+    {
+      "kappa": -0.32648825000000004,
+      "rt": 497.27027027027,
+      "word_length": 5,
+      "degree": 4,
+      "word": "woman"
+    },
+    {
+      "kappa": -0.38809525,
+      "rt": 510.702702702703,
+      "word_length": 4,
+      "degree": 4,
+      "word": "wood"
+    },
+    {
+      "kappa": 0.25,
+      "rt": 531.405405405405,
+      "word_length": 4,
+      "degree": 1,
+      "word": "word"
+    },
+    {
+      "kappa": -0.0833335,
+      "rt": 501.05,
+      "word_length": 5,
+      "degree": 2,
+      "word": "words"
+    },
+    {
+      "kappa": -0.3652778333333333,
+      "rt": 512.210526315789,
+      "word_length": 4,
+      "degree": 6,
+      "word": "work"
+    },
+    {
+      "kappa": -0.17916675,
+      "rt": 530.052631578947,
+      "word_length": 5,
+      "degree": 4,
+      "word": "world"
+    },
+    {
+      "kappa": 0.0,
+      "rt": 670.558823529412,
+      "word_length": 7,
+      "degree": 2,
+      "word": "writing"
+    },
+    {
+      "kappa": -0.1833336666666667,
+      "rt": 489.432432432432,
+      "word_length": 5,
+      "degree": 3,
+      "word": "wrong"
+    },
+    {
+      "kappa": -0.23611133333333334,
+      "rt": 486.157894736842,
+      "word_length": 6,
+      "degree": 3,
+      "word": "yellow"
+    },
+    {
+      "kappa": -0.166667,
+      "rt": 531.810810810811,
+      "word_length": 3,
+      "degree": 2,
+      "word": "you"
+    },
+    {
+      "kappa": -0.166667,
+      "rt": 503.85,
+      "word_length": 5,
+      "degree": 2,
+      "word": "young"
+    }
+  ]
+}
