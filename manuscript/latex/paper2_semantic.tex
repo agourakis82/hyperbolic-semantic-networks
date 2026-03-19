@@ -633,6 +633,13 @@ First, the hyperbolic phase is not an artefact of human associative processes---
 
 Second, LLMs can serve as controlled probes of semantic geometry. Unlike human participants, LLMs can be queried with arbitrary cue sets, at arbitrary scales, and across arbitrary languages, without recruitment costs or cultural confounds. The geometric invariance we observe suggests that LLM-generated association networks are valid proxies for studying the structural properties of semantic space. Recent probing of the NLLB-200 multilingual translation model~\cite{nllb2025universal} independently demonstrates language-independent conceptual representations, providing convergent evidence from a complementary methodology.
 
+\subsection{Behavioral Validation: Curvature and Lexical Access}
+\label{sec:behavioral}
+
+A natural question is whether geometric regime predicts cognitive processing. We correlated per-node mean ORC (averaged over incident edges) with lexical decision reaction time (RT) from the British Lexicon Project~\cite{keuleers2012blp} for 405 matched SWOW-EN words. The raw correlation is weak ($r = +0.070$, $n = 405$); after partialing out node degree and word length, the relationship vanishes ($r_{\mathrm{partial}} = +0.027$, 95\% CI $[-0.064, +0.116]$, $p > 0.5$). Regime-stratified RT shows no significant difference: hyperbolic-neighborhood words ($n = 231$, RT $= 529.0 \pm 28.2$ ms) vs.\ spherical-neighborhood words ($n = 147$, RT $= 532.9 \pm 29.4$ ms), $\Delta = 3.9$ ms, $t = 1.29$, $p > 0.2$.
+
+This null result is informative. Per-node curvature is strongly confounded with degree ($r = -0.565$), and degree itself is only weakly related to RT ($r = -0.093$). Curvature captures \emph{mesoscale network geometry} (transport cost between neighborhoods), which is structurally meaningful but does not map onto single-word processing speed. Behavioral correlates are more likely to emerge at the \emph{path level}---e.g., whether curvature along prime-target shortest paths predicts semantic priming magnitude---or at the \emph{network level}---e.g., whether geometric regime predicts retrieval fluency in free association tasks. These remain important directions for future work.
+
 \subsection{Limitations}
 
 \begin{enumerate}
@@ -787,6 +794,9 @@ A.~Clauset, C.~R.~Shalizi, and M.~E.~J.~Newman, ``Power-law distributions in emp
 
 \bibitem{paper1_theory}
 D.~C.~Agourakis and M.~Gerenutti, ``A finite-size crossover in Ollivier--Ricci curvature of random regular graphs,'' Authorea preprint, 2026.
+
+\bibitem{keuleers2012blp}
+E.~Keuleers, P.~Lacey, K.~Rastle, and M.~Brysbaert, ``The British Lexicon Project: Lexical decision data for 28,730 monosyllabic and disyllabic English words,'' \emph{Behav.\ Res.\ Methods}, vol.~44, no.~1, pp.~287--304, 2012.
 
 \end{thebibliography}
 
