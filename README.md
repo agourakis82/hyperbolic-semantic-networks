@@ -138,6 +138,27 @@ cd ../figures
 python generate_all_figures.py
 ```
 
+### CPC 2026 Extension
+
+The repository now includes a dedicated CPC 2026 paper pipeline for:
+
+**Entropic Curvature in Hyperbolic Semantic Manifolds Indexes Psychopathology-Like Transitions**
+
+Artifacts and code live in:
+
+- `code/cpc2026/`
+- `results/cpc2026/`
+- `figures/cpc2026/`
+- `manuscript/cpc2026_paper.md`
+
+Run the full extension from the repository root with:
+
+```bash
+make cpc2026
+```
+
+This CPC pipeline reuses the validated SWOW-EN exact-LP curvature artifact, adds node-level entropic curvature and valence annotations, simulates regime-specific semantic trajectories, computes trajectory statistics, and generates a CPC-specific figure set.
+
 ---
 
 ## Sounio Experiments

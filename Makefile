@@ -1,7 +1,27 @@
 # Makefile for Sounio-fMRI Hypercomplex Geometric Deep Learning
 # =============================================================
 
-.PHONY: all install test demo clean visualize validate docker
+.PHONY: all install test demo clean visualize validate docker cpc2026 cpc2026-smoke
+
+CPC2026_PYTHON ?= python3
+
+cpc2026:
+	@echo "Running CPC 2026 pipeline..."
+	$(CPC2026_PYTHON) code/cpc2026/valence_loader.py
+	$(CPC2026_PYTHON) code/cpc2026/entropic_curvature.py
+	$(CPC2026_PYTHON) code/cpc2026/trajectory_simulator.py
+	$(CPC2026_PYTHON) code/cpc2026/analysis.py
+	$(CPC2026_PYTHON) code/cpc2026/generate_figures.py
+	@echo "CPC 2026 pipeline complete."
+
+cpc2026-smoke:
+	@echo "Running CPC 2026 smoke pipeline..."
+	$(CPC2026_PYTHON) code/cpc2026/valence_loader.py --smoke-test
+	$(CPC2026_PYTHON) code/cpc2026/entropic_curvature.py --smoke-test
+	$(CPC2026_PYTHON) code/cpc2026/trajectory_simulator.py --smoke-test --include-exploratory-engines
+	$(CPC2026_PYTHON) code/cpc2026/analysis.py --smoke-test --bootstrap 200
+	$(CPC2026_PYTHON) code/cpc2026/generate_figures.py
+	@echo "CPC 2026 smoke pipeline complete."
 
 # Default target
 all: demo visualize

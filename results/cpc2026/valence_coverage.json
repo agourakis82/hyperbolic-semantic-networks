@@ -1,0 +1,12 @@
+{
+  "seed": 20260409,
+  "n_nodes": 438,
+  "matched_nodes": 407,
+  "coverage_fraction": 0.9292237442922374,
+  "coverage_percent": 92.92237442922374,
+  "neutral_fill_value": 0.0,
+  "sources": {
+    "primary": "https://static-content.springer.com/esm/art%3A10.3758%2Fs13428-012-0314-x/MediaObjects/13428_2012_314_MOESM1_ESM.zip",
+    "fallback": "https://crr.ugent.be/papers/Ratings_Warriner_et_al.csv"
+  }
+}
