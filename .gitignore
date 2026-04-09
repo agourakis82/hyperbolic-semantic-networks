@@ -96,3 +96,10 @@ data/scratch/
 
 # Julia package manifest (lock file — reproducibility via Project.toml)
 julia/Manifest.toml
+
+# CPC 2026 reproducible snapshot
+!data/cpc2026/**
+!results/cpc2026/**
+!figures/cpc2026/**
+data/cpc2026/trajectories_*_input.npy
+results/cpc2026/ossm_trajectories_*.csv

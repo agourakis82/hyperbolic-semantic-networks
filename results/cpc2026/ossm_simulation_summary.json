@@ -1,0 +1,38 @@
+{
+  "seed": 20260409,
+  "regimes": {
+    "normative": {
+      "output_csv": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectories_normative.csv",
+      "summary_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectory_summary_normative.parquet",
+      "sample_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_state_samples_normative.parquet",
+      "n_trajectories": 10000,
+      "trajectory_length": 500,
+      "chunk_size": 64
+    },
+    "anxious": {
+      "output_csv": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectories_anxious.csv",
+      "summary_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectory_summary_anxious.parquet",
+      "sample_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_state_samples_anxious.parquet",
+      "n_trajectories": 10000,
+      "trajectory_length": 500,
+      "chunk_size": 64
+    },
+    "ruminative": {
+      "output_csv": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectories_ruminative.csv",
+      "summary_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectory_summary_ruminative.parquet",
+      "sample_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_state_samples_ruminative.parquet",
+      "n_trajectories": 10000,
+      "trajectory_length": 500,
+      "chunk_size": 64
+    },
+    "psychotic": {
+      "output_csv": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectories_psychotic.csv",
+      "summary_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectory_summary_psychotic.parquet",
+      "sample_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_state_samples_psychotic.parquet",
+      "n_trajectories": 10000,
+      "trajectory_length": 500,
+      "chunk_size": 64
+    }
+  },
+  "combined_summary_parquet": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/ossm_trajectory_statistics.parquet"
+}

@@ -2,13 +2,13 @@
 
 ## Abstract
 
-[PLACEHOLDER: Replace with the abstract derived from `results/cpc2026/statistical_summary.json`, not the accepted poster projection.]
+[PLACEHOLDER: Replace with the abstract derived from `results/cpc2026/ossm_statistical_summary.json`; results reported here supersede the projections in the accepted conference abstract.]
 
 Paragraph 1 topic sentence: This paper introduces entropic curvature as a node-level geometric marker on the validated SWOW-EN semantic graph and tests whether simulated cognitive regimes separate along that landscape.
 
 Paragraph 2 topic sentence: Using Ollivier-Ricci curvature, local transition entropy, and regime-specific semantic trajectory simulations, we quantify variance, residence time, entropy production, and long-range temporal structure across normative and pathology-like conditions.
 
-Paragraph 3 topic sentence: The final abstract must report the observed effect sizes, confidence intervals, and any discrepancies between the poster claims and the reproducible full-paper results.
+Paragraph 3 topic sentence: The revised journal abstract must replace the poster-era projected numbers with the observed O-SSM-aware results and explicitly note when the full-paper values supersede the accepted conference abstract.
 
 ## Introduction
 
@@ -88,19 +88,49 @@ Topic sentence: A hybrid engine interleaves graph-constrained jumps with continu
 
 [PLACEHOLDER: Document whether this engine contributes to the final paper or remains supplementary.]
 
+#### 2.5.4 Octonionic State Space Model
+
+Topic sentence: We complement the memoryless Markov baseline with an octonionic state space model whose hidden state evolves by non-associative composition, allowing persistent attractor structure and context-sensitive trajectory modulation.
+
+[PLACEHOLDER: Insert the state update equation `h_{t+1} = sigma(A h_t B + C x_t)` in paper notation and define the 8D node input vector.]
+
+#### 2.5.5 Regime parametrization in the O-SSM
+
+Topic sentence: In the O-SSM, regime differences are encoded through temperature, initial-state geometry, and valence gating rather than solely through the graph transition kernel, enabling path dependence without introducing supervised fitting.
+
+[PLACEHOLDER: Document balanced, negative-attractor, rigid, and dispersed initial states; report that the first pass uses structured deterministic weights rather than trained parameters.]
+
+#### 2.5.6 Canonical Sounio implementation and Python full-artifact mirror
+
+Topic sentence: Because the canonical `sounio-lang/sounio` checkout provides validated octonion arithmetic but not a full benchmark-recovered O-SSM package, we pair a runnable Sounio implementation for executable parity with a Python reference engine that generates the full paper-scale artifacts.
+
+[PLACEHOLDER: Clarify which figures/statistics come from the Python full run and which Sounio outputs currently serve as parity/smoke validation.]
+
 ### 2.6 Statistical Analysis
 
 Topic sentence: We quantified trajectory-level variance in entropic curvature, residence time in high-entropy hubs, entropy production rate, and Hurst exponents estimated by detrended fluctuation analysis.
 
 [PLACEHOLDER: Insert bootstrap count, effect-size definitions, p-value tests, and trajectory-level summary table.]
 
-### 2.7 Phase-Transition Reference
+### 2.7 O-SSM-Specific Dynamical Metrics
+
+Topic sentence: For the octonionic model we additionally quantified associator norm, hidden-state entropy, quaternionic subspace occupancy across the seven Fano-plane triples, and recurrence-based attractor diagnostics.
+
+[PLACEHOLDER: Define the associator norm, occupancy rule, and recurrence thresholds used in `ossm_analysis.py`.]
+
+### 2.8 Cross-Model Comparison
+
+Topic sentence: Markov and O-SSM outputs were compared side by side to determine which regime contrasts survive a memoryful dynamical model and which remain inherited from the common input trajectories.
+
+[PLACEHOLDER: Insert the comparison table specification and explain any metric-definition asymmetries.]
+
+### 2.9 Phase-Transition Reference
 
 Topic sentence: The generic geometric phase transition near `⟨k⟩²/N ≈ 2.5` was taken from the repository's validated random-regular reference curve and used only as a contextual geometry baseline, not as a property of the sparse SWOW-EN substrate itself.
 
 [PLACEHOLDER: Clarify the distinction between generic graph geometry and simulated psychiatric regimes on SWOW-EN.]
 
-### 2.8 Code and Data Availability
+### 2.10 Code and Data Availability
 
 Topic sentence: All CPC-specific code resides in `code/cpc2026/`, with outputs in `results/cpc2026/` and figures in `figures/cpc2026/`, enabling exact regeneration from the repository root.
 
@@ -138,6 +168,18 @@ Topic sentence: Although the repository's validated random-regular reference cro
 
 [PLACEHOLDER: Insert `swow_eta`, reference `eta_c`, and interpretive sentence about substrate vs regime dynamics.]
 
+### 3.6 The O-SSM introduces structured non-associative regime fingerprints
+
+Topic sentence: Once persistent octonionic state is added, the regimes differ not only in output variability but also in associator activation, hidden-state entropy, and occupation of specific quaternionic subspaces.
+
+[PLACEHOLDER: Insert the main associator and subspace occupancy findings, including whether pathological regimes activate stronger non-associativity.]
+
+### 3.7 Markov and O-SSM models diverge in what they separate
+
+Topic sentence: Cross-model comparison shows which findings are inherited from the shared graph input walk and which emerge only after adding memoryful octonionic state dynamics.
+
+[PLACEHOLDER: Insert the side-by-side table and summarize whether the O-SSM increases, decreases, or qualitatively reorganizes regime separation.]
+
 ## Discussion
 
 ### 4.1 Entropic curvature as an interpretable semantic instability marker
@@ -170,9 +212,14 @@ Topic sentence: The next empirical step is to align semantic trajectories with c
 
 [PLACEHOLDER: Mention planned validation against real speech or neuroimaging data.]
 
+### 4.6 Non-associativity as a cognitive mechanism
+
+Topic sentence: The associator term makes precise the idea that affective-semantic composition is order-sensitive, so `(fear ∘ anger) ∘ sadness` need not occupy the same cognitive basin as `fear ∘ (anger ∘ sadness)`.
+
+[PLACEHOLDER: Connect the associator interpretation to compositional cognition, the O-SSM benchmark paper, and explicit caveats about mechanistic overreach.]
+
 ## References
 
 Topic sentence: The final reference list should be compiled from `manuscript/references.bib`, augmented with any computational psychiatry, DFA, and affective-norm citations added during drafting.
 
 [PLACEHOLDER: Cite from `manuscript/references.bib`; do not duplicate final BibTeX inline here.]
-

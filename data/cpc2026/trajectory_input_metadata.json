@@ -1,0 +1,57 @@
+{
+  "seed": 20260409,
+  "n_trajectories": 10000,
+  "trajectory_length": 500,
+  "feature_columns": [
+    "feature_kappa",
+    "feature_entropy_norm",
+    "feature_c_ent",
+    "feature_valence",
+    "feature_poincare_x",
+    "feature_poincare_y",
+    "feature_log_degree",
+    "feature_eta_local"
+  ],
+  "regimes": {
+    "normative": {
+      "node_index_path": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectories_normative_nodes.npy",
+      "input_tensor_path": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectories_normative_input.npy",
+      "shape": [
+        10000,
+        500,
+        8
+      ],
+      "seed": 20260409
+    },
+    "anxious": {
+      "node_index_path": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectories_anxious_nodes.npy",
+      "input_tensor_path": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectories_anxious_input.npy",
+      "shape": [
+        10000,
+        500,
+        8
+      ],
+      "seed": 20260509
+    },
+    "ruminative": {
+      "node_index_path": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectories_ruminative_nodes.npy",
+      "input_tensor_path": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectories_ruminative_input.npy",
+      "shape": [
+        10000,
+        500,
+        8
+      ],
+      "seed": 20260609
+    },
+    "psychotic": {
+      "node_index_path": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectories_psychotic_nodes.npy",
+      "input_tensor_path": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectories_psychotic_input.npy",
+      "shape": [
+        10000,
+        500,
+        8
+      ],
+      "seed": 20260709
+    }
+  }
+}

@@ -1,9 +1,12 @@
 # Makefile for Sounio-fMRI Hypercomplex Geometric Deep Learning
 # =============================================================
 
-.PHONY: all install test demo clean visualize validate docker cpc2026 cpc2026-smoke
+.PHONY: all install test demo clean visualize validate docker cpc2026 cpc2026-smoke cpc2026-ossm
 
 CPC2026_PYTHON ?= python3
+SOUNIO_REPO ?= /home/demetrios/work/sounio-lang
+SOUC ?= $(SOUNIO_REPO)/artifacts/omega/souc-bin/souc-linux-x86_64-gpu
+SOUNIO_PARITY_RESULTS ?= $(SOUNIO_REPO)/examples/cognitive_ossm/results
 
 cpc2026:
 	@echo "Running CPC 2026 pipeline..."
@@ -22,6 +25,28 @@ cpc2026-smoke:
 	$(CPC2026_PYTHON) code/cpc2026/analysis.py --smoke-test --bootstrap 200
 	$(CPC2026_PYTHON) code/cpc2026/generate_figures.py
 	@echo "CPC 2026 smoke pipeline complete."
+
+cpc2026-ossm:
+	@echo "Running CPC 2026 O-SSM extension..."
+	@echo "Canonical Sounio compiler: $(SOUC)"
+	@$(SOUC) --version
+	$(CPC2026_PYTHON) code/cpc2026/valence_loader.py
+	$(CPC2026_PYTHON) code/cpc2026/entropic_curvature.py
+	$(CPC2026_PYTHON) code/cpc2026/trajectory_simulator.py
+	$(CPC2026_PYTHON) code/cpc2026/analysis.py
+	$(CPC2026_PYTHON) code/cpc2026/ossm_bridge/node_features.py
+	$(CPC2026_PYTHON) code/cpc2026/ossm_bridge/trajectory_generator.py
+	$(CPC2026_PYTHON) code/cpc2026/ossm_bridge/export_to_sounio.py
+	mkdir -p $(SOUNIO_PARITY_RESULTS)
+	cd $(SOUNIO_REPO) && $(SOUC) run examples/cognitive_ossm/cognitive_ossm.sio
+	cd $(SOUNIO_REPO) && $(SOUC) run examples/cognitive_ossm/run_regimes.sio -- --max-trajectories 8 --max-steps 64
+	cd $(SOUNIO_REPO) && $(SOUC) run examples/cognitive_ossm/export_results.sio
+	mkdir -p results/cpc2026/sounio_parity
+	cp $(SOUNIO_PARITY_RESULTS)/*.csv results/cpc2026/sounio_parity/
+	$(CPC2026_PYTHON) code/cpc2026/ossm_reference_simulator.py
+	$(CPC2026_PYTHON) code/cpc2026/ossm_analysis.py
+	$(CPC2026_PYTHON) code/cpc2026/generate_ossm_figures.py
+	@echo "CPC 2026 O-SSM extension complete."
 
 # Default target
 all: demo visualize
@@ -166,6 +191,8 @@ help:
 	@echo "  make clean-all      - Deep clean (including data)"
 	@echo "  make docker-build   - Build Docker image"
 	@echo "  make docker-run     - Run Docker container"
+	@echo "  make cpc2026        - Run the CPC 2026 Markov baseline pipeline"
+	@echo "  make cpc2026-ossm   - Run the CPC 2026 O-SSM bridge + parity + analysis pipeline"
 	@echo "  make help           - Show this help message"
 	@echo ""
 	@echo "Quick start:"

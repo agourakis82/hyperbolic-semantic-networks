@@ -1,0 +1,273 @@
+{
+  "seed": 20260409,
+  "high_entropy_threshold": 1.385678232707365,
+  "per_regime": {
+    "normative": {
+      "n_trajectories": 10000,
+      "mean_c_ent_variance": 0.019666841253638268,
+      "ci_c_ent_variance": [
+        0.019383062003180386,
+        0.019944687420502306
+      ],
+      "mean_residence_fraction_high_entropy": 0.14144759999999998,
+      "ci_residence_fraction_high_entropy": [
+        0.13878139999999997,
+        0.14396918500000003
+      ],
+      "mean_hidden_entropy_production_rate": 0.0016760078724473715,
+      "ci_hidden_entropy_production_rate": [
+        0.0016639108798699453,
+        0.001688571844715625
+      ],
+      "mean_hurst_exponent": 0.7826638377406362,
+      "ci_hurst_exponent": [
+        0.7783370922502555,
+        0.7870719239947542
+      ],
+      "mean_associator_norm": 0.2727181017398834,
+      "ci_mean_associator_norm": [
+        0.2704750642180443,
+        0.27507071420550344
+      ],
+      "mean_h_entropy": 0.9952461123466492,
+      "ci_mean_h_entropy": [
+        0.9952210709452629,
+        0.9952707335352897
+      ],
+      "subspace_occupancy": {
+        "H123": 0.0115,
+        "H145": 0.4275,
+        "H167": 0.29425,
+        "H246": 0.05875,
+        "H257": 0.0295,
+        "H347": 0.17575,
+        "H356": 0.00275
+      },
+      "attractor_summary": {
+        "recurrence_rate": 0.08527777777777779,
+        "fixed_point_fraction": 0.09722222222222221,
+        "limit_cycle_fraction": 0.3762755102040817,
+        "threshold": 0.09237095713615417
+      }
+    },
+    "anxious": {
+      "n_trajectories": 10000,
+      "mean_c_ent_variance": 0.015830522403120995,
+      "ci_c_ent_variance": [
+        0.015703156124800444,
+        0.015944610303267836
+      ],
+      "mean_residence_fraction_high_entropy": 0.18540900000000002,
+      "ci_residence_fraction_high_entropy": [
+        0.184355515,
+        0.18652407
+      ],
+      "mean_hidden_entropy_production_rate": 0.014764606021344662,
+      "ci_hidden_entropy_production_rate": [
+        0.014735752041451633,
+        0.014791351184248925
+      ],
+      "mean_hurst_exponent": 0.8750877666718762,
+      "ci_hurst_exponent": [
+        0.8737689052789104,
+        0.8764097406619661
+      ],
+      "mean_associator_norm": 0.05174228549003601,
+      "ci_mean_associator_norm": [
+        0.0516451807692647,
+        0.051832991931587455
+      ],
+      "mean_h_entropy": 0.9441724419593811,
+      "ci_mean_h_entropy": [
+        0.9441082954406739,
+        0.944237296283245
+      ],
+      "subspace_occupancy": {
+        "H123": 0.1185,
+        "H145": 0.25375,
+        "H167": 0.38775,
+        "H246": 0.01675,
+        "H257": 0.0155,
+        "H347": 0.1275,
+        "H356": 0.08025
+      },
+      "attractor_summary": {
+        "recurrence_rate": 0.01575757575757576,
+        "fixed_point_fraction": 0.10101010101010102,
+        "limit_cycle_fraction": 0.07653061224489796,
+        "threshold": 0.17108255624771118
+      }
+    },
+    "ruminative": {
+      "n_trajectories": 10000,
+      "mean_c_ent_variance": 0.013011978007853031,
+      "ci_c_ent_variance": [
+        0.012705401587300002,
+        0.013326672744005919
+      ],
+      "mean_residence_fraction_high_entropy": 0.12118499999999999,
+      "ci_residence_fraction_high_entropy": [
+        0.11786048,
+        0.12483095500000001
+      ],
+      "mean_hidden_entropy_production_rate": 0.0005342161166481674,
+      "ci_hidden_entropy_production_rate": [
+        0.0005271069516311399,
+        0.0005414865168859251
+      ],
+      "mean_hurst_exponent": 0.5412098022736437,
+      "ci_hurst_exponent": [
+        0.5350892035068109,
+        0.5471542039302729
+      ],
+      "mean_associator_norm": 0.2275242656469345,
+      "ci_mean_associator_norm": [
+        0.2251053787767887,
+        0.2298926468938589
+      ],
+      "mean_h_entropy": 0.9987028241157532,
+      "ci_mean_h_entropy": [
+        0.9986944198608398,
+        0.9987109333276749
+      ],
+      "subspace_occupancy": {
+        "H123": 0.119,
+        "H145": 0.19775,
+        "H167": 0.3995,
+        "H246": 0.0155,
+        "H257": 0.004,
+        "H347": 0.119,
+        "H356": 0.14525
+      },
+      "attractor_summary": {
+        "recurrence_rate": 0.21896464646464647,
+        "fixed_point_fraction": 0.09090909090909091,
+        "limit_cycle_fraction": 0.6862244897959183,
+        "threshold": 0.10561924427747726
+      }
+    },
+    "psychotic": {
+      "n_trajectories": 10000,
+      "mean_c_ent_variance": 0.009495732374489307,
+      "ci_c_ent_variance": [
+        0.009430267428979278,
+        0.009562400402501225
+      ],
+      "mean_residence_fraction_high_entropy": 0.237891,
+      "ci_residence_fraction_high_entropy": [
+        0.23685169,
+        0.238834025
+      ],
+      "mean_hidden_entropy_production_rate": 0.021218813955783844,
+      "ci_hidden_entropy_production_rate": [
+        0.021182462060824036,
+        0.0212551006115973
+      ],
+      "mean_hurst_exponent": 0.8324121045820521,
+      "ci_hurst_exponent": [
+        0.8310774439278801,
+        0.8337164768183082
+      ],
+      "mean_associator_norm": 0.006205380894243717,
+      "ci_mean_associator_norm": [
+        0.006195198406931013,
+        0.0062155408784747125
+      ],
+      "mean_h_entropy": 0.9192182421684265,
+      "ci_mean_h_entropy": [
+        0.9191486164927483,
+        0.919283390045166
+      ],
+      "subspace_occupancy": {
+        "H123": 0.0075,
+        "H145": 0.4365,
+        "H167": 0.51875,
+        "H246": 0.025,
+        "H257": 0.0075,
+        "H347": 0.00475,
+        "H356": 0.0
+      },
+      "attractor_summary": {
+        "recurrence_rate": 0.015025252525252525,
+        "fixed_point_fraction": 0.10101010101010102,
+        "limit_cycle_fraction": 0.06505102040816327,
+        "threshold": 0.06429167836904526
+      }
+    }
+  },
+  "comparisons": {
+    "normative_vs_anxious_c_ent_variance": {
+      "cohens_d": -0.3337011452487621,
+      "ci": [
+        -0.3581655939295682,
+        -0.3096092263029176
+      ],
+      "p_value": 1.1122158686805157e-120,
+      "baseline_mean": 0.01966684084237023,
+      "candidate_mean": 0.015830522913020104
+    },
+    "normative_vs_anxious_hurst_exponent": {
+      "cohens_d": 0.5412710409353454,
+      "ci": [
+        0.5173293132904323,
+        0.566256959048238
+      ],
+      "p_value": 3.514045765239679e-302,
+      "baseline_mean": 0.7826638377406362,
+      "candidate_mean": 0.8750877666718762
+    },
+    "normative_vs_anxious_residence_fraction_high_entropy": {
+      "cohens_d": 0.4528895538199423,
+      "ci": [
+        0.4242318195391155,
+        0.4857186490646787
+      ],
+      "p_value": 5.9731911035431105e-217,
+      "baseline_mean": 0.14144759999999998,
+      "candidate_mean": 0.18540900000000002
+    },
+    "normative_vs_anxious_hidden_entropy_production_rate": {
+      "cohens_d": 11.650868078041157,
+      "ci": [
+        11.47217612871818,
+        11.83392207493238
+      ],
+      "p_value": 0.0,
+      "baseline_mean": 0.0016760078215207613,
+      "candidate_mean": 0.01476460516899824
+    },
+    "normative_vs_anxious_mean_associator_norm": {
+      "cohens_d": -2.781365869022835,
+      "ci": [
+        -2.8258482814407,
+        -2.7393915532847983
+      ],
+      "p_value": 0.0,
+      "baseline_mean": 0.27271811791174116,
+      "candidate_mean": 0.051742285047657786
+    }
+  },
+  "cross_model": {
+    "C_ent variance": {
+      "markov_d": -0.26588450227800453,
+      "ossm_d": -0.3337011452487621,
+      "note": "Directly comparable trajectory-level C_ent variance."
+    },
+    "Hurst exponent": {
+      "markov_d": 0.6126887847906675,
+      "ossm_d": 0.5412710409353454,
+      "note": "Directly comparable DFA on the model output series."
+    },
+    "Residence in high-entropy hubs": {
+      "markov_d": 0.4528895538199423,
+      "ossm_d": 0.4528895538199423,
+      "note": "Inherited from the input walk under the current no-training O-SSM setup."
+    },
+    "Entropy production": {
+      "markov_d": -0.38086630417892897,
+      "ossm_d": 11.650868078041157,
+      "note": "Markov uses visited-node entropy; O-SSM uses hidden-state entropy."
+    }
+  },
+  "baseline_markov_summary_path": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/statistical_summary.json"
+}
