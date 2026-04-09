@@ -1,0 +1,60 @@
+{
+  "snapshot": "cpc2026-ossm-v0.1",
+  "versioned_artifacts": [
+    {
+      "path": "data/cpc2026/trajectories_normative_input.npz",
+      "size_bytes": 7175016,
+      "sha256": "904521140eba7fa7226a4279cb836bf8f47a5f76415376c47bc278b3a787db17"
+    },
+    {
+      "path": "data/cpc2026/trajectories_anxious_input.npz",
+      "size_bytes": 19108025,
+      "sha256": "88bd8a720a14ada12cee421491526df2fe70208ab27a9acc5f932f5b9ec9f213"
+    },
+    {
+      "path": "data/cpc2026/trajectories_ruminative_input.npz",
+      "size_bytes": 3044059,
+      "sha256": "6c5e67753dc710cd6c10830c851ed182ad42e714ba9a22b9e3f673943f69f177"
+    },
+    {
+      "path": "data/cpc2026/trajectories_psychotic_input.npz",
+      "size_bytes": 19881017,
+      "sha256": "268445935f88aff501c5c3c38ec77abe91cf484a68142effe559ce73617f84f6"
+    },
+    {
+      "path": "results/cpc2026/ossm_trajectories_normative.csv.gz",
+      "size_bytes": 75169747,
+      "sha256": "048b4e989247ad4e86511144a5f3b45a9f584cb87856f9f28760d99453bae93c"
+    },
+    {
+      "path": "results/cpc2026/ossm_trajectories_anxious.csv.gz",
+      "size_bytes": 103388460,
+      "sha256": "d28d039c3e18cdb632a94dace8fa034f3d3a9b1c5c38d86d16b5e868adcfd9c6"
+    },
+    {
+      "path": "results/cpc2026/ossm_trajectories_ruminative.csv.gz",
+      "size_bytes": 40497984,
+      "sha256": "f8316b6bf5b568f2698c8535336b155fbc66114c364ed2bea049febcd528c98e"
+    },
+    {
+      "path": "results/cpc2026/ossm_trajectories_psychotic.csv.gz",
+      "size_bytes": 100125882,
+      "sha256": "c46ff6c04424f56a9d2a95e6820e8f9e9592da64dbae17f7c7e38716ba3c0601"
+    },
+    {
+      "path": "results/cpc2026/ossm_statistical_summary.json",
+      "size_bytes": 8190,
+      "sha256": "887b1ef11ef5d75bd0b95b7b7228dbf91681712f3bd1b8ee8feeff7afc12a064"
+    },
+    {
+      "path": "results/cpc2026/ossm_cross_model_comparison.csv",
+      "size_bytes": 1114,
+      "sha256": "556c34da87e59e8a52da7e55a151bbf067ba92fda7e5089224316b2b9f70b9ae"
+    }
+  ],
+  "local_only_patterns": [
+    "data/cpc2026/trajectories_*_input.npy",
+    "results/cpc2026/ossm_trajectories_*.csv"
+  ],
+  "reason": "GitHub file-size limits require versioning compressed CPC O-SSM artifacts while keeping raw paper-scale tensors and CSVs local-only."
+}

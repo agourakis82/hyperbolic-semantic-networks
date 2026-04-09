@@ -1,0 +1,62 @@
+{
+  "seed": 20260409,
+  "n_nodes": 438,
+  "feature_columns": [
+    "feature_kappa",
+    "feature_entropy_norm",
+    "feature_c_ent",
+    "feature_valence",
+    "feature_poincare_x",
+    "feature_poincare_y",
+    "feature_log_degree",
+    "feature_eta_local"
+  ],
+  "vector_layout": [
+    "kappa",
+    "entropy_norm",
+    "c_ent_scaled",
+    "valence_centered",
+    "poincare_x",
+    "poincare_y",
+    "log_degree_scaled",
+    "eta_local_scaled"
+  ],
+  "normalization": {
+    "kappa": "identity_clip[-1,1]",
+    "entropy_norm": "identity_clip[-1,1]",
+    "c_ent_scaled": {
+      "method": "max_abs",
+      "scale": 0.5
+    },
+    "valence_centered": "identity_clip[-1,1]",
+    "poincare_x": "identity_clip[-1,1]",
+    "poincare_y": "identity_clip[-1,1]",
+    "log_degree_scaled": {
+      "method": "minmax_to_unit",
+      "min": 0.0,
+      "max": 2.5649493574615367
+    },
+    "eta_local_scaled": {
+      "method": "minmax_to_unit",
+      "min": 0.324,
+      "max": 2.25
+    }
+  },
+  "poincare_embedding_engine": "gensim_poincare",
+  "raw_columns_retained": [
+    "degree",
+    "strength",
+    "entropy",
+    "entropy_norm",
+    "kappa",
+    "C_ent",
+    "valence_centered",
+    "arousal_raw",
+    "dominance_raw",
+    "x",
+    "y",
+    "radius",
+    "log_degree_raw",
+    "eta_local_raw"
+  ]
+}

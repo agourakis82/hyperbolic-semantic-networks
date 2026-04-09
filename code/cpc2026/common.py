@@ -31,9 +31,11 @@ FIGURES_DIR = REPO_ROOT / "figures"
 SUBMISSION_DIR = REPO_ROOT / "submission"
 
 CPC_CODE_DIR = Path(__file__).resolve().parent
+CPC_DATA_DIR = DATA_DIR / "cpc2026"
 CPC_RESULTS_DIR = RESULTS_DIR / "cpc2026"
 CPC_FIGURES_DIR = FIGURES_DIR / "cpc2026"
 CPC_SUBMISSION_DIR = SUBMISSION_DIR / "cpc2026"
+CPC_SOUNIO_INPUT_DIR = CPC_DATA_DIR / "sounio_input"
 
 SWOW_FINAL_CSV = PROCESSED_DATA_DIR / "english_edges_FINAL.csv"
 SWOW_VALENCE_CSV = PROCESSED_DATA_DIR / "swow_en_valence.csv"
@@ -53,6 +55,10 @@ HYBRID_EXAMPLES_PARQUET = CPC_RESULTS_DIR / "trajectories_hybrid_examples.parque
 EXAMPLE_TRAJECTORIES_PARQUET = CPC_RESULTS_DIR / "example_trajectories.parquet"
 ENTROPY_PRODUCTION_CSV = CPC_RESULTS_DIR / "entropy_production_time_series.csv"
 REGIME_SUMMARY_CSV = CPC_RESULTS_DIR / "regime_summary.csv"
+NODE_FEATURES_CSV = CPC_DATA_DIR / "swow_en_node_features.csv"
+NODE_FEATURES_NPY = CPC_DATA_DIR / "swow_en_node_features.npy"
+NODE_FEATURES_METADATA_JSON = CPC_DATA_DIR / "node_feature_metadata.json"
+SOUNIO_INPUT_MANIFEST_JSON = CPC_SOUNIO_INPUT_DIR / "manifest.json"
 
 DEFAULT_SEED = 20260409
 
@@ -298,6 +304,16 @@ def load_node_metrics(path: Path = NODE_METRICS_PARQUET) -> pd.DataFrame:
     return pd.read_parquet(path)
 
 
+def load_poincare_embedding(path: Path = POINCARE_EMBEDDING_PARQUET) -> pd.DataFrame:
+    """Load the cached CPC Poincare embedding."""
+
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Poincare embedding not found at {path}. Run trajectory_simulator.py first."
+        )
+    return pd.read_parquet(path)
+
+
 def load_valence_data(path: Path = SWOW_VALENCE_CSV) -> pd.DataFrame:
     """Load merged SWOW-EN valence annotations."""
 
@@ -310,6 +326,24 @@ def trajectory_path(regime: str) -> Path:
     """Return the standard parquet path for one regime's trajectories."""
 
     return CPC_RESULTS_DIR / f"trajectories_{regime}.parquet"
+
+
+def trajectory_input_tensor_path(regime: str) -> Path:
+    """Return the standard numpy tensor path for one regime's O-SSM inputs."""
+
+    return CPC_DATA_DIR / f"trajectories_{regime}_input.npy"
+
+
+def trajectory_node_index_path(regime: str) -> Path:
+    """Return the numpy path for node-index trajectories."""
+
+    return CPC_DATA_DIR / f"trajectories_{regime}_nodes.npy"
+
+
+def trajectory_sounio_csv_path(regime: str) -> Path:
+    """Return the compact row-wise CSV path exported for Sounio."""
+
+    return CPC_SOUNIO_INPUT_DIR / f"trajectories_{regime}_nodes.csv"
 
 
 def load_phase_transition_reference(path: Path = PHASE_TRANSITION_REFERENCE_JSON) -> pd.DataFrame:

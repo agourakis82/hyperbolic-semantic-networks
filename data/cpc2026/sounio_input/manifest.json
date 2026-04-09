@@ -1,0 +1,77 @@
+{
+  "seed": 20260409,
+  "format": "rowwise_node_indices_csv_plus_feature_lookup",
+  "feature_file": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/node_features.csv",
+  "feature_columns": [
+    "feature_kappa",
+    "feature_entropy_norm",
+    "feature_c_ent",
+    "feature_valence",
+    "feature_poincare_x",
+    "feature_poincare_y",
+    "feature_log_degree",
+    "feature_eta_local"
+  ],
+  "node_feature_metadata": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/node_feature_metadata.json",
+  "trajectory_generation_metadata": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/trajectory_input_metadata.json",
+  "parity_defaults": {
+    "max_trajectories": 64,
+    "max_steps": 64
+  },
+  "regimes": {
+    "normative": {
+      "node_csv": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/trajectories_normative_nodes.csv",
+      "shape": [
+        10000,
+        500
+      ],
+      "parity_node_csv": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/trajectories_normative_nodes_parity.csv",
+      "parity_shape": [
+        64,
+        64
+      ]
+    },
+    "anxious": {
+      "node_csv": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/trajectories_anxious_nodes.csv",
+      "shape": [
+        10000,
+        500
+      ],
+      "parity_node_csv": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/trajectories_anxious_nodes_parity.csv",
+      "parity_shape": [
+        64,
+        64
+      ]
+    },
+    "ruminative": {
+      "node_csv": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/trajectories_ruminative_nodes.csv",
+      "shape": [
+        10000,
+        500
+      ],
+      "parity_node_csv": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/trajectories_ruminative_nodes_parity.csv",
+      "parity_shape": [
+        64,
+        64
+      ]
+    },
+    "psychotic": {
+      "node_csv": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/trajectories_psychotic_nodes.csv",
+      "shape": [
+        10000,
+        500
+      ],
+      "parity_node_csv": "/home/demetrios/work/hyperbolic-semantic-networks/data/cpc2026/sounio_input/trajectories_psychotic_nodes_parity.csv",
+      "parity_shape": [
+        64,
+        64
+      ]
+    }
+  },
+  "notes": [
+    "Each trajectory CSV row contains one trajectory_id followed by 500 node indices.",
+    "Sounio should load node_features.csv once, then look up the 8D vector for each node index.",
+    "The *_parity.csv files provide a bounded 64 x 64 subset for executable Sounio parity runs.",
+    "Dense .npy tensors remain in data/cpc2026/ for Python-side analysis."
+  ]
+}

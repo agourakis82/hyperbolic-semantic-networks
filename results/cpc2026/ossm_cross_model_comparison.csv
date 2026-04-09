@@ -1,0 +1,5 @@
+metric,markov_metric,ossm_metric,markov_d,ossm_d,markov_normative_mean,markov_anxious_mean,ossm_normative_mean,ossm_anxious_mean,note
+C_ent variance,c_ent_variance,c_ent_variance,-0.26588450227800453,-0.3337011452487621,0.017474202439188957,0.01461960468441248,0.019666841253638268,0.015830522403120995,Directly comparable trajectory-level C_ent variance.
+Hurst exponent,hurst_exponent,hurst_exponent,0.6126887847906675,0.5412710409353454,0.7498754138034396,0.8621568568910764,0.7826638377406362,0.8750877666718762,Directly comparable DFA on the model output series.
+Residence in high-entropy hubs,residence_fraction_high_entropy,residence_fraction_high_entropy,0.4528895538199423,0.4528895538199423,0.14144759999999998,0.18540900000000002,0.14144759999999998,0.18540900000000002,Inherited from the input walk under the current no-training O-SSM setup.
+Entropy production,entropy_production_rate,hidden_entropy_production_rate,-0.38086630417892897,11.650868078041157,0.6890639448137734,0.605987800065101,0.0016760078724473715,0.014764606021344662,Markov uses visited-node entropy; O-SSM uses hidden-state entropy.
