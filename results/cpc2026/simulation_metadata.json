@@ -1,0 +1,33 @@
+{
+  "seed": 20260409,
+  "n_trajectories_per_regime": 10000,
+  "trajectory_length": 500,
+  "regimes": [
+    {
+      "name": "normative",
+      "temperature": 0.5,
+      "valence_bias": 0.0,
+      "description": "Low-temperature, balanced exploration with entropy penalty."
+    },
+    {
+      "name": "anxious",
+      "temperature": 2.0,
+      "valence_bias": -1.0,
+      "description": "High-temperature exploration with negative-valence priming."
+    },
+    {
+      "name": "ruminative",
+      "temperature": 0.3,
+      "valence_bias": -0.5,
+      "description": "Low-temperature trapping with mild negative-valence priming."
+    },
+    {
+      "name": "psychotic",
+      "temperature": 5.0,
+      "valence_bias": 0.0,
+      "description": "Maximum stochasticity via uniform neighbor sampling."
+    }
+  ],
+  "embedding_path": "/home/demetrios/work/hyperbolic-semantic-networks/results/cpc2026/poincare_embedding.parquet",
+  "exploratory_engines_saved": false
+}

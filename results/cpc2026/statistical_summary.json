@@ -1,0 +1,147 @@
+{
+  "seed": 20260409,
+  "high_entropy_threshold": 1.385678232707365,
+  "n_bootstrap": 1000,
+  "per_regime": {
+    "normative": {
+      "n_trajectories": 10000,
+      "mean_c_ent_variance": 0.017474202439188957,
+      "ci_c_ent_variance": [
+        0.017195746349170805,
+        0.017743581254035235
+      ],
+      "mean_residence_fraction_high_entropy": 0.14144759999999998,
+      "ci_residence_fraction_high_entropy": [
+        0.13878139999999997,
+        0.14396918500000003
+      ],
+      "mean_entropy_production_rate": 0.6890639448137734,
+      "ci_entropy_production_rate": [
+        0.6833574691708182,
+        0.6954325305983611
+      ],
+      "mean_hurst_exponent": 0.7498754138034396,
+      "ci_hurst_exponent": [
+        0.7452890700587705,
+        0.7546536346269819
+      ]
+    },
+    "anxious": {
+      "n_trajectories": 10000,
+      "mean_c_ent_variance": 0.01461960468441248,
+      "ci_c_ent_variance": [
+        0.014497532974928617,
+        0.014726813905872405
+      ],
+      "mean_residence_fraction_high_entropy": 0.18540900000000002,
+      "ci_residence_fraction_high_entropy": [
+        0.184355515,
+        0.18652407
+      ],
+      "mean_entropy_production_rate": 0.605987800065101,
+      "ci_entropy_production_rate": [
+        0.6045688181950869,
+        0.607426653111758
+      ],
+      "mean_hurst_exponent": 0.8621568568910764,
+      "ci_hurst_exponent": [
+        0.8608173880932448,
+        0.863518780465443
+      ]
+    },
+    "ruminative": {
+      "n_trajectories": 10000,
+      "mean_c_ent_variance": 0.0118767274543643,
+      "ci_c_ent_variance": [
+        0.011594591313041747,
+        0.012154776742681861
+      ],
+      "mean_residence_fraction_high_entropy": 0.12118499999999999,
+      "ci_residence_fraction_high_entropy": [
+        0.11786048,
+        0.12483095500000001
+      ],
+      "mean_entropy_production_rate": 0.6675591391624662,
+      "ci_entropy_production_rate": [
+        0.6590516675433623,
+        0.6753270200991583
+      ],
+      "mean_hurst_exponent": 0.4802930293070047,
+      "ci_hurst_exponent": [
+        0.47378096178655726,
+        0.48622431132813926
+      ]
+    },
+    "psychotic": {
+      "n_trajectories": 10000,
+      "mean_c_ent_variance": 0.009194951504468918,
+      "ci_c_ent_variance": [
+        0.009130831994116306,
+        0.009259908017702401
+      ],
+      "mean_residence_fraction_high_entropy": 0.237891,
+      "ci_residence_fraction_high_entropy": [
+        0.23685169,
+        0.238834025
+      ],
+      "mean_entropy_production_rate": 0.6051837035079548,
+      "ci_entropy_production_rate": [
+        0.604072106412333,
+        0.6063254474046041
+      ],
+      "mean_hurst_exponent": 0.8313943854433393,
+      "ci_hurst_exponent": [
+        0.8300735271834603,
+        0.8326667134332225
+      ]
+    }
+  },
+  "comparisons": {
+    "normative_vs_anxious_c_ent_variance": {
+      "cohens_d": -0.26588450227800453,
+      "ci": [
+        -0.28981890047915704,
+        -0.24249784423040882
+      ],
+      "p_value": 7.1669623893164555e-78,
+      "normative_mean": 0.017474202439188957,
+      "anxious_mean": 0.01461960468441248
+    },
+    "normative_vs_anxious_high_entropy_residence": {
+      "percent_increase": 31.07963655799042,
+      "ci": [
+        28.526067161186717,
+        33.553074910382186
+      ],
+      "p_value": 0.0,
+      "normative_mean": 0.14144759999999998,
+      "anxious_mean": 0.18540900000000002
+    }
+  },
+  "phase_transition_reference": {
+    "eta_critical_reference": 2.939427214662331,
+    "eta_critical_method": "linear_interpolation",
+    "swow_eta": 0.019498338594933346,
+    "swow_mean_kappa": -0.044180623454374145,
+    "swow_position": "subcritical_hyperbolic"
+  },
+  "abstract_claim_check": {
+    "cohens_d_claim": {
+      "claimed": 1.84,
+      "observed": -0.26588450227800453
+    },
+    "residence_time_claim_percent": {
+      "claimed": 47.0,
+      "observed": 31.07963655799042
+    },
+    "hurst_pathology_direction": {
+      "claimed": "pathological_regimes_lower_than_normative",
+      "observed": {
+        "normative": 0.7498754138034396,
+        "anxious": 0.8621568568910764,
+        "ruminative": 0.4802930293070047,
+        "psychotic": 0.8313943854433393
+      }
+    }
+  }
+}

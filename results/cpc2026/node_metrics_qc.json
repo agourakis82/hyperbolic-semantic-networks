@@ -1,0 +1,19 @@
+{
+  "graph_n_nodes": 438,
+  "graph_n_edges": 640,
+  "artifact_kappa_mean": -0.137147,
+  "artifact_kappa_std": 0.312363,
+  "node_kappa_mean": -0.044180623454374145,
+  "node_c_ent_mean": 0.039849542673963685,
+  "exact_artifact_used": true,
+  "n_nodes": 438,
+  "n_edges": 640,
+  "mean_degree": 2.922374429223744,
+  "eta": 0.019498338594933346,
+  "weight_min": 0.06,
+  "weight_max": 1.09,
+  "is_connected": true,
+  "graphricci_validation_available": true,
+  "graphricci_node_correlation": 0.7374205998913105,
+  "graphricci_mean_absolute_difference": 0.265382797777011
+}
