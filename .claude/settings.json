@@ -61,7 +61,8 @@
       "Bash(unzip -p SWOW-RP22.zip strength.SWOWRP.R1.20220426.csv)",
       "WebFetch(domain:w3.usf.edu)",
       "WebFetch(domain:vlado.fmf.uni-lj.si)",
-      "WebFetch(domain:www.psychonomic.org)"
+      "WebFetch(domain:www.psychonomic.org)",
+      "Bash(make cpc2026-poster:*)"
     ]
   }
 }
