@@ -1,0 +1,554 @@
+// quaternion_sinkhorn.sio — Quaternionic Ollivier-Ricci Curvature for Brain Networks
+//
+// PHASE 9 (Brain Hypercomplex): Extends sinkhorn_adaptive.sio to compute
+// quaternion-valued κ_ℍ(u,v) ∈ ℍ per edge, fusing 4 brain modalities:
+//
+//   κ_ℍ.r  →  fMRI BOLD functional connectivity
+//   κ_ℍ.i  →  DTI structural tractography strength
+//   κ_ℍ.j  →  EEG/MEG spectral power
+//   κ_ℍ.k  →  clinical phenotype score (ASD/ADHD-RS)
+//
+// Strategy: 4 independent Sinkhorn solves (one per ℍ-component).
+// The real part κ_ℍ.r is the standard ORC curvature; components i,j,k
+// reveal *which modality* drives fragility on each edge.
+//
+// Validation gate: |κ_ℍ.r − κ_scalar| < 0.03 (matching Phase 1-3 bias bound)
+//
+// Key types:
+//   Quaternion    { r: f64, i: f64, j: f64, k: f64 }
+//   QMeasure      { nodes, w_r, w_i, w_j, w_k, len }  — ℍ-weighted node measure
+//   QuatKappa     { u, v, kappa: Quaternion, norm: f64, dom_comp: i64 }
+//
+// Key functions:
+//   quat_w1(mu, nu, dists, cfg) -> Quaternion    4 Sinkhorn solves
+//   quat_kappa_edge(u, v, qm, dists, cfg) -> QuatKappa
+//   quat_norm(q) -> f64                           |κ_ℍ| = overall robustness
+//   quat_dom_component(q) -> i64                  dominant modality (0=r,1=i,2=j,3=k)
+//
+// Author: Hyperbolic Semantic Networks Project — Phase 9
+// Version: 1.0.0
+
+// ============================================================================
+// Pure-Sounio exp() — .exp() method returns () in beta.4, use this instead
+// ============================================================================
+
+fn sc_exp(x: f64) -> f64 with Mut, Div {
+    let ln2     = 0.6931471805599453
+    let inv_ln2 = 1.4426950408889634
+    if x >  709.0 { return 1.0e308 }
+    if x < -709.0 { return 0.0 }
+    var k_f = x * inv_ln2
+    var k: i64 = 0
+    if k_f >= 0.0 { k = (k_f + 0.5) as i64 } else { k = (k_f - 0.5) as i64 }
+    let r = x - (k as f64) * ln2
+    var sum  = 1.0
+    var term = 1.0
+    var n = 1
+    while n <= 20 { term = term * r / (n as f64); sum = sum + term; n = n + 1 }
+    var result = sum
+    if k > 0 {
+        var j: i64 = 0
+        while j < k { result = result * 2.0; j = j + 1 }
+    } else if k < 0 {
+        var j: i64 = 0
+        while j < (0 - k) { result = result * 0.5; j = j + 1 }
+    }
+    result
+}
+
+// Pure-Sounio sqrt via Newton-Raphson (50 iterations, from Phase 2)
+fn sc_sqrt(x: f64) -> f64 with Mut, Div, Panic {
+    if x <= 0.0 { return 0.0 }
+    var g = x
+    if g > 1.0 { g = 1.0 + (x - 1.0) * 0.5 }
+    var i = 0
+    while i < 50 { g = (g + x / g) * 0.5; i = i + 1 }
+    g
+}
+
+// ============================================================================
+// Constants
+// ============================================================================
+
+let MAX_N:        usize = 500
+let MAX_DEG:      usize = 60
+let MAX_SUP:      usize = 41    // max support per measure (MAX_DEG + 1)
+let FLOOR:        f64   = 1e-300
+
+// ============================================================================
+// SinkhornConfig (copied from sinkhorn_adaptive.sio for standalone use)
+// ============================================================================
+
+struct SinkhornConfig {
+    epsilon:  f64,
+    max_iter: usize,
+    tol:      f64,
+    adaptive: bool,
+}
+
+fn sinkhorn_default() -> SinkhornConfig {
+    SinkhornConfig { epsilon: 0.1, max_iter: 300, tol: 1e-6, adaptive: false }
+}
+
+fn sinkhorn_strict() -> SinkhornConfig {
+    SinkhornConfig { epsilon: 0.01, max_iter: 500, tol: 1e-8, adaptive: false }
+}
+
+// ============================================================================
+// Scalar Measure and DistMatrix (for gate validation)
+// ============================================================================
+
+struct Measure {
+    nodes: [usize; 41],
+    probs: [f64;   41],
+    len:   usize,
+}
+
+struct DistMatrix {
+    d: [i64; 250000],
+    n: usize,
+}
+
+// ============================================================================
+// Quaternion and QMeasure
+// ============================================================================
+
+// A quaternion q = r + i·î + j·ĵ + k·k̂
+struct Quaternion {
+    r: f64,
+    i: f64,
+    j: f64,
+    k: f64,
+}
+
+fn quat_zero() -> Quaternion {
+    Quaternion { r: 0.0, i: 0.0, j: 0.0, k: 0.0 }
+}
+
+// |q|² = r² + i² + j² + k²
+fn quat_norm_sq(q: &Quaternion) -> f64 with Mut, Div {
+    q.r * q.r + q.i * q.i + q.j * q.j + q.k * q.k
+}
+
+// |q| = sqrt(|q|²)
+fn quat_norm(q: &Quaternion) -> f64 with Mut, Div, Panic {
+    sc_sqrt(quat_norm_sq(q))
+}
+
+// Returns 0=r, 1=i, 2=j, 3=k for the component with largest |κ_ℍ| contribution
+// (the "dominant modality" — which brain signal drives edge fragility)
+fn quat_dom_component(q: &Quaternion) -> i64 {
+    let ar = if q.r >= 0.0 { q.r } else { -q.r }
+    let ai = if q.i >= 0.0 { q.i } else { -q.i }
+    let aj = if q.j >= 0.0 { q.j } else { -q.j }
+    let ak = if q.k >= 0.0 { q.k } else { -q.k }
+    var dom: i64 = 0
+    var mx = ar
+    if ai > mx { mx = ai; dom = 1 }
+    if aj > mx { mx = aj; dom = 2 }
+    if ak > mx { dom = 3 }
+    dom
+}
+
+// Quaternion-weighted measure: each node has a 4-component weight vector
+// encoding its multi-modal omics/imaging data.
+// Normalization: each component's weights sum to 1 independently.
+struct QMeasure {
+    nodes: [usize; 41],   // node index support (shared across components)
+    w_r:   [f64;   41],   // fMRI BOLD weights (sum to 1)
+    w_i:   [f64;   41],   // DTI tractography weights (sum to 1)
+    w_j:   [f64;   41],   // EEG/MEG spectral weights (sum to 1)
+    w_k:   [f64;   41],   // clinical score weights (sum to 1)
+    len:   usize,
+}
+
+// Build a QMeasure from a scalar Measure plus 3 additional component arrays.
+// Copies the node support; caller provides pre-normalized weight vectors.
+fn qmeasure_from_measure(
+    base:  &Measure,
+    wi:    &[f64; 41],
+    wj:    &[f64; 41],
+    wk:    &[f64; 41]
+) -> QMeasure with Mut, Panic {
+    var nodes: [usize; 41] = [0;   41]
+    var wr:    [f64;   41] = [0.0; 41]
+    var wi_c:  [f64;   41] = [0.0; 41]
+    var wj_c:  [f64;   41] = [0.0; 41]
+    var wk_c:  [f64;   41] = [0.0; 41]
+    var idx: usize = 0
+    while idx < base.len {
+        nodes[idx] = base.nodes[idx]
+        wr[idx]    = base.probs[idx]
+        wi_c[idx]  = wi[idx]
+        wj_c[idx]  = wj[idx]
+        wk_c[idx]  = wk[idx]
+        idx = idx + 1
+    }
+    QMeasure { nodes: nodes, w_r: wr, w_i: wi_c, w_j: wj_c, w_k: wk_c, len: base.len }
+}
+
+// ============================================================================
+// Core Sinkhorn solver (single component, returns scalar W1)
+// ============================================================================
+
+fn sinkhorn_w1_component(
+    nodes_mu: &[usize; 41],
+    probs_mu: &[f64;   41],
+    nm:        usize,
+    nodes_nu: &[usize; 41],
+    probs_nu: &[f64;   41],
+    nn:        usize,
+    dists:    &DistMatrix,
+    cfg:      &SinkhornConfig
+) -> f64 with Mut, Div, Panic {
+    if nm == 0 || nn == 0 { return 0.0 }
+
+    let n   = dists.n
+    let eps = cfg.epsilon
+
+    var cost: [f64; 1681] = [0.0; 1681]
+    var kmat: [f64; 1681] = [0.0; 1681]
+    var u_s:  [f64;   41] = [1.0;   41]
+    var v_s:  [f64;   41] = [1.0;   41]
+
+    var i: usize = 0
+    while i < nm {
+        var j: usize = 0
+        while j < nn {
+            let ui = nodes_mu[i]
+            let vj = nodes_nu[j]
+            let dv = dists.d[ui * n + vj]
+            let c  = if dv >= 0 { dv as f64 } else { 100.0 }
+            cost[i * MAX_SUP + j] = c
+            kmat[i * MAX_SUP + j] = sc_exp(-(c / eps))
+            j = j + 1
+        }
+        i = i + 1
+    }
+
+    var iter: usize = 0
+    while iter < cfg.max_iter {
+        i = 0
+        while i < nm {
+            var s: f64 = 0.0
+            var j: usize = 0
+            while j < nn { s = s + kmat[i * MAX_SUP + j] * v_s[j]; j = j + 1 }
+            if s > FLOOR { u_s[i] = probs_mu[i] / s }
+            i = i + 1
+        }
+        var j: usize = 0
+        while j < nn {
+            var s: f64 = 0.0
+            i = 0
+            while i < nm { s = s + kmat[i * MAX_SUP + j] * u_s[i]; i = i + 1 }
+            if s > FLOOR { v_s[j] = probs_nu[j] / s }
+            j = j + 1
+        }
+        iter = iter + 1
+    }
+
+    var w1: f64 = 0.0
+    i = 0
+    while i < nm {
+        var j: usize = 0
+        while j < nn {
+            w1 = w1 + u_s[i] * kmat[i * MAX_SUP + j] * v_s[j] * cost[i * MAX_SUP + j]
+            j  = j + 1
+        }
+        i = i + 1
+    }
+    w1
+}
+
+// ============================================================================
+// Quaternionic W1: 4 independent Sinkhorn solves
+// ============================================================================
+
+// Compute W₁_ℍ(mu, nu) = Quaternion of 4 independent W1 values.
+// Each component solves the same transport problem but with different
+// node weights (different brain modalities).
+fn quat_w1(
+    mu:    &QMeasure,
+    nu:    &QMeasure,
+    dists: &DistMatrix,
+    cfg:   &SinkhornConfig
+) -> Quaternion with Mut, Div, Panic {
+    // Real component (fMRI BOLD)
+    let wr = sinkhorn_w1_component(
+        &mu.nodes, &mu.w_r, mu.len,
+        &nu.nodes, &nu.w_r, nu.len,
+        dists, cfg
+    )
+    // i-component (DTI tractography)
+    let wi = sinkhorn_w1_component(
+        &mu.nodes, &mu.w_i, mu.len,
+        &nu.nodes, &nu.w_i, nu.len,
+        dists, cfg
+    )
+    // j-component (EEG/MEG spectral power)
+    let wj = sinkhorn_w1_component(
+        &mu.nodes, &mu.w_j, mu.len,
+        &nu.nodes, &nu.w_j, nu.len,
+        dists, cfg
+    )
+    // k-component (clinical phenotype)
+    let wk = sinkhorn_w1_component(
+        &mu.nodes, &mu.w_k, mu.len,
+        &nu.nodes, &nu.w_k, nu.len,
+        dists, cfg
+    )
+    Quaternion { r: wr, i: wi, j: wj, k: wk }
+}
+
+// ============================================================================
+// Quaternionic κ_ℍ per edge
+// ============================================================================
+
+// Result struct: quaternionic curvature for a single edge (u,v)
+struct QuatKappa {
+    u:        usize,
+    v:        usize,
+    kappa:    Quaternion,  // κ_ℍ = 1 - W₁_ℍ / d(u,v)   (component-wise)
+    norm:     f64,         // |κ_ℍ| = overall edge robustness
+    dom_comp: i64,         // dominant modality (0=fMRI,1=DTI,2=EEG,3=clinical)
+}
+
+// Compute quaternionic ORC for edge (u,v).
+// d(u,v) is taken from dists; same divisor applied to all 4 components.
+fn quat_kappa_edge(
+    u:     usize,
+    v:     usize,
+    mu:    &QMeasure,
+    nu:    &QMeasure,
+    dists: &DistMatrix,
+    cfg:   &SinkhornConfig
+) -> QuatKappa with Mut, Div, Panic {
+    let n   = dists.n
+    let duv = dists.d[u * n + v]
+    let d   = if duv > 0 { duv as f64 } else { 1.0 }
+
+    let w1q = quat_w1(mu, nu, dists, cfg)
+
+    // κ_ℍ(u,v) = 1 - W₁_ℍ(μ_u, μ_v) / d(u,v), component-wise
+    let kappa = Quaternion {
+        r: 1.0 - w1q.r / d,
+        i: 1.0 - w1q.i / d,
+        j: 1.0 - w1q.j / d,
+        k: 1.0 - w1q.k / d,
+    }
+
+    let nm   = quat_norm(&kappa)
+    let dom  = quat_dom_component(&kappa)
+
+    QuatKappa { u: u, v: v, kappa: kappa, norm: nm, dom_comp: dom }
+}
+
+// ============================================================================
+// Scalar Sinkhorn W1 (for gate validation — must match sinkhorn_adaptive.sio)
+// ============================================================================
+
+fn wasserstein1_scalar(
+    mu:    &Measure,
+    nu:    &Measure,
+    dists: &DistMatrix,
+    cfg:   &SinkhornConfig
+) -> f64 with Mut, Div, Panic {
+    sinkhorn_w1_component(
+        &mu.nodes, &mu.probs, mu.len,
+        &nu.nodes, &nu.probs, nu.len,
+        dists, cfg
+    )
+}
+
+// ============================================================================
+// main(): Validation on P4 path graph
+// ============================================================================
+//
+// Test 1 — scalar gate: κ_ℍ.r on pure-fMRI measures must match scalar κ
+//   Expected: |κ_ℍ.r − κ_scalar| < 0.03
+//
+// Test 2 — quaternionic: with 4 distinct modalities, all components computed
+//   Expected: dom_comp reflects the component with largest deviation from zero
+//
+// Test 3 — K4 complete graph: all edges should have κ_ℍ.r > 0 (spherical)
+
+fn main() with IO, Mut, Div, Panic {
+    println("quaternion_sinkhorn.sio — Quaternionic ORC Validation")
+    println("=======================================================")
+    println("")
+
+    // ------------------------------------------------------------------
+    // Build P4 path graph: 0-1-2-3
+    // ------------------------------------------------------------------
+    var raw4: [i64; 250000] = [0; 250000]
+    let n4: usize = 4
+    raw4[0 * n4 + 1] = 1; raw4[0 * n4 + 2] = 2; raw4[0 * n4 + 3] = 3
+    raw4[1 * n4 + 0] = 1; raw4[1 * n4 + 2] = 1; raw4[1 * n4 + 3] = 2
+    raw4[2 * n4 + 0] = 2; raw4[2 * n4 + 1] = 1; raw4[2 * n4 + 3] = 1
+    raw4[3 * n4 + 0] = 3; raw4[3 * n4 + 1] = 2; raw4[3 * n4 + 2] = 1
+    let dists4 = DistMatrix { d: raw4, n: n4 }
+
+    // Lazy random walk (alpha=0.5) at node 1: mu_1 = {0: 0.5, 1: 0.5 (idle), 2: 0.5}
+    // Normalized: deg(1)=2, alpha=0.5 → mu_1(1)=0.5, mu_1(0)=0.25, mu_1(2)=0.25
+    var mu_nodes: [usize; 41] = [0; 41]
+    var mu_probs: [f64;   41] = [0.0; 41]
+    mu_nodes[0] = 1; mu_nodes[1] = 0; mu_nodes[2] = 2
+    mu_probs[0] = 0.5; mu_probs[1] = 0.25; mu_probs[2] = 0.25
+    let mu_scalar = Measure { nodes: mu_nodes, probs: mu_probs, len: 3 }
+
+    // Node 2: deg(2)=2, alpha=0.5 → mu_2(2)=0.5, mu_2(1)=0.25, mu_2(3)=0.25
+    var nu_nodes: [usize; 41] = [0; 41]
+    var nu_probs: [f64;   41] = [0.0; 41]
+    nu_nodes[0] = 2; nu_nodes[1] = 1; nu_nodes[2] = 3
+    nu_probs[0] = 0.5; nu_probs[1] = 0.25; nu_probs[2] = 0.25
+    let nu_scalar = Measure { nodes: nu_nodes, probs: nu_probs, len: 3 }
+
+    let cfg = sinkhorn_default()
+
+    // ------------------------------------------------------------------
+    // TEST 1: Scalar gate — κ_ℍ.r must match κ_scalar
+    // ------------------------------------------------------------------
+    println("TEST 1: Scalar gate (κ_ℍ.r vs κ_scalar on P4 edge 1-2)")
+    println("----------------------------------------------------------")
+
+    let w1_scalar = wasserstein1_scalar(&mu_scalar, &nu_scalar, &dists4, &cfg)
+    let d12 = dists4.d[1 * n4 + 2] as f64   // d(1,2)=1
+    let kappa_scalar = 1.0 - w1_scalar / d12
+
+    print("  W1 scalar:    "); print(w1_scalar);   println("")
+    print("  κ scalar:     "); print(kappa_scalar); println("")
+
+    // Build QMeasure with identical weights across all 4 components
+    var wi_same: [f64; 41] = [0.0; 41]
+    var wj_same: [f64; 41] = [0.0; 41]
+    var wk_same: [f64; 41] = [0.0; 41]
+    wi_same[0] = 0.5; wi_same[1] = 0.25; wi_same[2] = 0.25
+    wj_same[0] = 0.5; wj_same[1] = 0.25; wj_same[2] = 0.25
+    wk_same[0] = 0.5; wk_same[1] = 0.25; wk_same[2] = 0.25
+    let qmu = qmeasure_from_measure(&mu_scalar, &wi_same, &wj_same, &wk_same)
+
+    var wi_nu: [f64; 41] = [0.0; 41]
+    var wj_nu: [f64; 41] = [0.0; 41]
+    var wk_nu: [f64; 41] = [0.0; 41]
+    wi_nu[0] = 0.5; wi_nu[1] = 0.25; wi_nu[2] = 0.25
+    wj_nu[0] = 0.5; wj_nu[1] = 0.25; wj_nu[2] = 0.25
+    wk_nu[0] = 0.5; wk_nu[1] = 0.25; wk_nu[2] = 0.25
+    let qnu = qmeasure_from_measure(&nu_scalar, &wi_nu, &wj_nu, &wk_nu)
+
+    let qk12 = quat_kappa_edge(1, 2, &qmu, &qnu, &dists4, &cfg)
+
+    print("  κ_ℍ.r:        "); print(qk12.kappa.r); println("")
+    print("  κ_ℍ.i:        "); print(qk12.kappa.i); println("")
+    print("  κ_ℍ.j:        "); print(qk12.kappa.j); println("")
+    print("  κ_ℍ.k:        "); print(qk12.kappa.k); println("")
+    print("  |κ_ℍ| (norm): "); print(qk12.norm);    println("")
+    print("  dom_comp:     "); print(qk12.dom_comp); println("  (0=fMRI,1=DTI,2=EEG,3=clin)")
+
+    let err_r = if qk12.kappa.r >= kappa_scalar {
+        qk12.kappa.r - kappa_scalar
+    } else {
+        kappa_scalar - qk12.kappa.r
+    }
+    print("  |κ_ℍ.r − κ_scalar| = "); print(err_r); println("")
+    if err_r < 0.03 {
+        println("  GATE PASS: |Δ| < 0.03 ✓")
+    } else {
+        println("  GATE FAIL: |Δ| >= 0.03 ✗")
+    }
+    println("")
+
+    // ------------------------------------------------------------------
+    // TEST 2: Multi-modal — distinct weights per component
+    // ------------------------------------------------------------------
+    println("TEST 2: Multi-modal quaternionic ORC on P4 edge 1-2")
+    println("------------------------------------------------------")
+    println("  Scenario: fMRI=standard, DTI=uniform, EEG=concentrated, clinical=zero")
+
+    // fMRI (standard lazy walk — same as scalar)
+    // DTI: uniform across support
+    var wi_dti_mu: [f64; 41] = [0.0; 41]
+    var wi_dti_nu: [f64; 41] = [0.0; 41]
+    wi_dti_mu[0] = 0.333; wi_dti_mu[1] = 0.333; wi_dti_mu[2] = 0.334
+    wi_dti_nu[0] = 0.333; wi_dti_nu[1] = 0.333; wi_dti_nu[2] = 0.334
+
+    // EEG: concentrated at self-node (high idleness — strong signal)
+    var wj_eeg_mu: [f64; 41] = [0.0; 41]
+    var wj_eeg_nu: [f64; 41] = [0.0; 41]
+    wj_eeg_mu[0] = 0.9; wj_eeg_mu[1] = 0.05; wj_eeg_mu[2] = 0.05
+    wj_eeg_nu[0] = 0.9; wj_eeg_nu[1] = 0.05; wj_eeg_nu[2] = 0.05
+
+    // Clinical: all mass on first neighbor (edge direction dominates)
+    var wk_clin_mu: [f64; 41] = [0.0; 41]
+    var wk_clin_nu: [f64; 41] = [0.0; 41]
+    wk_clin_mu[0] = 1.0
+    wk_clin_nu[0] = 1.0
+
+    let qmu2 = qmeasure_from_measure(&mu_scalar, &wi_dti_mu, &wj_eeg_mu, &wk_clin_mu)
+    let qnu2 = qmeasure_from_measure(&nu_scalar, &wi_dti_nu, &wj_eeg_nu, &wk_clin_nu)
+
+    let qk12_mm = quat_kappa_edge(1, 2, &qmu2, &qnu2, &dists4, &cfg)
+
+    print("  κ_ℍ.r (fMRI):     "); print(qk12_mm.kappa.r); println("")
+    print("  κ_ℍ.i (DTI):      "); print(qk12_mm.kappa.i); println("")
+    print("  κ_ℍ.j (EEG):      "); print(qk12_mm.kappa.j); println("")
+    print("  κ_ℍ.k (clinical): "); print(qk12_mm.kappa.k); println("")
+    print("  |κ_ℍ| (norm):     "); print(qk12_mm.norm);    println("")
+    print("  Dominant modality: "); print(qk12_mm.dom_comp)
+    println("  (0=fMRI,1=DTI,2=EEG,3=clinical)")
+    println("")
+
+    // ------------------------------------------------------------------
+    // TEST 3: K4 complete graph — all edges spherical (κ_ℍ.r > 0)
+    // ------------------------------------------------------------------
+    println("TEST 3: K4 complete graph — κ_ℍ.r > 0 for all edges (spherical)")
+    println("-------------------------------------------------------------------")
+
+    var rawK4: [i64; 250000] = [0; 250000]
+    let nK4: usize = 4
+    // All pairwise distances = 1 (complete graph)
+    rawK4[0 * nK4 + 1] = 1; rawK4[0 * nK4 + 2] = 1; rawK4[0 * nK4 + 3] = 1
+    rawK4[1 * nK4 + 0] = 1; rawK4[1 * nK4 + 2] = 1; rawK4[1 * nK4 + 3] = 1
+    rawK4[2 * nK4 + 0] = 1; rawK4[2 * nK4 + 1] = 1; rawK4[2 * nK4 + 3] = 1
+    rawK4[3 * nK4 + 0] = 1; rawK4[3 * nK4 + 1] = 1; rawK4[3 * nK4 + 2] = 1
+    let distsK4 = DistMatrix { d: rawK4, n: nK4 }
+
+    // K4 lazy measure at node 0: alpha=0.5, deg=3
+    // mu_0(0) = 0.5, mu_0(1) = mu_0(2) = mu_0(3) = 1/6
+    var mk4_0n: [usize; 41] = [0; 41]
+    var mk4_0p: [f64;   41] = [0.0; 41]
+    mk4_0n[0] = 0; mk4_0n[1] = 1; mk4_0n[2] = 2; mk4_0n[3] = 3
+    mk4_0p[0] = 0.5; mk4_0p[1] = 0.1667; mk4_0p[2] = 0.1667; mk4_0p[3] = 0.1666
+    let mK4_0 = Measure { nodes: mk4_0n, probs: mk4_0p, len: 4 }
+
+    var mk4_1n: [usize; 41] = [0; 41]
+    var mk4_1p: [f64;   41] = [0.0; 41]
+    mk4_1n[0] = 1; mk4_1n[1] = 0; mk4_1n[2] = 2; mk4_1n[3] = 3
+    mk4_1p[0] = 0.5; mk4_1p[1] = 0.1667; mk4_1p[2] = 0.1667; mk4_1p[3] = 0.1666
+    let mK4_1 = Measure { nodes: mk4_1n, probs: mk4_1p, len: 4 }
+
+    // Identical DTI/EEG/clinical weights for K4 test
+    var wi_k4: [f64; 41] = [0.0; 41]
+    var wj_k4: [f64; 41] = [0.0; 41]
+    var wk_k4: [f64; 41] = [0.0; 41]
+    wi_k4[0] = 0.5; wi_k4[1] = 0.1667; wi_k4[2] = 0.1667; wi_k4[3] = 0.1666
+    wj_k4[0] = 0.5; wj_k4[1] = 0.1667; wj_k4[2] = 0.1667; wj_k4[3] = 0.1666
+    wk_k4[0] = 0.5; wk_k4[1] = 0.1667; wk_k4[2] = 0.1667; wk_k4[3] = 0.1666
+
+    let qmK4_0 = qmeasure_from_measure(&mK4_0, &wi_k4, &wj_k4, &wk_k4)
+    let qmK4_1 = qmeasure_from_measure(&mK4_1, &wi_k4, &wj_k4, &wk_k4)
+
+    let qkK4 = quat_kappa_edge(0, 1, &qmK4_0, &qmK4_1, &distsK4, &cfg)
+
+    print("  K4 edge (0,1) κ_ℍ.r: "); print(qkK4.kappa.r); println("")
+    print("  K4 edge (0,1) |κ_ℍ|:  "); print(qkK4.norm);    println("")
+    if qkK4.kappa.r > 0.0 {
+        println("  GATE PASS: K4 is spherical (κ_ℍ.r > 0) ✓")
+    } else {
+        println("  GATE FAIL: K4 κ_ℍ.r <= 0 ✗")
+    }
+    println("")
+
+    println("=======================================================")
+    println("ALL VALIDATION TESTS COMPLETE")
+    println("Next: run with real brain FC matrices (Phase D)")
+}

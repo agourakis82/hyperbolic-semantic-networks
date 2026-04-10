@@ -1,0 +1,162 @@
+// validate_algebra.sio — Minimal gate validation (no orbit loop)
+// Tests only Gate 1 (zero divisors) and Gate 2 (identity).
+
+fn cmul_r(a0: f64, a1: f64, b0: f64, b1: f64) -> f64 { a0*b0 - a1*b1 }
+fn cmul_i(a0: f64, a1: f64, b0: f64, b1: f64) -> f64 { a0*b1 + a1*b0 }
+
+fn qmul_0(a0: f64, a1: f64, a2: f64, a3: f64,
+          b0: f64, b1: f64, b2: f64, b3: f64) -> f64 {
+    cmul_r(a0,a1,b0,b1) - cmul_r(b2,0.0-b3,a2,a3)
+}
+fn qmul_1(a0: f64, a1: f64, a2: f64, a3: f64,
+          b0: f64, b1: f64, b2: f64, b3: f64) -> f64 {
+    cmul_i(a0,a1,b0,b1) - cmul_i(b2,0.0-b3,a2,a3)
+}
+fn qmul_2(a0: f64, a1: f64, a2: f64, a3: f64,
+          b0: f64, b1: f64, b2: f64, b3: f64) -> f64 {
+    cmul_r(b2,b3,a0,a1) + cmul_r(a2,a3,b0,0.0-b1)
+}
+fn qmul_3(a0: f64, a1: f64, a2: f64, a3: f64,
+          b0: f64, b1: f64, b2: f64, b3: f64) -> f64 {
+    cmul_i(b2,b3,a0,a1) + cmul_i(a2,a3,b0,0.0-b1)
+}
+
+struct Oct8 { e: [f64; 8] }
+fn oct_zero() -> Oct8 { Oct8 { e: [0.0; 8] } }
+
+fn oct_mul_comp(a: &Oct8, b: &Oct8, comp: usize) -> f64 with Mut, Div, Panic {
+    let a0=a.e[0];let a1=a.e[1];let a2=a.e[2];let a3=a.e[3]
+    let b0=b.e[0];let b1=b.e[1];let b2=b.e[2];let b3=b.e[3]
+    let a4=a.e[4];let a5=a.e[5];let a6=a.e[6];let a7=a.e[7]
+    let b4=b.e[4];let b5=b.e[5];let b6=b.e[6];let b7=b.e[7]
+    if comp < 4 {
+        var pr: f64 = 0.0
+        var sq: f64 = 0.0
+        if comp==0 { pr=qmul_0(a0,a1,a2,a3,b0,b1,b2,b3); sq=qmul_0(b4,0.0-b5,0.0-b6,0.0-b7,a4,a5,a6,a7) }
+        if comp==1 { pr=qmul_1(a0,a1,a2,a3,b0,b1,b2,b3); sq=qmul_1(b4,0.0-b5,0.0-b6,0.0-b7,a4,a5,a6,a7) }
+        if comp==2 { pr=qmul_2(a0,a1,a2,a3,b0,b1,b2,b3); sq=qmul_2(b4,0.0-b5,0.0-b6,0.0-b7,a4,a5,a6,a7) }
+        if comp==3 { pr=qmul_3(a0,a1,a2,a3,b0,b1,b2,b3); sq=qmul_3(b4,0.0-b5,0.0-b6,0.0-b7,a4,a5,a6,a7) }
+        pr - sq
+    } else {
+        let ci = comp - 4
+        var sp: f64 = 0.0
+        var qr: f64 = 0.0
+        if ci==0 { sp=qmul_0(b4,b5,b6,b7,a0,a1,a2,a3); qr=qmul_0(a4,a5,a6,a7,b0,0.0-b1,0.0-b2,0.0-b3) }
+        if ci==1 { sp=qmul_1(b4,b5,b6,b7,a0,a1,a2,a3); qr=qmul_1(a4,a5,a6,a7,b0,0.0-b1,0.0-b2,0.0-b3) }
+        if ci==2 { sp=qmul_2(b4,b5,b6,b7,a0,a1,a2,a3); qr=qmul_2(a4,a5,a6,a7,b0,0.0-b1,0.0-b2,0.0-b3) }
+        if ci==3 { sp=qmul_3(b4,b5,b6,b7,a0,a1,a2,a3); qr=qmul_3(a4,a5,a6,a7,b0,0.0-b1,0.0-b2,0.0-b3) }
+        sp + qr
+    }
+}
+
+struct Sed16 { e: [f64; 16] }
+fn sed_zero() -> Sed16 { Sed16 { e: [0.0; 16] } }
+
+fn sed_mul(s1: &Sed16, s2: &Sed16) -> Sed16 with Mut, Div, Panic {
+    var r = sed_zero()
+    // Extract octets
+    var a1 = oct_zero(); var a2 = oct_zero()
+    var b1 = oct_zero(); var b2 = oct_zero()
+    var i = 0
+    while i < 8 {
+        a1.e[i]=s1.e[i]; a2.e[i]=s1.e[i+8]
+        b1.e[i]=s2.e[i]; b2.e[i]=s2.e[i+8]
+        i = i + 1
+    }
+    // conj(b2): negate e[1..7]
+    var cb2 = oct_zero()
+    cb2.e[0] = b2.e[0]
+    var j = 1
+    while j < 8 { cb2.e[j] = 0.0 - b2.e[j]; j = j + 1 }
+    // conj(b1)
+    var cb1 = oct_zero()
+    cb1.e[0] = b1.e[0]
+    var k = 1
+    while k < 8 { cb1.e[k] = 0.0 - b1.e[k]; k = k + 1 }
+
+    // First 8: a1*b1 - conj(b2)*a2
+    var c = 0
+    while c < 8 {
+        r.e[c] = oct_mul_comp(&a1, &b1, c) - oct_mul_comp(&cb2, &a2, c)
+        c = c + 1
+    }
+    // Last 8: b2*a1 + a2*conj(b1)
+    var d = 0
+    while d < 8 {
+        r.e[d+8] = oct_mul_comp(&b2, &a1, d) + oct_mul_comp(&a2, &cb1, d)
+        d = d + 1
+    }
+    r
+}
+
+fn sc_sqrt(x: f64) -> f64 with Mut, Div {
+    if x <= 0.0 { return 0.0 }
+    var g = x * 0.5 + 0.5
+    var i = 0
+    while i < 40 { g = 0.5*(g + x/g); i = i+1 }
+    g
+}
+
+fn sed_norm(s: &Sed16) -> f64 with Mut, Div {
+    var acc = 0.0
+    var i = 0
+    while i < 16 { acc = acc + s.e[i]*s.e[i]; i = i+1 }
+    sc_sqrt(acc)
+}
+
+fn main() with Mut, Div, Panic, IO {
+    println("validate_algebra.sio — Sedenion zero-divisor gate")
+    println("===================================================")
+
+    // Gate 1: (e1+e10) * (e4-e15) = 0
+    var a = sed_zero()
+    a.e[1]  =  1.0
+    a.e[10] =  1.0
+    var b = sed_zero()
+    b.e[4]  =  1.0
+    b.e[15] = -1.0
+    let prod = sed_mul(&a, &b)
+    let nm   = sed_norm(&prod)
+    println("(e1+e10)*(e4-e15) norm = {nm}")
+    if nm < 1.0e-8 {
+        println("PASS  Gate 1: zero divisor confirmed")
+    } else {
+        println("FAIL  Gate 1: norm = {nm}")
+        // Print components for debug
+        let p0=prod.e[0]; let p1=prod.e[1]; let p2=prod.e[2]; let p3=prod.e[3]
+        let p8=prod.e[8]; let p9=prod.e[9]; let p10=prod.e[10]; let p11=prod.e[11]
+        println("  e0={p0} e1={p1} e2={p2} e3={p3}")
+        println("  e8={p8} e9={p9} e10={p10} e11={p11}")
+    }
+
+    // Gate 6: e0 * a = a  (multiplicative identity)
+    var e0 = sed_zero()
+    e0.e[0] = 1.0
+    let a_copy = sed_mul(&e0, &a)
+    var diff = 0.0
+    var i = 0
+    while i < 16 { let d = a_copy.e[i] - a.e[i]; diff = diff + d*d; i=i+1 }
+    diff = sc_sqrt(diff)
+    if diff < 1.0e-12 {
+        println("PASS  Gate 6: e0 is multiplicative identity")
+    } else {
+        println("FAIL  Gate 6: identity error = {diff}")
+    }
+
+    // Gate 7: e1*e2 != e2*e1 (non-commutativity)
+    var e1 = sed_zero(); e1.e[1] = 1.0
+    var e2 = sed_zero(); e2.e[2] = 1.0
+    let e1e2 = sed_mul(&e1, &e2)
+    let e2e1 = sed_mul(&e2, &e1)
+    var diff7 = 0.0
+    var i7 = 0
+    while i7 < 16 { let d=e1e2.e[i7]-e2e1.e[i7]; diff7=diff7+d*d; i7=i7+1 }
+    diff7 = sc_sqrt(diff7)
+    if diff7 > 0.5 {
+        println("PASS  Gate 7: e1*e2 != e2*e1 (non-commutative, diff={diff7})")
+    } else {
+        println("FAIL  Gate 7: commutative? diff={diff7}")
+    }
+
+    println("Done.")
+}
