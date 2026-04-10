@@ -19,6 +19,8 @@ import «HyperbolicSemanticNetworks».LaTeXExport
 import «HyperbolicSemanticNetworks».ComputationalVerification
 import «HyperbolicSemanticNetworks».RandomGeometric
 import «HyperbolicSemanticNetworks».SounioVerification
+import «HyperbolicSemanticNetworks».OctonionGraph
+import «HyperbolicSemanticNetworks».DepressionNetworks
 /-!
 # Hyperbolic Semantic Networks - Lean 4 Formalization
 

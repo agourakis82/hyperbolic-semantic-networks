@@ -1,0 +1,184 @@
+{
+  "n_trajectories": 1000,
+  "experiment": "depression_trajectories",
+  "per_severity": {
+    "minimum": {
+      "regimes": {
+        "anxious": {
+          "hurst_mean": 0.8349959789988918,
+          "c_ent_var_std": 1.312228850536191e-5,
+          "n_trajectories": 1000,
+          "residence_mean": 0.05369499999999999,
+          "c_ent_var_mean": 1.2793743271168532e-5,
+          "residence_std": 0.01913865886793699,
+          "hurst_std": 0.10287385369437939
+        },
+        "ruminative": {
+          "hurst_mean": 0.5206050444147968,
+          "c_ent_var_std": 1.885300556693704e-5,
+          "n_trajectories": 1000,
+          "residence_mean": 0.0014049999999999998,
+          "c_ent_var_mean": 5.6292000388658995e-6,
+          "residence_std": 0.003249851771471512,
+          "hurst_std": 0.31565287600561126
+        },
+        "psychotic": {
+          "hurst_mean": 0.7149314110185403,
+          "c_ent_var_std": 1.8857310628597062e-5,
+          "n_trajectories": 1000,
+          "residence_mean": 0.0589,
+          "c_ent_var_mean": 1.0689400732564469e-5,
+          "residence_std": 0.020444020102659794,
+          "hurst_std": 0.08465094794694909
+        },
+        "normative": {
+          "hurst_mean": 0.6145375237637045,
+          "c_ent_var_std": 3.59338414402152e-5,
+          "n_trajectories": 1000,
+          "residence_mean": 0.00203,
+          "c_ent_var_mean": 8.121168073017559e-6,
+          "residence_std": 0.0040737814982759815,
+          "hurst_std": 0.30519223572385334
+        }
+      },
+      "N": 1634,
+      "eta": 0.1181956829812238,
+      "E": 11354,
+      "kappa_mean": -0.130267
+    },
+    "moderate": {
+      "regimes": {
+        "anxious": {
+          "hurst_mean": 1.112945866775287,
+          "c_ent_var_std": 1.4380933710704581e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.006630000000000002,
+          "c_ent_var_mean": 1.10226137456844e-5,
+          "residence_std": 0.006552559502670391,
+          "hurst_std": 0.10064098391770547
+        },
+        "ruminative": {
+          "hurst_mean": 0.33732961017519275,
+          "c_ent_var_std": 1.5060331108817447e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.00035,
+          "c_ent_var_mean": 2.3169910051708964e-6,
+          "residence_std": 0.0014932279563850024,
+          "hurst_std": 0.2756675850953084
+        },
+        "psychotic": {
+          "hurst_mean": 0.6333225135250228,
+          "c_ent_var_std": 9.080258544812699e-7,
+          "n_trajectories": 1000,
+          "residence_mean": 0.018385000000000002,
+          "c_ent_var_mean": 4.364752754817063e-6,
+          "residence_std": 0.010567802678582407,
+          "hurst_std": 0.06908446813099377
+        },
+        "normative": {
+          "hurst_mean": 0.39873577893095585,
+          "c_ent_var_std": 1.112772386382153e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.00031,
+          "c_ent_var_mean": 2.5005304352497057e-6,
+          "residence_std": 0.001380509255965278,
+          "hurst_std": 0.2714565263179204
+        }
+      },
+      "N": 2238,
+      "eta": 0.20741403423512997,
+      "E": 24109,
+      "kappa_mean": -0.08715
+    },
+    "severe": {
+      "regimes": {
+        "anxious": {
+          "hurst_mean": 0.8294821512246701,
+          "c_ent_var_std": 1.901097503205731e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.0016400000000000002,
+          "c_ent_var_mean": 5.631042453981963e-6,
+          "residence_std": 0.0035246025056483777,
+          "hurst_std": 0.1422932506945394
+        },
+        "ruminative": {
+          "hurst_mean": 0.16067339082459958,
+          "c_ent_var_std": 5.998875391804133e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.000425,
+          "c_ent_var_mean": 2.8071184532070895e-6,
+          "residence_std": 0.0020853593751974076,
+          "hurst_std": 0.16470220083372542
+        },
+        "psychotic": {
+          "hurst_mean": 0.6908615728184302,
+          "c_ent_var_std": 1.2160544406493511e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.022044999999999995,
+          "c_ent_var_mean": 6.014378646312481e-6,
+          "residence_std": 0.011250313086512063,
+          "hurst_std": 0.07380870673758688
+        },
+        "normative": {
+          "hurst_mean": 0.21155042066001026,
+          "c_ent_var_std": 6.73385217892159e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.00040500000000000003,
+          "c_ent_var_mean": 3.1124211458227832e-6,
+          "residence_std": 0.0014876787920072615,
+          "hurst_std": 0.18748896891070846
+        }
+      },
+      "N": 2685,
+      "eta": 0.2138332522990197,
+      "E": 32168,
+      "kappa_mean": -0.078283
+    },
+    "mild": {
+      "regimes": {
+        "anxious": {
+          "hurst_mean": 0.6730798996558266,
+          "c_ent_var_std": 2.185223135714783e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.0018949999999999998,
+          "c_ent_var_mean": 8.540300455918669e-6,
+          "residence_std": 0.003477940636507625,
+          "hurst_std": 0.20679218786573603
+        },
+        "ruminative": {
+          "hurst_mean": 0.1163124395723085,
+          "c_ent_var_std": 2.543824668958275e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.00033,
+          "c_ent_var_mean": 5.8087825608542594e-6,
+          "residence_std": 0.0014293855823895607,
+          "hurst_std": 0.14330906428999687
+        },
+        "psychotic": {
+          "hurst_mean": 0.6784547804975791,
+          "c_ent_var_std": 1.0002287926578882e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.020995,
+          "c_ent_var_mean": 5.633122910125819e-6,
+          "residence_std": 0.01120984547777692,
+          "hurst_std": 0.07041182919597638
+        },
+        "normative": {
+          "hurst_mean": 0.12324934840757791,
+          "c_ent_var_std": 2.448930146815164e-6,
+          "n_trajectories": 1000,
+          "residence_mean": 0.0004,
+          "c_ent_var_mean": 5.870028960058195e-6,
+          "residence_std": 0.0016409426232177325,
+          "hurst_std": 0.13456641396956795
+        }
+      },
+      "N": 3089,
+      "eta": 0.21539961659287826,
+      "E": 39840,
+      "kappa_mean": -0.07422
+    }
+  },
+  "seed": 20260409,
+  "trajectory_length": 200
+}

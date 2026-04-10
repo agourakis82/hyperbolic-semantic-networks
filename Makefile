@@ -1,7 +1,7 @@
 # Makefile for Sounio-fMRI Hypercomplex Geometric Deep Learning
 # =============================================================
 
-.PHONY: all install test demo clean visualize validate docker cpc2026 cpc2026-smoke cpc2026-ossm
+.PHONY: all install test demo clean visualize validate docker cpc2026 cpc2026-smoke cpc2026-ossm cpc2026-poster
 
 CPC2026_PYTHON ?= python3
 SOUNIO_REPO ?= /home/demetrios/work/sounio-lang
@@ -47,6 +47,13 @@ cpc2026-ossm:
 	$(CPC2026_PYTHON) code/cpc2026/ossm_analysis.py
 	$(CPC2026_PYTHON) code/cpc2026/generate_ossm_figures.py
 	@echo "CPC 2026 O-SSM extension complete."
+
+cpc2026-poster:
+	@echo "Running CPC 2026 poster upgrade pipeline..."
+	$(CPC2026_PYTHON) code/cpc2026/clinical_validation.py
+	$(CPC2026_PYTHON) code/cpc2026/cross_validation_summary.py
+	$(CPC2026_PYTHON) code/cpc2026/generate_poster_figures.py
+	@echo "CPC 2026 poster figures complete."
 
 # Default target
 all: demo visualize
@@ -193,6 +200,7 @@ help:
 	@echo "  make docker-run     - Run Docker container"
 	@echo "  make cpc2026        - Run the CPC 2026 Markov baseline pipeline"
 	@echo "  make cpc2026-ossm   - Run the CPC 2026 O-SSM bridge + parity + analysis pipeline"
+	@echo "  make cpc2026-poster - Generate upgraded CPC 2026 poster figures"
 	@echo "  make help           - Show this help message"
 	@echo ""
 	@echo "Quick start:"

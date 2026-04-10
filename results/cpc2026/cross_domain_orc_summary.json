@@ -1,0 +1,155 @@
+{
+  "networks": [
+    {
+      "network": "SWOW-English",
+      "domain": "semantic",
+      "N": 438,
+      "kappa_mean": -0.137147,
+      "kappa_std": 0.312363,
+      "frac_spherical": 0.2859,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.019498338594933346
+    },
+    {
+      "network": "SWOW-Spanish",
+      "domain": "semantic",
+      "N": 422,
+      "kappa_mean": -0.068341,
+      "kappa_std": 0.319316,
+      "frac_spherical": 0.3433,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.01735381066775985
+    },
+    {
+      "network": "SWOW-Chinese",
+      "domain": "semantic",
+      "N": 465,
+      "kappa_mean": -0.143997,
+      "kappa_std": 0.297742,
+      "frac_spherical": 0.2874,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.023099951887035234
+    },
+    {
+      "network": "SWOW-Dutch",
+      "domain": "semantic",
+      "N": 500,
+      "kappa_mean": 0.098695,
+      "kappa_std": 0.046421,
+      "frac_spherical": 0.9818,
+      "geometry": "SPHERICAL",
+      "eta": 7.557613568000001
+    },
+    {
+      "network": "SWOW-Arg. Spanish",
+      "domain": "semantic",
+      "N": 489,
+      "kappa_mean": -0.263919,
+      "kappa_std": 0.256502,
+      "frac_spherical": 0.1374,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.0396793747899227
+    },
+    {
+      "network": "Depression-Minimum",
+      "domain": "clinical",
+      "N": 1634,
+      "kappa_mean": -0.130267,
+      "kappa_std": 0.209346,
+      "frac_spherical": 0.1847,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.1181956829812238
+    },
+    {
+      "network": "Depression-Mild",
+      "domain": "clinical",
+      "N": 3089,
+      "kappa_mean": -0.07422,
+      "kappa_std": 0.113419,
+      "frac_spherical": 0.1478,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.21539961659287826
+    },
+    {
+      "network": "Depression-Moderate",
+      "domain": "clinical",
+      "N": 2238,
+      "kappa_mean": -0.08715,
+      "kappa_std": 0.130406,
+      "frac_spherical": 0.1326,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.20741403423512997
+    },
+    {
+      "network": "Depression-Severe",
+      "domain": "clinical",
+      "N": 2685,
+      "kappa_mean": -0.078283,
+      "kappa_std": 0.118634,
+      "frac_spherical": 0.1362,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.2138332522990197
+    },
+    {
+      "network": "ABIDE fMRI (N=60)",
+      "domain": "brain",
+      "N": 200,
+      "kappa_mean": 0.0,
+      "kappa_std": 0.0,
+      "frac_spherical": 1.0,
+      "geometry": "SPHERICAL",
+      "eta": 2.7162
+    },
+    {
+      "network": "ConceptNet-EN",
+      "domain": "semantic",
+      "N": 467,
+      "kappa_mean": -0.23321,
+      "kappa_std": 0.13075,
+      "frac_spherical": 0.0361,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.2230269957465747
+    },
+    {
+      "network": "ConceptNet-PT",
+      "domain": "semantic",
+      "N": 489,
+      "kappa_mean": -0.236173,
+      "kappa_std": 0.206474,
+      "frac_spherical": 0.1128,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.085181917422868
+    },
+    {
+      "network": "WordNet-EN",
+      "domain": "semantic",
+      "N": 500,
+      "kappa_mean": -0.001532,
+      "kappa_std": 0.284309,
+      "frac_spherical": 0.8197,
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "eta": 0.008887328
+    },
+    {
+      "network": "EAT-EN",
+      "domain": "semantic",
+      "N": 500,
+      "kappa_mean": -0.045628,
+      "kappa_std": 0.066625,
+      "frac_spherical": 0.1999,
+      "geometry": "EUCLIDEAN/TRANSITION",
+      "eta": 1.8507528000000002
+    },
+    {
+      "network": "USF-EN",
+      "domain": "semantic",
+      "N": 498,
+      "kappa_mean": -0.320666,
+      "kappa_std": 0.234467,
+      "frac_spherical": 0.083,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.06221547534309104
+    }
+  ],
+  "count": 15
+}

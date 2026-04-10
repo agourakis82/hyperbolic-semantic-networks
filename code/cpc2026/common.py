@@ -60,6 +60,15 @@ NODE_FEATURES_NPY = CPC_DATA_DIR / "swow_en_node_features.npy"
 NODE_FEATURES_METADATA_JSON = CPC_DATA_DIR / "node_feature_metadata.json"
 SOUNIO_INPUT_MANIFEST_JSON = CPC_SOUNIO_INPUT_DIR / "manifest.json"
 
+CLINICAL_DEPRESSION_SUMMARY_JSON = CPC_RESULTS_DIR / "clinical_depression_summary.json"
+CLINICAL_DEPRESSION_METRICS_PARQUET = CPC_RESULTS_DIR / "clinical_depression_node_metrics.parquet"
+CROSS_DOMAIN_ORC_SUMMARY_CSV = CPC_RESULTS_DIR / "cross_domain_orc_summary.csv"
+CROSS_DOMAIN_ORC_SUMMARY_JSON = CPC_RESULTS_DIR / "cross_domain_orc_summary.json"
+
+DEPRESSION_EDGE_DIR = PROCESSED_DATA_DIR / "depression_networks_optimal"
+DEPRESSION_ORC_DIR = RESULTS_DIR / "unified"
+DEPRESSION_SEVERITIES = ("minimum", "mild", "moderate", "severe")
+
 DEFAULT_SEED = 20260409
 
 
@@ -160,15 +169,21 @@ def normalize_token(token: Any) -> str:
     return str(token).strip().lower()
 
 
-def load_swow_en_edgelist(path: Path = SWOW_FINAL_CSV) -> pd.DataFrame:
-    """Load the validated SWOW-EN edge list used in the exact-LP pipeline."""
+def load_edgelist(path: Path) -> pd.DataFrame:
+    """Load a generic source/target/weight edge list CSV."""
 
     df = pd.read_csv(path)
     required = {"source", "target", "weight"}
     missing = required.difference(df.columns)
     if missing:
-        raise ValueError(f"Missing required SWOW columns: {sorted(missing)}")
+        raise ValueError(f"Missing required columns in {path.name}: {sorted(missing)}")
     return df
+
+
+def load_swow_en_edgelist(path: Path = SWOW_FINAL_CSV) -> pd.DataFrame:
+    """Load the validated SWOW-EN edge list used in the exact-LP pipeline."""
+
+    return load_edgelist(path)
 
 
 def build_weighted_graph(edgelist: pd.DataFrame, largest_component: bool = True) -> nx.Graph:

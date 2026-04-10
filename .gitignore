@@ -85,6 +85,16 @@ wheels/
 data/raw/conceptnet/*
 data/raw/SWOW-ZH24/*
 
+# Stray PDFs
+ORC-Bio.pdf
+
+# Biomedical ontology data (large)
+data/processed/hp.obo
+data/processed/phenotype.hpoa
+
+# ABIDE FC matrices (large binary data)
+data/processed/abide_fc/
+
 # Rust build artifacts
 rust/target/
 
