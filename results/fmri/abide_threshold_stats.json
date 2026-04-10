@@ -1,0 +1,4742 @@
+[
+  {
+    "file_id": "Pitt_0050003",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 24.45,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16802,
+        "mean_k": 168.02,
+        "eta": 141.1536,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 43,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15335,
+        "mean_k": 153.35,
+        "eta": 117.5811,
+        "lcc_frac": 1.0,
+        "max_degree": 195,
+        "min_degree": 24,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 13725,
+        "mean_k": 137.25,
+        "eta": 94.1878,
+        "lcc_frac": 1.0,
+        "max_degree": 189,
+        "min_degree": 13,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 11836,
+        "mean_k": 118.36,
+        "eta": 70.0454,
+        "lcc_frac": 1.0,
+        "max_degree": 182,
+        "min_degree": 11,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 9955,
+        "mean_k": 99.55,
+        "eta": 49.551,
+        "lcc_frac": 1.0,
+        "max_degree": 173,
+        "min_degree": 10,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 8083,
+        "mean_k": 80.83,
+        "eta": 32.6674,
+        "lcc_frac": 1.0,
+        "max_degree": 164,
+        "min_degree": 5,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 4865,
+        "mean_k": 48.65,
+        "eta": 11.8341,
+        "lcc_frac": 0.995,
+        "max_degree": 118,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050004",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 19.09,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 14626,
+        "mean_k": 146.26,
+        "eta": 106.9599,
+        "lcc_frac": 1.0,
+        "max_degree": 191,
+        "min_degree": 33,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 12022,
+        "mean_k": 120.22,
+        "eta": 72.2642,
+        "lcc_frac": 1.0,
+        "max_degree": 184,
+        "min_degree": 14,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 9339,
+        "mean_k": 93.39,
+        "eta": 43.6085,
+        "lcc_frac": 1.0,
+        "max_degree": 166,
+        "min_degree": 6,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 6860,
+        "mean_k": 68.6,
+        "eta": 23.5298,
+        "lcc_frac": 1.0,
+        "max_degree": 150,
+        "min_degree": 5,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 4767,
+        "mean_k": 47.67,
+        "eta": 11.3621,
+        "lcc_frac": 1.0,
+        "max_degree": 127,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3231,
+        "mean_k": 32.31,
+        "eta": 5.2197,
+        "lcc_frac": 1.0,
+        "max_degree": 103,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1412,
+        "mean_k": 14.12,
+        "eta": 0.9969,
+        "lcc_frac": 0.995,
+        "max_degree": 54,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050005",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 13.73,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16963,
+        "mean_k": 169.63,
+        "eta": 143.8717,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 48,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15451,
+        "mean_k": 154.51,
+        "eta": 119.3667,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 25,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 13687,
+        "mean_k": 136.87,
+        "eta": 93.667,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 10,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 11699,
+        "mean_k": 116.99,
+        "eta": 68.4333,
+        "lcc_frac": 1.0,
+        "max_degree": 186,
+        "min_degree": 5,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 9715,
+        "mean_k": 97.15,
+        "eta": 47.1906,
+        "lcc_frac": 1.0,
+        "max_degree": 180,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 7772,
+        "mean_k": 77.72,
+        "eta": 30.202,
+        "lcc_frac": 1.0,
+        "max_degree": 159,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 4609,
+        "mean_k": 46.09,
+        "eta": 10.6214,
+        "lcc_frac": 1.0,
+        "max_degree": 117,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050006",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 13.37,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 11457,
+        "mean_k": 114.57,
+        "eta": 65.6314,
+        "lcc_frac": 1.0,
+        "max_degree": 178,
+        "min_degree": 35,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 9150,
+        "mean_k": 91.5,
+        "eta": 41.8612,
+        "lcc_frac": 1.0,
+        "max_degree": 161,
+        "min_degree": 17,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 7050,
+        "mean_k": 70.5,
+        "eta": 24.8513,
+        "lcc_frac": 1.0,
+        "max_degree": 137,
+        "min_degree": 6,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 5254,
+        "mean_k": 52.54,
+        "eta": 13.8023,
+        "lcc_frac": 1.0,
+        "max_degree": 113,
+        "min_degree": 3,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3785,
+        "mean_k": 37.85,
+        "eta": 7.1631,
+        "lcc_frac": 1.0,
+        "max_degree": 89,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2707,
+        "mean_k": 27.07,
+        "eta": 3.6639,
+        "lcc_frac": 0.99,
+        "max_degree": 67,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1328,
+        "mean_k": 13.28,
+        "eta": 0.8818,
+        "lcc_frac": 0.98,
+        "max_degree": 36,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050007",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 17.78,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17719,
+        "mean_k": 177.19,
+        "eta": 156.9815,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 23,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 16594,
+        "mean_k": 165.94,
+        "eta": 137.6804,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 6,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 15134,
+        "mean_k": 151.34,
+        "eta": 114.519,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 4,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 13427,
+        "mean_k": 134.27,
+        "eta": 90.1422,
+        "lcc_frac": 1.0,
+        "max_degree": 188,
+        "min_degree": 3,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 11607,
+        "mean_k": 116.07,
+        "eta": 67.3612,
+        "lcc_frac": 1.0,
+        "max_degree": 184,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 9664,
+        "mean_k": 96.64,
+        "eta": 46.6964,
+        "lcc_frac": 1.0,
+        "max_degree": 171,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 6161,
+        "mean_k": 61.61,
+        "eta": 18.979,
+        "lcc_frac": 0.99,
+        "max_degree": 136,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050008",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 32.45,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17738,
+        "mean_k": 177.38,
+        "eta": 157.3183,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 44,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 16409,
+        "mean_k": 164.09,
+        "eta": 134.6276,
+        "lcc_frac": 1.0,
+        "max_degree": 195,
+        "min_degree": 34,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 14700,
+        "mean_k": 147.0,
+        "eta": 108.045,
+        "lcc_frac": 1.0,
+        "max_degree": 193,
+        "min_degree": 17,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 12814,
+        "mean_k": 128.14,
+        "eta": 82.0993,
+        "lcc_frac": 1.0,
+        "max_degree": 185,
+        "min_degree": 10,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 10783,
+        "mean_k": 107.83,
+        "eta": 58.1365,
+        "lcc_frac": 1.0,
+        "max_degree": 172,
+        "min_degree": 3,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 8688,
+        "mean_k": 86.88,
+        "eta": 37.7407,
+        "lcc_frac": 1.0,
+        "max_degree": 161,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 5082,
+        "mean_k": 50.82,
+        "eta": 12.9134,
+        "lcc_frac": 0.99,
+        "max_degree": 121,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050009",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 33.86,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 14554,
+        "mean_k": 145.54,
+        "eta": 105.9095,
+        "lcc_frac": 1.0,
+        "max_degree": 190,
+        "min_degree": 44,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 12718,
+        "mean_k": 127.18,
+        "eta": 80.8738,
+        "lcc_frac": 1.0,
+        "max_degree": 180,
+        "min_degree": 13,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 10847,
+        "mean_k": 108.47,
+        "eta": 58.8287,
+        "lcc_frac": 1.0,
+        "max_degree": 171,
+        "min_degree": 5,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 9058,
+        "mean_k": 90.58,
+        "eta": 41.0237,
+        "lcc_frac": 1.0,
+        "max_degree": 154,
+        "min_degree": 3,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 7359,
+        "mean_k": 73.59,
+        "eta": 27.0774,
+        "lcc_frac": 1.0,
+        "max_degree": 138,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 5859,
+        "mean_k": 58.59,
+        "eta": 17.1639,
+        "lcc_frac": 1.0,
+        "max_degree": 118,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3367,
+        "mean_k": 33.67,
+        "eta": 5.6683,
+        "lcc_frac": 0.99,
+        "max_degree": 87,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050010",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 35.2,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 12803,
+        "mean_k": 128.03,
+        "eta": 81.9584,
+        "lcc_frac": 1.0,
+        "max_degree": 186,
+        "min_degree": 31,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 10140,
+        "mean_k": 101.4,
+        "eta": 51.4098,
+        "lcc_frac": 1.0,
+        "max_degree": 175,
+        "min_degree": 16,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 7604,
+        "mean_k": 76.04,
+        "eta": 28.9104,
+        "lcc_frac": 1.0,
+        "max_degree": 156,
+        "min_degree": 6,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 5365,
+        "mean_k": 53.65,
+        "eta": 14.3916,
+        "lcc_frac": 1.0,
+        "max_degree": 122,
+        "min_degree": 1,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3621,
+        "mean_k": 36.21,
+        "eta": 6.5558,
+        "lcc_frac": 0.99,
+        "max_degree": 101,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2370,
+        "mean_k": 23.7,
+        "eta": 2.8084,
+        "lcc_frac": 0.98,
+        "max_degree": 77,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 947,
+        "mean_k": 9.47,
+        "eta": 0.4484,
+        "lcc_frac": 0.91,
+        "max_degree": 37,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050011",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 16.93,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 10583,
+        "mean_k": 105.83,
+        "eta": 55.9999,
+        "lcc_frac": 1.0,
+        "max_degree": 179,
+        "min_degree": 26,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 8014,
+        "mean_k": 80.14,
+        "eta": 32.1121,
+        "lcc_frac": 1.0,
+        "max_degree": 160,
+        "min_degree": 4,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 5832,
+        "mean_k": 58.32,
+        "eta": 17.0061,
+        "lcc_frac": 0.995,
+        "max_degree": 142,
+        "min_degree": 0,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 4063,
+        "mean_k": 40.63,
+        "eta": 8.254,
+        "lcc_frac": 0.99,
+        "max_degree": 121,
+        "min_degree": 0,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 2748,
+        "mean_k": 27.48,
+        "eta": 3.7758,
+        "lcc_frac": 0.985,
+        "max_degree": 94,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 1819,
+        "mean_k": 18.19,
+        "eta": 1.6544,
+        "lcc_frac": 0.97,
+        "max_degree": 69,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 805,
+        "mean_k": 8.05,
+        "eta": 0.324,
+        "lcc_frac": 0.86,
+        "max_degree": 27,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050012",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 21.48,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17761,
+        "mean_k": 177.61,
+        "eta": 157.7266,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 62,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 16384,
+        "mean_k": 163.84,
+        "eta": 134.2177,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 34,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 14457,
+        "mean_k": 144.57,
+        "eta": 104.5024,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 21,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 12404,
+        "mean_k": 124.04,
+        "eta": 76.9296,
+        "lcc_frac": 1.0,
+        "max_degree": 188,
+        "min_degree": 11,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 10220,
+        "mean_k": 102.2,
+        "eta": 52.2242,
+        "lcc_frac": 1.0,
+        "max_degree": 175,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 7991,
+        "mean_k": 79.91,
+        "eta": 31.928,
+        "lcc_frac": 1.0,
+        "max_degree": 161,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 4561,
+        "mean_k": 45.61,
+        "eta": 10.4014,
+        "lcc_frac": 1.0,
+        "max_degree": 128,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050013",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 9.33,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 18475,
+        "mean_k": 184.75,
+        "eta": 170.6628,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 34,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 17648,
+        "mean_k": 176.48,
+        "eta": 155.726,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 17,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 16405,
+        "mean_k": 164.05,
+        "eta": 134.562,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 5,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 14789,
+        "mean_k": 147.89,
+        "eta": 109.3573,
+        "lcc_frac": 1.0,
+        "max_degree": 191,
+        "min_degree": 2,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 12885,
+        "mean_k": 128.85,
+        "eta": 83.0116,
+        "lcc_frac": 1.0,
+        "max_degree": 184,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 10814,
+        "mean_k": 108.14,
+        "eta": 58.4713,
+        "lcc_frac": 1.0,
+        "max_degree": 173,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 6689,
+        "mean_k": 66.89,
+        "eta": 22.3714,
+        "lcc_frac": 1.0,
+        "max_degree": 148,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050014",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 14.2,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 11057,
+        "mean_k": 110.57,
+        "eta": 61.1286,
+        "lcc_frac": 1.0,
+        "max_degree": 162,
+        "min_degree": 48,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 8568,
+        "mean_k": 85.68,
+        "eta": 36.7053,
+        "lcc_frac": 1.0,
+        "max_degree": 147,
+        "min_degree": 28,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 6345,
+        "mean_k": 63.45,
+        "eta": 20.1295,
+        "lcc_frac": 1.0,
+        "max_degree": 124,
+        "min_degree": 19,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 4641,
+        "mean_k": 46.41,
+        "eta": 10.7694,
+        "lcc_frac": 1.0,
+        "max_degree": 107,
+        "min_degree": 8,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3354,
+        "mean_k": 33.54,
+        "eta": 5.6247,
+        "lcc_frac": 1.0,
+        "max_degree": 90,
+        "min_degree": 3,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2336,
+        "mean_k": 23.36,
+        "eta": 2.7284,
+        "lcc_frac": 1.0,
+        "max_degree": 72,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1123,
+        "mean_k": 11.23,
+        "eta": 0.6306,
+        "lcc_frac": 0.94,
+        "max_degree": 45,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050015",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 14.2,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 9431,
+        "mean_k": 94.31,
+        "eta": 44.4719,
+        "lcc_frac": 1.0,
+        "max_degree": 128,
+        "min_degree": 37,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 6769,
+        "mean_k": 67.69,
+        "eta": 22.9097,
+        "lcc_frac": 1.0,
+        "max_degree": 111,
+        "min_degree": 21,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 4869,
+        "mean_k": 48.69,
+        "eta": 11.8536,
+        "lcc_frac": 1.0,
+        "max_degree": 91,
+        "min_degree": 6,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 3373,
+        "mean_k": 33.73,
+        "eta": 5.6886,
+        "lcc_frac": 1.0,
+        "max_degree": 74,
+        "min_degree": 2,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 2353,
+        "mean_k": 23.53,
+        "eta": 2.7683,
+        "lcc_frac": 0.995,
+        "max_degree": 56,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 1596,
+        "mean_k": 15.96,
+        "eta": 1.2736,
+        "lcc_frac": 0.99,
+        "max_degree": 47,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 701,
+        "mean_k": 7.01,
+        "eta": 0.2457,
+        "lcc_frac": 0.905,
+        "max_degree": 27,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050016",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 21.82,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 15606,
+        "mean_k": 156.06,
+        "eta": 121.7736,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 50,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 13878,
+        "mean_k": 138.78,
+        "eta": 96.2994,
+        "lcc_frac": 1.0,
+        "max_degree": 190,
+        "min_degree": 25,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 12026,
+        "mean_k": 120.26,
+        "eta": 72.3123,
+        "lcc_frac": 1.0,
+        "max_degree": 188,
+        "min_degree": 11,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 10108,
+        "mean_k": 101.08,
+        "eta": 51.0858,
+        "lcc_frac": 1.0,
+        "max_degree": 176,
+        "min_degree": 4,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 8220,
+        "mean_k": 82.2,
+        "eta": 33.7842,
+        "lcc_frac": 1.0,
+        "max_degree": 159,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6464,
+        "mean_k": 64.64,
+        "eta": 20.8916,
+        "lcc_frac": 0.985,
+        "max_degree": 134,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3598,
+        "mean_k": 35.98,
+        "eta": 6.4728,
+        "lcc_frac": 0.98,
+        "max_degree": 94,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050017",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 22.7,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16756,
+        "mean_k": 167.56,
+        "eta": 140.3818,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 39,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15323,
+        "mean_k": 153.23,
+        "eta": 117.3972,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 21,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 13714,
+        "mean_k": 137.14,
+        "eta": 94.0369,
+        "lcc_frac": 1.0,
+        "max_degree": 187,
+        "min_degree": 15,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 12033,
+        "mean_k": 120.33,
+        "eta": 72.3965,
+        "lcc_frac": 1.0,
+        "max_degree": 180,
+        "min_degree": 9,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 10302,
+        "mean_k": 103.02,
+        "eta": 53.0656,
+        "lcc_frac": 1.0,
+        "max_degree": 174,
+        "min_degree": 5,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 8622,
+        "mean_k": 86.22,
+        "eta": 37.1694,
+        "lcc_frac": 1.0,
+        "max_degree": 160,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 5574,
+        "mean_k": 55.74,
+        "eta": 15.5347,
+        "lcc_frac": 0.995,
+        "max_degree": 117,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050019",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 27.81,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16694,
+        "mean_k": 166.94,
+        "eta": 139.3448,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 51,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 14920,
+        "mean_k": 149.2,
+        "eta": 111.3032,
+        "lcc_frac": 1.0,
+        "max_degree": 195,
+        "min_degree": 25,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 12867,
+        "mean_k": 128.67,
+        "eta": 82.7798,
+        "lcc_frac": 1.0,
+        "max_degree": 186,
+        "min_degree": 13,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 10673,
+        "mean_k": 106.73,
+        "eta": 56.9565,
+        "lcc_frac": 1.0,
+        "max_degree": 174,
+        "min_degree": 5,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 8515,
+        "mean_k": 85.15,
+        "eta": 36.2526,
+        "lcc_frac": 1.0,
+        "max_degree": 157,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6441,
+        "mean_k": 64.41,
+        "eta": 20.7432,
+        "lcc_frac": 1.0,
+        "max_degree": 134,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3312,
+        "mean_k": 33.12,
+        "eta": 5.4847,
+        "lcc_frac": 1.0,
+        "max_degree": 87,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050020",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 20.83,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16841,
+        "mean_k": 168.41,
+        "eta": 141.8096,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 54,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15063,
+        "mean_k": 150.63,
+        "eta": 113.447,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 29,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 12919,
+        "mean_k": 129.19,
+        "eta": 83.4503,
+        "lcc_frac": 1.0,
+        "max_degree": 186,
+        "min_degree": 15,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 10575,
+        "mean_k": 105.75,
+        "eta": 55.9153,
+        "lcc_frac": 1.0,
+        "max_degree": 182,
+        "min_degree": 11,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 8273,
+        "mean_k": 82.73,
+        "eta": 34.2213,
+        "lcc_frac": 1.0,
+        "max_degree": 172,
+        "min_degree": 6,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6284,
+        "mean_k": 62.84,
+        "eta": 19.7443,
+        "lcc_frac": 1.0,
+        "max_degree": 148,
+        "min_degree": 4,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3237,
+        "mean_k": 32.37,
+        "eta": 5.2391,
+        "lcc_frac": 0.995,
+        "max_degree": 99,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050022",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 16.99,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 15873,
+        "mean_k": 158.73,
+        "eta": 125.9761,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 52,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 13934,
+        "mean_k": 139.34,
+        "eta": 97.0782,
+        "lcc_frac": 1.0,
+        "max_degree": 190,
+        "min_degree": 31,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 11782,
+        "mean_k": 117.82,
+        "eta": 69.4078,
+        "lcc_frac": 1.0,
+        "max_degree": 182,
+        "min_degree": 16,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 9553,
+        "mean_k": 95.53,
+        "eta": 45.6299,
+        "lcc_frac": 1.0,
+        "max_degree": 168,
+        "min_degree": 8,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 7479,
+        "mean_k": 74.79,
+        "eta": 27.9677,
+        "lcc_frac": 1.0,
+        "max_degree": 143,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 5670,
+        "mean_k": 56.7,
+        "eta": 16.0745,
+        "lcc_frac": 1.0,
+        "max_degree": 121,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 2940,
+        "mean_k": 29.4,
+        "eta": 4.3218,
+        "lcc_frac": 0.985,
+        "max_degree": 80,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050023",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 12.64,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 18625,
+        "mean_k": 186.25,
+        "eta": 173.4453,
+        "lcc_frac": 1.0,
+        "max_degree": 199,
+        "min_degree": 69,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 17679,
+        "mean_k": 176.79,
+        "eta": 156.2735,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 34,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 16355,
+        "mean_k": 163.55,
+        "eta": 133.743,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 16,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 14585,
+        "mean_k": 145.85,
+        "eta": 106.3611,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 10,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 12585,
+        "mean_k": 125.85,
+        "eta": 79.1911,
+        "lcc_frac": 1.0,
+        "max_degree": 185,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 10521,
+        "mean_k": 105.21,
+        "eta": 55.3457,
+        "lcc_frac": 1.0,
+        "max_degree": 177,
+        "min_degree": 4,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 6751,
+        "mean_k": 67.51,
+        "eta": 22.788,
+        "lcc_frac": 1.0,
+        "max_degree": 150,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050024",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 22.64,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 9684,
+        "mean_k": 96.84,
+        "eta": 46.8899,
+        "lcc_frac": 1.0,
+        "max_degree": 148,
+        "min_degree": 38,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 6783,
+        "mean_k": 67.83,
+        "eta": 23.0045,
+        "lcc_frac": 1.0,
+        "max_degree": 114,
+        "min_degree": 16,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 4666,
+        "mean_k": 46.66,
+        "eta": 10.8858,
+        "lcc_frac": 1.0,
+        "max_degree": 85,
+        "min_degree": 4,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 3114,
+        "mean_k": 31.14,
+        "eta": 4.8485,
+        "lcc_frac": 1.0,
+        "max_degree": 70,
+        "min_degree": 1,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 2089,
+        "mean_k": 20.89,
+        "eta": 2.182,
+        "lcc_frac": 0.995,
+        "max_degree": 53,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": false
+      },
+      "0.40": {
+        "n_edges": 1378,
+        "mean_k": 13.78,
+        "eta": 0.9494,
+        "lcc_frac": 0.98,
+        "max_degree": 40,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 563,
+        "mean_k": 5.63,
+        "eta": 0.1585,
+        "lcc_frac": 0.81,
+        "max_degree": 22,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050025",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 31.72,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17153,
+        "mean_k": 171.53,
+        "eta": 147.1127,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 63,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15523,
+        "mean_k": 155.23,
+        "eta": 120.4818,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 36,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 13614,
+        "mean_k": 136.14,
+        "eta": 92.6705,
+        "lcc_frac": 1.0,
+        "max_degree": 190,
+        "min_degree": 24,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 11296,
+        "mean_k": 112.96,
+        "eta": 63.7998,
+        "lcc_frac": 1.0,
+        "max_degree": 185,
+        "min_degree": 12,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 9054,
+        "mean_k": 90.54,
+        "eta": 40.9875,
+        "lcc_frac": 1.0,
+        "max_degree": 175,
+        "min_degree": 8,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6958,
+        "mean_k": 69.58,
+        "eta": 24.2069,
+        "lcc_frac": 1.0,
+        "max_degree": 156,
+        "min_degree": 4,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3647,
+        "mean_k": 36.47,
+        "eta": 6.6503,
+        "lcc_frac": 1.0,
+        "max_degree": 106,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050026",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 16.28,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 18717,
+        "mean_k": 187.17,
+        "eta": 175.163,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 38,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 18043,
+        "mean_k": 180.43,
+        "eta": 162.7749,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 20,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 17148,
+        "mean_k": 171.48,
+        "eta": 147.027,
+        "lcc_frac": 1.0,
+        "max_degree": 195,
+        "min_degree": 11,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 16044,
+        "mean_k": 160.44,
+        "eta": 128.705,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 6,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 14748,
+        "mean_k": 147.48,
+        "eta": 108.7518,
+        "lcc_frac": 1.0,
+        "max_degree": 190,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 13222,
+        "mean_k": 132.22,
+        "eta": 87.4106,
+        "lcc_frac": 1.0,
+        "max_degree": 184,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 9845,
+        "mean_k": 98.45,
+        "eta": 48.462,
+        "lcc_frac": 0.995,
+        "max_degree": 166,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050027",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 12.24,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 14121,
+        "mean_k": 141.21,
+        "eta": 99.7013,
+        "lcc_frac": 1.0,
+        "max_degree": 189,
+        "min_degree": 58,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 11824,
+        "mean_k": 118.24,
+        "eta": 69.9035,
+        "lcc_frac": 1.0,
+        "max_degree": 175,
+        "min_degree": 28,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 9497,
+        "mean_k": 94.97,
+        "eta": 45.0965,
+        "lcc_frac": 1.0,
+        "max_degree": 164,
+        "min_degree": 12,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 7396,
+        "mean_k": 73.96,
+        "eta": 27.3504,
+        "lcc_frac": 1.0,
+        "max_degree": 144,
+        "min_degree": 7,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 5485,
+        "mean_k": 54.85,
+        "eta": 15.0426,
+        "lcc_frac": 1.0,
+        "max_degree": 116,
+        "min_degree": 3,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3947,
+        "mean_k": 39.47,
+        "eta": 7.7894,
+        "lcc_frac": 1.0,
+        "max_degree": 91,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1981,
+        "mean_k": 19.81,
+        "eta": 1.9622,
+        "lcc_frac": 0.98,
+        "max_degree": 67,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050028",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 12.74,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16806,
+        "mean_k": 168.06,
+        "eta": 141.2208,
+        "lcc_frac": 1.0,
+        "max_degree": 199,
+        "min_degree": 56,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15120,
+        "mean_k": 151.2,
+        "eta": 114.3072,
+        "lcc_frac": 1.0,
+        "max_degree": 193,
+        "min_degree": 28,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 13107,
+        "mean_k": 131.07,
+        "eta": 85.8967,
+        "lcc_frac": 1.0,
+        "max_degree": 185,
+        "min_degree": 14,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 10915,
+        "mean_k": 109.15,
+        "eta": 59.5686,
+        "lcc_frac": 1.0,
+        "max_degree": 176,
+        "min_degree": 4,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 8803,
+        "mean_k": 88.03,
+        "eta": 38.7464,
+        "lcc_frac": 1.0,
+        "max_degree": 164,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6869,
+        "mean_k": 68.69,
+        "eta": 23.5916,
+        "lcc_frac": 1.0,
+        "max_degree": 141,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3811,
+        "mean_k": 38.11,
+        "eta": 7.2619,
+        "lcc_frac": 1.0,
+        "max_degree": 96,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050029",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 11.4,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 11108,
+        "mean_k": 111.08,
+        "eta": 61.6938,
+        "lcc_frac": 1.0,
+        "max_degree": 160,
+        "min_degree": 42,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 8612,
+        "mean_k": 86.12,
+        "eta": 37.0833,
+        "lcc_frac": 1.0,
+        "max_degree": 137,
+        "min_degree": 18,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 6474,
+        "mean_k": 64.74,
+        "eta": 20.9563,
+        "lcc_frac": 1.0,
+        "max_degree": 119,
+        "min_degree": 11,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 4867,
+        "mean_k": 48.67,
+        "eta": 11.8438,
+        "lcc_frac": 1.0,
+        "max_degree": 100,
+        "min_degree": 7,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3559,
+        "mean_k": 35.59,
+        "eta": 6.3332,
+        "lcc_frac": 1.0,
+        "max_degree": 85,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2571,
+        "mean_k": 25.71,
+        "eta": 3.305,
+        "lcc_frac": 1.0,
+        "max_degree": 65,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1343,
+        "mean_k": 13.43,
+        "eta": 0.9018,
+        "lcc_frac": 0.98,
+        "max_degree": 45,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050030",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 25.12,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 11247,
+        "mean_k": 112.47,
+        "eta": 63.2475,
+        "lcc_frac": 1.0,
+        "max_degree": 172,
+        "min_degree": 40,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 8836,
+        "mean_k": 88.36,
+        "eta": 39.0374,
+        "lcc_frac": 1.0,
+        "max_degree": 145,
+        "min_degree": 19,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 6740,
+        "mean_k": 67.4,
+        "eta": 22.7138,
+        "lcc_frac": 1.0,
+        "max_degree": 125,
+        "min_degree": 9,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 4993,
+        "mean_k": 49.93,
+        "eta": 12.465,
+        "lcc_frac": 1.0,
+        "max_degree": 106,
+        "min_degree": 5,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3648,
+        "mean_k": 36.48,
+        "eta": 6.654,
+        "lcc_frac": 1.0,
+        "max_degree": 89,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2640,
+        "mean_k": 26.4,
+        "eta": 3.4848,
+        "lcc_frac": 0.99,
+        "max_degree": 67,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1366,
+        "mean_k": 13.66,
+        "eta": 0.933,
+        "lcc_frac": 0.94,
+        "max_degree": 41,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050031",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 12.92,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 15496,
+        "mean_k": 154.96,
+        "eta": 120.063,
+        "lcc_frac": 1.0,
+        "max_degree": 193,
+        "min_degree": 58,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 13669,
+        "mean_k": 136.69,
+        "eta": 93.4208,
+        "lcc_frac": 1.0,
+        "max_degree": 186,
+        "min_degree": 37,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 11743,
+        "mean_k": 117.43,
+        "eta": 68.949,
+        "lcc_frac": 1.0,
+        "max_degree": 175,
+        "min_degree": 20,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 9756,
+        "mean_k": 97.56,
+        "eta": 47.5898,
+        "lcc_frac": 1.0,
+        "max_degree": 157,
+        "min_degree": 9,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 7774,
+        "mean_k": 77.74,
+        "eta": 30.2175,
+        "lcc_frac": 1.0,
+        "max_degree": 142,
+        "min_degree": 3,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6066,
+        "mean_k": 60.66,
+        "eta": 18.3982,
+        "lcc_frac": 0.995,
+        "max_degree": 126,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3543,
+        "mean_k": 35.43,
+        "eta": 6.2764,
+        "lcc_frac": 0.995,
+        "max_degree": 83,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050032",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 19.8,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 13481,
+        "mean_k": 134.81,
+        "eta": 90.8687,
+        "lcc_frac": 1.0,
+        "max_degree": 179,
+        "min_degree": 49,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 11360,
+        "mean_k": 113.6,
+        "eta": 64.5248,
+        "lcc_frac": 1.0,
+        "max_degree": 168,
+        "min_degree": 29,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 9263,
+        "mean_k": 92.63,
+        "eta": 42.9016,
+        "lcc_frac": 1.0,
+        "max_degree": 155,
+        "min_degree": 16,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 7347,
+        "mean_k": 73.47,
+        "eta": 26.9892,
+        "lcc_frac": 1.0,
+        "max_degree": 136,
+        "min_degree": 4,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 5738,
+        "mean_k": 57.38,
+        "eta": 16.4623,
+        "lcc_frac": 1.0,
+        "max_degree": 125,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 4460,
+        "mean_k": 44.6,
+        "eta": 9.9458,
+        "lcc_frac": 0.995,
+        "max_degree": 108,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 2588,
+        "mean_k": 25.88,
+        "eta": 3.3489,
+        "lcc_frac": 0.975,
+        "max_degree": 76,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050033",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 12.15,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17389,
+        "mean_k": 173.89,
+        "eta": 151.1887,
+        "lcc_frac": 1.0,
+        "max_degree": 195,
+        "min_degree": 41,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 16110,
+        "mean_k": 161.1,
+        "eta": 129.7661,
+        "lcc_frac": 1.0,
+        "max_degree": 193,
+        "min_degree": 22,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 14618,
+        "mean_k": 146.18,
+        "eta": 106.843,
+        "lcc_frac": 1.0,
+        "max_degree": 191,
+        "min_degree": 17,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 12876,
+        "mean_k": 128.76,
+        "eta": 82.8957,
+        "lcc_frac": 1.0,
+        "max_degree": 187,
+        "min_degree": 13,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 11061,
+        "mean_k": 110.61,
+        "eta": 61.1729,
+        "lcc_frac": 1.0,
+        "max_degree": 176,
+        "min_degree": 7,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 9159,
+        "mean_k": 91.59,
+        "eta": 41.9436,
+        "lcc_frac": 1.0,
+        "max_degree": 164,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 5881,
+        "mean_k": 58.81,
+        "eta": 17.2931,
+        "lcc_frac": 0.995,
+        "max_degree": 130,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050034",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 14.77,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 14058,
+        "mean_k": 140.58,
+        "eta": 98.8137,
+        "lcc_frac": 1.0,
+        "max_degree": 185,
+        "min_degree": 21,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 11752,
+        "mean_k": 117.52,
+        "eta": 69.0548,
+        "lcc_frac": 1.0,
+        "max_degree": 173,
+        "min_degree": 12,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 9496,
+        "mean_k": 94.96,
+        "eta": 45.087,
+        "lcc_frac": 1.0,
+        "max_degree": 161,
+        "min_degree": 8,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 7214,
+        "mean_k": 72.14,
+        "eta": 26.0209,
+        "lcc_frac": 1.0,
+        "max_degree": 138,
+        "min_degree": 4,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 5340,
+        "mean_k": 53.4,
+        "eta": 14.2578,
+        "lcc_frac": 1.0,
+        "max_degree": 115,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3790,
+        "mean_k": 37.9,
+        "eta": 7.182,
+        "lcc_frac": 1.0,
+        "max_degree": 96,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1947,
+        "mean_k": 19.47,
+        "eta": 1.8954,
+        "lcc_frac": 0.98,
+        "max_degree": 56,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050035",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 17.36,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 15229,
+        "mean_k": 152.29,
+        "eta": 115.9612,
+        "lcc_frac": 1.0,
+        "max_degree": 193,
+        "min_degree": 52,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 13392,
+        "mean_k": 133.92,
+        "eta": 89.6728,
+        "lcc_frac": 1.0,
+        "max_degree": 189,
+        "min_degree": 28,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 11460,
+        "mean_k": 114.6,
+        "eta": 65.6658,
+        "lcc_frac": 1.0,
+        "max_degree": 179,
+        "min_degree": 16,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 9609,
+        "mean_k": 96.09,
+        "eta": 46.1664,
+        "lcc_frac": 1.0,
+        "max_degree": 166,
+        "min_degree": 8,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 7766,
+        "mean_k": 77.66,
+        "eta": 30.1554,
+        "lcc_frac": 1.0,
+        "max_degree": 147,
+        "min_degree": 5,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6037,
+        "mean_k": 60.37,
+        "eta": 18.2227,
+        "lcc_frac": 1.0,
+        "max_degree": 122,
+        "min_degree": 3,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3486,
+        "mean_k": 34.86,
+        "eta": 6.0761,
+        "lcc_frac": 0.995,
+        "max_degree": 79,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050036",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 13.28,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 11197,
+        "mean_k": 111.97,
+        "eta": 62.6864,
+        "lcc_frac": 1.0,
+        "max_degree": 178,
+        "min_degree": 48,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 8609,
+        "mean_k": 86.09,
+        "eta": 37.0574,
+        "lcc_frac": 1.0,
+        "max_degree": 154,
+        "min_degree": 26,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 6437,
+        "mean_k": 64.37,
+        "eta": 20.7175,
+        "lcc_frac": 1.0,
+        "max_degree": 130,
+        "min_degree": 15,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 4675,
+        "mean_k": 46.75,
+        "eta": 10.9278,
+        "lcc_frac": 1.0,
+        "max_degree": 101,
+        "min_degree": 9,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3256,
+        "mean_k": 32.56,
+        "eta": 5.3008,
+        "lcc_frac": 1.0,
+        "max_degree": 71,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2206,
+        "mean_k": 22.06,
+        "eta": 2.4332,
+        "lcc_frac": 1.0,
+        "max_degree": 44,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 1002,
+        "mean_k": 10.02,
+        "eta": 0.502,
+        "lcc_frac": 0.975,
+        "max_degree": 33,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050037",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 19.16,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 15506,
+        "mean_k": 155.06,
+        "eta": 120.218,
+        "lcc_frac": 1.0,
+        "max_degree": 193,
+        "min_degree": 42,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 13319,
+        "mean_k": 133.19,
+        "eta": 88.6979,
+        "lcc_frac": 1.0,
+        "max_degree": 188,
+        "min_degree": 14,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 10928,
+        "mean_k": 109.28,
+        "eta": 59.7106,
+        "lcc_frac": 1.0,
+        "max_degree": 171,
+        "min_degree": 4,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 8549,
+        "mean_k": 85.49,
+        "eta": 36.5427,
+        "lcc_frac": 1.0,
+        "max_degree": 158,
+        "min_degree": 3,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 6337,
+        "mean_k": 63.37,
+        "eta": 20.0788,
+        "lcc_frac": 1.0,
+        "max_degree": 136,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 4465,
+        "mean_k": 44.65,
+        "eta": 9.9681,
+        "lcc_frac": 0.995,
+        "max_degree": 113,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 2103,
+        "mean_k": 21.03,
+        "eta": 2.2113,
+        "lcc_frac": 0.97,
+        "max_degree": 78,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050038",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 13.95,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 14959,
+        "mean_k": 149.59,
+        "eta": 111.8858,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 37,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 13109,
+        "mean_k": 131.09,
+        "eta": 85.9229,
+        "lcc_frac": 1.0,
+        "max_degree": 183,
+        "min_degree": 19,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 11134,
+        "mean_k": 111.34,
+        "eta": 61.983,
+        "lcc_frac": 1.0,
+        "max_degree": 173,
+        "min_degree": 5,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 9171,
+        "mean_k": 91.71,
+        "eta": 42.0536,
+        "lcc_frac": 1.0,
+        "max_degree": 167,
+        "min_degree": 3,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 7368,
+        "mean_k": 73.68,
+        "eta": 27.1437,
+        "lcc_frac": 1.0,
+        "max_degree": 141,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 5691,
+        "mean_k": 56.91,
+        "eta": 16.1937,
+        "lcc_frac": 1.0,
+        "max_degree": 126,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3121,
+        "mean_k": 31.21,
+        "eta": 4.8703,
+        "lcc_frac": 0.985,
+        "max_degree": 89,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050039",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 30.66,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16784,
+        "mean_k": 167.84,
+        "eta": 140.8513,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 87,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15735,
+        "mean_k": 157.35,
+        "eta": 123.7951,
+        "lcc_frac": 1.0,
+        "max_degree": 195,
+        "min_degree": 66,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 14527,
+        "mean_k": 145.27,
+        "eta": 105.5169,
+        "lcc_frac": 1.0,
+        "max_degree": 191,
+        "min_degree": 42,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 13308,
+        "mean_k": 133.08,
+        "eta": 88.5514,
+        "lcc_frac": 1.0,
+        "max_degree": 189,
+        "min_degree": 31,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 12039,
+        "mean_k": 120.39,
+        "eta": 72.4688,
+        "lcc_frac": 1.0,
+        "max_degree": 184,
+        "min_degree": 25,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 10728,
+        "mean_k": 107.28,
+        "eta": 57.545,
+        "lcc_frac": 1.0,
+        "max_degree": 166,
+        "min_degree": 22,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 8272,
+        "mean_k": 82.72,
+        "eta": 34.213,
+        "lcc_frac": 1.0,
+        "max_degree": 137,
+        "min_degree": 13,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050040",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 24.6,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16012,
+        "mean_k": 160.12,
+        "eta": 128.1921,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 56,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 13857,
+        "mean_k": 138.57,
+        "eta": 96.0082,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 20,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 11564,
+        "mean_k": 115.64,
+        "eta": 66.863,
+        "lcc_frac": 1.0,
+        "max_degree": 180,
+        "min_degree": 8,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 9265,
+        "mean_k": 92.65,
+        "eta": 42.9201,
+        "lcc_frac": 0.995,
+        "max_degree": 161,
+        "min_degree": 0,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 7193,
+        "mean_k": 71.93,
+        "eta": 25.8696,
+        "lcc_frac": 0.995,
+        "max_degree": 142,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 5396,
+        "mean_k": 53.96,
+        "eta": 14.5584,
+        "lcc_frac": 0.99,
+        "max_degree": 126,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 2815,
+        "mean_k": 28.15,
+        "eta": 3.9621,
+        "lcc_frac": 0.97,
+        "max_degree": 83,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050041",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 27.92,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 12458,
+        "mean_k": 124.58,
+        "eta": 77.6009,
+        "lcc_frac": 1.0,
+        "max_degree": 169,
+        "min_degree": 37,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 10158,
+        "mean_k": 101.58,
+        "eta": 51.5925,
+        "lcc_frac": 1.0,
+        "max_degree": 154,
+        "min_degree": 16,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 8068,
+        "mean_k": 80.68,
+        "eta": 32.5463,
+        "lcc_frac": 1.0,
+        "max_degree": 137,
+        "min_degree": 8,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 6173,
+        "mean_k": 61.73,
+        "eta": 19.053,
+        "lcc_frac": 1.0,
+        "max_degree": 123,
+        "min_degree": 6,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 4590,
+        "mean_k": 45.9,
+        "eta": 10.5341,
+        "lcc_frac": 1.0,
+        "max_degree": 101,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3405,
+        "mean_k": 34.05,
+        "eta": 5.797,
+        "lcc_frac": 1.0,
+        "max_degree": 87,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1766,
+        "mean_k": 17.66,
+        "eta": 1.5594,
+        "lcc_frac": 0.94,
+        "max_degree": 57,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050042",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 33.17,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16932,
+        "mean_k": 169.32,
+        "eta": 143.3463,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 38,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15479,
+        "mean_k": 154.79,
+        "eta": 119.7997,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 14,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 13840,
+        "mean_k": 138.4,
+        "eta": 95.7728,
+        "lcc_frac": 1.0,
+        "max_degree": 185,
+        "min_degree": 8,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 11964,
+        "mean_k": 119.64,
+        "eta": 71.5686,
+        "lcc_frac": 1.0,
+        "max_degree": 177,
+        "min_degree": 4,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 9969,
+        "mean_k": 99.69,
+        "eta": 49.6905,
+        "lcc_frac": 1.0,
+        "max_degree": 162,
+        "min_degree": 3,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 7924,
+        "mean_k": 79.24,
+        "eta": 31.3949,
+        "lcc_frac": 1.0,
+        "max_degree": 147,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 4583,
+        "mean_k": 45.83,
+        "eta": 10.5019,
+        "lcc_frac": 0.99,
+        "max_degree": 111,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050043",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 13.78,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 10961,
+        "mean_k": 109.61,
+        "eta": 60.0718,
+        "lcc_frac": 1.0,
+        "max_degree": 167,
+        "min_degree": 44,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 8335,
+        "mean_k": 83.35,
+        "eta": 34.7361,
+        "lcc_frac": 1.0,
+        "max_degree": 148,
+        "min_degree": 27,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 6098,
+        "mean_k": 60.98,
+        "eta": 18.5928,
+        "lcc_frac": 1.0,
+        "max_degree": 124,
+        "min_degree": 14,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 4305,
+        "mean_k": 43.05,
+        "eta": 9.2665,
+        "lcc_frac": 1.0,
+        "max_degree": 90,
+        "min_degree": 5,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3005,
+        "mean_k": 30.05,
+        "eta": 4.515,
+        "lcc_frac": 1.0,
+        "max_degree": 66,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2078,
+        "mean_k": 20.78,
+        "eta": 2.159,
+        "lcc_frac": 1.0,
+        "max_degree": 50,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 1015,
+        "mean_k": 10.15,
+        "eta": 0.5151,
+        "lcc_frac": 0.955,
+        "max_degree": 33,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050044",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 17.13,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17432,
+        "mean_k": 174.32,
+        "eta": 151.9373,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 11,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 16287,
+        "mean_k": 162.87,
+        "eta": 132.6332,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 6,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 14962,
+        "mean_k": 149.62,
+        "eta": 111.9307,
+        "lcc_frac": 1.0,
+        "max_degree": 186,
+        "min_degree": 3,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 13369,
+        "mean_k": 133.69,
+        "eta": 89.3651,
+        "lcc_frac": 1.0,
+        "max_degree": 181,
+        "min_degree": 2,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 11616,
+        "mean_k": 116.16,
+        "eta": 67.4657,
+        "lcc_frac": 0.995,
+        "max_degree": 174,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 9809,
+        "mean_k": 98.09,
+        "eta": 48.1082,
+        "lcc_frac": 0.99,
+        "max_degree": 169,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 6358,
+        "mean_k": 63.58,
+        "eta": 20.2121,
+        "lcc_frac": 0.965,
+        "max_degree": 138,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050045",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 15.7,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 13327,
+        "mean_k": 133.27,
+        "eta": 88.8045,
+        "lcc_frac": 0.99,
+        "max_degree": 186,
+        "min_degree": 0,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 10913,
+        "mean_k": 109.13,
+        "eta": 59.5468,
+        "lcc_frac": 0.99,
+        "max_degree": 171,
+        "min_degree": 0,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 8544,
+        "mean_k": 85.44,
+        "eta": 36.5,
+        "lcc_frac": 0.99,
+        "max_degree": 154,
+        "min_degree": 0,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 6462,
+        "mean_k": 64.62,
+        "eta": 20.8787,
+        "lcc_frac": 0.985,
+        "max_degree": 130,
+        "min_degree": 0,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 4693,
+        "mean_k": 46.93,
+        "eta": 11.0121,
+        "lcc_frac": 0.975,
+        "max_degree": 101,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3279,
+        "mean_k": 32.79,
+        "eta": 5.3759,
+        "lcc_frac": 0.975,
+        "max_degree": 77,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1537,
+        "mean_k": 15.37,
+        "eta": 1.1812,
+        "lcc_frac": 0.97,
+        "max_degree": 44,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050046",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 20.65,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 18430,
+        "mean_k": 184.3,
+        "eta": 169.8325,
+        "lcc_frac": 1.0,
+        "max_degree": 199,
+        "min_degree": 59,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 17374,
+        "mean_k": 173.74,
+        "eta": 150.9279,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 33,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 15996,
+        "mean_k": 159.96,
+        "eta": 127.936,
+        "lcc_frac": 1.0,
+        "max_degree": 193,
+        "min_degree": 16,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 14184,
+        "mean_k": 141.84,
+        "eta": 100.5929,
+        "lcc_frac": 1.0,
+        "max_degree": 188,
+        "min_degree": 9,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 12186,
+        "mean_k": 121.86,
+        "eta": 74.2493,
+        "lcc_frac": 1.0,
+        "max_degree": 181,
+        "min_degree": 5,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 10026,
+        "mean_k": 100.26,
+        "eta": 50.2603,
+        "lcc_frac": 1.0,
+        "max_degree": 177,
+        "min_degree": 3,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 6226,
+        "mean_k": 62.26,
+        "eta": 19.3815,
+        "lcc_frac": 0.995,
+        "max_degree": 140,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050047",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 15.35,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16526,
+        "mean_k": 165.26,
+        "eta": 136.5543,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 55,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 14718,
+        "mean_k": 147.18,
+        "eta": 108.3098,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 35,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 12686,
+        "mean_k": 126.86,
+        "eta": 80.4673,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 21,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 10447,
+        "mean_k": 104.47,
+        "eta": 54.5699,
+        "lcc_frac": 1.0,
+        "max_degree": 182,
+        "min_degree": 10,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 8349,
+        "mean_k": 83.49,
+        "eta": 34.8529,
+        "lcc_frac": 1.0,
+        "max_degree": 165,
+        "min_degree": 6,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6461,
+        "mean_k": 64.61,
+        "eta": 20.8723,
+        "lcc_frac": 1.0,
+        "max_degree": 144,
+        "min_degree": 4,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3531,
+        "mean_k": 35.31,
+        "eta": 6.234,
+        "lcc_frac": 1.0,
+        "max_degree": 108,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050048",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 11.81,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 15029,
+        "mean_k": 150.29,
+        "eta": 112.9354,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 55,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 12795,
+        "mean_k": 127.95,
+        "eta": 81.856,
+        "lcc_frac": 1.0,
+        "max_degree": 184,
+        "min_degree": 29,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 10479,
+        "mean_k": 104.79,
+        "eta": 54.9047,
+        "lcc_frac": 1.0,
+        "max_degree": 173,
+        "min_degree": 13,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 8252,
+        "mean_k": 82.52,
+        "eta": 34.0478,
+        "lcc_frac": 1.0,
+        "max_degree": 160,
+        "min_degree": 8,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 6273,
+        "mean_k": 62.73,
+        "eta": 19.6753,
+        "lcc_frac": 1.0,
+        "max_degree": 143,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 4606,
+        "mean_k": 46.06,
+        "eta": 10.6076,
+        "lcc_frac": 1.0,
+        "max_degree": 119,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 2425,
+        "mean_k": 24.25,
+        "eta": 2.9403,
+        "lcc_frac": 0.98,
+        "max_degree": 67,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050049",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 15.82,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 12396,
+        "mean_k": 123.96,
+        "eta": 76.8304,
+        "lcc_frac": 1.0,
+        "max_degree": 173,
+        "min_degree": 55,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 10126,
+        "mean_k": 101.26,
+        "eta": 51.2679,
+        "lcc_frac": 1.0,
+        "max_degree": 156,
+        "min_degree": 29,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 8173,
+        "mean_k": 81.73,
+        "eta": 33.399,
+        "lcc_frac": 1.0,
+        "max_degree": 132,
+        "min_degree": 23,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 6456,
+        "mean_k": 64.56,
+        "eta": 20.84,
+        "lcc_frac": 1.0,
+        "max_degree": 112,
+        "min_degree": 17,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 5102,
+        "mean_k": 51.02,
+        "eta": 13.0152,
+        "lcc_frac": 1.0,
+        "max_degree": 92,
+        "min_degree": 9,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3928,
+        "mean_k": 39.28,
+        "eta": 7.7146,
+        "lcc_frac": 1.0,
+        "max_degree": 75,
+        "min_degree": 7,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 2292,
+        "mean_k": 22.92,
+        "eta": 2.6266,
+        "lcc_frac": 1.0,
+        "max_degree": 53,
+        "min_degree": 4,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050050",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 14.37,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 15273,
+        "mean_k": 152.73,
+        "eta": 116.6323,
+        "lcc_frac": 1.0,
+        "max_degree": 193,
+        "min_degree": 27,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 13436,
+        "mean_k": 134.36,
+        "eta": 90.263,
+        "lcc_frac": 1.0,
+        "max_degree": 187,
+        "min_degree": 16,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 11435,
+        "mean_k": 114.35,
+        "eta": 65.3796,
+        "lcc_frac": 1.0,
+        "max_degree": 178,
+        "min_degree": 13,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 9408,
+        "mean_k": 94.08,
+        "eta": 44.2552,
+        "lcc_frac": 1.0,
+        "max_degree": 170,
+        "min_degree": 4,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 7548,
+        "mean_k": 75.48,
+        "eta": 28.4862,
+        "lcc_frac": 1.0,
+        "max_degree": 153,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 5879,
+        "mean_k": 58.79,
+        "eta": 17.2813,
+        "lcc_frac": 1.0,
+        "max_degree": 129,
+        "min_degree": 4,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3375,
+        "mean_k": 33.75,
+        "eta": 5.6953,
+        "lcc_frac": 1.0,
+        "max_degree": 94,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050051",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 12.83,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 13318,
+        "mean_k": 133.18,
+        "eta": 88.6846,
+        "lcc_frac": 1.0,
+        "max_degree": 190,
+        "min_degree": 51,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 10900,
+        "mean_k": 109.0,
+        "eta": 59.405,
+        "lcc_frac": 1.0,
+        "max_degree": 175,
+        "min_degree": 25,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 8553,
+        "mean_k": 85.53,
+        "eta": 36.5769,
+        "lcc_frac": 1.0,
+        "max_degree": 154,
+        "min_degree": 13,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 6438,
+        "mean_k": 64.38,
+        "eta": 20.7239,
+        "lcc_frac": 1.0,
+        "max_degree": 134,
+        "min_degree": 8,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 4737,
+        "mean_k": 47.37,
+        "eta": 11.2196,
+        "lcc_frac": 1.0,
+        "max_degree": 108,
+        "min_degree": 3,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3321,
+        "mean_k": 33.21,
+        "eta": 5.5145,
+        "lcc_frac": 1.0,
+        "max_degree": 80,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1549,
+        "mean_k": 15.49,
+        "eta": 1.1997,
+        "lcc_frac": 0.985,
+        "max_degree": 53,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050052",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 33.24,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 18724,
+        "mean_k": 187.24,
+        "eta": 175.2941,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 55,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 18087,
+        "mean_k": 180.87,
+        "eta": 163.5698,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 34,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 17140,
+        "mean_k": 171.4,
+        "eta": 146.8898,
+        "lcc_frac": 1.0,
+        "max_degree": 195,
+        "min_degree": 12,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 15955,
+        "mean_k": 159.55,
+        "eta": 127.281,
+        "lcc_frac": 1.0,
+        "max_degree": 191,
+        "min_degree": 6,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 14409,
+        "mean_k": 144.09,
+        "eta": 103.8096,
+        "lcc_frac": 1.0,
+        "max_degree": 188,
+        "min_degree": 2,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 12517,
+        "mean_k": 125.17,
+        "eta": 78.3376,
+        "lcc_frac": 1.0,
+        "max_degree": 182,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 8389,
+        "mean_k": 83.89,
+        "eta": 35.1877,
+        "lcc_frac": 0.99,
+        "max_degree": 154,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050053",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 12.03,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 19107,
+        "mean_k": 191.07,
+        "eta": 182.5387,
+        "lcc_frac": 1.0,
+        "max_degree": 199,
+        "min_degree": 79,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 18610,
+        "mean_k": 186.1,
+        "eta": 173.166,
+        "lcc_frac": 1.0,
+        "max_degree": 199,
+        "min_degree": 63,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 17980,
+        "mean_k": 179.8,
+        "eta": 161.6402,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 42,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 17165,
+        "mean_k": 171.65,
+        "eta": 147.3186,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 26,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 16198,
+        "mean_k": 161.98,
+        "eta": 131.1876,
+        "lcc_frac": 1.0,
+        "max_degree": 191,
+        "min_degree": 18,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 15027,
+        "mean_k": 150.27,
+        "eta": 112.9054,
+        "lcc_frac": 1.0,
+        "max_degree": 187,
+        "min_degree": 9,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 11975,
+        "mean_k": 119.75,
+        "eta": 71.7003,
+        "lcc_frac": 1.0,
+        "max_degree": 177,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050054",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 9.44,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17584,
+        "mean_k": 175.84,
+        "eta": 154.5985,
+        "lcc_frac": 1.0,
+        "max_degree": 199,
+        "min_degree": 111,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 16530,
+        "mean_k": 165.3,
+        "eta": 136.6205,
+        "lcc_frac": 1.0,
+        "max_degree": 197,
+        "min_degree": 80,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 15309,
+        "mean_k": 153.09,
+        "eta": 117.1827,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 49,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 13911,
+        "mean_k": 139.11,
+        "eta": 96.758,
+        "lcc_frac": 1.0,
+        "max_degree": 194,
+        "min_degree": 31,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 12314,
+        "mean_k": 123.14,
+        "eta": 75.8173,
+        "lcc_frac": 1.0,
+        "max_degree": 187,
+        "min_degree": 18,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 10725,
+        "mean_k": 107.25,
+        "eta": 57.5128,
+        "lcc_frac": 1.0,
+        "max_degree": 177,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 7652,
+        "mean_k": 76.52,
+        "eta": 29.2766,
+        "lcc_frac": 1.0,
+        "max_degree": 143,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050055",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 16.99,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 11079,
+        "mean_k": 110.79,
+        "eta": 61.3721,
+        "lcc_frac": 1.0,
+        "max_degree": 165,
+        "min_degree": 34,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 8638,
+        "mean_k": 86.38,
+        "eta": 37.3075,
+        "lcc_frac": 1.0,
+        "max_degree": 147,
+        "min_degree": 17,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 6489,
+        "mean_k": 64.89,
+        "eta": 21.0536,
+        "lcc_frac": 1.0,
+        "max_degree": 126,
+        "min_degree": 4,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 4681,
+        "mean_k": 46.81,
+        "eta": 10.9559,
+        "lcc_frac": 1.0,
+        "max_degree": 99,
+        "min_degree": 2,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3325,
+        "mean_k": 33.25,
+        "eta": 5.5278,
+        "lcc_frac": 0.995,
+        "max_degree": 73,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2316,
+        "mean_k": 23.16,
+        "eta": 2.6819,
+        "lcc_frac": 0.99,
+        "max_degree": 60,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 1067,
+        "mean_k": 10.67,
+        "eta": 0.5692,
+        "lcc_frac": 0.91,
+        "max_degree": 37,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050056",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 13.59,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16079,
+        "mean_k": 160.79,
+        "eta": 129.2671,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 60,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 14238,
+        "mean_k": 142.38,
+        "eta": 101.3603,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 34,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 12237,
+        "mean_k": 122.37,
+        "eta": 74.8721,
+        "lcc_frac": 1.0,
+        "max_degree": 183,
+        "min_degree": 21,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 10153,
+        "mean_k": 101.53,
+        "eta": 51.5417,
+        "lcc_frac": 1.0,
+        "max_degree": 172,
+        "min_degree": 15,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 8066,
+        "mean_k": 80.66,
+        "eta": 32.5302,
+        "lcc_frac": 1.0,
+        "max_degree": 151,
+        "min_degree": 6,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 6307,
+        "mean_k": 63.07,
+        "eta": 19.8891,
+        "lcc_frac": 1.0,
+        "max_degree": 129,
+        "min_degree": 4,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3474,
+        "mean_k": 34.74,
+        "eta": 6.0343,
+        "lcc_frac": 1.0,
+        "max_degree": 95,
+        "min_degree": 1,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050057",
+    "dx_group": 1,
+    "site_id": "PITT",
+    "age": 12.62,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 9304,
+        "mean_k": 93.04,
+        "eta": 43.2822,
+        "lcc_frac": 1.0,
+        "max_degree": 133,
+        "min_degree": 24,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 6796,
+        "mean_k": 67.96,
+        "eta": 23.0928,
+        "lcc_frac": 1.0,
+        "max_degree": 115,
+        "min_degree": 9,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 4924,
+        "mean_k": 49.24,
+        "eta": 12.1229,
+        "lcc_frac": 1.0,
+        "max_degree": 98,
+        "min_degree": 4,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 3583,
+        "mean_k": 35.83,
+        "eta": 6.4189,
+        "lcc_frac": 1.0,
+        "max_degree": 80,
+        "min_degree": 2,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 2584,
+        "mean_k": 25.84,
+        "eta": 3.3385,
+        "lcc_frac": 1.0,
+        "max_degree": 71,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 1832,
+        "mean_k": 18.32,
+        "eta": 1.6781,
+        "lcc_frac": 0.985,
+        "max_degree": 48,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 958,
+        "mean_k": 9.58,
+        "eta": 0.4589,
+        "lcc_frac": 0.87,
+        "max_degree": 30,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050058",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 23.1,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 16426,
+        "mean_k": 164.26,
+        "eta": 134.9067,
+        "lcc_frac": 1.0,
+        "max_degree": 198,
+        "min_degree": 46,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 14951,
+        "mean_k": 149.51,
+        "eta": 111.7662,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 23,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 13203,
+        "mean_k": 132.03,
+        "eta": 87.1596,
+        "lcc_frac": 1.0,
+        "max_degree": 187,
+        "min_degree": 12,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 11197,
+        "mean_k": 111.97,
+        "eta": 62.6864,
+        "lcc_frac": 1.0,
+        "max_degree": 177,
+        "min_degree": 7,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 9190,
+        "mean_k": 91.9,
+        "eta": 42.2281,
+        "lcc_frac": 1.0,
+        "max_degree": 164,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 7245,
+        "mean_k": 72.45,
+        "eta": 26.245,
+        "lcc_frac": 1.0,
+        "max_degree": 147,
+        "min_degree": 2,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 3963,
+        "mean_k": 39.63,
+        "eta": 7.8527,
+        "lcc_frac": 0.985,
+        "max_degree": 103,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050059",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 21.22,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17208,
+        "mean_k": 172.08,
+        "eta": 148.0576,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 47,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 15825,
+        "mean_k": 158.25,
+        "eta": 125.2153,
+        "lcc_frac": 1.0,
+        "max_degree": 192,
+        "min_degree": 22,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 14216,
+        "mean_k": 142.16,
+        "eta": 101.0473,
+        "lcc_frac": 1.0,
+        "max_degree": 187,
+        "min_degree": 12,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 12404,
+        "mean_k": 124.04,
+        "eta": 76.9296,
+        "lcc_frac": 1.0,
+        "max_degree": 178,
+        "min_degree": 7,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 10434,
+        "mean_k": 104.34,
+        "eta": 54.4342,
+        "lcc_frac": 1.0,
+        "max_degree": 166,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 8414,
+        "mean_k": 84.14,
+        "eta": 35.3977,
+        "lcc_frac": 1.0,
+        "max_degree": 151,
+        "min_degree": 4,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 5035,
+        "mean_k": 50.35,
+        "eta": 12.6756,
+        "lcc_frac": 0.995,
+        "max_degree": 115,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Pitt_0050060",
+    "dx_group": 2,
+    "site_id": "PITT",
+    "age": 20.34,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 10986,
+        "mean_k": 109.86,
+        "eta": 60.3461,
+        "lcc_frac": 1.0,
+        "max_degree": 176,
+        "min_degree": 49,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 8393,
+        "mean_k": 83.93,
+        "eta": 35.2212,
+        "lcc_frac": 1.0,
+        "max_degree": 155,
+        "min_degree": 26,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 6115,
+        "mean_k": 61.15,
+        "eta": 18.6966,
+        "lcc_frac": 1.0,
+        "max_degree": 126,
+        "min_degree": 11,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 4339,
+        "mean_k": 43.39,
+        "eta": 9.4135,
+        "lcc_frac": 1.0,
+        "max_degree": 103,
+        "min_degree": 3,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 3062,
+        "mean_k": 30.62,
+        "eta": 4.6879,
+        "lcc_frac": 1.0,
+        "max_degree": 76,
+        "min_degree": 1,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 2055,
+        "mean_k": 20.55,
+        "eta": 2.1115,
+        "lcc_frac": 0.995,
+        "max_degree": 52,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 935,
+        "mean_k": 9.35,
+        "eta": 0.4371,
+        "lcc_frac": 0.935,
+        "max_degree": 29,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Olin_0050102",
+    "dx_group": 2,
+    "site_id": "OLIN",
+    "age": 14.0,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 14767,
+        "mean_k": 147.67,
+        "eta": 109.0321,
+        "lcc_frac": 1.0,
+        "max_degree": 191,
+        "min_degree": 33,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 12504,
+        "mean_k": 125.04,
+        "eta": 78.175,
+        "lcc_frac": 1.0,
+        "max_degree": 180,
+        "min_degree": 23,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 10125,
+        "mean_k": 101.25,
+        "eta": 51.2578,
+        "lcc_frac": 1.0,
+        "max_degree": 167,
+        "min_degree": 13,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 7790,
+        "mean_k": 77.9,
+        "eta": 30.3421,
+        "lcc_frac": 1.0,
+        "max_degree": 152,
+        "min_degree": 6,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 5706,
+        "mean_k": 57.06,
+        "eta": 16.2792,
+        "lcc_frac": 1.0,
+        "max_degree": 131,
+        "min_degree": 4,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3970,
+        "mean_k": 39.7,
+        "eta": 7.8805,
+        "lcc_frac": 1.0,
+        "max_degree": 99,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1711,
+        "mean_k": 17.11,
+        "eta": 1.4638,
+        "lcc_frac": 0.985,
+        "max_degree": 55,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Olin_0050103",
+    "dx_group": 2,
+    "site_id": "OLIN",
+    "age": 14.0,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 17612,
+        "mean_k": 176.12,
+        "eta": 155.0913,
+        "lcc_frac": 1.0,
+        "max_degree": 199,
+        "min_degree": 71,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 16187,
+        "mean_k": 161.87,
+        "eta": 131.0095,
+        "lcc_frac": 1.0,
+        "max_degree": 196,
+        "min_degree": 47,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 14500,
+        "mean_k": 145.0,
+        "eta": 105.125,
+        "lcc_frac": 1.0,
+        "max_degree": 191,
+        "min_degree": 37,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 12648,
+        "mean_k": 126.48,
+        "eta": 79.986,
+        "lcc_frac": 1.0,
+        "max_degree": 184,
+        "min_degree": 29,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 10695,
+        "mean_k": 106.95,
+        "eta": 57.1915,
+        "lcc_frac": 1.0,
+        "max_degree": 172,
+        "min_degree": 25,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 8798,
+        "mean_k": 87.98,
+        "eta": 38.7024,
+        "lcc_frac": 1.0,
+        "max_degree": 155,
+        "min_degree": 16,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 5574,
+        "mean_k": 55.74,
+        "eta": 15.5347,
+        "lcc_frac": 1.0,
+        "max_degree": 117,
+        "min_degree": 5,
+        "threshold": 0.5,
+        "above_eta_c": true
+      }
+    }
+  },
+  {
+    "file_id": "Olin_0050104",
+    "dx_group": 2,
+    "site_id": "OLIN",
+    "age": 16.0,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 9091,
+        "mean_k": 90.91,
+        "eta": 41.3231,
+        "lcc_frac": 1.0,
+        "max_degree": 135,
+        "min_degree": 34,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 6426,
+        "mean_k": 64.26,
+        "eta": 20.6467,
+        "lcc_frac": 1.0,
+        "max_degree": 107,
+        "min_degree": 14,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 4415,
+        "mean_k": 44.15,
+        "eta": 9.7461,
+        "lcc_frac": 1.0,
+        "max_degree": 90,
+        "min_degree": 6,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 2982,
+        "mean_k": 29.82,
+        "eta": 4.4462,
+        "lcc_frac": 1.0,
+        "max_degree": 66,
+        "min_degree": 3,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 2027,
+        "mean_k": 20.27,
+        "eta": 2.0544,
+        "lcc_frac": 0.98,
+        "max_degree": 55,
+        "min_degree": 0,
+        "threshold": 0.35,
+        "above_eta_c": false
+      },
+      "0.40": {
+        "n_edges": 1359,
+        "mean_k": 13.59,
+        "eta": 0.9234,
+        "lcc_frac": 0.96,
+        "max_degree": 43,
+        "min_degree": 0,
+        "threshold": 0.4,
+        "above_eta_c": false
+      },
+      "0.50": {
+        "n_edges": 624,
+        "mean_k": 6.24,
+        "eta": 0.1947,
+        "lcc_frac": 0.77,
+        "max_degree": 26,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  },
+  {
+    "file_id": "Olin_0050118",
+    "dx_group": 1,
+    "site_id": "OLIN",
+    "age": 15.0,
+    "eta_c": 2.7162,
+    "thresholds": {
+      "0.15": {
+        "n_edges": 14273,
+        "mean_k": 142.73,
+        "eta": 101.8593,
+        "lcc_frac": 1.0,
+        "max_degree": 190,
+        "min_degree": 60,
+        "threshold": 0.15,
+        "above_eta_c": true
+      },
+      "0.20": {
+        "n_edges": 11790,
+        "mean_k": 117.9,
+        "eta": 69.5021,
+        "lcc_frac": 1.0,
+        "max_degree": 179,
+        "min_degree": 35,
+        "threshold": 0.2,
+        "above_eta_c": true
+      },
+      "0.25": {
+        "n_edges": 9318,
+        "mean_k": 93.18,
+        "eta": 43.4126,
+        "lcc_frac": 1.0,
+        "max_degree": 162,
+        "min_degree": 22,
+        "threshold": 0.25,
+        "above_eta_c": true
+      },
+      "0.30": {
+        "n_edges": 7104,
+        "mean_k": 71.04,
+        "eta": 25.2334,
+        "lcc_frac": 1.0,
+        "max_degree": 141,
+        "min_degree": 6,
+        "threshold": 0.3,
+        "above_eta_c": true
+      },
+      "0.35": {
+        "n_edges": 5150,
+        "mean_k": 51.5,
+        "eta": 13.2613,
+        "lcc_frac": 1.0,
+        "max_degree": 120,
+        "min_degree": 3,
+        "threshold": 0.35,
+        "above_eta_c": true
+      },
+      "0.40": {
+        "n_edges": 3638,
+        "mean_k": 36.38,
+        "eta": 6.6175,
+        "lcc_frac": 1.0,
+        "max_degree": 95,
+        "min_degree": 1,
+        "threshold": 0.4,
+        "above_eta_c": true
+      },
+      "0.50": {
+        "n_edges": 1652,
+        "mean_k": 16.52,
+        "eta": 1.3646,
+        "lcc_frac": 0.985,
+        "max_degree": 50,
+        "min_degree": 0,
+        "threshold": 0.5,
+        "above_eta_c": false
+      }
+    }
+  }
+]

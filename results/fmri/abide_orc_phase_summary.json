@@ -1,0 +1,9 @@
+{
+  "finding": "All subjects spherical (kappa > 0) at both thresholds. No significant ASD vs control difference in mean ORC.",
+  "analysis": "ABIDE-I Brain ORC Phase Classification",
+  "n_control": 30,
+  "eta_c_200": 2.7162,
+  "n_asd": 30,
+  "n_subjects": 60,
+  "implication": "Brain FC networks are universally spherical due to high density. Novel discriminators (octonion associator field) needed."
+}

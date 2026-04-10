@@ -1,0 +1,116 @@
+{
+  "threshold": 0.4,
+  "n_subjects": 59,
+  "n_features": {
+    "ORC-only": 8,
+    "Assoc-FC-only": 4,
+    "Assoc-RSN-only": 4,
+    "Dual-FC": 12,
+    "Dual-RSN": 12,
+    "Dual-Both": 16
+  },
+  "results": {
+    "ORC-only": {
+      "GaussianNB": {
+        "auroc": 0.4589,
+        "auroc_std": 0.0977,
+        "perm_p": 0.682
+      },
+      "KNN-5": {
+        "auroc": 0.4744,
+        "auroc_std": 0.2017,
+        "perm_p": 0.638
+      },
+      "LinearSVM": {
+        "auroc": 0.4222,
+        "auroc_std": 0.1235,
+        "perm_p": 0.794
+      }
+    },
+    "Assoc-FC-only": {
+      "GaussianNB": {
+        "auroc": 0.5678,
+        "auroc_std": 0.1249,
+        "perm_p": 0.274
+      },
+      "KNN-5": {
+        "auroc": 0.4644,
+        "auroc_std": 0.1861,
+        "perm_p": 0.67
+      },
+      "LinearSVM": {
+        "auroc": 0.5233,
+        "auroc_std": 0.1275,
+        "perm_p": 0.44
+      }
+    },
+    "Assoc-RSN-only": {
+      "GaussianNB": {
+        "auroc": 0.4739,
+        "auroc_std": 0.1399,
+        "perm_p": 0.602
+      },
+      "KNN-5": {
+        "auroc": 0.3906,
+        "auroc_std": 0.1373,
+        "perm_p": 0.866
+      },
+      "LinearSVM": {
+        "auroc": 0.4572,
+        "auroc_std": 0.1016,
+        "perm_p": 0.63
+      }
+    },
+    "Dual-FC": {
+      "GaussianNB": {
+        "auroc": 0.42,
+        "auroc_std": 0.0845,
+        "perm_p": 0.79
+      },
+      "KNN-5": {
+        "auroc": 0.47,
+        "auroc_std": 0.1067,
+        "perm_p": 0.654
+      },
+      "LinearSVM": {
+        "auroc": 0.3556,
+        "auroc_std": 0.1887,
+        "perm_p": 0.908
+      }
+    },
+    "Dual-RSN": {
+      "GaussianNB": {
+        "auroc": 0.4589,
+        "auroc_std": 0.0977,
+        "perm_p": 0.674
+      },
+      "KNN-5": {
+        "auroc": 0.4811,
+        "auroc_std": 0.1,
+        "perm_p": 0.57
+      },
+      "LinearSVM": {
+        "auroc": 0.38,
+        "auroc_std": 0.0424,
+        "perm_p": 0.878
+      }
+    },
+    "Dual-Both": {
+      "GaussianNB": {
+        "auroc": 0.42,
+        "auroc_std": 0.0845,
+        "perm_p": 0.79
+      },
+      "KNN-5": {
+        "auroc": 0.5228,
+        "auroc_std": 0.1376,
+        "perm_p": 0.4
+      },
+      "LinearSVM": {
+        "auroc": 0.3222,
+        "auroc_std": 0.1635,
+        "perm_p": 0.954
+      }
+    }
+  }
+}
