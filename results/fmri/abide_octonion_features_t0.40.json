@@ -1,0 +1,1142 @@
+[
+  {
+    "file_id": "Pitt_0050003",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 8083,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.013195,
+      "zero_frac": 0.29,
+      "assoc_entropy": 1.7421,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.160843,
+      "zero_frac": 0.772533,
+      "assoc_entropy": 0.5362,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.0
+  },
+  {
+    "file_id": "Pitt_0050004",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 3231,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.044314,
+      "zero_frac": 0.0469,
+      "assoc_entropy": 1.6414,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.207866,
+      "zero_frac": 0.706033,
+      "assoc_entropy": 0.6057,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.0
+  },
+  {
+    "file_id": "Pitt_0050005",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 7772,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.023323,
+      "zero_frac": 0.153833,
+      "assoc_entropy": 1.8731,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.207371,
+      "zero_frac": 0.706733,
+      "assoc_entropy": 0.6051,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.9
+  },
+  {
+    "file_id": "Pitt_0050006",
+    "dx_group": 1,
+    "N": 198,
+    "n_edges": 2707,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.048142,
+      "zero_frac": 0.028333,
+      "assoc_entropy": 1.4217,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.253616,
+      "zero_frac": 0.641333,
+      "assoc_entropy": 0.6526,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.0
+  },
+  {
+    "file_id": "Pitt_0050007",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 9664,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.015276,
+      "zero_frac": 0.242833,
+      "assoc_entropy": 1.9925,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.19106,
+      "zero_frac": 0.7298,
+      "assoc_entropy": 0.5835,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.2
+  },
+  {
+    "file_id": "Pitt_0050008",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 8688,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.009672,
+      "zero_frac": 0.318633,
+      "assoc_entropy": 1.9238,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.183235,
+      "zero_frac": 0.740867,
+      "assoc_entropy": 0.5721,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.8
+  },
+  {
+    "file_id": "Pitt_0050009",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 5859,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.012888,
+      "zero_frac": 0.2714,
+      "assoc_entropy": 1.3947,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.165534,
+      "zero_frac": 0.7659,
+      "assoc_entropy": 0.5442,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.4
+  },
+  {
+    "file_id": "Pitt_0050010",
+    "dx_group": 1,
+    "N": 196,
+    "n_edges": 2370,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.055847,
+      "zero_frac": 0.140533,
+      "assoc_entropy": 1.5271,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.198108,
+      "zero_frac": 0.719833,
+      "assoc_entropy": 0.5931,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.2
+  },
+  {
+    "file_id": "Pitt_0050011",
+    "dx_group": 1,
+    "N": 194,
+    "n_edges": 1819,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.084115,
+      "zero_frac": 0.0384,
+      "assoc_entropy": 1.6903,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.224341,
+      "zero_frac": 0.682733,
+      "assoc_entropy": 0.6248,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.1
+  },
+  {
+    "file_id": "Pitt_0050012",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 7991,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.023611,
+      "zero_frac": 0.2448,
+      "assoc_entropy": 1.8487,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.176305,
+      "zero_frac": 0.750667,
+      "assoc_entropy": 0.5616,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.1
+  },
+  {
+    "file_id": "Pitt_0050013",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 10814,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.004964,
+      "zero_frac": 0.3771,
+      "assoc_entropy": 1.3188,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.157496,
+      "zero_frac": 0.777267,
+      "assoc_entropy": 0.5303,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.5
+  },
+  {
+    "file_id": "Pitt_0050014",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 2336,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.036356,
+      "zero_frac": 0.072267,
+      "assoc_entropy": 1.7501,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.237211,
+      "zero_frac": 0.664533,
+      "assoc_entropy": 0.638,
+      "n_triples": 30000
+    },
+    "elapsed_s": 47.9
+  },
+  {
+    "file_id": "Pitt_0050015",
+    "dx_group": 1,
+    "N": 198,
+    "n_edges": 1596,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.041399,
+      "zero_frac": 0.0711,
+      "assoc_entropy": 1.3605,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.212108,
+      "zero_frac": 0.700033,
+      "assoc_entropy": 0.6108,
+      "n_triples": 30000
+    },
+    "elapsed_s": 49.2
+  },
+  {
+    "file_id": "Pitt_0050016",
+    "dx_group": 1,
+    "N": 197,
+    "n_edges": 6464,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.022919,
+      "zero_frac": 0.1791,
+      "assoc_entropy": 1.6444,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.214654,
+      "zero_frac": 0.696433,
+      "assoc_entropy": 0.6139,
+      "n_triples": 30000
+    },
+    "elapsed_s": 54.2
+  },
+  {
+    "file_id": "Pitt_0050017",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 8622,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.009602,
+      "zero_frac": 0.2573,
+      "assoc_entropy": 1.8012,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.148775,
+      "zero_frac": 0.7896,
+      "assoc_entropy": 0.5145,
+      "n_triples": 30000
+    },
+    "elapsed_s": 54.6
+  },
+  {
+    "file_id": "Pitt_0050019",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 6441,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.02519,
+      "zero_frac": 0.148167,
+      "assoc_entropy": 1.785,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.18802,
+      "zero_frac": 0.7341,
+      "assoc_entropy": 0.5791,
+      "n_triples": 30000
+    },
+    "elapsed_s": 54.2
+  },
+  {
+    "file_id": "Pitt_0050020",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 6284,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.021535,
+      "zero_frac": 0.176767,
+      "assoc_entropy": 1.8251,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.191084,
+      "zero_frac": 0.729767,
+      "assoc_entropy": 0.5835,
+      "n_triples": 30000
+    },
+    "elapsed_s": 50.3
+  },
+  {
+    "file_id": "Pitt_0050022",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 5670,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.016108,
+      "zero_frac": 0.1853,
+      "assoc_entropy": 1.4241,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.210482,
+      "zero_frac": 0.702333,
+      "assoc_entropy": 0.6089,
+      "n_triples": 30000
+    },
+    "elapsed_s": 48.6
+  },
+  {
+    "file_id": "Pitt_0050023",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 10521,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.01464,
+      "zero_frac": 0.3642,
+      "assoc_entropy": 1.7339,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.160325,
+      "zero_frac": 0.773267,
+      "assoc_entropy": 0.5353,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.8
+  },
+  {
+    "file_id": "Pitt_0050024",
+    "dx_group": 1,
+    "N": 196,
+    "n_edges": 1378,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.074862,
+      "zero_frac": 0.059778,
+      "assoc_entropy": 1.5146,
+      "n_triples": 24591
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.210829,
+      "zero_frac": 0.701842,
+      "assoc_entropy": 0.6093,
+      "n_triples": 24591
+    },
+    "elapsed_s": 37.1
+  },
+  {
+    "file_id": "Pitt_0050025",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 6958,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.029017,
+      "zero_frac": 0.0718,
+      "assoc_entropy": 1.8374,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.19304,
+      "zero_frac": 0.727,
+      "assoc_entropy": 0.5862,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.0
+  },
+  {
+    "file_id": "Pitt_0050026",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 13222,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.003955,
+      "zero_frac": 0.451367,
+      "assoc_entropy": 0.8914,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.141233,
+      "zero_frac": 0.800267,
+      "assoc_entropy": 0.5,
+      "n_triples": 30000
+    },
+    "elapsed_s": 51.9
+  },
+  {
+    "file_id": "Pitt_0050027",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 3947,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.028025,
+      "zero_frac": 0.033,
+      "assoc_entropy": 1.8669,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.241265,
+      "zero_frac": 0.6588,
+      "assoc_entropy": 0.6418,
+      "n_triples": 30000
+    },
+    "elapsed_s": 51.3
+  },
+  {
+    "file_id": "Pitt_0050028",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 6869,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.04168,
+      "zero_frac": 0.0514,
+      "assoc_entropy": 1.8565,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.19931,
+      "zero_frac": 0.718133,
+      "assoc_entropy": 0.5947,
+      "n_triples": 30000
+    },
+    "elapsed_s": 50.3
+  },
+  {
+    "file_id": "Pitt_0050029",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 2571,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.042959,
+      "zero_frac": 0.024233,
+      "assoc_entropy": 1.8778,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.237635,
+      "zero_frac": 0.663933,
+      "assoc_entropy": 0.6384,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.7
+  },
+  {
+    "file_id": "Pitt_0050030",
+    "dx_group": 2,
+    "N": 198,
+    "n_edges": 2640,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.063246,
+      "zero_frac": 0.039,
+      "assoc_entropy": 1.9606,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.245672,
+      "zero_frac": 0.652567,
+      "assoc_entropy": 0.6458,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.8
+  },
+  {
+    "file_id": "Pitt_0050031",
+    "dx_group": 2,
+    "N": 199,
+    "n_edges": 6066,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.022073,
+      "zero_frac": 0.142133,
+      "assoc_entropy": 1.5913,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.209398,
+      "zero_frac": 0.703867,
+      "assoc_entropy": 0.6076,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.2
+  },
+  {
+    "file_id": "Pitt_0050032",
+    "dx_group": 2,
+    "N": 199,
+    "n_edges": 4460,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.03791,
+      "zero_frac": 0.099133,
+      "assoc_entropy": 2.1476,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.227853,
+      "zero_frac": 0.677767,
+      "assoc_entropy": 0.6285,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.1
+  },
+  {
+    "file_id": "Pitt_0050033",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 9159,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.020791,
+      "zero_frac": 0.239633,
+      "assoc_entropy": 2.1777,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.204566,
+      "zero_frac": 0.7107,
+      "assoc_entropy": 0.6015,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.9
+  },
+  {
+    "file_id": "Pitt_0050034",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 3790,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.025278,
+      "zero_frac": 0.0999,
+      "assoc_entropy": 1.9968,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.224412,
+      "zero_frac": 0.682633,
+      "assoc_entropy": 0.6249,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.9
+  },
+  {
+    "file_id": "Pitt_0050035",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 6037,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.019904,
+      "zero_frac": 0.216667,
+      "assoc_entropy": 1.8685,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.191131,
+      "zero_frac": 0.7297,
+      "assoc_entropy": 0.5836,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.6
+  },
+  {
+    "file_id": "Pitt_0050036",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 2206,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.033237,
+      "zero_frac": 0.059967,
+      "assoc_entropy": 1.9498,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.229409,
+      "zero_frac": 0.675567,
+      "assoc_entropy": 0.6302,
+      "n_triples": 30000
+    },
+    "elapsed_s": 49.3
+  },
+  {
+    "file_id": "Pitt_0050037",
+    "dx_group": 2,
+    "N": 199,
+    "n_edges": 4465,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.052263,
+      "zero_frac": 0.0306,
+      "assoc_entropy": 1.7849,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.21694,
+      "zero_frac": 0.6932,
+      "assoc_entropy": 0.6165,
+      "n_triples": 30000
+    },
+    "elapsed_s": 50.0
+  },
+  {
+    "file_id": "Pitt_0050038",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 5691,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.034842,
+      "zero_frac": 0.179,
+      "assoc_entropy": 2.1672,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.213146,
+      "zero_frac": 0.698567,
+      "assoc_entropy": 0.6121,
+      "n_triples": 30000
+    },
+    "elapsed_s": 50.2
+  },
+  {
+    "file_id": "Pitt_0050039",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 10728,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.009151,
+      "zero_frac": 0.330067,
+      "assoc_entropy": 1.6831,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.170012,
+      "zero_frac": 0.759567,
+      "assoc_entropy": 0.5516,
+      "n_triples": 30000
+    },
+    "elapsed_s": 51.5
+  },
+  {
+    "file_id": "Pitt_0050040",
+    "dx_group": 2,
+    "N": 198,
+    "n_edges": 5396,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.046111,
+      "zero_frac": 0.052567,
+      "assoc_entropy": 1.7953,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.196552,
+      "zero_frac": 0.722033,
+      "assoc_entropy": 0.591,
+      "n_triples": 30000
+    },
+    "elapsed_s": 48.3
+  },
+  {
+    "file_id": "Pitt_0050041",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 3405,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.040465,
+      "zero_frac": 0.075233,
+      "assoc_entropy": 2.1161,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.20829,
+      "zero_frac": 0.705433,
+      "assoc_entropy": 0.6062,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.9
+  },
+  {
+    "file_id": "Pitt_0050042",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 7924,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.016109,
+      "zero_frac": 0.168033,
+      "assoc_entropy": 1.3355,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.211142,
+      "zero_frac": 0.7014,
+      "assoc_entropy": 0.6097,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.7
+  },
+  {
+    "file_id": "Pitt_0050043",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 2078,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.02599,
+      "zero_frac": 0.061633,
+      "assoc_entropy": 1.2663,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.242514,
+      "zero_frac": 0.657033,
+      "assoc_entropy": 0.643,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.7
+  },
+  {
+    "file_id": "Pitt_0050044",
+    "dx_group": 2,
+    "N": 198,
+    "n_edges": 9809,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.009415,
+      "zero_frac": 0.374533,
+      "assoc_entropy": 1.9028,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.167514,
+      "zero_frac": 0.7631,
+      "assoc_entropy": 0.5475,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.1
+  },
+  {
+    "file_id": "Pitt_0050045",
+    "dx_group": 2,
+    "N": 195,
+    "n_edges": 3279,
+    "scheme_fc": {
+      "mean_assoc_norm": NaN,
+      "zero_frac": 0.0,
+      "assoc_entropy": 0.0,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": NaN,
+      "zero_frac": 0.625767,
+      "assoc_entropy": 0.0,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.8
+  },
+  {
+    "file_id": "Pitt_0050046",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 10026,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.008713,
+      "zero_frac": 0.422067,
+      "assoc_entropy": 1.1896,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.15356,
+      "zero_frac": 0.782833,
+      "assoc_entropy": 0.5233,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.0
+  },
+  {
+    "file_id": "Pitt_0050047",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 6461,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.019263,
+      "zero_frac": 0.2152,
+      "assoc_entropy": 1.4823,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.201832,
+      "zero_frac": 0.714567,
+      "assoc_entropy": 0.598,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.3
+  },
+  {
+    "file_id": "Pitt_0050048",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 4606,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.025041,
+      "zero_frac": 0.043433,
+      "assoc_entropy": 1.9647,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.198391,
+      "zero_frac": 0.719433,
+      "assoc_entropy": 0.5935,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.0
+  },
+  {
+    "file_id": "Pitt_0050049",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 3928,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.028197,
+      "zero_frac": 0.047533,
+      "assoc_entropy": 1.9401,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.236009,
+      "zero_frac": 0.666233,
+      "assoc_entropy": 0.6368,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.9
+  },
+  {
+    "file_id": "Pitt_0050050",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 5879,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.01512,
+      "zero_frac": 0.1902,
+      "assoc_entropy": 1.463,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.210223,
+      "zero_frac": 0.7027,
+      "assoc_entropy": 0.6086,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.3
+  },
+  {
+    "file_id": "Pitt_0050051",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 3321,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.039153,
+      "zero_frac": 0.0165,
+      "assoc_entropy": 1.8386,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.242208,
+      "zero_frac": 0.657467,
+      "assoc_entropy": 0.6427,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.8
+  },
+  {
+    "file_id": "Pitt_0050052",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 12517,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.010384,
+      "zero_frac": 0.3548,
+      "assoc_entropy": 1.6082,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.174868,
+      "zero_frac": 0.7527,
+      "assoc_entropy": 0.5593,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.6
+  },
+  {
+    "file_id": "Pitt_0050053",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 15027,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.008126,
+      "zero_frac": 0.435,
+      "assoc_entropy": 1.4498,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.153843,
+      "zero_frac": 0.782433,
+      "assoc_entropy": 0.5238,
+      "n_triples": 30000
+    },
+    "elapsed_s": 47.0
+  },
+  {
+    "file_id": "Pitt_0050054",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 10725,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.011993,
+      "zero_frac": 0.368267,
+      "assoc_entropy": 1.4869,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.155021,
+      "zero_frac": 0.780767,
+      "assoc_entropy": 0.5259,
+      "n_triples": 30000
+    },
+    "elapsed_s": 46.1
+  },
+  {
+    "file_id": "Pitt_0050055",
+    "dx_group": 1,
+    "N": 198,
+    "n_edges": 2316,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.036812,
+      "zero_frac": 0.055633,
+      "assoc_entropy": 1.4855,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.201054,
+      "zero_frac": 0.715667,
+      "assoc_entropy": 0.597,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.7
+  },
+  {
+    "file_id": "Pitt_0050056",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 6307,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.015409,
+      "zero_frac": 0.227367,
+      "assoc_entropy": 1.6118,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.178214,
+      "zero_frac": 0.747967,
+      "assoc_entropy": 0.5646,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.3
+  },
+  {
+    "file_id": "Pitt_0050057",
+    "dx_group": 1,
+    "N": 197,
+    "n_edges": 1832,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.056629,
+      "zero_frac": 0.068533,
+      "assoc_entropy": 1.4423,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.217553,
+      "zero_frac": 0.692333,
+      "assoc_entropy": 0.6172,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.7
+  },
+  {
+    "file_id": "Pitt_0050058",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 7245,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.044314,
+      "zero_frac": 0.043367,
+      "assoc_entropy": 2.0051,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.195727,
+      "zero_frac": 0.7232,
+      "assoc_entropy": 0.5899,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.6
+  },
+  {
+    "file_id": "Pitt_0050059",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 8414,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.01895,
+      "zero_frac": 0.0882,
+      "assoc_entropy": 2.0034,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.182693,
+      "zero_frac": 0.741633,
+      "assoc_entropy": 0.5713,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.9
+  },
+  {
+    "file_id": "Pitt_0050060",
+    "dx_group": 2,
+    "N": 199,
+    "n_edges": 2055,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.062958,
+      "zero_frac": 0.0514,
+      "assoc_entropy": 1.714,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.23087,
+      "zero_frac": 0.6735,
+      "assoc_entropy": 0.6317,
+      "n_triples": 30000
+    },
+    "elapsed_s": 44.7
+  },
+  {
+    "file_id": "Olin_0050102",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 3970,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.035532,
+      "zero_frac": 0.058133,
+      "assoc_entropy": 1.6684,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.184932,
+      "zero_frac": 0.738467,
+      "assoc_entropy": 0.5747,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.0
+  },
+  {
+    "file_id": "Olin_0050103",
+    "dx_group": 2,
+    "N": 200,
+    "n_edges": 8798,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.02712,
+      "zero_frac": 0.0301,
+      "assoc_entropy": 2.066,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.212556,
+      "zero_frac": 0.6994,
+      "assoc_entropy": 0.6114,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.9
+  },
+  {
+    "file_id": "Olin_0050104",
+    "dx_group": 2,
+    "N": 192,
+    "n_edges": 1359,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.064909,
+      "zero_frac": 0.065458,
+      "assoc_entropy": 1.619,
+      "n_triples": 27865
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.239551,
+      "zero_frac": 0.661224,
+      "assoc_entropy": 0.6402,
+      "n_triples": 27865
+    },
+    "elapsed_s": 41.4
+  },
+  {
+    "file_id": "Olin_0050118",
+    "dx_group": 1,
+    "N": 200,
+    "n_edges": 3638,
+    "scheme_fc": {
+      "mean_assoc_norm": 0.024527,
+      "zero_frac": 0.164033,
+      "assoc_entropy": 1.3751,
+      "n_triples": 30000
+    },
+    "scheme_rsn": {
+      "mean_assoc_norm": 0.169871,
+      "zero_frac": 0.759767,
+      "assoc_entropy": 0.5513,
+      "n_triples": 30000
+    },
+    "elapsed_s": 45.0
+  }
+]
