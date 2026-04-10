@@ -1,0 +1,46 @@
+{
+  "method": "Exact LP (HiGHS), alpha=0.5, N=39 ROIs",
+  "reference": "Phase 9 (BrainORC); extends Phase 8B clinical_fc_orc.sio",
+  "experiment": "quaternionic_brain_orc",
+  "gates_pass": true,
+  "cohorts": [
+    {
+      "kappa_r": 0.027445518747572423,
+      "norm_mean": 0.10407040539870692,
+      "kappa_i": 0.029208728270742165,
+      "dom_eeg": 81,
+      "dom_dti": 83,
+      "kappa_j": 0.02941516374763965,
+      "N": 100,
+      "geometry": "SPHERICAL",
+      "dom_fmri": 147,
+      "dom_clin": 489,
+      "eta_c": 2.2880000000000003,
+      "n_edges": 800,
+      "cohort": "ADHD (k=16)",
+      "eta": 2.56,
+      "E": 800,
+      "kappa_k": 0.0523046875
+    },
+    {
+      "kappa_r": -0.3990144766391844,
+      "norm_mean": 0.8022021376256733,
+      "kappa_i": -0.39647904759414077,
+      "dom_eeg": 35,
+      "dom_dti": 30,
+      "kappa_j": -0.39925665273938526,
+      "N": 100,
+      "geometry": "HYPERBOLIC",
+      "dom_fmri": 54,
+      "dom_clin": 81,
+      "eta_c": 2.2880000000000003,
+      "n_edges": 200,
+      "cohort": "ASD (k=4)",
+      "eta": 0.16,
+      "E": 200,
+      "kappa_k": -0.38625
+    }
+  ],
+  "notes": "κ_R = fMRI ORC; κ_I = DTI; κ_J = EEG; κ_K = clinical. Gate: |Δκ_R| < 0.05 vs F# Sinkhorn.",
+  "description": "Exact LP quaternionic ORC on synthetic ADHD/ASD brain networks"
+}

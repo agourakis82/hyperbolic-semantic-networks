@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>BrainORC</AssemblyName>
+    <Nullable>enable</Nullable>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Types.fs" />
+    <Compile Include="Quaternion.fs" />
+    <Compile Include="BrainGraph.fs" />
+    <Compile Include="Pipeline.fs" />
+    <Compile Include="SedenionFeatures.fs" />
+    <Compile Include="DualAnalysis.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+</Project>
