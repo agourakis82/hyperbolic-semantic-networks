@@ -1,0 +1,36 @@
+{
+  "n_star": 1200,
+  "k_star": 8.0,
+  "reps": 8,
+  "basis": "identity (ordering is 21/21 perm-stable)",
+  "results": {
+    "minimum": {
+      "energy_mean": 548.1271747625403,
+      "energy_std": 177.9651198047827,
+      "energy_se": 62.92017151431909
+    },
+    "mild": {
+      "energy_mean": 3403.462702555091,
+      "energy_std": 870.6563018490892,
+      "energy_se": 307.8234875601463
+    },
+    "moderate": {
+      "energy_mean": 1914.4735574018662,
+      "energy_std": 732.5043320863386,
+      "energy_se": 258.97939023338637
+    },
+    "severe": {
+      "energy_mean": 3063.9825954868975,
+      "energy_std": 908.3301503638123,
+      "energy_se": 321.143204439224
+    }
+  },
+  "order_hi_to_lo": [
+    "mild",
+    "severe",
+    "moderate",
+    "minimum"
+  ],
+  "minimum_lowest": true,
+  "t_s": 54.6
+}
