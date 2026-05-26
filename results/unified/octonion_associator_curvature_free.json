@@ -1,0 +1,41 @@
+{
+  "n_star": 1200,
+  "k_star": 8.0,
+  "reps": 8,
+  "feature_set": "curvature-free structural (no kappa)",
+  "results": {
+    "minimum": {
+      "energy_mean": 2891.8395745937523,
+      "energy_std": 354.3959687239683,
+      "energy_se": 125.29789635494679,
+      "mean_triples": 13452.75
+    },
+    "mild": {
+      "energy_mean": 2869.921449256679,
+      "energy_std": 794.632897074281,
+      "energy_se": 280.945155037568,
+      "mean_triples": 19910.25
+    },
+    "moderate": {
+      "energy_mean": 2241.3412945192904,
+      "energy_std": 562.0511697558663,
+      "energy_se": 198.7150967541022,
+      "mean_triples": 16505.25
+    },
+    "severe": {
+      "energy_mean": 2322.3076339278045,
+      "energy_std": 909.9700897805209,
+      "energy_se": 321.72301058036885,
+      "mean_triples": 16605.75
+    }
+  },
+  "order_hi_to_lo": [
+    "minimum",
+    "mild",
+    "severe",
+    "moderate"
+  ],
+  "minimum_lowest": false,
+  "matches_full_feature_order": false,
+  "t_s": 59.5
+}

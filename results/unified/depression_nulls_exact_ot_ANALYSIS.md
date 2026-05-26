@@ -64,6 +64,51 @@ the curvature rank is **robust to density control** — it is not a pure density
 well-separated from all clinical groups. The non-monotonicity (subclinical most hyperbolic; mild,
 the mildest clinical group, *least*) is a genuine residual structural effect, not a confound.
 
-Caveats still open: (a) ⟨k⟩=10 is one operating point — sweep it; (b) groups differ in source N
-(sampling-stability not corpus-size matched); (c) per-subsample nulls not yet run (the cross-group
-separation is what carries the claim now, not vs-null significance).
+Caveats still open: (a) ⟨k⟩=10 is one operating point — swept below; (b) groups differ in source N
+(sampling-stability not corpus-size matched); (c) per-subsample nulls run in the phase diagram below.
+
+## (N, ⟨k⟩) INVARIANCE SURFACE (DONE 2026-05-26) — the rank is topological
+
+`code/analysis/depression_phase_diagram.py`: grid N∈{1000,1400} × ⟨k⟩∈{6,8,10}, 6 reps + 2
+per-cell degree-nulls + per-edge KS. `results/unified/depression_phase_diagram.json`.
+
+- **minimum most hyperbolic AND mild least hyperbolic in 6/6 cells** — the extremes are invariant
+  across the whole feasible (size, density) plane.
+- **5/6 cells match the full canonical rank** `minimum > moderate > severe > mild`. The single
+  exception (N=1000, ⟨k⟩=10) swaps moderate/severe, which are statistically tied there
+  (−0.1182 vs −0.1184). The middle pair is unresolved; the extremes are not.
+- **Distributional, not just mean:** per-edge KS(minimum, mild) gives p = 4e-81 … 9e-180 across
+  every cell. The whole curvature distribution shifts, not only its mean.
+
+This converts the single-point density-matched result into a **topological robustness statement**:
+the subclinical-most-hyperbolic / mild-least ordering is not an operating-point artifact.
+
+## OCTONION ASSOCIATOR AS A 2ND AXIS — TESTED, REJECTED (honest negative)
+
+Hypothesis: the octonion associator [a,b,c] = (a·b)·c − a·(b·c) on 8 graph-derived per-group
+node features gives a second, *non-associative* geometric axis orthogonal to curvature.
+
+What looked promising:
+- `octonion_associator_permutation_test.py`: ordering `mild>severe>moderate>minimum`
+  (minimum LOWEST energy) was **21/21 permutation-stable** across random basis assignments.
+- `octonion_associator_density_matched.py`: ordering survived density matching (minimum 548 vs
+  clinical 1900–3400 at N=1200, ⟨k⟩=8).
+
+The discriminating control that killed it (`octonion_associator_curvature_free.py`):
+two of the eight components WERE curvature (e0=kappa, e6=kappa-gradient). Rebuilt the 8-tuple
+**curvature-free** (log_degree, clustering, pagerank, core, eigenvector, avg-neighbor-degree,
+triangles, square-clustering). Result: ordering **collapses** — `minimum>mild>severe>moderate`,
+minimum now HIGHEST, all four within overlapping SE (2241–2892). `minimum_lowest=False`.
+
+**VERDICT: the associator energy was re-encoding curvature ("curvature in a Cayley-Dickson
+costume"), not a second axis.** Permutation-stability is necessary but not sufficient — it shows
+basis-robustness, not curvature-independence. On this data with these features, the octonion
+associator adds nothing beyond Ollivier-Ricci curvature. (Negative control retained as the reason
+the two-axis claim is NOT made.)
+
+## Bottom line for Yale / Hong Kong
+
+ONE robust geometric axis: **Ollivier-Ricci curvature separates depression severity, with
+subclinical the most hyperbolic.** Robust to exact-OT, degree-nulls, density matching, and a
+6-cell (size×density) sweep with KS distributional separation. The octonion second axis does not
+survive a curvature-free control and is not claimed.
