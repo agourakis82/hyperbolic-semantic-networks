@@ -39,15 +39,15 @@
   },
   "verification": {
     "method": "Independently recomputed R1.Strength from data/raw/SWOW-NL13/associationData.csv (asso1) and compared row-by-row to the strength file.",
-    "result": "484587 / 485481 = 99.816% of strength rows reproduce to |diff| < 1e-6 (exact, since denominator = 100 => fractions are exact 2-decimals).",
+    "result_verbatim_match": "484587 / 485481 = 99.816% of strength rows reproduce to |diff| < 1e-6 when matching cue/response VERBATIM (case-sensitive).",
+    "result_casefolded_match": "485481 / 485481 = 100.0000% reproduce to |diff| < 1e-6 when cue and response are LOWERCASED on both sides (zero residual, zero rows with diff >= 1e-6).",
     "normalization_invariant": "Sum of R1.Strength over each cue's responses = 1.0000 exactly for all 12571 cues (1.0 == probability mass).",
     "residual_explained": {
-      "unmatched_rows": 891,
-      "cause": "21 cues present in the strength file are ABSENT from the on-disk April-2012 associationData snapshot (e.g. amerikaans, india, frans, spaans, engeland, ...). The strength file derives from a marginally more complete SWOW-NL export than the .mat snapshot on disk. These 21 cues account for all 891 unmatched rows.",
-      "rounding_rows": 3,
-      "rounding_detail": "3 matched rows differ by exactly 0.01 (one participant out of 100), e.g. zelfzuchtig->egoistisch file 0.27 vs recompute 0.26 — off-by-one export differences, not normalization errors."
+      "unmatched_rows_verbatim": 891,
+      "cause": "CASE-FOLDING, not missing data. The published strength file LOWERCASES cues/responses; the raw associationData.csv stores them in ORIGINAL casing. The cues that fail a verbatim match (e.g. amerikaans, india, frans, spaans, engeland) ARE present in the raw snapshot, CAPITALIZED (e.g. 'Amerikaans' with exactly 100 presentations, zero lowercase occurrences). Lowercasing both sides yields EXACT 100% reproduction (485481/485481), which dissolves the 891 'unmatched' rows AND the 3 apparent off-by-one rows.",
+      "correction_note": "An earlier draft of this file wrongly attributed the residual to '21 cues absent from a marginally more complete export'. That mechanism is FALSE (verified: those cues are in the raw, capitalized). The correct mechanism is the documented SWOW lowercasing convention."
     },
-    "conclusion": "strength.SWOW-NL.R1.csv is a GENUINE R1-derived SWOW strength table (asso1, normalized by 100 participants/cue), NOT a threshold reconstruction and NOT fabricated. The same construction underlies the EN/ES/ZH strength files."
+    "conclusion": "strength.SWOW-NL.R1.csv is a GENUINE R1-derived SWOW strength table (asso1, normalized by 100 participants/cue, lowercased per SWOW convention): 100% byte-faithful to the raw asso1 column under case-folding. NOT a threshold reconstruction and NOT fabricated. The same construction underlies the EN/ES/ZH strength files."
   },
   "git_note": "strength.SWOW-NL.R1.csv and the raw SWOW exports are gitignored by repo policy (data/raw/*.csv); their md5s are recorded here. The committed downstream artifact is data/processed/dutch_edges_FINAL.csv."
 }
