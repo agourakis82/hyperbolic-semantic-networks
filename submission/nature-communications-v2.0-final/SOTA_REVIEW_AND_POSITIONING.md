@@ -51,3 +51,20 @@ Verification **REFUTED (0-3)** the convenient claim "trees have all-negative ORC
 4. **(MED) Forward-citation sweep of Ni 2019 + Yamshchikov 2020 for 2025-2026 work** before finalizing the novelty claim (the search did not surface the most recent competitors).
 5. **(MED) Expand n where cheap:** the configuration/triadic nulls and the network-size variants are *additional* (C, κ) observations already in the pipeline — use them to support the mechanism (not the GAM, which is descriptive at n=7).
 6. **(LOW) Re-evaluate venue** against how much new empirical curvature-on-SWOW evidence remains after the above vs reinterpretation of established mechanisms.
+
+---
+
+## UPDATE 2026-06-04 — actions taken (tasks 1–3 executed)
+
+**Task 1 (references + content) — DONE.** Added 10 references to `references.bib` (Jost–Liu 2014, Azarhooshang 2020, Samal 2018, Yamshchikov 2020, Tifrea 2019, Li–Wu–Evans 2020, Elumalai 2022, Simhal 2020, Sandhu 2015, Sia 2019). Added the **Yamshchikov 2020 differentiation** to §1.3 and the **weighted-vs-unweighted robustness** result to §3.5.
+
+**Task 2 (weighted-vs-unweighted sensitivity) — RISK 2 RESOLVED (favourably).** Recomputed ORC on all 7 networks under weighted and unweighted edges (`results/weighted_vs_unweighted_orc.json`):
+
+| | weighted κ̄ | unweighted κ̄ |
+|---|---|---|
+| SWOW ES / EN / ZH / NL | −0.155 / −0.258 / −0.214 / −0.270 | −0.068 / −0.137 / −0.144 / −0.196 |
+| WordNet EN / BabelNet RU / AR | −0.002 / −0.030 / −0.012 | **identical** (edges are weight=1 by construction) |
+
+Association networks are hyperbolic under **both** definitions; taxonomy edges are unweighted by construction, so "Euclidean taxonomy" is **not** a weighting artifact. **Construction-dependence is robust to the weighted/unweighted choice.** Bonus: the unweighted SWOW values reproduce the companion **exact rational-arithmetic** ORC implementation to ≤1e-3 (independent cross-validation).
+
+**Task 3 (forward-citation sweep) — novelty CONFIRMED.** No 2025–2026 work applies ORC to SWOW/free-association networks; the speech-curvature biomarker gap is still open (2025 psychiatric-speech work uses acoustic/GCN/symptom-network methods, not curvature). New context: the field is moving to **hyperbolic LLMs** (HELM, 2025; arXiv:2505.24722) and there is a 2025 *Hyperbolic geometric graph representation learning* survey — useful "current direction" framing, but those are embedding/architecture works, not curvature **measurement** of association networks (our distinct contribution). Added Sia et al. 2019 (ORC community detection).
