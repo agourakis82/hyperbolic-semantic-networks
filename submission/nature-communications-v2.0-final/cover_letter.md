@@ -9,11 +9,11 @@
 
 Dear Editors of *Nature Communications*,
 
-I am pleased to submit the manuscript entitled **"Boundary Conditions for Hyperbolic Geometry in Semantic Networks: Clustering-Curvature Trade-offs Revealed by Ollivier-Ricci Analysis"**, which identifies the quantitative balance of clustering and degree heterogeneity that gives rise to hyperbolic geometry in semantic association networks across seven semantic graphs spanning three language families.
+I am pleased to submit the manuscript entitled **"Boundary Conditions for Hyperbolic Geometry in Semantic Networks: Construction-Dependent Curvature Revealed by Ollivier-Ricci Analysis"**, which identifies the quantitative balance of clustering and degree heterogeneity that gives rise to hyperbolic geometry in semantic association networks across seven semantic graphs spanning three language families.
 
 ## **Why This Work Matters**
 
-Semantic networks—cognitive structures representing word associations—are frequently assumed to be hyperbolic, yet the geometric boundary conditions that support negative curvature have remained unclear. Using **Ollivier–Ricci curvature** on directed weighted graphs (SWOW and taxonomy data) and matching **configuration and triadic-rewire null models**, we demonstrate that hyperbolicity is **not universal** but confined to a **moderate-clustering regime**. This "hyperbolic sweet spot" connects linguistic and cognitive evidence—association networks of healthy cognition occupy this region—and motivates a testable clinical hypothesis: that pathological language (schizophrenia, depression, mania) may deviate toward Euclidean or spherical extremes—a prediction we do not evaluate here.
+Semantic networks—cognitive structures representing word associations—are frequently assumed to be hyperbolic, yet the geometric boundary conditions that support negative curvature have remained unclear. Using **Ollivier–Ricci curvature** on directed weighted graphs (SWOW and taxonomy data) and matching **configuration and triadic-rewire null models**, we demonstrate that hyperbolicity is **not universal** but confined to a **moderate-clustering regime**. This construction-dependent hyperbolicity connects linguistic and cognitive evidence—association networks of healthy cognition occupy this region—and motivates a testable clinical hypothesis: that pathological language (schizophrenia, depression, mania) may deviate toward Euclidean or spherical extremes—a prediction we do not evaluate here.
 
 ## **Novel Contributions**
 
