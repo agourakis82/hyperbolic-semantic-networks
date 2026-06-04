@@ -32,7 +32,8 @@ abstract: |
   eliminate this gap, confirming clustering as the causal moderator. Discrete
   Ricci flow reduces clustering by 79–86 % yet fails to fully flatten real
   semantic graphs, revealing functional resistance to geometric smoothing. These
-  results define a “hyperbolic sweet spot” for semantic cognition and generate
+  results define construction-dependent boundary conditions for hyperbolic
+  geometry in semantic cognition and generate
   falsifiable predictions for clinical speech networks that deviate toward
   spherical or Euclidean regimes.
 
@@ -79,7 +80,7 @@ ai_disclosure: |
   All scientific design decisions, analyses, and interpretations are original contributions of the author.
 
 word_count:
-  main_text: 4700
+  main_text: 4118
   abstract: 180
   references: 64
 
