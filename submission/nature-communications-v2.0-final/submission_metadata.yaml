@@ -23,9 +23,9 @@ abstract: |
   geometric boundary conditions that support negative curvature remain unclear.
   We analyzed four Small World of Words (SWOW) association networks (Spanish,
   English, Chinese, Dutch) and three taxonomy-based lexical graphs (English
-  WordNet, Spanish WordNet, Portuguese BabelNet) using Ollivier–Ricci curvature.
+  WordNet, Russian BabelNet, Arabic BabelNet) using Ollivier–Ricci curvature.
   Association graphs occupy a moderate clustering regime (C ≈ 0.02–0.15) where
-  mean curvature is strongly negative (κ̄ = -0.17 to -0.24), whereas taxonomies
+  mean curvature is strongly negative (κ̄ = -0.16 to -0.27), whereas taxonomies
   with minimal clustering are near Euclidean (κ̄ ≈ 0). Configuration-model nulls
   (M = 1000) that destroy clustering become markedly more hyperbolic
   (Δκ = +0.17 to +0.22, pMC < 0.001), and triadic-rewire nulls preserving triangles
