@@ -13,11 +13,11 @@ I am pleased to submit the manuscript entitled **"Boundary Conditions for Hyperb
 
 ## **Why This Work Matters**
 
-Semantic networks—cognitive structures representing word associations—are frequently assumed to be hyperbolic, yet the geometric boundary conditions that support negative curvature have remained unclear. Using **Ollivier–Ricci curvature** on directed weighted graphs (SWOW and taxonomy data) and matching **configuration and triadic-rewire null models**, we demonstrate that hyperbolicity is **not universal** but confined to a **moderate-clustering regime (C ≈ 0.02–0.15)**. This "hyperbolic sweet spot" unites linguistic, cognitive, and clinical evidence: association networks of healthy cognition occupy this region, whereas pathological language (schizophrenia, depression, mania) deviates toward Euclidean or spherical extremes.
+Semantic networks—cognitive structures representing word associations—are frequently assumed to be hyperbolic, yet the geometric boundary conditions that support negative curvature have remained unclear. Using **Ollivier–Ricci curvature** on directed weighted graphs (SWOW and taxonomy data) and matching **configuration and triadic-rewire null models**, we demonstrate that hyperbolicity is **not universal** but confined to a **moderate-clustering regime**. This "hyperbolic sweet spot" connects linguistic and cognitive evidence—association networks of healthy cognition occupy this region—and motivates a testable clinical hypothesis: that pathological language (schizophrenia, depression, mania) may deviate toward Euclidean or spherical extremes—a prediction we do not evaluate here.
 
 ## **Novel Contributions**
 
-**First, boundary conditions for hyperbolic geometry.** We show that semantic networks exhibit negative curvature only when topology satisfies specific balance conditions: moderate clustering (C ≈ 0.02–0.15), heavy-tailed degree distributions (broad-scale rather than strictly scale-free), and a mixture of primary and context-driven associations. This structural balance yields an operational criterion for future analyses.
+**First, boundary conditions for hyperbolic geometry.** We show that semantic networks exhibit negative curvature only when topology satisfies specific balance conditions: moderate clustering, heavy-tailed degree distributions (broad-scale rather than strictly scale-free), and a mixture of primary and context-driven associations. This structural balance yields an operational criterion for future analyses.
 
 **Second, causal inference via structural null models.** Configuration model nulls (M = 1000 replicates) that preserved degree distributions but destroyed clustering proved significantly more hyperbolic than real networks (Δκ = +0.17 to +0.22, p_MC < 0.001), confirming that local clustering moderates underlying geometry. Triadic-rewire nulls (M = 1000, Spanish and English) preserved triangle counts and eliminated the curvature shift, isolating clustering as the causal moderator.
 
@@ -72,7 +72,7 @@ I declare no competing interests. This research received no specific funding.
 
 ## **Word Count**
 
-Main text: ~4,224 words (within journal guidelines of 3,000–4,000 words)  
+Main text: ~4118 words (Nature Communications guideline 3,000–4,000; ~120 words over — minor trim pending)  
 Abstract: ~180 words (within 200-word limit)
 
 ---

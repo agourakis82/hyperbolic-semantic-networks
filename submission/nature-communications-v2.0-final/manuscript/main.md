@@ -167,7 +167,7 @@ Publication bias will be assessed using funnel plots, Egger regression, trim-and
 ---
 
 *Manuscript prepared for submission to Nature Communications*
-*Word count: ~5,500 words (main text)*
+*Word count: ~4118 words (main text)*
 *Tables: 3 (Network statistics, Null-model comparisons, Ricci flow summary)*
 *Figures: 4 (Clustering–curvature map, Null comparisons, Ricci flow trajectories, Phase diagram)*
 *Version: v2.0 (Major Revisions Complete)*
@@ -184,7 +184,7 @@ Across the seven networks, mean curvature followed a non-monotonic, valley-shape
 
 #### 3.2.1 Degree Distribution Topology: Broad-Scale Rather Than Strictly Scale-Free
 
-To assess whether semantic networks exhibit scale-free topology—a property often associated with hyperbolic geometry—we applied the rigorous Clauset, Shalizi, Newman (2009) protocol [14] to degree distributions from all SWOW languages. Maximum likelihood estimation yielded power-law exponents $\alpha = 2.06$ (Dutch), 2.13 (Chinese), and 2.28 (Spanish), with mean $\bar{\alpha} = 1.90 \pm 0.03$ (95% CI: [1.86, 1.95]) when including English data from prior analyses. This mean estimate falls below the classical scale-free range ($\alpha \in [2.0, 3.0]$), and goodness-of-fit tests via Kolmogorov-Smirnov statistics produced $p < 0.001$ for all languages, indicating poor power-law fit. Likelihood ratio tests comparing power-law to lognormal distributions yielded negative $R$ values (mean $R = -168.7$, $p < 0.001$), indicating that lognormal distributions provide a significantly better fit to the degree distributions.
+To assess whether semantic networks exhibit scale-free topology—a property often associated with hyperbolic geometry—we applied the rigorous Clauset, Shalizi, Newman (2009) protocol [14] to degree distributions from all SWOW languages. Maximum likelihood estimation on the degree sequences of the four undirected SWOW networks yielded power-law exponents $\alpha = 2.55$ (English), 2.73 (Spanish), 2.37 (Chinese), and 2.88 (Dutch), with mean $\bar{\alpha} = 2.63 \pm 0.22$ (SD; 95% CI: [2.28, 2.99]). Although these exponents fall within the classical scale-free range ($\alpha \in [2.0, 3.0]$), the pure power law provides a poor description of the data: Kolmogorov-Smirnov distances were substantial ($D$ between 0.10 and 0.19), and likelihood-ratio tests comparing power-law to lognormal distributions yielded negative $R$ values for every language (mean $R = -33.6$; per-language $p < 0.01$), indicating that lognormal distributions provide a significantly better fit to the degree distributions.
 
 These results align with recent re-analyses of semantic network topology [21] and support a "broad-scale" rather than strictly "scale-free" characterization: semantic networks exhibit heavy-tailed degree distributions (superior to exponential) but do not follow pure power laws. This distinction matters for theoretical interpretation but does not undermine the geometric findings. As demonstrated in Section 3.3, hyperbolic curvature emerges robustly in configuration-model nulls that preserve degree distributions, confirming that hyperbolicity does not require strict scale-free topology. Instead, the hierarchical and branching structure of semantic networks—combined with moderate clustering—drives hyperbolic embedding, independent of the specific degree distribution form (power-law, lognormal, or other heavy-tailed variants).
 
