@@ -24,7 +24,7 @@ abstract: |
   We analyzed four Small World of Words (SWOW) association networks (Spanish,
   English, Chinese, Dutch) and three taxonomy-based lexical graphs (English
   WordNet, Russian BabelNet, Arabic BabelNet) using Ollivier–Ricci curvature.
-  Association graphs occupy a moderate clustering regime (C ≈ 0.02–0.15) where
+  Association graphs occupy a moderate clustering regime where
   mean curvature is strongly negative (κ̄ = -0.16 to -0.27), whereas taxonomies
   with minimal clustering are near Euclidean (κ̄ ≈ 0). Configuration-model nulls
   (M = 1000) that destroy clustering become markedly more hyperbolic
