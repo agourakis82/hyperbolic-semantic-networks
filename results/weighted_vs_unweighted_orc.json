@@ -1,0 +1,72 @@
+{
+  "SWOW ES": {
+    "category": "association",
+    "N": 422,
+    "E": 571,
+    "kappa_weighted": -0.1549,
+    "kappa_unweighted": -0.0683,
+    "neg_frac_weighted": 0.585,
+    "neg_frac_unweighted": 0.566,
+    "weights_all_1": false
+  },
+  "SWOW EN": {
+    "category": "association",
+    "N": 438,
+    "E": 640,
+    "kappa_weighted": -0.2577,
+    "kappa_unweighted": -0.1371,
+    "neg_frac_weighted": 0.628,
+    "neg_frac_unweighted": 0.636,
+    "weights_all_1": false
+  },
+  "SWOW ZH": {
+    "category": "association",
+    "N": 465,
+    "E": 762,
+    "kappa_weighted": -0.214,
+    "kappa_unweighted": -0.144,
+    "neg_frac_weighted": 0.63,
+    "neg_frac_unweighted": 0.65,
+    "weights_all_1": false
+  },
+  "SWOW NL": {
+    "category": "association",
+    "N": 465,
+    "E": 835,
+    "kappa_weighted": -0.27,
+    "kappa_unweighted": -0.196,
+    "neg_frac_weighted": 0.636,
+    "neg_frac_unweighted": 0.715,
+    "weights_all_1": false
+  },
+  "WordNet EN": {
+    "category": "taxonomy",
+    "N": 500,
+    "E": 527,
+    "kappa_weighted": -0.0015,
+    "kappa_unweighted": -0.0015,
+    "neg_frac_weighted": 0.18,
+    "neg_frac_unweighted": 0.18,
+    "weights_all_1": true
+  },
+  "BabelNet RU": {
+    "category": "taxonomy",
+    "N": 493,
+    "E": 522,
+    "kappa_weighted": -0.0299,
+    "kappa_unweighted": -0.0299,
+    "neg_frac_weighted": 0.241,
+    "neg_frac_unweighted": 0.241,
+    "weights_all_1": true
+  },
+  "BabelNet AR": {
+    "category": "taxonomy",
+    "N": 142,
+    "E": 151,
+    "kappa_weighted": -0.0124,
+    "kappa_unweighted": -0.0124,
+    "neg_frac_weighted": 0.258,
+    "neg_frac_unweighted": 0.258,
+    "weights_all_1": true
+  }
+}

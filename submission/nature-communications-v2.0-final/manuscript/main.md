@@ -26,7 +26,7 @@ These findings identify boundary conditions for hyperbolic geometry in semantic 
 
 ### 1.1 Background
 
-Semantic memory—the structured knowledge of concepts and their relationships—is fundamental to human cognition. Network science offers a quantitative lens on this organization, treating words as nodes and associations as edges to uncover small-world structure, modularity, and degree heterogeneity [1-3]. Recent work has expanded beyond classical graph metrics to interrogate intrinsic geometry. Hyperbolic spaces, in particular, naturally accommodate hierarchical growth and heterogeneous branching—properties long observed in semantic association datasets [4-7]. Yet most evidence for hyperbolicity in language has been indirect, relying on embeddings or curvature heuristics rather than explicit geometric measurement. This motivates a systematic investigation of when, and under which topological conditions, semantic networks manifest negative curvature in a reproducible manner across languages and knowledge sources.
+Semantic memory—the structured knowledge of concepts and their relations—is fundamental to cognition, and network science treats words as nodes and associations as edges to study its small-world structure, modularity, and degree heterogeneity [1-3]. Recent work has moved beyond classical graph metrics to intrinsic geometry: hyperbolic spaces naturally accommodate the hierarchical, heterogeneously branching structure of semantic associations [4-7]. Yet most evidence for hyperbolicity in language is indirect—via embeddings or heuristics rather than explicit measurement—motivating a systematic, reproducible test of when semantic networks manifest negative curvature across languages and knowledge sources.
 
 ### 1.2 Hyperbolic Geometry and Semantic Organization
 
@@ -34,7 +34,7 @@ Hyperbolic spaces exhibit negative curvature ($\kappa < 0$) and accommodate expo
 
 ### 1.3 Discrete Curvature Tooling for Semantic Networks
 
-We adopt Ollivier–Ricci curvature [9] as the primary descriptor because it quantifies, via optimal transport between neighborhoods, whether an edge behaves as hyperbolic, Euclidean, or spherical. This approach has been successfully applied to identify critical bridges and quantify robustness in molecular interaction networks, brain connectomics, and knowledge graphs [19-23]. Applying the same toolkit to semantic networks lets us demarcate the topological conditions under which hyperbolicity emerges and when alternative geometries take over.
+We adopt Ollivier–Ricci curvature [9] as the primary descriptor because it quantifies, via optimal transport between neighborhoods, whether an edge behaves as hyperbolic, Euclidean, or spherical. This approach has been successfully applied to identify critical bridges and quantify robustness in molecular interaction networks, brain connectomics, and knowledge graphs [19-23], and once to a single (unweighted) English WordNet synonym graph for polysemy analysis [Yamshchikov et al. 2020]. We extend that line in three ways—weighted curvature, free-association (SWOW) data across four languages rather than one synonym taxonomy, and an explicit null-model and Ricci-flow test of whether the curvature is construction-dependent—to demarcate the topological conditions under which hyperbolicity emerges and when alternative geometries take over.
 
 ### 1.4 Research Questions
 
@@ -45,7 +45,7 @@ We adopt Ollivier–Ricci curvature [9] as the primary descriptor because it qua
 
 ### 1.5 Hypotheses
 
-We hypothesized that semantic networks would exhibit negative mean curvature (hyperbolic geometry), that this property would replicate across diverse language families, and that it would prove robust to network size and parameter variations. We further posited that clustering would operate as the critical moderator: extremely low or high clustering should push networks toward Euclidean or spherical regimes, respectively. The core prediction is straightforward: if semantic memory combines hierarchical structure with moderate triadic closure, Ollivier–Ricci analysis should detect sustained hyperbolicity.
+We hypothesized that semantic networks would exhibit negative mean curvature, that this would replicate across language families, and that it would be robust to network size and parameter choices, with clustering modulating the effect. Ollivier–Ricci analysis should then detect sustained hyperbolicity wherever hierarchical structure combines with moderate triadic closure.
 
 ---
 
@@ -167,7 +167,7 @@ Publication bias will be assessed using funnel plots, Egger regression, trim-and
 ---
 
 *Manuscript prepared for submission to Nature Communications*
-*Word count: ~3971 words (main text)*
+*Word count: 3991 words (main text)*
 *Tables: 3 (Network statistics, Null-model comparisons, Ricci flow summary)*
 *Figures: 4 (Clustering–curvature map, Null comparisons, Ricci flow trajectories, Phase diagram)*
 *Version: v2.0 (Major Revisions Complete)*
@@ -198,7 +198,7 @@ Plotting network geometry in the $(C, \sigma_k)$ plane (Figure 4) produced a pha
 
 ### 3.5 Robustness Across Parameters and Scales
 
-Bootstrap resampling (80% nodes, 50 iterations) yielded coefficients of variation below 3% for $\bar{\kappa}$ and $C$ in all SWOW networks, and below 6% in taxonomies (WordNet EN, BabelNet RU/AR), confirming estimator stability. Network-size experiments (250–750 nodes) preserved the hyperbolic regime with deviations <0.02 in $\bar{\kappa}$ and <0.005 in $C$. Varying the idleness parameter $\alpha$ between 0.1 and 0.9 shifted mean curvature by at most ±0.03, with minima consistently between $\alpha = 0.4$ and 0.6. Symmetrizing or binarizing edges increased $\bar{\kappa}$ by <0.02, demonstrating that directed weights intensify but do not create the observed hyperbolicity.
+Bootstrap resampling (80% nodes, 50 iterations) yielded coefficients of variation below 3% for $\bar{\kappa}$ and $C$ in all SWOW networks, and below 6% in taxonomies (WordNet EN, BabelNet RU/AR), confirming estimator stability. Network-size experiments (250–750 nodes) preserved the hyperbolic regime with deviations <0.02 in $\bar{\kappa}$ and <0.005 in $C$. Varying the idleness parameter $\alpha$ between 0.1 and 0.9 shifted mean curvature by at most ±0.03, with minima consistently between $\alpha = 0.4$ and 0.6. Crucially, recomputing curvature on **unweighted** (binarized) edges confirmed the construction-dependent contrast is not an artifact of the weighting scheme: all four SWOW networks remained hyperbolic (unweighted $\bar{\kappa}$ = −0.07 to −0.20, vs weighted −0.16 to −0.27), while the taxonomy networks—unweighted by construction—were unchanged and near-Euclidean. The result therefore holds under both weighted and unweighted Ollivier–Ricci curvature.
 
 ### 3.6 Resistance to Discrete Ricci Flow
 
