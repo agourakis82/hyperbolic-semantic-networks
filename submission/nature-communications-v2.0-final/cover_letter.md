@@ -72,7 +72,7 @@ I declare no competing interests. This research received no specific funding.
 
 ## **Word Count**
 
-Main text: ~3971 words (within Nature Communications' 3,000–4,000 guideline)  
+Main text: 3991 words (within Nature Communications' 3,000–4,000 guideline)  
 Abstract: ~180 words (within 200-word limit)
 
 ---
