@@ -1,3 +1,10 @@
+<!-- ⚠️ DEPRECATED DRAFT — DO NOT SUBMIT.
+     Superseded by submission/nature-communications-v2.0-final/manuscript/main.md (the canonical version).
+     This draft's Table-1 κ̄ family (ES -0.19 / EN -0.22 / NL -0.17 / ZH -0.21) was computed on an
+     OLDER N=500 graph instance and is STALE. The canonical weighted-GRC values on the committed
+     *_edges_FINAL.csv are ES -0.155 / EN -0.258 / ZH -0.214 / NL -0.270 (NL on dutch_edges_FINAL.csv,
+     md5 f8592ef3..., LCC 465/835). Use the -final manuscript. -->
+
 # Consistent Evidence for Hyperbolic Geometry in Semantic Networks Across Four Languages
 ## Cross-Linguistic Analysis Using Word Association Data
 
