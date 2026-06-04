@@ -9,7 +9,7 @@
 
 Dear Editors of *Nature Communications*,
 
-I am pleased to submit the manuscript entitled **"Boundary Conditions for Hyperbolic Geometry in Semantic Networks: Clustering-Curvature Trade-offs Revealed by Ollivier-Ricci Analysis"**, which identifies the quantitative balance of clustering and degree heterogeneity that gives rise to hyperbolic geometry in semantic association networks across eight semantic graphs spanning three language families.
+I am pleased to submit the manuscript entitled **"Boundary Conditions for Hyperbolic Geometry in Semantic Networks: Clustering-Curvature Trade-offs Revealed by Ollivier-Ricci Analysis"**, which identifies the quantitative balance of clustering and degree heterogeneity that gives rise to hyperbolic geometry in semantic association networks across nine semantic graphs spanning three language families.
 
 ## **Why This Work Matters**
 
@@ -23,7 +23,7 @@ Semantic networks—cognitive structures representing word associations—are fr
 
 **Third, functional resistance to geometric smoothing.** Discrete Ricci flow experiments demonstrated that forcing semantic graphs toward curvature equilibrium reduces clustering by 79–86% and removes negative curvature, yet real networks resist full flattening. This "resistance to Ricci flow" suggests functional optimization (efficient navigation, inferential cost) versus geometric smoothing.
 
-**Fourth, cross-linguistic and cross-domain replication.** Our results establish consistency across eight semantic graphs (three SWOW association networks, two ConceptNet knowledge graphs, and three taxonomy-based lexicons) spanning Indo-European, Sino-Tibetan, and Semitic language families. This cross-linguistic scope strengthens generalizability while highlighting important structural variation.
+**Fourth, cross-linguistic and cross-domain replication.** Our results establish consistency across nine semantic graphs (four SWOW association networks, two ConceptNet knowledge graphs, and three taxonomy-based lexicons) spanning Indo-European, Sino-Tibetan, and Semitic language families. This cross-linguistic scope strengthens generalizability while highlighting important structural variation.
 
 ## **Fit with Nature Communications**
 
