@@ -17,7 +17,7 @@ ORCID: 0000-0002-8596-5097
 
 ## Abstract
 
-We confirm a sign change in mean Ollivier-Ricci curvature $\bar{\kappa}$ of random $k$-regular graphs at a critical density $\eta_c$, computed via exact linear programming (no entropy regularization). For $N = 100$ vertices averaged over 10 random seeds, the transition occurs between $\eta = 1.96$ ($\bar{\kappa} = -0.016$, $p < 10^{-6}$) and $\eta = 2.56$ ($\bar{\kappa} = +0.022$, $p < 10^{-6}$), with the sign change confirmed by one-sample $t$-tests. Multi-$N$ scaling ($N \in \{50, 100, 200, 500, 1000\}$) yields finite-size scaling $\eta_c(N) = \eta_c^\infty - a/\sqrt{N}$ with $\eta_c^\infty \approx 3.7$ (fixed $\beta = 1/2$, $R^2 = 0.995$; free-$\beta$ fit gives $\eta_c^\infty \approx 4.2$ with wider uncertainty). A free-exponent fit gives $\beta = 0.35$ (profile 95% CI $[0.20, 0.53]$, containing $\beta = 0.5$); the transition slope at $\eta_c$ scales as $N^{-0.20}$, consistent with a crossover rather than a sharp phase transition in the finite-size regime studied. Comparison with Sinkhorn approximation ($\varepsilon = 0.01$) confirms mean bias $|\Delta\kappa| < 0.015$ and identical sign-change location, validating Sinkhorn for practical use. Lin-Lu-Yau curvature (without idleness) shows the same monotonic trend but a different sign-change location, consistent with the dependence on the random walk parameter $\alpha$. Erdős-Rényi graphs $G(N,p)$ with matched expected degree also exhibit a sign change, but at lower critical density ($\eta_c^{\text{ER}} \approx 1.9$ vs.\ $\eta_c^{\text{reg}} \approx 2.3$ at $N = 100$), demonstrating that the transition is robust across graph models while the critical point depends on degree distribution. A Lean 4 formalization (25 modules, 15 explicit axioms, with 0 `sorry` in the 7 core ORC-theory modules) provides machine-checked proofs of Wasserstein non-negativity, coupling marginals, probability measure normalization, curvature bounds, regime exclusivity, and clustering bounds. The full analytical characterization of the sign change remains open.
+We confirm a sign change in mean Ollivier-Ricci curvature $\bar{\kappa}$ of random $k$-regular graphs at a critical density $\eta_c$, computed via exact linear programming (no entropy regularization). For $N = 100$ vertices averaged over 10 random seeds, the transition occurs between $\eta = 1.96$ ($\bar{\kappa} = -0.016$, $p < 10^{-6}$) and $\eta = 2.56$ ($\bar{\kappa} = +0.022$, $p < 10^{-6}$), with the sign change confirmed by one-sample $t$-tests. Multi-$N$ scaling ($N \in \{50, 100, 200, 500, 1000\}$) yields finite-size scaling $\eta_c(N) = \eta_c^\infty - a/\sqrt{N}$ with $\eta_c^\infty \approx 3.7$ (fixed $\beta = 1/2$, $R^2 = 0.995$; free-$\beta$ fit gives $\eta_c^\infty \approx 4.2$ with wider uncertainty). A free-exponent fit gives $\beta = 0.35$ (profile 95% CI $[0.20, 0.53]$, containing $\beta = 0.5$); the transition slope at $\eta_c$ scales as $N^{-0.20}$, consistent with a crossover rather than a sharp phase transition in the finite-size regime studied. Comparison with Sinkhorn approximation ($\varepsilon = 0.01$) confirms mean bias $|\Delta\kappa| < 0.015$ and identical sign-change location, validating Sinkhorn for practical use. Lin-Lu-Yau curvature (without idleness) shows the same monotonic trend but a different sign-change location, consistent with the dependence on the random walk parameter $\alpha$. Erdős-Rényi graphs $G(N,p)$ with matched expected degree also exhibit a sign change, but at lower critical density ($\eta_c^{\text{ER}} \approx 1.9$ vs.\ $\eta_c^{\text{reg}} \approx 2.3$ at $N = 100$), demonstrating that the transition is robust across graph models while the critical point depends on degree distribution. A Lean 4 formalization (29 modules, 13 explicit axioms, with 0 `sorry` in the 7 core ORC-theory modules) provides machine-checked proofs of Wasserstein non-negativity, coupling marginals, probability measure normalization, curvature bounds, regime exclusivity, and clustering bounds. The full analytical characterization of the sign change remains open.
 
 **Keywords**: Ollivier-Ricci curvature, finite-size crossover, sign change, optimal transport, linear programming, random regular graphs, Erdős-Rényi graphs, Lean 4, formal verification
 
@@ -43,12 +43,12 @@ Network curvature has found broad application: community detection [7], cancer n
 
 3. **Multi-$N$ scaling and critical exponents**: Exact LP sweeps for $N \in \{50, 100, 200, 500, 1000\}$ reveal finite-size scaling $\eta_c(N) = \eta_c^\infty - a/\sqrt{N}$ ($\eta_c^\infty \approx 3.7$, $R^2 = 0.995$). A free-exponent fit yields $\beta = 0.35$ (profile 95% CI $[0.20, 0.53]$), consistent with but not uniquely selecting $\beta = 1/2$. The transition slope at $\eta_c$ scales as $N^{-0.20}$, indicating a crossover rather than a sharp phase transition over the system sizes studied. The sign change is driven by the absolute number of triangles per edge ($\approx \eta_c \to 3.7$ in the large-$N$ limit), not by the vanishing clustering coefficient.
 
-4. **Lean 4 formalization**: 25 modules, 15 explicit axioms (5 in core ORC modules, 2 in dynamic-network extensions, 8 in hypercomplex algebra; all standard), with **0 `sorry`** in the 7 core ORC-theory modules. Machine-checked results include $W_1 \geq 0$, coupling marginal lemma, probability measure normalization, curvature bounds $\kappa \in [-1, 1]$, curvature vanishing for unreachable nodes, regime exclusivity, and clustering bounds.
+4. **Lean 4 formalization**: 29 modules, 13 explicit axioms (3 in core ORC modules, 2 in dynamic-network extensions, 8 in hypercomplex algebra; all standard), with **0 `sorry`** in the 7 core ORC-theory modules. Machine-checked results include $W_1 \geq 0$, coupling marginal lemma, probability measure normalization, curvature bounds $\kappa \in [-1, 1]$, curvature vanishing for unreachable nodes, regime exclusivity, and clustering bounds.
 
 ### 1.3 Limitations (stated upfront)
 
-- The 7 core ORC-theory modules contain **0 `sorry` statements** (including machine-checked proofs of probability measure normalization, curvature vanishing for unreachable nodes, and regime exclusivity) and rely on **5 explicit axioms** in the core (Wasserstein symmetry, Wasserstein triangle inequality, Wasserstein coupling bound, local clustering bound, and specification bridge; all mathematically standard). Six auxiliary modules contain 63 proof stubs (`sorry`) for ongoing formalization of spectral geometry, Ricci flow, random graphs, and probability theory; four additional exploratory extension modules contribute 22 further stubs (85 total). The sign change is formally *stated* but not formally *proven*.
-- Remaining axioms include Wasserstein symmetry and triangle inequality (infimum manipulation over couplings), coupling bound for ORC measures, and local clustering bound. McDiarmid's inequality is now formally stated in `McDiarmid.lean` (0 sorry); probability measure normalization is machine-checked in `Curvature.lean`.
+- The 7 core ORC-theory modules contain **0 `sorry` statements** (including machine-checked proofs of probability measure normalization, curvature vanishing for unreachable nodes, and regime exclusivity) and rely on **3 explicit axioms** in the core (adjacency coupling bound $W_1 \leq 2$, support-distance bound for the idleness measures, and specification bridge; all mathematically standard — Wasserstein symmetry, the triangle inequality, and the local clustering bound, previously axiomatized, are now machine-checked). Eight non-core modules carry 65 sorry-carrying declarations (`lake build` count, 2026-07-11) for ongoing formalization of spectral geometry, Ricci flow, random graphs, and related infrastructure. The sign change is formally *stated* but not formally *proven*.
+- Remaining core axioms are the adjacency coupling bound ($W_1(\mu_u, \mu_v) \leq 2$ for adjacent $u, v$, `wasserstein_le_two_of_adjacent`), the support-distance bound for idleness measures ($d(x,y) \leq d(u,v) + 2$ on the support of the product coupling, `probabilityMeasure_support_dist_bound`), and the specification bridge. Wasserstein symmetry and the triangle inequality are machine-checked in `WassersteinProven.lean`; the local clustering bound is machine-checked in `Basic.lean`. McDiarmid's inequality is formally stated in `McDiarmid.lean` (0 sorry); probability measure normalization is machine-checked in `Curvature.lean`.
 - The exact analytical form of $\mathbb{E}[\kappa]$ as a function of $\eta$ remains open. The heuristic $(\eta - \eta_c)/(\eta + 1)$ does not fit the data ($R^2 < 0$); the true functional form is nonlinear and non-monotonic for $\eta < 0.16$.
 
 ---
@@ -267,42 +267,46 @@ The sign change in ORC is governed by the **absolute** number of triangles avail
 
 ### 4.1 Architecture
 
-The formalization uses Lean 4 (v4.17.0) with Mathlib (v4.17.0). It consists of 25 modules totaling 8,097 lines with **15 explicit axioms** (5 in the 7 core ORC-theory modules; 10 in extension modules for dynamic networks and hypercomplex algebra). The 7 core ORC-theory modules contain **0 `sorry`**; six original auxiliary modules contain 63 `sorry` in proof stubs for ongoing formalization work; four additional exploratory extension modules (Clifford algebra, fMRI connectivity, hypercomplex phase boundary, visualization) contribute 22 further stubs; eight core extension modules are sorry-free.
+The formalization uses Lean 4 (v4.17.0) with Mathlib (v4.17.0). It consists of 29 modules totaling 10,212 lines with **13 explicit axioms** (3 in the 7 core ORC-theory modules; 10 in extension modules for dynamic networks and hypercomplex algebra). The 7 core ORC-theory modules contain **0 `sorry`**; eight non-core modules carry 65 sorry-carrying declarations for ongoing formalization work; the remaining 14 extension modules are sorry-free.
 
-**Table 6**: Module-by-module status. **Core**: 7 ORC-theory modules (0 sorry). **Extensions**: 8 original sorry-free modules + 4 exploratory modules with stubs. **Auxiliary**: 6 modules with proof stubs.
+**Table 6**: Module-by-module status. **Core**: 7 ORC-theory modules (0 sorry). **Extensions**: 14 sorry-free modules + 4 exploratory modules with stubs. **Auxiliary**: 4 modules with proof stubs. The `sorry` column counts sorry-carrying declarations reported by `lake build` (verified 2026-07-11); the `Axioms` column counts `axiom` declarations.
 
 | Module | Lines | `sorry` | Axioms | Description |
 |--------|-------|---------|--------|-------------|
 | *— Core ORC-theory (0 sorry) —* | | | | |
-| `Basic.lean` | 185 | 0 | 1 | Weighted graphs, probability measures, clustering |
-| `Wasserstein.lean` | 153 | 0 | 2 | Optimal transport, couplings, symmetry + triangle (axioms) |
-| `Curvature.lean` | 466 | 0 | 1 | ORC definition, probability normalization (proven), curvature bounds, regime exclusivity |
+| `Basic.lean` | 245 | 0 | 0 | Weighted graphs, probability measures, clustering (bounds proven) |
+| `Wasserstein.lean` | 136 | 0 | 0 | Optimal transport, couplings; symmetry + triangle proven in `WassersteinProven.lean` |
+| `Curvature.lean` | 641 | 0 | 2 | ORC definition, normalization (proven), curvature bounds, regime exclusivity; adjacency + support-distance bounds admitted |
 | `PhaseTransition.lean` | 197 | 0 | 0 | Phase transition definition, density parameter, thresholds |
-| `Bounds.lean` | 196 | 0 | 0 | Global bounds on curvature and clustering |
+| `Bounds.lean` | 202 | 0 | 0 | Global bounds on curvature and clustering |
 | `Consistency.lean` | 315 | 0 | 1 | Cross-implementation consistency (specification bridge) |
 | `Axioms.lean` | 101 | 0 | 0 | Deprecated wrapper; McDiarmid re-exported from `McDiarmid.lean` |
 | *— Extensions (0 sorry) —* | | | | |
 | `McDiarmid.lean` | 153 | 0 | 0 | McDiarmid's inequality and Hoeffding corollary |
+| `WassersteinProven.lean` | 456 | 0 | 0 | Machine-checked Wasserstein symmetry and triangle inequality |
 | `DynamicNetworks.lean` | 320 | 0 | 2 | Time-varying graphs, ORC Lipschitz continuity (axioms) |
 | `Hypercomplex.lean` | 462 | 0 | 8 | Octonion and sedenion algebra axioms |
 | `Validation.lean` | 243 | 0 | 0 | Experimental validation framework |
 | `ComputationalVerification.lean` | 150 | 0 | 0 | Computational verification helpers |
 | `TestExtraction.lean` | 236 | 0 | 0 | Test extraction utilities |
 | `LaTeXExport.lean` | 84 | 0 | 0 | LaTeX export helpers |
-| `HyperbolicSemanticNetworks.lean` | 104 | 0 | 0 | Entry point, re-exports all modules |
-| *— Exploratory extensions (stubs) —* | | | | |
-| `CliffordFMRI.lean` | 459 | 17 | 0 | Clifford algebra for fMRI connectivity (17 stubs) |
-| `HypercomplexPhase.lean` | 168 | 3 | 0 | Hypercomplex phase boundary analysis (3 stubs) |
-| `Visualization.lean` | 246 | 2 | 0 | Visualization helpers and phase curve sampling (2 stubs) |
+| `HyperbolicSemanticNetworks.lean` | 107 | 0 | 0 | Entry point, re-exports all modules |
 | `Clifford.lean` | 130 | 0 | 0 | Clifford algebra definitions |
-| *— Auxiliary with stubs —* | | | | |
-| `RandomGraph.lean` | 1,875 | 21 | 0 | Erdős-Rényi and configuration model (21 stubs) |
-| `RicciFlow.lean` | 728 | 17 | 0 | Discrete Ricci flow on networks (17 stubs) |
-| `SpectralGeometry.lean` | 460 | 20 | 0 | Eigenvalues, Cheeger inequality (20 stubs) |
-| `WassersteinProven.lean` | 381 | 1 | 0 | Detailed Wasserstein proofs in progress (1 stub) |
-| `RandomGeometric.lean` | 198 | 4 | 0 | Random geometric graph models (4 stubs) |
 | `ProbabilityProofs.lean` | 87 | 0 | 0 | Advanced probability lemmas (fully proved) |
-| **Total** | **8,097** | **85** | **15** | 25 modules |
+| `DepressionNetworks.lean` | 187 | 0 | 0 | Depression speech-network phase classification |
+| `OctonionGraph.lean` | 102 | 0 | 0 | Octonion associator counting (343-triple bookkeeping) |
+| `SounioVerification.lean` | 1,234 | 0 | 0 | Auto-generated bridge from Sounio computation traces |
+| *— Exploratory extensions (stubs) —* | | | | |
+| `CliffordFMRI.lean` | 510 | 14 | 0 | Clifford algebra for fMRI connectivity |
+| `HypercomplexPhase.lean` | 168 | 3 | 0 | Hypercomplex phase boundary analysis |
+| `Visualization.lean` | 246 | 2 | 0 | Visualization helpers and phase curve sampling |
+| `HehlFormula.lean` | 239 | 2 | 0 | Hehl explicit ORC formula on k-regular graphs (arXiv:2407.08854) |
+| *— Auxiliary with stubs —* | | | | |
+| `RandomGraph.lean` | 1,875 | 10 | 0 | Erdős-Rényi and configuration model |
+| `RicciFlow.lean` | 728 | 12 | 0 | Discrete Ricci flow on networks |
+| `SpectralGeometry.lean` | 460 | 18 | 0 | Eigenvalues, Cheeger inequality |
+| `RandomGeometric.lean` | 198 | 4 | 0 | Random geometric graph models |
+| **Total** | **10,212** | **65** | **13** | 29 modules |
 
 ### 4.2 Machine-Checked Results
 
@@ -321,7 +325,7 @@ The following are fully proven with no axioms:
 **Graph structure**:
 - **Distance properties**: Symmetry, self-zero, positive for reachable distinct nodes (`WeightedGraph.dist_symmetric`, `dist_self_zero`, `dist_pos_of_ne`)
 - **Probability bound**: $\mu(v) \leq 1$ for any probability measure (`ProbabilityMeasure.prob_le_one`)
-- **Average clustering bounds**: $\bar{C} \in [0, 1]$ (`Clustering.averageClustering_bounds`, using `localClustering_bounds` axiom)
+- **Average clustering bounds**: $\bar{C} \in [0, 1]$ (`Clustering.averageClustering_bounds`, using the machine-checked `localClustering_bounds`)
 - **Idleness bounds**: $\alpha \in [0, 1]$, with non-negativity and upper bound lemmas (`Curvature.Idleness.α_nonneg`, `α_le_one`)
 - **Degree non-negativity**: $\deg(v) \geq 0$ (`Bounds.degree_nonneg`)
 - **Density non-negativity**: $\eta \geq 0$ (`Bounds.density_nonneg`)
@@ -332,28 +336,24 @@ The following are fully proven with no axioms:
 
 ### 4.3 Axiomatized Results
 
-The formalization uses **15 explicit axioms** across 6 modules (5 in core ORC-theory modules, 10 in extension modules). All are standard results whose formal proofs require infrastructure not yet available in Mathlib.
+The formalization uses **13 explicit axioms** across 4 modules (3 in core ORC-theory modules, 10 in extension modules). All are standard results whose formal proofs require infrastructure not yet available in Mathlib.
 
-**Core ORC-theory axioms (5)**:
+**Core ORC-theory axioms (3)**:
 
-**Category A — Optimal transport**:
-1. **Wasserstein symmetry** (Wasserstein.lean): $W_1(d, \mu, \nu) = W_1(d, \nu, \mu)$. The proof constructs the transposed coupling; axiomatized due to delicate double-sum manipulation in Lean's elaborator.
-2. **Wasserstein triangle inequality** (Wasserstein.lean): $W_1(\mu, \rho) \leq W_1(\mu, \nu) + W_1(\nu, \rho)$. The gluing construction is scaffolded (`gluedCoupling`) and the key marginal lemma is proven (`coupling_zero_of_marginal_zero`). The infimum manipulation is axiomatized.
+**Category A — Curvature algebra**:
+1. **Adjacency coupling bound** (Curvature.lean, `wasserstein_le_two_of_adjacent`): $W_1(\mu_u, \mu_v) \leq 2$ for adjacent $u, v$ under the idleness-based construction — the $d = 1$ case of the $W_1 \leq 2 \cdot d(u,v)$ bound behind $\kappa \in [-1, 1]$. Standard for idleness $\alpha = 1/2$ (curvature bounded below by $-2(1-\alpha)$); the general-$d$ case is proven from it via a product coupling.
+2. **Support-distance bound** (Curvature.lean, `probabilityMeasure_support_dist_bound`): $d(x,y) \leq d(u,v) + 2$ for $x, y$ in the supports of $\mu_u, \mu_v$ — the triangle-inequality step over the one-step neighbourhoods, true unconditionally under the dist-zero-when-unreachable convention.
 
-**Category B — Curvature algebra**:
-3. **Wasserstein coupling bound** (Curvature.lean): $W_1(\mu_u, \mu_v) \leq 2 \cdot d(u,v)$ for probability measures arising from the idleness-based construction. Follows from a product coupling argument with detailed case analysis.
+**Category B — Specification**:
+3. **Specification bridge** (Consistency.lean, `julia_curvature_satisfies_spec`): The Julia implementation satisfies the formal ORC specification. Connects computational results to the formal definitions.
 
-**Category C — Clustering and specification**:
-4. **Local clustering bounds** (Basic.lean): $C(v) \in [0, 1]$. Requires careful reasoning about triangle counts vs. possible edges among neighbors, with $\mathbb{N}$-to-$\mathbb{R}$ cast arithmetic.
-5. **Specification bridge** (Consistency.lean): The Julia implementation satisfies the formal ORC specification. Connects computational results to the formal definitions.
-
-*Note*: Probability measure normalization ($\sum_v \mu_u(v) = 1$), previously axiomatized, is now **fully machine-checked** in `Curvature.lean` (`probabilityMeasure_normalization_proven`). McDiarmid's inequality is formally stated in `McDiarmid.lean` (0 sorry).
+*Note*: Wasserstein symmetry and the triangle inequality, previously axiomatized, are now **fully machine-checked** in `WassersteinProven.lean` (`wasserstein_symmetric_proven`, `wasserstein_triangle_proven`); the local clustering bound is machine-checked in `Basic.lean` (`localClustering_bounds`, via `triangleCount_le_neighbor_pairs`). Probability measure normalization ($\sum_v \mu_u(v) = 1$) is machine-checked in `Curvature.lean` (`probabilityMeasure_normalization_proven`). McDiarmid's inequality is formally stated in `McDiarmid.lean` (0 sorry).
 
 **Extension module axioms (10)**:
 - `DynamicNetworks.lean` (2 axioms): ORC Lipschitz continuity under edge perturbations; brain connectome sweet-spot hypothesis.
 - `Hypercomplex.lean` (8 axioms): Standard properties of octonion algebra (non-associativity, alternative laws, zero divisors, composition) and sedenion algebra.
 
-These are honest uses of axioms: all results are well-established and their inclusion in Mathlib is a matter of engineering, not mathematical doubt. The 7 core ORC-theory modules (Basic, Wasserstein, Curvature, PhaseTransition, Bounds, Consistency, Axioms) contain no `sorry` statements; the 6 auxiliary modules contain 63 proof stubs (`sorry`) for ongoing formalization of spectral geometry, Ricci flow, random graphs, and probability theory; four additional exploratory extension modules contribute 22 further stubs.
+These are honest uses of axioms: all results are well-established and their inclusion in Mathlib is a matter of engineering, not mathematical doubt. The 7 core ORC-theory modules (Basic, Wasserstein, Curvature, PhaseTransition, Bounds, Consistency, Axioms) contain no `sorry` statements; eight non-core modules contribute 65 sorry-carrying declarations (SpectralGeometry 18, CliffordFMRI 14, RicciFlow 12, RandomGraph 10, RandomGeometric 4, HypercomplexPhase 3, Visualization 2, HehlFormula 2) for ongoing formalization of spectral geometry, Ricci flow, random graphs, and related infrastructure.
 
 ### 4.4 Verbatim Proofs
 
@@ -420,7 +420,7 @@ The Erdős-Rényi comparison (Section 3.5) provides evidence for the *robustness
 
 We are direct about what our Lean 4 formalization achieves and what it does not:
 
-**Achieved**: The 7 core ORC-theory modules compile and type-check with **0 `sorry`**. The mathematical *definitions* are correct (Wasserstein distance, ORC, phase transition). Key structural results ($W_1 \geq 0$, coupling marginal vanishing, probability measure normalization, curvature vanishing for unreachable nodes, regime exclusivity, average clustering bounds) are fully machine-checked. Fifteen results are stated as explicit axioms (5 in core modules, 10 in extensions), including $W_1$ symmetry and triangle inequality, the coupling bound for ORC measures, local clustering bounds, and a specification bridge. Six auxiliary modules contain 63 `sorry` stubs for ongoing formalization work; four additional exploratory extension modules contribute 22 further stubs (85 total).
+**Achieved**: The 7 core ORC-theory modules compile and type-check with **0 `sorry`**. The mathematical *definitions* are correct (Wasserstein distance, ORC, phase transition). Key structural results ($W_1 \geq 0$, coupling marginal vanishing, probability measure normalization, curvature vanishing for unreachable nodes, regime exclusivity, average clustering bounds) are fully machine-checked. Thirteen results are stated as explicit axioms (3 in core modules, 10 in extensions): the adjacency coupling bound and support-distance bound for ORC measures, a specification bridge, and ten extension-module axioms. $W_1$ symmetry, the triangle inequality, and the local clustering bound, previously axiomatized, are now machine-checked. Eight non-core modules contain 65 sorry-carrying declarations for ongoing formalization work.
 
 **Not achieved**: The sign change is not formally proven as a sharp transition. The main barriers are:
 1. Random graph probability infrastructure in Lean 4 is immature
@@ -438,7 +438,7 @@ We estimate that completing the full formal proof would require the development 
 
    See Appendix E for preliminary hypercomplex embedding results suggesting that the sign change depends on the transport metric.
 5. **Functional form of $\mathbb{E}[\kappa(\eta)]$**: The heuristic $(\eta - \eta_c)/(\eta + 1)$ fails ($R^2 < 0$). The true curve is non-monotonic at low $\eta$ and saturating at high $\eta$; identifying the correct functional form remains open.
-6. **Complete formalization**: Replace the 15 remaining axioms with Mathlib proofs and eliminate the 85 `sorry` stubs across auxiliary and exploratory modules (requires infimum manipulation over coupling sets, detailed ODE theory for Ricci flow convergence, random graph PMFs, spectral graph theory, and measure-theoretic random variable infrastructure).
+6. **Complete formalization**: Replace the 13 remaining axioms with Mathlib proofs and eliminate the 65 `sorry` stubs across auxiliary and exploratory modules (requires infimum manipulation over coupling sets, detailed ODE theory for Ricci flow convergence, random graph PMFs, spectral graph theory, and measure-theoretic random variable infrastructure).
 
 ---
 
@@ -470,7 +470,7 @@ We have presented four complementary contributions to the study of Ollivier-Ricc
 
 3. **Multi-$N$ scaling and critical exponents** ($N \in \{50, 100, 200, 500, 1000\}$) revealing finite-size scaling $\eta_c(N) \approx \eta_c^\infty - a/\sqrt{N}$ with $\eta_c^\infty \approx 3.7$ (fixed $\beta = 1/2$, $R^2 = 0.995$; free-$\beta$ fit gives $\eta_c^\infty \approx 4.2$ with wide CI), and crossover character in the finite-size regime studied (Section 3.7, Figure 3b).
 
-4. **Lean 4 formalization** (25 modules, 15 explicit axioms, **0 `sorry`** in the 7 core ORC-theory modules), with machine-checked proofs of Wasserstein non-negativity, coupling marginals, probability measure normalization, curvature bounds, curvature vanishing for unreachable nodes, regime exclusivity, and clustering bounds. All axioms are mathematically standard.
+4. **Lean 4 formalization** (29 modules, 13 explicit axioms, **0 `sorry`** in the 7 core ORC-theory modules), with machine-checked proofs of Wasserstein non-negativity, coupling marginals, probability measure normalization, curvature bounds, curvature vanishing for unreachable nodes, regime exclusivity, and clustering bounds. All axioms are mathematically standard.
 
 The gap between computational confirmation and full formal proof of the sign change remains the central open problem. We view this work as establishing both the computational ground truth — with sufficient statistical rigor for reproducibility — and a formal foundation for eventual complete verification.
 
@@ -619,7 +619,7 @@ All data, code, and formalization files necessary to reproduce the results in th
 
 - **Computation scripts**: `julia/scripts/exact_curvature_lp.jl` (LP solver), `julia/scripts/run_er_comparison.jl` (Erdős-Rényi comparison), `julia/scripts/run_n1000.jl` ($N=1000$ sweep), `julia/scripts/statistical_analysis.jl` (statistical analysis), `julia/scripts/generate_paper_figures.jl` (figures)
 - **Result data**: `results/experiments/phase_transition_exact_n100_v2.json` (Table 1), `results/experiments/sinkhorn_vs_exact_comparison.json` (Table 2), `results/experiments/er_comparison_n100.json` (Table 4), `results/experiments/phase_transition_exact_multi_N_v2.json` (Table 5, $N \leq 500$), `results/experiments/phase_transition_exact_n1000.json` (Table 5, $N=1000$), `results/experiments/statistical_analysis_v2.json` (CIs, t-tests, scaling fits)
-- **Lean formalization**: `lean/HyperbolicSemanticNetworks/` (all 25 modules, buildable with `lake build`)
+- **Lean formalization**: `lean/HyperbolicSemanticNetworks/` (all 29 modules, buildable with `lake build`)
 - **Figures**: `figures/paper/figure{1,2,3,4,5}.{pdf,png}`; Figure 5 generated by `julia/scripts/generate_figure5.jl`
 - **Hypercomplex embedding data**: `results/sounio/hypercomplex_curvature.csv` (Experiment 05: ORC in Q4/Oct/Sed embedding spaces, $N \in \{20, 50\}$, Sinkhorn $\varepsilon = 0.5$); `results/experiments/hypercomplex_lp_n{N}_d{d}.json` for $N \in \{50, 100, 200\}$, $d \in \{4, 8\}$ and $N = 100$, $d = 16$ (exact LP, 3–5 seeds — Open Problem 4, Figure 5)
 
