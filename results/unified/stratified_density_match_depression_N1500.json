@@ -1,0 +1,31 @@
+{
+  "params": {
+    "alpha": 0.5,
+    "n_sub": 1500,
+    "n_bins": 10,
+    "n_seeds": 5
+  },
+  "matched_mean_kappa_mean_sd": {
+    "minimum": [
+      -0.16264046856931336,
+      0.005866315898148509
+    ],
+    "mild": [
+      -0.10950203151398041,
+      0.030970877462802512
+    ],
+    "moderate": [
+      -0.08883572058839347,
+      0.015246188256446717
+    ],
+    "severe": [
+      -0.09478348234440724,
+      0.010861360242685336
+    ]
+  },
+  "minimum_most_hyperbolic_seeds": "5/5",
+  "raw_order_preserved_seeds": "4/5",
+  "mw_min_lt_clin_p_median": 0.0,
+  "mw_min_lt_clin_p_max": 1.139686074450173e-221,
+  "verdict": "SURVIVES \u2014 subclinical-most-hyperbolic holds at matched density-distribution in ALL seeds with p<.01; the conference biomarker is robust to the strictest density control. Show this slide."
+}

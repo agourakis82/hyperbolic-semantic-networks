@@ -1,0 +1,78 @@
+{
+  "params": {
+    "fs": 256,
+    "win_s": 30,
+    "preictal_s": 1800,
+    "tau": 0.3
+  },
+  "result": {
+    "preictal_vs_interictal": {
+      "n_pre": 200,
+      "n_inter": 240,
+      "med_pre": 0.22589576924290694,
+      "med_inter": 0.183436683083775,
+      "rank_biserial": -0.4598333333333333,
+      "p": 9.660585160906631e-17,
+      "sign": "pre>inter"
+    },
+    "corr_kappa_density_interictal": 0.7629960483045874,
+    "density_residualized": {
+      "p": 0.10158208408449126,
+      "med_resid_pre": -0.00013951517911468814,
+      "med_resid_inter": -0.0055388792420996424
+    },
+    "density_matched": {
+      "p": 1.7292224322091827e-12,
+      "n_pre": 181,
+      "n_inter": 239,
+      "med_pre": 0.21954537877712418,
+      "med_inter": 0.1840061392015875,
+      "band": [
+        0.16205533596837945,
+        0.4980237154150198
+      ]
+    },
+    "density_stratified_matched": {
+      "median_p": 0.8820410222867272,
+      "median_kappa_diff": -0.0004898124213764676,
+      "n_matched_total": 131
+    },
+    "preictal_trends": [
+      {
+        "file": "chb01_03",
+        "onset": 2996,
+        "n_pre": 60,
+        "preictal_median": 0.2107940973175344,
+        "slope_per_s": -5.614563812845046e-05,
+        "slope_p": 1.1349203823722803e-07
+      },
+      {
+        "file": "chb01_04",
+        "onset": 1467,
+        "n_pre": 49,
+        "preictal_median": 0.19781205562315576,
+        "slope_per_s": 6.663372618526928e-05,
+        "slope_p": 1.3076145870284235e-06
+      },
+      {
+        "file": "chb01_16",
+        "onset": 1015,
+        "n_pre": 34,
+        "preictal_median": 0.25122600516771654,
+        "slope_per_s": -7.286886919576896e-06,
+        "slope_p": 0.6136549832177773
+      },
+      {
+        "file": "chb01_18",
+        "onset": 1720,
+        "n_pre": 57,
+        "preictal_median": 0.2317785977069961,
+        "slope_per_s": 4.773930417107697e-05,
+        "slope_p": 1.1027953015616269e-05
+      }
+    ],
+    "n_seizures": 4,
+    "n_negative_slope": 2,
+    "verdict": "DENSITY ARTIFACT \u2014 raw pre-ictal \u03ba shift does NOT survive density control (pre-ictal synchronization, re-expressed as curvature)"
+  }
+}
