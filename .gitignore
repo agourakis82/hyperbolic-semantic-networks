@@ -113,3 +113,7 @@ julia/Manifest.toml
 !figures/cpc2026/**
 data/cpc2026/trajectories_*_input.npy
 results/cpc2026/ossm_trajectories_*.csv
+data/external/emotion_timeseries/
+data/external/chbmit/
+data/external/Depression_Severity_Levels_Dataset/
+data/external/zuco/
