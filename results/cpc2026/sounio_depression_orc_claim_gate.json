@@ -1,0 +1,48 @@
+{
+  "schema": "cpc2026.sounio_depression_orc_claim_gate.v1",
+  "generated_at": "2026-05-25T10:24:16.433784+00:00",
+  "git_commit_hash": "8b5c67687a6746e91d2c503a0d129fd206dc7e71",
+  "status": "PASS_SOUNIO_CLAIM_SPINE_READY",
+  "reasons": [],
+  "souc": "/workspace/sounio/bin/souc",
+  "sounio_source": "experiments/sounio_cpc2026/depression_orc_claim.sio",
+  "python_gate": "results/cpc2026/depression_orc_network_geometry_scope_gate.json",
+  "python_gate_status": "PASS_EXPLORATORY_NETWORK_GEOMETRY_SCOPE_GATE_ONLY",
+  "claim_level": "exploratory_network_geometry_scope_gate",
+  "context_of_use": "exploratory research and conference hypothesis generation; not for clinical decision-making",
+  "target_external_cohort": "TBD; no access agreement or validation cohort is claimed",
+  "monotonicity_assumption": "not established; current group means are non-monotonic and require formal trend testing before any ordered-severity claim",
+  "preregistered_margins": "undefined; example planning thresholds such as |r| >= 0.30 for severity association or AUC >= 0.65 for individual-level endpoints require domain justification before confirmatory use",
+  "sounio_returncode": 0,
+  "sounio_stdout": [
+    "SOUNIO_CPC2026_NETWORK_GEOMETRY_CLAIM_PASS",
+    "claim_level=exploratory_network_geometry_scope_gate",
+    "context_of_use=exploratory_research_only",
+    "target_external_cohort=TBD",
+    "biomarker_candidate_language=false",
+    "diagnostic_language=false",
+    "clinical_utility=false",
+    "patient_level_prediction=false",
+    "requires_external_validation=true"
+  ],
+  "sounio_stderr": [],
+  "required_tokens": [
+    "SOUNIO_CPC2026_NETWORK_GEOMETRY_CLAIM_PASS",
+    "claim_level=exploratory_network_geometry_scope_gate",
+    "context_of_use=exploratory_research_only",
+    "target_external_cohort=TBD",
+    "biomarker_candidate_language=false",
+    "diagnostic_language=false",
+    "clinical_utility=false",
+    "patient_level_prediction=false",
+    "requires_external_validation=true"
+  ],
+  "missing_tokens": [],
+  "boundaries": [
+    "sounio_spine_validates_claim_level_not_orc_recomputation",
+    "exploratory_network_geometry_scope_gate_not_biomarker_candidate",
+    "biomarker_candidate_language_false_until_context_of_use_validation",
+    "diagnostic_language_false_until_external_validation",
+    "clinical_utility_false_until_context_of_use_validation"
+  ]
+}

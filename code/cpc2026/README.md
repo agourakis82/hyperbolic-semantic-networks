@@ -17,6 +17,10 @@ The pipeline is intentionally reviewer-friendly:
 - `ossm_reference_simulator.py`: generates the full paper-scale O-SSM artifacts in Python.
 - `ossm_analysis.py`: computes O-SSM metrics, subspace occupancy, attractor summaries, and Markov-vs-O-SSM comparisons.
 - `generate_ossm_figures.py`: builds the O-SSM figure set as PDF + PNG.
+- `network_geometry_claim_gate.py`: audits depression ORC / entropic-curvature
+  evidence and emits a conference-safe exploratory network-geometry scope gate.
+- `sounio_claim_gate.py`: runs the network-geometry claim audit through the
+  Sounio claim spine in `experiments/sounio_cpc2026/`.
 - `common.py`: shared paths, graph loading, exact-ORC wrapping, and utility functions.
 
 ## Data Choices
@@ -44,8 +48,14 @@ Main artifacts land in `results/cpc2026/`:
 - `ossm_statistical_summary.json`
 - `ossm_cross_model_comparison.csv`
 - `ossm_release_manifest.json`
+- `depression_orc_network_geometry_scope_gate.json`
+- `sounio_depression_orc_claim_gate.json`
 
 Figures land in `figures/cpc2026/`.
+
+Conference claim memo:
+
+- `submission/cpc2026/depression_orc_network_geometry_claim.md`
 
 Bounded canonical Sounio parity outputs are copied into:
 
@@ -91,6 +101,29 @@ Or from the root:
 ```bash
 make cpc2026-ossm
 ```
+
+For the depression ORC network-geometry claim audit:
+
+```bash
+python3 code/cpc2026/network_geometry_claim_gate.py
+# or
+make cpc2026-network-geometry
+```
+
+For the Sounio-native claim spine:
+
+```bash
+python3 code/cpc2026/sounio_claim_gate.py
+# or
+make cpc2026-sounio-claim
+```
+
+The gate is intentionally conservative. It permits exploratory
+network-geometry scope-gate language for conference framing, but rejects/avoids
+biomarker-candidate, validated clinical biomarker, diagnostic,
+clinical-utility, individual-level prediction, treatment-selection, or
+external-validation claims until context-of-use and external validation
+artifacts exist.
 
 ## Smoke Test
 
