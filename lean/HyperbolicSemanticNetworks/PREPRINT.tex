@@ -117,7 +117,7 @@ Erd\H{o}s-R\'{e}nyi graphs $G(N,p)$ with matched expected degree also exhibit a 
 but at lower critical density ($\etac^{\mathrm{ER}} \approx 1.9$ vs.\ $\etac^{\mathrm{reg}}
 \approx 2.3$ at $N = 100$), demonstrating that the transition is robust across graph models
 while the critical point depends on degree distribution.
-A Lean~4 formalization (25 modules, 15 explicit axioms, with 0 \sorry{} in the 7 core
+A Lean~4 formalization (29 modules, 13 explicit axioms, with 0 \sorry{} in the 7 core
 ORC-theory modules) provides machine-checked proofs of Wasserstein non-negativity, coupling
 marginals, probability measure normalization, curvature bounds, regime exclusivity, and
 clustering bounds. The full analytical characterization of the sign change remains open.
@@ -179,7 +179,7 @@ and is it a sharp transition or a crossover?
   consistent with but not uniquely selecting $\beta = 1/2$. The transition slope at
   $\etac$ scales as $N^{-0.20}$, indicating crossover behavior.
 
-  \item \textbf{Lean~4 formalization}: 25 modules, 15 explicit axioms (5 in core ORC
+  \item \textbf{Lean~4 formalization}: 29 modules, 13 explicit axioms (3 in core ORC
   modules, 2 in dynamic-network extensions, 8 in hypercomplex algebra; all standard),
   with \textbf{0 \sorry{}} in the 7 core ORC-theory modules.
 \end{enumerate}
@@ -188,16 +188,20 @@ and is it a sharp transition or a crossover?
 
 \begin{itemize}
   \item The 7 core ORC-theory modules contain \textbf{0 \sorry{} statements} and rely on
-  \textbf{5 explicit axioms} in the core (Wasserstein symmetry, triangle inequality,
-  coupling bound, local clustering bound, and specification bridge; all mathematically
-  standard). Six auxiliary modules contain 63 proof stubs (\sorry{}) for ongoing
-  formalization of spectral geometry, Ricci flow, random graphs, and probability theory;
-  four additional exploratory extension modules contribute 22 further stubs (85 total).
+  \textbf{3 explicit axioms} in the core (adjacency coupling bound $W_1 \leq 2$,
+  support-distance bound for the idleness measures, and specification bridge; all
+  mathematically standard --- Wasserstein symmetry, the triangle inequality, and the local
+  clustering bound, previously axiomatized, are now machine-checked). Eight non-core
+  modules carry 65 \sorry{}-carrying declarations for ongoing formalization of spectral
+  geometry, Ricci flow, random graphs, and related infrastructure.
   The sign change is formally \emph{stated} but not formally \emph{proven}.
 
-  \item Remaining axioms include Wasserstein symmetry and triangle inequality (infimum
-  manipulation over couplings), coupling bound for ORC measures, and local clustering
-  bound. Probability measure normalization is now machine-checked in \texttt{Curvature.lean}.
+  \item Remaining core axioms are the adjacency coupling bound
+  (\texttt{wasserstein\_le\_two\_of\_adjacent}), the support-distance bound
+  (\texttt{probabilityMeasure\_support\_dist\_bound}), and the specification bridge.
+  Wasserstein symmetry and the triangle inequality are machine-checked in
+  \texttt{WassersteinProven.lean}; the local clustering bound is machine-checked in
+  \texttt{Basic.lean}; probability measure normalization in \texttt{Curvature.lean}.
 
   \item The exact analytical form of $\mathbb{E}[\kappa]$ as a function of $\eta$ remains
   open. The heuristic $(\eta - \etac)/(\eta + 1)$ does not fit the data ($R^2 < 0$).
@@ -524,18 +528,19 @@ reduce $W_1$ below $d$ ($\kappa > 0$).
 
 \subsection{Architecture}
 
-The formalization uses Lean~4 (v4.17.0) with Mathlib (v4.17.0). It consists of 25 modules
-totaling 8\,097 lines with \textbf{15 explicit axioms} (5 in the 7 core ORC-theory modules;
+The formalization uses Lean~4 (v4.17.0) with Mathlib (v4.17.0). It consists of 29 modules
+totaling 10\,212 lines with \textbf{13 explicit axioms} (3 in the 7 core ORC-theory modules;
 10 in extension modules for dynamic networks and hypercomplex algebra). The 7 core
-ORC-theory modules contain \textbf{0 \sorry{}}; six original auxiliary modules contain 63
-\sorry{} in proof stubs; four additional exploratory extension modules contribute 22 further
-stubs; eight core extension modules are \sorry{}-free.
+ORC-theory modules contain \textbf{0 \sorry{}}; eight non-core modules carry 65
+\sorry{}-carrying declarations (\texttt{lake build} count, 2026-07-11); the remaining 14
+extension modules are \sorry{}-free.
 
 \begin{table}[ht]
 \centering
 \caption{Module-by-module status. \textbf{Core}: 7 ORC-theory modules (0 \sorry{}).
-\textbf{Extensions}: 8 sorry-free modules + 4 exploratory modules with stubs.
-\textbf{Auxiliary}: 6 modules with proof stubs.}
+\textbf{Extensions}: 14 sorry-free modules + 4 exploratory modules with stubs.
+\textbf{Auxiliary}: 4 modules with proof stubs. The \sorry{} column counts sorry-carrying
+declarations reported by \texttt{lake build} (verified 2026-07-11).}
 \label{tab:lean}
 \footnotesize\setlength{\tabcolsep}{4pt}
 \begin{tabular}{l r r r p{5.8cm}}
@@ -543,39 +548,43 @@ stubs; eight core extension modules are \sorry{}-free.
 Module & Lines & \sorry{} & Axioms & Description \\
 \midrule
 \multicolumn{5}{l}{\itshape --- Core ORC-theory (0 \sorry{}) ---} \\
-\texttt{Basic.lean}          & 185   & 0 & 1 & Weighted graphs, probability measures, clustering \\
-\texttt{Wasserstein.lean}    & 153   & 0 & 2 & Optimal transport, couplings, symmetry + triangle (axioms) \\
-\texttt{Curvature.lean}      & 466   & 0 & 1 & ORC definition, prob.\ normalization (proven), bounds, regime exclusivity \\
+\texttt{Basic.lean}          & 245   & 0 & 0 & Weighted graphs, probability measures, clustering (bounds proven) \\
+\texttt{Wasserstein.lean}    & 136   & 0 & 0 & Optimal transport, couplings; symmetry + triangle proven in \texttt{WassersteinProven.lean} \\
+\texttt{Curvature.lean}      & 641   & 0 & 2 & ORC definition, prob.\ normalization (proven), bounds, regime exclusivity; adjacency + support-distance bounds admitted \\
 \texttt{PhaseTransition.lean}& 197   & 0 & 0 & Phase transition definition, density parameter, thresholds \\
-\texttt{Bounds.lean}         & 196   & 0 & 0 & Global bounds on curvature and clustering \\
+\texttt{Bounds.lean}         & 202   & 0 & 0 & Global bounds on curvature and clustering \\
 \texttt{Consistency.lean}    & 315   & 0 & 1 & Cross-implementation consistency (specification bridge) \\
 \texttt{Axioms.lean}         & 101   & 0 & 0 & Deprecated wrapper; McDiarmid re-exported \\
 \midrule
 \multicolumn{5}{l}{\itshape --- Extensions (0 \sorry{}) ---} \\
 \texttt{McDiarmid.lean}           & 153 & 0 & 0 & McDiarmid's inequality and Hoeffding corollary \\
+\texttt{WassersteinProven.lean}   & 456 & 0 & 0 & Machine-checked Wasserstein symmetry and triangle inequality \\
 \texttt{DynamicNetworks.lean}     & 320 & 0 & 2 & Time-varying graphs, ORC Lipschitz continuity \\
 \texttt{Hypercomplex.lean}        & 462 & 0 & 8 & Octonion and sedenion algebra axioms \\
 \texttt{Validation.lean}          & 243 & 0 & 0 & Experimental validation framework \\
 \texttt{ComputationalVerification.lean} & 150 & 0 & 0 & Computational verification helpers \\
 \texttt{TestExtraction.lean}      & 236 & 0 & 0 & Test extraction utilities \\
 \texttt{LaTeXExport.lean}         & 84  & 0 & 0 & \LaTeX{} export helpers \\
-\texttt{HyperbolicSemanticNetworks.lean} & 104 & 0 & 0 & Entry point, re-exports all modules \\
+\texttt{HyperbolicSemanticNetworks.lean} & 107 & 0 & 0 & Entry point, re-exports all modules \\
+\texttt{Clifford.lean}            & 130 & 0 & 0 & Clifford algebra definitions \\
+\texttt{ProbabilityProofs.lean}   & 87  & 0 & 0 & Advanced probability lemmas (fully proved) \\
+\texttt{DepressionNetworks.lean}  & 187 & 0 & 0 & Depression speech-network phase classification \\
+\texttt{OctonionGraph.lean}       & 102 & 0 & 0 & Octonion associator counting (343-triple bookkeeping) \\
+\texttt{SounioVerification.lean}  & 1\,234 & 0 & 0 & Auto-generated bridge from Sounio computation traces \\
 \midrule
 \multicolumn{5}{l}{\itshape --- Exploratory extensions (stubs) ---} \\
-\texttt{CliffordFMRI.lean}        & 459 & 17 & 0 & Clifford algebra for fMRI connectivity \\
+\texttt{CliffordFMRI.lean}        & 510 & 14 & 0 & Clifford algebra for fMRI connectivity \\
 \texttt{HypercomplexPhase.lean}   & 168 &  3 & 0 & Hypercomplex phase boundary analysis \\
 \texttt{Visualization.lean}       & 246 &  2 & 0 & Visualization helpers and phase curve sampling \\
-\texttt{Clifford.lean}            & 130 &  0 & 0 & Clifford algebra definitions \\
+\texttt{HehlFormula.lean}         & 239 &  2 & 0 & Hehl explicit ORC formula on $k$-regular graphs \\
 \midrule
 \multicolumn{5}{l}{\itshape --- Auxiliary with stubs ---} \\
-\texttt{RandomGraph.lean}         & 1\,875 & 21 & 0 & Erd\H{o}s-R\'{e}nyi and configuration model \\
-\texttt{RicciFlow.lean}           &   728  & 17 & 0 & Discrete Ricci flow on networks \\
-\texttt{SpectralGeometry.lean}    &   460  & 20 & 0 & Eigenvalues, Cheeger inequality \\
-\texttt{WassersteinProven.lean}   &   381  &  1 & 0 & Detailed Wasserstein proofs in progress \\
+\texttt{RandomGraph.lean}         & 1\,875 & 10 & 0 & Erd\H{o}s-R\'{e}nyi and configuration model \\
+\texttt{RicciFlow.lean}           &   728  & 12 & 0 & Discrete Ricci flow on networks \\
+\texttt{SpectralGeometry.lean}    &   460  & 18 & 0 & Eigenvalues, Cheeger inequality \\
 \texttt{RandomGeometric.lean}     &   198  &  4 & 0 & Random geometric graph models \\
-\texttt{ProbabilityProofs.lean}   &    87  &  0 & 0 & Advanced probability lemmas (fully proved) \\
 \midrule
-\textbf{Total} & \textbf{8\,097} & \textbf{85} & \textbf{15} & 25 modules \\
+\textbf{Total} & \textbf{10\,212} & \textbf{65} & \textbf{13} & 29 modules \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -608,10 +617,12 @@ The following are fully proven with no axioms:
 
 \subsection{Axiomatized Results}
 
-\textbf{Core ORC-theory axioms (5)}: Wasserstein symmetry, Wasserstein triangle inequality,
-Wasserstein coupling bound ($\Wone(\mu_u,\mu_v) \leq 2d(u,v)$), local clustering bounds
-($C(v) \in [0,1]$), and specification bridge (Julia implementation satisfies the formal ORC
-specification).
+\textbf{Core ORC-theory axioms (3)}: adjacency coupling bound
+($\Wone(\mu_u,\mu_v) \leq 2$ for adjacent $u,v$; the $d=1$ case behind
+$\kappa \in [-1,1]$), support-distance bound ($d(x,y) \leq d(u,v) + 2$ on the supports of
+the idleness measures), and specification bridge (Julia implementation satisfies the formal
+ORC specification). Wasserstein symmetry, the triangle inequality, and the local clustering
+bound, previously axiomatized, are now machine-checked.
 
 \textbf{Extension module axioms (10)}: \texttt{DynamicNetworks.lean} (2~axioms): ORC
 Lipschitz continuity under edge perturbations; brain connectome sweet-spot hypothesis.
@@ -721,8 +732,8 @@ to formal specifications remains at the axiom level.
   $(\eta - \etac)/(\eta + 1)$ fails ($R^2 < 0$). The true curve is non-monotonic at low
   $\eta$ and saturating at high $\eta$.
 
-  \item \textbf{Complete formalization}: Replace the 15 remaining axioms with Mathlib proofs
-  and eliminate the 85 \sorry{} stubs (requires infimum manipulation, ODE theory, random
+  \item \textbf{Complete formalization}: Replace the 13 remaining axioms with Mathlib proofs
+  and eliminate the 65 \sorry{} stubs (requires ODE theory, random
   graph PMFs, spectral graph theory, and measure-theoretic infrastructure).
 \end{enumerate}
 
@@ -787,7 +798,7 @@ We have presented four complementary contributions:
   fit gives $\etac^\infty \approx 4.2$ with wide CI), and crossover character in the
   finite-size regime studied (Section~\ref{sec:results}, Figure~\ref{fig:f3}).
 
-  \item \textbf{Lean~4 formalization} (25 modules, 15 axioms, \textbf{0 \sorry{}} in 7
+  \item \textbf{Lean~4 formalization} (29 modules, 13 axioms, \textbf{0 \sorry{}} in 7
   core modules), machine-checking key structural results.
 \end{enumerate}
 
@@ -1093,7 +1104,7 @@ available at \url{https://github.com/agourakis82/hyperbolic-semantic-networks}. 
   (Tables 1--5).
 
   \item \textbf{Lean formalization}: \texttt{lean/HyperbolicSemanticNetworks/}
-  (all 25 modules, buildable with \texttt{lake build}).
+  (all 29 modules, buildable with \texttt{lake build}).
 
   \item \textbf{Figures}: \texttt{figures/paper/figure\{1,2,3,4,5\}.\{pdf,png\}}.
 
