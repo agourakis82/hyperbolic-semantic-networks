@@ -1,0 +1,117 @@
+{
+  "grid": {
+    "win": [
+      21,
+      28
+    ],
+    "tau": [
+      0.05,
+      0.1
+    ],
+    "ridge": [
+      0.1,
+      0.2
+    ]
+  },
+  "criterion": "both kappa_pearson and kappa_hyperbolic signal earlier than earliest scalar EWS; >=6/8",
+  "n_hold": 4,
+  "verdict": "NOT ROBUST (honest negative)",
+  "cells": [
+    {
+      "win": 21,
+      "tau": 0.05,
+      "ridge": 0.1,
+      "onset": 138.5,
+      "k_pearson": 70.5,
+      "k_hyperbolic": 70.5,
+      "ews_var": 46.5,
+      "ews_ac1": 86.5,
+      "earliest_scalar": 46.5,
+      "headline_holds": false
+    },
+    {
+      "win": 21,
+      "tau": 0.05,
+      "ridge": 0.2,
+      "onset": 138.5,
+      "k_pearson": 70.5,
+      "k_hyperbolic": 70.5,
+      "ews_var": 46.5,
+      "ews_ac1": 86.5,
+      "earliest_scalar": 46.5,
+      "headline_holds": false
+    },
+    {
+      "win": 21,
+      "tau": 0.1,
+      "ridge": 0.1,
+      "onset": 138.5,
+      "k_pearson": 70.5,
+      "k_hyperbolic": 66.5,
+      "ews_var": 46.5,
+      "ews_ac1": 86.5,
+      "earliest_scalar": 46.5,
+      "headline_holds": false
+    },
+    {
+      "win": 21,
+      "tau": 0.1,
+      "ridge": 0.2,
+      "onset": 138.5,
+      "k_pearson": 70.5,
+      "k_hyperbolic": 66.5,
+      "ews_var": 46.5,
+      "ews_ac1": 86.5,
+      "earliest_scalar": 46.5,
+      "headline_holds": false
+    },
+    {
+      "win": 28,
+      "tau": 0.05,
+      "ridge": 0.1,
+      "onset": 142.0,
+      "k_pearson": 66.0,
+      "k_hyperbolic": 62.0,
+      "ews_var": 122.0,
+      "ews_ac1": 90.0,
+      "earliest_scalar": 90.0,
+      "headline_holds": true
+    },
+    {
+      "win": 28,
+      "tau": 0.05,
+      "ridge": 0.2,
+      "onset": 142.0,
+      "k_pearson": 66.0,
+      "k_hyperbolic": 62.0,
+      "ews_var": 122.0,
+      "ews_ac1": 90.0,
+      "earliest_scalar": 90.0,
+      "headline_holds": true
+    },
+    {
+      "win": 28,
+      "tau": 0.1,
+      "ridge": 0.1,
+      "onset": 142.0,
+      "k_pearson": 62.0,
+      "k_hyperbolic": 58.0,
+      "ews_var": 122.0,
+      "ews_ac1": 90.0,
+      "earliest_scalar": 90.0,
+      "headline_holds": true
+    },
+    {
+      "win": 28,
+      "tau": 0.1,
+      "ridge": 0.2,
+      "onset": 142.0,
+      "k_pearson": 62.0,
+      "k_hyperbolic": 58.0,
+      "ews_var": 122.0,
+      "ews_ac1": 90.0,
+      "earliest_scalar": 90.0,
+      "headline_holds": true
+    }
+  ]
+}
