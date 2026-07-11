@@ -33543,7 +33543,7 @@
       "network_id": "swow_nl",
       "frac_hyperbolic": 0.0063,
       "kappa_median": 0.094406,
-      "filename": "dutch_edges.csv",
+      "filename": "dutch_edges_FINAL.csv",
       "elapsed_total_seconds": 626.3,
       "graph_type": "undirected_unweighted",
       "max_degree": 458

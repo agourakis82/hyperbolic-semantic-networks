@@ -1,19 +1,19 @@
 {
   "test_classification_accuracy": "4/5",
-  "test_mae": 0.11079173645072829,
+  "test_mae": 0.1305319927630451,
   "model": {
     "eta_c_inf": 3.75,
     "linear_coefs": [
-      0.024903282640789705,
-      0.017543326564111183,
-      -0.5257346116493004
+      -0.18894279207862735,
+      -0.03533531365637813,
+      -0.5678100780301806
     ],
     "C_star": 0.05,
-    "r2_train": 0.08136776010197722
+    "r2_train": 0.7086158595663954
   },
-  "test_rmse": 0.13389784772326713,
+  "test_rmse": 0.15276138530316105,
   "experiment": "heldout_generalization",
-  "test_r2": -0.28725894364371785,
+  "test_r2": -0.675505669234739,
   "description": "Two-parameter model (η,C) generalization to 5 held-out test networks",
   "test_results": [
     {
@@ -22,7 +22,7 @@
       "correct": true,
       "C": 0.154,
       "kappa_obs": -0.264,
-      "kappa_pred": -0.11252963731818814,
+      "kappa_pred": -0.1626455572026244,
       "pred_geometry": "Hyperbolic",
       "eta": 0.04,
       "true_geometry": "Hyperbolic"
@@ -33,7 +33,7 @@
       "correct": true,
       "C": 0.143,
       "kappa_obs": -0.046,
-      "kappa_pred": -0.039474883943742115,
+      "kappa_pred": -0.2918965057602915,
       "pred_geometry": "Hyperbolic",
       "eta": 1.851,
       "true_geometry": "Hyperbolic"
@@ -44,7 +44,7 @@
       "correct": true,
       "C": 0.143,
       "kappa_obs": -0.321,
-      "kappa_pred": -0.09905810721838859,
+      "kappa_pred": -0.17188552179019911,
       "pred_geometry": "Hyperbolic",
       "eta": 0.062,
       "true_geometry": "Hyperbolic"
@@ -55,7 +55,7 @@
       "correct": true,
       "C": 0.022,
       "kappa_obs": -0.023,
-      "kappa_pred": -0.07641446400663521,
+      "kappa_pred": -0.020659297192914598,
       "pred_geometry": "Euclidean",
       "eta": 0.006,
       "true_geometry": "Euclidean"
@@ -66,7 +66,7 @@
       "correct": false,
       "C": 0.045,
       "kappa_obs": -0.202,
-      "kappa_pred": -0.08139315327267493,
+      "kappa_pred": -0.04804616575932802,
       "pred_geometry": "Euclidean",
       "eta": 0.009,
       "true_geometry": "Hyperbolic"
