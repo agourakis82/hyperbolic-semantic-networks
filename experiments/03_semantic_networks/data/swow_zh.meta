@@ -1,5 +1,10 @@
-N=476
-E=768
+N=465
+E=762
 max_deg=16
+full_N=476
+full_E=768
+graph=lcc
 kappa_ref=-0.143997
 geometry=HYPERBOLIC
+ref_N=465
+ref_E=762

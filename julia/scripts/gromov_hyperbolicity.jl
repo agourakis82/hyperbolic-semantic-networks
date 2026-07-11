@@ -56,7 +56,7 @@ const NETWORKS = [
     ("swow_es",       "spanish_edges_FINAL.csv",    "swow_es_exact_lp.json",       "kappa_mean", "Hyperbolic",  "SWOW Spanish"),
     ("swow_en",       "english_edges_FINAL.csv",    "swow_en_exact_lp.json",       "kappa_mean", "Hyperbolic",  "SWOW English"),
     ("swow_zh",       "chinese_edges_FINAL.csv",    "swow_zh_exact_lp.json",       "kappa_mean", "Hyperbolic",  "SWOW Chinese"),
-    ("swow_nl",       "dutch_edges.csv",            "swow_nl_exact_lp.json",       "kappa_mean", "Spherical",   "SWOW Dutch"),
+    ("swow_nl",       "dutch_edges_FINAL.csv",      "swow_nl_exact_lp.json",       "kappa_mean", "Hyperbolic",  "SWOW Dutch"),
     ("conceptnet_en", "conceptnet_en_edges.csv",    "conceptnet_en_exact_lp.json", "kappa_mean", "Hyperbolic",  "ConceptNet EN"),
     ("conceptnet_pt", "conceptnet_pt_edges.csv",    "conceptnet_pt_exact_lp.json", "kappa_mean", "Hyperbolic",  "ConceptNet PT"),
     ("wordnet_en",    "wordnet_edges.csv",           "wordnet_en_exact_lp.json",    "kappa_mean", "Euclidean",   "WordNet EN"),

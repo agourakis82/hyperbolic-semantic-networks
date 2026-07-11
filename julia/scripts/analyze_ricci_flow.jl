@@ -33,7 +33,7 @@ const FLOW_FILES = [
     ("swow_es",      "ricci_flow_swow_es.json",      "Hyperbolic", "SWOW Spanish",     0.017),
     ("swow_en",      "ricci_flow_swow_en.json",      "Hyperbolic", "SWOW English",     0.020),
     ("swow_zh",      "ricci_flow_swow_zh.json",      "Hyperbolic", "SWOW Chinese",     0.023),
-    ("swow_nl",      "ricci_flow_swow_nl.json",      "Spherical",  "SWOW Dutch",       7.558),
+    ("swow_nl",      "ricci_flow_swow_nl.json",      "Hyperbolic", "SWOW Dutch",       0.028),
     ("conceptnet_en","ricci_flow_conceptnet_en.json","Hyperbolic", "ConceptNet EN",    0.223),
     ("conceptnet_pt","ricci_flow_conceptnet_pt.json","Hyperbolic", "ConceptNet PT",    0.085),
     ("wordnet_en",   "ricci_flow_wordnet_en.json",   "Euclidean",  "WordNet EN",       0.009),

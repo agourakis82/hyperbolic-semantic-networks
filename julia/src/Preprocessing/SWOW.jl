@@ -89,6 +89,20 @@ function load_swow(
     return (graph=G, weights=edge_weights, node_map=node_map)
 end
 
+"""
+    load_swow_network(language::String) -> SimpleGraph
+
+Load a processed SWOW edge list by language name (`english`, `spanish`,
+`chinese`, `dutch`). Uses R1-only `*_edges_FINAL.csv` files in `data/processed/`.
+"""
+function load_swow_network(language::String)
+    lang = lowercase(language)
+    processed = joinpath(@__DIR__, "..", "..", "..", "data", "processed")
+    filepath = joinpath(processed, "$(lang)_edges_FINAL.csv")
+    result = load_swow(filepath; language=lang)
+    return result.graph
+end
+
 # Helper function
 function countmap(v::Vector)
     counts = Dict{eltype(v), Int}()

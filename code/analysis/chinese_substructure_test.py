@@ -23,7 +23,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 ALPHA = 0.5
-EDGE_FILE = Path(__file__).parent.parent.parent / "data/processed/chinese_edges.csv"
+EDGE_FILE = Path(__file__).parent.parent.parent / "data/processed/chinese_edges_FINAL.csv"
 
 print("="*70)
 print("🇨🇳 CHINESE NETWORK SUBSTRUCTURE ANALYSIS - Reviewer Response")

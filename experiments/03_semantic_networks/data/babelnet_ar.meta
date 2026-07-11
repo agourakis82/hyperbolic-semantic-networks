@@ -1,5 +1,10 @@
 N=142
 E=151
 max_deg=11
+full_N=142
+full_E=151
+graph=lcc
 kappa_ref=-0.012362
 geometry=EUCLIDEAN/TRANSITION
+ref_N=142
+ref_E=151
