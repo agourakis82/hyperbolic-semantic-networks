@@ -1,14 +1,9 @@
 {
   "class_means": {
     "Hyperbolic": {
-      "delta_kappa_std": 0.08025005799727915,
-      "delta_kappa_mean": -0.10709716666666669,
-      "n": 6
-    },
-    "Spherical": {
-      "delta_kappa_std": 0.0,
-      "delta_kappa_mean": -0.010985999999999996,
-      "n": 1
+      "delta_kappa_std": 0.07373398479540845,
+      "delta_kappa_mean": -0.11025885714285717,
+      "n": 7
     },
     "Euclidean": {
       "delta_kappa_std": 0.04717871041405577,
@@ -73,20 +68,20 @@
     },
     {
       "label": "SWOW Dutch",
-      "kappa_std_initial": 0.044703,
-      "delta_w_gini": 0.071032,
-      "kappa_std_final": 1.4e-5,
-      "delta_kappa_std": -0.044689,
-      "geometry": "Spherical",
-      "delta_kappa": -0.010985999999999996,
-      "kappa_initial": 0.086882,
-      "divergence_rate": -0.0002197199999999999,
-      "eta": 7.558,
+      "kappa_std_initial": 0.301907,
+      "delta_w_gini": 0.356241,
+      "kappa_std_final": 0.006061,
+      "delta_kappa_std": -0.295846,
+      "geometry": "Hyperbolic",
+      "delta_kappa": -0.12922899999999998,
+      "kappa_initial": -0.196338,
+      "divergence_rate": -0.0025845799999999995,
+      "eta": 0.028,
       "network_id": "swow_nl",
-      "kappa_final": 0.075896,
-      "dist_to_boundary": 3.808,
+      "kappa_final": -0.325567,
+      "dist_to_boundary": -3.722,
       "w_gini_initial": 0.0,
-      "w_gini_final": 0.071032,
+      "w_gini_final": 0.356241,
       "n_steps": 50
     },
     {
@@ -202,7 +197,7 @@
   "experiment": "ricci_flow_analysis",
   "eta_c_inf": 3.75,
   "dt": 0.5,
-  "H1_all_sph_positive": false,
+  "H1_all_sph_positive": true,
   "description": "Discrete Ricci flow convergence fingerprinting: geometry class divergence signatures",
   "n_steps": 50
 }
