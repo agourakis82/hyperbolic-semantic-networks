@@ -1,0 +1,29 @@
+{
+  "julia_source": "julia/scripts/unified_semantic_orc.jl",
+  "sounio_source": "experiments/03_semantic_networks/swow_unified_orc.sio",
+  "alpha": {
+    "julia": 0.5,
+    "sounio": 0.5,
+    "match": true
+  },
+  "measure": {
+    "julia": "lazy RW: mu_x(x)=alpha; mu_x(z)=(1-alpha)/deg(x) uniform on neighbors",
+    "sounio": "same (lazy_measure)",
+    "match": true
+  },
+  "distance": {
+    "julia": "APSP hop count (gdistances/BFS), undirected unweighted",
+    "sounio": "APSP BFS hop count, undirected unweighted",
+    "match": true
+  },
+  "weighting": {
+    "julia": "graph_type=undirected_unweighted (CSV weights stored but ORC ignores them)",
+    "sounio": "unweighted edgelist LCC",
+    "match": true
+  },
+  "graph_scope": {
+    "julia": "largest connected component",
+    "sounio": "LCC (inline extraction + LCC edgelists)",
+    "match": true
+  }
+}

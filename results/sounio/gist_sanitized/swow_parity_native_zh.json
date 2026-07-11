@@ -1,0 +1,46 @@
+{
+  "producer": "sounio-native",
+  "solver": "sinkhorn_lse_logdomain",
+  "alpha": 0.5,
+  "epsilon": 0.01,
+  "sinkhorn_iter": 1000,
+  "scope": "largest_connected_component",
+  "hop_distance": "undirected_unweighted",
+  "lazy_walk": "alpha=0.5 idleness",
+  "commit": "hyperbolic=b9a6a6f3f73363eadb432552a23677eec0f774ce sounio=89452af42195d9c2a9bc7c40dccd0b22efb33952",
+  "souc_sha256": "1223f1168ac191495e122c8987ce0e535e63550b85a9cf290259e289a95455cf",
+  "entrypoint": "experiments/03_semantic_networks/swow_unified_orc.sio",
+  "slurm_cpu": {
+    "job_id": 2313,
+    "partition": "cpu-ops",
+    "node": "<cpu-node>",
+    "wall_clock_s_end_to_end": 102
+  },
+  "slurm_gpu": {
+    "job_id": 2314,
+    "partition": "gpu-orangefs",
+    "node": "<gpu-node>",
+    "gres": "gpu:1",
+    "gpu_model": "NVIDIA L4",
+    "wall_clock_s_end_to_end": 102
+  },
+  "staging": "base64-bundle piped via `srun bash -s` to compute-node-local /tmp (no shared FS; sbcast/OrangeFS unreliable cross-partition)",
+  "IMPORTANT_DEVIATIONS": [
+    "SOLVER IS SINKHORN (entropic, log-domain LSE), NOT the STEP-2 native EXACT OT solver. The exact solver does not exist in Sounio (no exact-rational arithmetic) and was not built. Parity here is Sinkhorn-vs-exact-LP; it is close because epsilon=0.01 entropic bias is tiny on these integer-distance LCCs.",
+    "GPU run is the SAME scalar x86_64 ELF executed on a GPU-partition node. There is NO GPU compute kernel. Hence kappa(GPU)==kappa(CPU) BITWISE is satisfied trivially (identical scalar code), NOT by a GPU-batched solver. Determinism (b) is met but does not evidence GPU computation.",
+    "Partition names: prompt 'cpu'/'gpu' do not exist; mapped to cpu-ops/gpu-orangefs."
+  ],
+  "language": "Chinese",
+  "N": 465,
+  "E": 762,
+  "kappa_sounio": -0.143997,
+  "kappa_julia_ref": -0.143997,
+  "kappa_cpu": -0.143997,
+  "kappa_gpu": -0.143997,
+  "abs_delta_vs_julia": 0.0,
+  "sign_match": true,
+  "gpu_eq_cpu_within_1e-9": true,
+  "acceptance_a_sign_and_delta_lt_0.01": true,
+  "acceptance_b_gpu_eq_cpu": true,
+  "verdict_as_specified": "parity ACHIEVED via Sinkhorn under real Slurm CPU+GPU (sign match + |delta|<0.01, gpu==cpu bitwise); but STEP-3 as written requires the STEP-2 EXACT solver, which does not exist -> the 'exact-solver' clause is UNMET."
+}

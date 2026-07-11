@@ -1,0 +1,13 @@
+{
+  "language": "nl",
+  "network_id": "swow_nl",
+  "method": "edge_bootstrap",
+  "B": 1000,
+  "seed": 5651,
+  "solver": "exact_lp_scipy_highs",
+  "kappa_mean": -0.19561948647309899,
+  "ci95_lo": -0.21652722013165596,
+  "ci95_hi": -0.17543110452378102,
+  "ci_entirely_below_zero": true,
+  "wall_clock_seconds": 0.009
+}
