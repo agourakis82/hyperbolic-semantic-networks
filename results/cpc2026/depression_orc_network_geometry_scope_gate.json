@@ -1,0 +1,110 @@
+{
+  "schema": "cpc2026.depression_orc_network_geometry_scope_gate.v1",
+  "generated_at": "2026-05-25T10:24:16.186933+00:00",
+  "git_commit_hash": "8b5c67687a6746e91d2c503a0d129fd206dc7e71",
+  "status": "PASS_EXPLORATORY_NETWORK_GEOMETRY_SCOPE_GATE_ONLY",
+  "requirements": {
+    "all_severity_levels_present": true,
+    "all_epistemic_ci_negative": true,
+    "cross_domain_has_four_depression_networks": true,
+    "pairwise_C_ent_effects_are_small_descriptive_not_marker_validation_level": true,
+    "severity_aggregate_is_not_overstated_as_monotonic": true
+  },
+  "failed_requirements": [],
+  "per_severity": {
+    "kappa_mean_by_severity": {
+      "minimum": -0.1302670206094768,
+      "mild": -0.0742201095130522,
+      "moderate": -0.08714959177070804,
+      "severe": -0.07828260958095001
+    },
+    "C_ent_mean_by_severity": {
+      "minimum": -0.00024502870457652684,
+      "mild": -0.0005371779146347196,
+      "moderate": -0.0006926354547610061,
+      "severe": -0.0005692398474746278
+    },
+    "kappa_sequence_monotonic": false,
+    "C_ent_sequence_monotonic": false
+  },
+  "evidence": {
+    "negative_ci_count": 4,
+    "ci_negative_by_severity": {
+      "minimum": true,
+      "mild": true,
+      "moderate": true,
+      "severe": true
+    },
+    "kappa_95ci_by_severity": {
+      "minimum": [
+        -0.134,
+        -0.126
+      ],
+      "mild": [
+        -0.075,
+        -0.073
+      ],
+      "moderate": [
+        -0.089,
+        -0.085
+      ],
+      "severe": [
+        -0.08,
+        -0.077
+      ]
+    },
+    "graph_size_by_group": {
+      "mild": {
+        "N": 3089,
+        "E": 39840
+      },
+      "minimum": {
+        "N": 1634,
+        "E": 11354
+      },
+      "moderate": {
+        "N": 2238,
+        "E": 24109
+      },
+      "severe": {
+        "N": 2685,
+        "E": 32168
+      }
+    },
+    "bootstrap_protocol": "bootstrap mean ORC over graph nodes, n_boot=10000; source seed recorded in depression_epistemic_orc.json",
+    "null_model_comparison_available": false,
+    "cross_domain_depression_count": 4,
+    "cross_domain_total_network_count": 15,
+    "max_abs_pairwise_C_ent_d": 0.1173886001993897,
+    "small_effect_threshold_for_C_ent_d": 0.2,
+    "kec_curvature_spearman_rho": 0.39999999999999997,
+    "kec_curvature_spearman_p": 0.6,
+    "kec_KEC_spectral_spearman_rho": 0.39999999999999997,
+    "kec_KEC_spectral_spearman_p": 0.6
+  },
+  "accepted_claim": "The current CPC 2026 artifact is an exploratory network-geometry scope gate that authorizes null-model, size-control, and per-subject follow-up experiments only.",
+  "claim_level": "exploratory_network_geometry_scope_gate",
+  "context_of_use": "exploratory research and conference hypothesis generation; not for clinical decision-making",
+  "target_external_cohort": "TBD; no access agreement or validation cohort is claimed",
+  "monotonicity_assumption": "not established; current group means are non-monotonic and require formal trend testing before any ordered-severity claim",
+  "preregistered_margins": "undefined; example planning thresholds such as |r| >= 0.30 for severity association or AUC >= 0.65 for individual-level endpoints require domain justification before confirmatory use",
+  "forbidden_claims": [
+    "biomarker-candidate",
+    "validated clinical biomarker",
+    "diagnostic biomarker",
+    "clinical utility",
+    "patient-level prediction",
+    "treatment selection"
+  ],
+  "boundaries": [
+    "conference_hypothesis_framing_not_clinical_validation",
+    "exploratory_network_geometry_scope_gate_not_biomarker_candidate",
+    "exploratory_network_geometry_scope_gate_not_diagnostic_biomarker",
+    "no_patient_level_prediction_or_treatment_selection_claim",
+    "severity_aggregate_is_non_monotonic_in_current_four_network_evidence",
+    "clinical_context_of_use_not_defined",
+    "requires_independent_external_validation_before_clinical_biomarker_language"
+  ],
+  "claim_doc": "submission/cpc2026/depression_orc_network_geometry_claim.md",
+  "forbidden_hits": []
+}
