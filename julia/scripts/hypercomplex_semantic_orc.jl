@@ -48,7 +48,7 @@ const NETWORKS = [
     NetworkSpec("swow_es", "spanish_edges_FINAL.csv", "association", "Spanish", false),
     NetworkSpec("swow_en", "english_edges_FINAL.csv", "association", "English", false),
     NetworkSpec("swow_zh", "chinese_edges_FINAL.csv", "association", "Chinese", false),
-    NetworkSpec("swow_nl", "dutch_edges.csv", "association", "Dutch", false),
+    NetworkSpec("swow_nl", "dutch_edges_FINAL.csv", "association", "Dutch", false),
     NetworkSpec("conceptnet_en", "conceptnet_en_edges.csv", "knowledge", "English", true),
     NetworkSpec("conceptnet_pt", "conceptnet_pt_edges.csv", "knowledge", "Portuguese", true),
     NetworkSpec("wordnet_en", "wordnet_edges.csv", "taxonomy", "English", true),

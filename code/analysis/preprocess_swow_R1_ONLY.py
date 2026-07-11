@@ -120,10 +120,38 @@ def preprocess_spanish(output_dir: Path):
     logger.info(f"✅ Spanish: {G_undir.number_of_nodes()} nodes, {G_undir.number_of_edges()} edges (target: ~776)")
 
 def preprocess_dutch(output_dir: Path):
-    """Dutch SWOW - R1 only"""
-    logger.warning("[Dutch] ZIP extraction failed, skipping for now. Will process manually later.")
-    logger.info("[Dutch] Target: 500 nodes, ~817 edges")
-    return
+    """Dutch SWOW - R1 only (strength table from SWOW-NL13 R100 export)."""
+    file_path = Path("data/raw/strength.SWOW-NL.R1.csv")
+    if not file_path.exists():
+        logger.error(f"[Dutch] Missing strength file: {file_path}")
+        return
+    df_raw = pd.read_csv(file_path, low_memory=False)
+    if 'R1.Strength' not in df_raw.columns:
+        logger.error("[Dutch] Missing R1.Strength column in strength file")
+        return
+    df = df_raw[df_raw['R1.Strength'] >= 0.06].copy()
+    from collections import Counter
+    words = Counter()
+    words.update(df['cue'].astype(str).str.lower())
+    words.update(df['response'].astype(str).str.lower())
+    top_words = set([w for w, _ in words.most_common(500)])
+    df['cue_clean'] = df['cue'].astype(str).str.lower().str.strip()
+    df['resp_clean'] = df['response'].astype(str).str.lower().str.strip()
+    df_filt = df[
+        (df['cue_clean'].isin(top_words)) &
+        (df['resp_clean'].isin(top_words)) &
+        (df['cue_clean'] != df['resp_clean'])
+    ]
+    edges = df_filt.groupby(['cue_clean', 'resp_clean'])['R1.Strength'].max().reset_index()
+    edges.columns = ['source', 'target', 'weight']
+    output_path = output_dir / "dutch_edges_R1.csv"
+    edges.to_csv(output_path, index=False)
+    logger.info(f"Saved: {output_path}")
+    G = nx.DiGraph()
+    for _, row in edges.iterrows():
+        G.add_edge(row['source'], row['target'], weight=row['weight'])
+    G_undir = G.to_undirected()
+    logger.info(f"✅ Dutch: {G_undir.number_of_nodes()} nodes, {G_undir.number_of_edges()} edges (target: ~817)")
 
 def preprocess_chinese(output_dir: Path):
     """Chinese SWOW - R1 only"""

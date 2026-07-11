@@ -1,5 +1,10 @@
 N=500
 E=527
 max_deg=38
+full_N=500
+full_E=527
+graph=lcc
 kappa_ref=-0.001532
 geometry=EUCLIDEAN/TRANSITION
+ref_N=500
+ref_E=527

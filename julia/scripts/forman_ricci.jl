@@ -76,10 +76,10 @@ end
 
 # Large-scale networks
 LARGE_NETWORKS = [
-    ("swow_en_full", "english_edges.csv"),
-    ("swow_es_full", "spanish_edges.csv"),
-    ("swow_zh_full", "chinese_edges.csv"),
-    ("swow_nl_full", "dutch_edges.csv"),
+    ("swow_en_full", "english_edges_FINAL.csv"),
+    ("swow_es_full", "spanish_edges_FINAL.csv"),
+    ("swow_zh_full", "chinese_edges_FINAL.csv"),
+    ("swow_nl_full", "dutch_edges_FINAL.csv"),
     ("conceptnet_en_full", "conceptnet_en_edges.csv"),
     ("conceptnet_pt_full", "conceptnet_pt_edges.csv"),
     ("wordnet_en_2k", "wordnet_N2000_edges.csv"),

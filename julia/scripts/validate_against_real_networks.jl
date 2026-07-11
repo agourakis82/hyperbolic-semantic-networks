@@ -8,8 +8,8 @@ This script tests the phase transition prediction on 11 real semantic networks:
 - Taxonomy networks (WordNet English, BabelNet Russian, BabelNet Arabic)
 - Clinical depression symptom network
 
-Key test: Dutch SWOW (η = 7.56 > η_c) should be spherical (κ > 0)
-All other networks (η < η_c) should be hyperbolic (κ < 0) if C > 0.10
+Key test: SWOW languages (R1-only FINAL edge lists) should be hyperbolic (κ < 0)
+when η ≪ η_c and clustering C > 0.10
 
 Author: Demetrios C. Agourakis
 Date: 2026-02-26
