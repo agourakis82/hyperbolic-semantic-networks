@@ -1,0 +1,52 @@
+{
+  "producer": "sounio-native-audit",
+  "step": "STEP 5 \u2014 SMT CERTIFICATION (NATIVE SOUNIO SOLVER, not external Z3)",
+  "native_smt_solver_exists": true,
+  "native_smt_is_real_proof": {
+    "file": "stdlib/theorem/smt.sio (DPLL(T), 1366 lines) + examples/erdos/*",
+    "demonstration": "ran examples/erdos/sat_proof_kernel.sio: SOLVER=UNSAT for 'K4 is 3-colorable', DRUP proof emitted (17 lemmas), checker VERIFIED the proof AND REJECTED invalid proofs (non-vacuous). chi(K4)>=4 certified natively.",
+    "capability": "genuine boolean CDCL SAT/UNSAT with DRUP proofs; used for De Grey / unit-distance chromatic-number certificates."
+  },
+  "why_it_CANNOT_certify_OT_exactly": [
+    "DECISIVE: the theory layer is float64 bounded Fourier-Motzkin (smt_lia_feasible casts i64 coeffs to f64, tests bounds < -1e-9). That is NOT exact-rational QF_LRA. An exact kappa<0 certificate over Q is impossible with a 1e-9 float epsilon.",
+    "No exact-rational arithmetic type exists in the language (see STEP 2).",
+    "The LIA API smt_add_lia operates over the boolean variables as 0/1 (pseudo-boolean), so it cannot even express continuous/rational transport mass gamma_ij>=0 with marginal equalities; the OT LP is not encodable as written.",
+    "Secondary (not the main blocker): caps are 1024 vars / 64 constraints / 16 vars-per-LIA-row \u2014 fine for low-degree SWOW edges (median degree ~2.5) but would bind on high-degree hubs."
+  ],
+  "prior_run_supersession": "The earlier results/sounio/swow_smt_*.json reported 407/640 (EN) etc. 'CERTIFIED' with \"solver\": \"z3\" \u2014 that is EXTERNAL Z3 in Python, which STEP 5 explicitly forbids. Those numbers are valid as Z3 results but are NOT native-Sounio certificates and are therefore NOT counted here.",
+  "edge_68_261_exact_rational_encoding": {
+    "note": "The QF_LRA encoding the task asks to print, for EN edge (68,261). Data are the true EN-LCC lazy-walk measures (alpha=1/2). The native Sounio solver CANNOT discharge this (no exact-rational theory); the optimum below is the known value (Z3/HiGHS), shown to document the encoding, not as a native certificate.",
+    "edge": {
+      "u": 68,
+      "v": 261,
+      "d_uv": 1
+    },
+    "variables": "gamma_ij >= 0 (rational) for i in supp(mu), j in supp(nu)",
+    "mu": {
+      "68": "1/2",
+      "18": "1/12",
+      "67": "1/12",
+      "89": "1/12",
+      "90": "1/12",
+      "138": "1/12",
+      "261": "1/12"
+    },
+    "nu": {
+      "261": "1/2",
+      "68": "1/10",
+      "89": "1/10",
+      "306": "1/10",
+      "334": "1/10",
+      "431": "1/10"
+    },
+    "marginal_constraints": "for all i: sum_j gamma_ij = mu_i ;  for all j: sum_i gamma_ij = nu_j",
+    "cost": "c_ij = hop_distance(i,j) (integer)",
+    "hypothesis": "exists feasible gamma with sum_ij c_ij*gamma_ij <= d_uv=1  (SAT => kappa>=0 ; UNSAT => certified kappa<0)",
+    "known_optimum": {
+      "W1": "27/20 = 1.35",
+      "kappa": "1 - 27/20 = -7/20 = -0.35",
+      "verdict_if_exact": "UNSAT (W1=1.35 > 1) => certified kappa<0"
+    }
+  },
+  "acceptance": "FAIL (for the NATIVE-Sounio exact-certification requirement): native SMT is real but float64-LIA, not exact-rational QF_LRA; 0 native OT certificates produced. (External Z3 previously certified 407/640 EN etc., but that is forbidden by STEP 5.)"
+}

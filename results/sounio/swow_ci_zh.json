@@ -1,0 +1,13 @@
+{
+  "language": "zh",
+  "network_id": "swow_zh",
+  "method": "edge_bootstrap",
+  "B": 1000,
+  "seed": 1163,
+  "solver": "exact_lp_scipy_highs",
+  "kappa_mean": -0.14465450668189347,
+  "ci95_lo": -0.16568600130731034,
+  "ci95_hi": -0.12484345381306503,
+  "ci_entirely_below_zero": true,
+  "wall_clock_seconds": 0.009
+}

@@ -1,0 +1,23 @@
+{
+  "language": "zh",
+  "network_id": "swow_zh",
+  "N": 465,
+  "E": 762,
+  "mean_degree": 3.2774,
+  "eta": 0.0231,
+  "alpha": 0.5,
+  "distance": "shortest_path_hops_undirected",
+  "weighting": "unweighted",
+  "graph": "largest_connected_component",
+  "solver": "sinkhorn_lse",
+  "epsilon": 0.01,
+  "max_iter": 1000,
+  "kappa_sounio": -0.143997,
+  "kappa_julia_lp": -0.143997,
+  "kappa_exact_lp_scipy": -0.1439972438249997,
+  "delta_sounio_vs_julia": 0.0,
+  "parity_pass": true,
+  "parity_tol": 0.01,
+  "wall_clock_sounio_gate_total_seconds": 101.895,
+  "seed": null
+}

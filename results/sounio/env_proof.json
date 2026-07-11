@@ -1,0 +1,57 @@
+{
+  "producer": "sounio-native-audit",
+  "step": "STEP 0 — ENVIRONMENT PROOF",
+  "generated_by": "claude-code interactive audit (date 2026-06-03)",
+  "slurm": {
+    "scheduler_present": true,
+    "sinfo_partitions": [
+      {"name": "all", "state": "up", "nodes": 4, "tres": "cpu=20,mem=964692M,node=4,gres/gpu=4"},
+      {"name": "cpu-ops", "state": "up", "nodes": 1, "total_cpus": 64, "nodelist": "cpuops-t560-proxmox"},
+      {"name": "gpu-orangefs", "state": "up", "default": true, "nodes": 2, "total_cpus": 140, "nodelist": "gpuorangefs-5860-proxmox,gpuorangefs-r770-proxmox"}
+    ],
+    "prompt_partition_name_deviation": {
+      "note": "The task prompt names partitions 'cpu' and 'gpu'. THOSE DO NOT EXIST on this cluster. `srun --partition=cpu true` => 'error: invalid partition specified: cpu'. Documented mapping used everywhere downstream:",
+      "cpu": "cpu-ops",
+      "gpu": "gpu-orangefs"
+    }
+  },
+  "cpu_partition": {
+    "name": "cpu-ops",
+    "allocatable": true,
+    "evidence": "srun --partition=cpu-ops hostname => job 2308 allocated, ran on cpuops-t560-proxmox, rc=0; srun --partition=cpu-ops true => rc=0",
+    "cpus_per_node": 64
+  },
+  "gpu_partition": {
+    "name": "gpu-orangefs",
+    "allocatable": true,
+    "evidence": "srun --partition=gpu-orangefs --gres=gpu:1 nvidia-smi -L => 'GPU 0: NVIDIA L4 (UUID: GPU-b3ffdfa8-b165-5562-f443-f40daaeef893)', rc=0; srun --partition=gpu-orangefs --gres=gpu:1 true => rc=0",
+    "gpu_model": "NVIDIA L4",
+    "gpu_count_visible_per_node": 1,
+    "gpu_nodes": ["gpuorangefs-5860-proxmox", "gpuorangefs-r770-proxmox"],
+    "nvidia_smi_on_control_node": false
+  },
+  "filesystem_topology": {
+    "shared_fs_between_control_and_compute": false,
+    "critical_finding": "The login/control node (this container) mounts /workspace on /dev/rbd4 (Ceph RBD). The compute nodes DO NOT see /workspace at all (srun chdir to /workspace/* fails -> falls back to /tmp). The compute nodes mount /orangefs/training (OrangeFS, pvfs2 tcp://10.100.100.2:3334) which the control node does NOT see. There is NO common shared path.",
+    "staging_strategy": "sbcast (available at /usr/bin/sbcast) is REQUIRED to stage the souc binary + .sio sources + data CSVs onto compute-node local storage; results are returned to the control node via captured job stdout (sgather is not installed).",
+    "control_node_workspace_mount": "/dev/rbd4 /workspace ext4",
+    "compute_node_shared_mount": "tcp://10.100.100.2:3334/orangefs_lab_2n /orangefs/training pvfs2"
+  },
+  "toolchain": {
+    "souc_binary": "/workspace/sounio/bin/souc",
+    "souc_kind": "mini_native (usage: souc <source.sio> <output>; compiles .sio to a native x86_64 ELF). NOTE: the 243MB artifacts/omega/souc-bin/souc-linux-x86_64 is a Rust INTERPRETER (crates/souc/src/interp/eval.rs) and panics on intended u64 wraparound in lcg_step ('attempt to multiply with overflow') — not usable for this numeric path. The native bin/souc is the path A3 used historically.",
+    "souc_sha256": "1223f1168ac191495e122c8987ce0e535e63550b85a9cf290259e289a95455cf",
+    "sounio_repo_commit": "89452af42195d9c2a9bc7c40dccd0b22efb33952",
+    "hyperbolic_repo_commit": "b9a6a6f3f73363eadb432552a23677eec0f774ce"
+  },
+  "acceptance": {
+    "requirement": ">=1 CPU partition AND >=1 GPU partition ALLOCATABLE (srun true rc=0 on each)",
+    "cpu_srun_true_rc": 0,
+    "gpu_srun_true_rc": 0,
+    "verdict": "PASS",
+    "caveats": [
+      "Partition names deviate from prompt (cpu->cpu-ops, gpu->gpu-orangefs); documented, not silently substituted.",
+      "STEP 0 PASS proves the partitions are allocatable and the GPU is an NVIDIA L4. It does NOT by itself prove native-.sio numeric execution works under Slurm — that requires sbcast staging (see filesystem_topology) and is validated separately."
+    ]
+  }
+}

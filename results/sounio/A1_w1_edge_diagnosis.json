@@ -1,0 +1,14 @@
+{
+  "u": 68,
+  "v": 261,
+  "d_uv": 1,
+  "support_size": 10,
+  "W1_exact_lp": 1.3499999999999999,
+  "W1_sinkhorn_primal_eps0.5_iter80": 1.3839404517129008,
+  "W1_sinkhorn_lse_eps0.01_iter1000": 1.349999999999995,
+  "kappa_exact_lp": -0.34999999999999987,
+  "kappa_primal_eps0.5": -0.3839404517129008,
+  "kappa_lse_eps0.01": -0.349999999999995,
+  "edge_name": "swow_en edge (68,261) \u2014 audit named edge (docs/research)",
+  "diagnosis": "Primal Sinkhorn at eps=0.5 underestimates W1 vs exact LP (W1_primal=1.384 vs W1_LP=1.350), driving kappa toward 0 (kappa_primal=-0.384 vs kappa_LP=-0.350). Log-domain LSE at eps=0.01 matches LP on this edge (W1_LSE=1.350, kappa=-0.350)."
+}

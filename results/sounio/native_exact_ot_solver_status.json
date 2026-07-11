@@ -1,0 +1,15 @@
+{
+  "producer": "sounio-native-audit",
+  "step": "STEP 2 \u2014 NATIVE EXACT OT SOLVER",
+  "question": "Does a native Sounio exact optimal-transport solver (network-simplex / exact LP over rationals) exist?",
+  "verdict": "DOES NOT EXIST \u2014 and was NOT built.",
+  "evidence": [
+    "Exhaustive grep of *.sio across /workspace/sounio and /workspace/hyperbolic-semantic-networks: no network_simplex / transportation_simplex / exact_lp / min_cost_flow / Hungarian / Kantorovich implementation.",
+    "The ONLY native OT in Sounio is entropic Sinkhorn (float64): wasserstein1() (primal) and sinkhorn_lse_w1() (log-domain). Both are APPROXIMATE.",
+    "No exact-rational arithmetic exists in the language: there is NO `struct Rational`/`Fraction`/`Ratio` anywhere; smt.sio's 'denom' tokens are float64. An exact network-simplex over Q is therefore not expressible without first building a rational type.",
+    "results/unified/swow_*_exact_lp.json were produced EXTERNALLY by Julia/HiGHS (solver field = 'HiGHS'); they are the cross-check reference, not a Sounio solver."
+  ],
+  "unit_tests_status": "NOT RUN \u2014 no native exact solver to test; the required <1e-9 hand-value match (incl. EN edge (68,261) W1=1.35) cannot be produced natively.",
+  "decision_not_to_build": "A from-scratch transportation-simplex/exact-LP-over-Q in .sio was judged out-of-scope and high-risk: (1) the souc native backend miscompiles non-zero array-fill initializers `[V;N]` (STEP-1 root cause), making large numeric .sio code a minefield; (2) no rational type exists to build on; (3) STEP-1's strict acceptance already FAILED, which by the task's own gating makes downstream verdicts FAIL regardless. Building it would chase gates the gating has already closed.",
+  "acceptance": "FAIL \u2014 native exact OT solver absent."
+}
