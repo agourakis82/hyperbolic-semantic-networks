@@ -3,7 +3,10 @@
 # Network analysis
 networkx>=3.0
 igraph>=0.10.0
-graph-tool>=2.45  # Optional, for advanced algorithms
+# graph-tool is NOT pip-installable (C++/Boost build; install via conda:
+# `conda install -c conda-forge graph-tool`). Kept optional: the pipeline
+# runs without it.
+# graph-tool>=2.45  # Optional, for advanced algorithms — conda only
 
 # Curvature computation
 GraphRicciCurvature>=0.5.3
