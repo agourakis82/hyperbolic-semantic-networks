@@ -63,9 +63,25 @@ pub fn sample_triadic_rewire(
             && !new_graph.contains_edge(a, c)
             && !new_graph.contains_edge(b, d)
         {
-            // Try the swap
-            new_graph.remove_edge(edges[edge1_idx]);
-            new_graph.remove_edge(edges[edge2_idx]);
+            // Remove by endpoints, not by stored indices: petgraph uses
+            // swap-remove, so any EdgeIndex captured before a removal may
+            // afterwards point to a different edge or be out of bounds.
+            // Re-find the second edge only after the first removal.
+            let e1 = match new_graph.find_edge(a, b) {
+                Some(e) => e,
+                None => continue,
+            };
+            new_graph.remove_edge(e1);
+            let e2 = match new_graph.find_edge(c, d) {
+                Some(e) => e,
+                None => {
+                    // Should not happen in a simple graph; restore (a,b)
+                    // to keep the edge count invariant.
+                    new_graph.add_edge(a, b, ());
+                    continue;
+                }
+            };
+            new_graph.remove_edge(e2);
             new_graph.add_edge(a, c, ());
             new_graph.add_edge(b, d, ());
 

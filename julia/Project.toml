@@ -1,4 +1,5 @@
 name = "HyperbolicSemanticNetworks"
+uuid = "b24a8a26-da79-4175-b528-b833efa45dd2"
 version = "0.1.0"
 
 [deps]

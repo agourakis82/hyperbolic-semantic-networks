@@ -36,6 +36,18 @@ pub fn sinkhorn_iteration_with_convergence(
     max_iterations: usize,
     convergence_threshold: f64,
 ) -> Vec<f64> {
+    // Clamp zero marginals and renormalize. With exact zeros, K entries
+    // underflow below the division guard and the scaling vectors collapse
+    // to a degenerate fixed point whose transport plan is the zero matrix
+    // (e.g. mu = [1, 0], nu = [0, 1] returned W1 = 0.0).
+    let floor = 1e-12;
+    let mu_clamped: Vec<f64> = mu.iter().map(|&x| x.max(floor)).collect();
+    let nu_clamped: Vec<f64> = nu.iter().map(|&x| x.max(floor)).collect();
+    let mu_sum: f64 = mu_clamped.iter().sum();
+    let nu_sum: f64 = nu_clamped.iter().sum();
+    let mu: Vec<f64> = mu_clamped.iter().map(|&x| x / mu_sum).collect();
+    let nu: Vec<f64> = nu_clamped.iter().map(|&x| x / nu_sum).collect();
+
     // Initialize: K = exp(-C / epsilon)
     let mut k = vec![0.0; n * n];
     for i in 0..n {
@@ -60,7 +72,7 @@ pub fn sinkhorn_iteration_with_convergence(
             for j in 0..n {
                 kv_sum += k[i * n + j] * v[j];
             }
-            if kv_sum > 1e-10 {
+            if kv_sum > 0.0 {
                 u[i] = mu[i] / kv_sum;
             }
         }
@@ -71,7 +83,7 @@ pub fn sinkhorn_iteration_with_convergence(
             for i in 0..n {
                 ktu_sum += k[i * n + j] * u[i];
             }
-            if ktu_sum > 1e-10 {
+            if ktu_sum > 0.0 {
                 v[j] = nu[j] / ktu_sum;
             }
         }

@@ -40,9 +40,35 @@ class TestCurvatureComputation:
         # Triangle should have positive curvature
         assert mean_curvature > 0
 
-    def test_negative_curvature_tree(self):
-        """Test that tree structures have negative curvature."""
-        # Star graph (tree structure)
+    def test_negative_curvature_bridge(self):
+        """Test that bridge edges between clusters have negative curvature.
+
+        Canonical example: the bridge of a dumbbell graph (two triangles
+        joined by a single edge) has kappa = -1/3 with alpha=0.5.
+        Note: trees are NOT generically negative under Ollivier curvature
+        with idleness — a star with alpha=0.5 has mean kappa = +0.2,
+        because each leaf's measure keeps mass on itself.
+        """
+        G = nx.Graph()
+        G.add_edges_from([(0, 1), (1, 2), (2, 0),
+                          (3, 4), (4, 5), (5, 3),
+                          (2, 3)])  # bridge
+
+        orc = OllivierRicci(G, alpha=0.5, verbose="ERROR")
+        orc.compute_ricci_curvature()
+        G_orc = orc.G
+
+        bridge_kappa = G_orc[2][3]['ricciCurvature']
+        assert bridge_kappa < 0
+        assert abs(bridge_kappa - (-1.0 / 3.0)) < 1e-6
+
+    def test_star_curvature_exact_value(self):
+        """Regression test: star graph with alpha=0.5 has mean kappa = +0.2.
+
+        The leaf measure mu_y = 0.5*d_leaf + 0.5*d_center keeps 0.1 of its
+        mass on the leaf itself (distance 0); the remaining 0.4 travels
+        distance 2, giving W1 = 0.8 and kappa = +0.2 per edge.
+        """
         G = nx.star_graph(5)
 
         orc = OllivierRicci(G, alpha=0.5, verbose="ERROR")
@@ -52,12 +78,16 @@ class TestCurvatureComputation:
         curvatures = [G_orc[u][v]['ricciCurvature'] for u, v in G_orc.edges()]
         mean_curvature = np.mean(curvatures)
 
-        # Tree should have negative curvature
-        assert mean_curvature < 0
+        assert abs(mean_curvature - 0.2) < 1e-6
 
     def test_alpha_parameter_effect(self):
-        """Test that alpha parameter affects curvature."""
-        G = nx.cycle_graph(6)
+        """Test that alpha parameter affects curvature.
+
+        Uses a star: mean kappa is +0.2 at alpha=0.1 and +0.04 at
+        alpha=0.9. A cycle is unsuitable here — it has kappa = 0 for
+        every alpha.
+        """
+        G = nx.star_graph(5)
 
         orc1 = OllivierRicci(G, alpha=0.1, verbose="ERROR")
         orc1.compute_ricci_curvature()
