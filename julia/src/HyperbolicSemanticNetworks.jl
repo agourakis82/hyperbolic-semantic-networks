@@ -16,7 +16,7 @@ export
     load_swow, load_conceptnet, load_taxonomy,
     
     # Curvature
-    compute_curvature, compute_graph_curvature,
+    compute_curvature, compute_graph_curvature, build_probability_measure,
     
     # Analysis
     generate_null_models, bootstrap_analysis, ricci_flow,

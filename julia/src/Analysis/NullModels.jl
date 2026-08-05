@@ -80,6 +80,31 @@ end
 Sample a single configuration model network.
 """
 function sample_configuration_model(degrees::Vector{Int})::SimpleGraph
+    MAX_ATTEMPTS = 200
+
+    for _ in 1:MAX_ATTEMPTS
+        G = try_simple_pairing(degrees)
+        if G !== nothing
+            return G
+        end
+    end
+
+    # Fallback: sequence not realized as a simple graph within the
+    # attempt budget. Return the node set without edges rather than a
+    # graph that silently violates the degree sequence.
+    return SimpleGraph(length(degrees))
+end
+
+"""
+One attempt at pairing stubs into a simple graph.
+
+The naive configuration model rejects self-loops and duplicate edges,
+which silently breaks the degree sequence. Here any collision aborts
+the attempt so the caller can reshuffle and retry, preserving the
+degree sequence exactly whenever it is graphical enough to be realized
+within the attempt budget.
+"""
+function try_simple_pairing(degrees::Vector{Int})::Union{SimpleGraph, Nothing}
     # Create stubs (half-edges)
     stubs = Int[]
     for (node_id, deg) in enumerate(degrees)
@@ -87,25 +112,29 @@ function sample_configuration_model(degrees::Vector{Int})::SimpleGraph
             push!(stubs, node_id)
         end
     end
-    
+
+    # Odd number of stubs can never pair
+    if isodd(length(stubs))
+        return nothing
+    end
+
     # Shuffle stubs
     shuffle!(stubs)
-    
+
     # Create graph
     n = length(degrees)
     G = SimpleGraph(n)
-    
-    # Pair stubs to form edges
+
+    # Pair stubs to form edges; abort on self-loop or duplicate
     for i in 1:2:length(stubs)
-        if i + 1 <= length(stubs)
-            u = stubs[i]
-            v = stubs[i + 1]
-            if u != v && !has_edge(G, u, v)
-                add_edge!(G, u, v)
-            end
+        u = stubs[i]
+        v = stubs[i + 1]
+        if u == v || has_edge(G, u, v)
+            return nothing
         end
+        add_edge!(G, u, v)
     end
-    
+
     return G
 end
 

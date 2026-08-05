@@ -52,12 +52,15 @@ function wasserstein1_rust(
     epsilon::Float64 = 0.01,
     max_iterations::Int = 100
 )::Float64
-    # Initialize library if not already done
-    if isempty(LIB_CURVATURE) || (LIB_CURVATURE[] != "" && !isfile(LIB_CURVATURE[]))
+    # Initialize library if not already done.
+    # LIB_CURVATURE is an uninitialized Ref until init_rust_library()
+    # finds a compiled library — accessing it before assignment throws
+    # UndefRefError, so guard with isassigned().
+    if !isassigned(LIB_CURVATURE) || !isfile(LIB_CURVATURE[])
         init_rust_library()
     end
     
-    if isempty(LIB_CURVATURE) || !isfile(LIB_CURVATURE[])
+    if !isassigned(LIB_CURVATURE) || !isfile(LIB_CURVATURE[])
         # Fallback to Julia implementation
         return wasserstein1_julia(mu, nu, cost_matrix, epsilon, max_iterations)
     end
