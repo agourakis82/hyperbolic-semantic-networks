@@ -65,9 +65,10 @@ end
     
     result = ricci_flow(G, max_iterations=5, alpha=0.5)
     
-    @test haskey(result, :trajectory)
-    @test haskey(result, :converged)
-    @test haskey(result, :iterations)
+    # ricci_flow returns a RicciFlowResult struct, not a Dict
+    @test result.trajectory isa Vector
+    @test result.converged isa Bool
+    @test result.iterations isa Int
     @test length(result.trajectory) > 0
     @test result.iterations >= 0
 end
