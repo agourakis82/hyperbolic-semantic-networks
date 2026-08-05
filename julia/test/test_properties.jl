@@ -90,9 +90,9 @@ using HyperbolicSemanticNetworks
         @test 0 <= result.iterations <= 10
         @test length(result.trajectory) > 0
         
-        # Trajectory should be monotonic in some sense (simplified check)
+        # Trajectory should be monotonic in time (records carry key "t")
         if length(result.trajectory) > 1
-            @test result.trajectory[1]["iteration"] < result.trajectory[end]["iteration"]
+            @test result.trajectory[1]["t"] < result.trajectory[end]["t"]
         end
     end
     
