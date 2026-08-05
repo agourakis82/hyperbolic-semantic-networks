@@ -6,6 +6,7 @@ Tests complete workflows from data loading to analysis.
 
 using Test
 using Graphs
+using Statistics
 using HyperbolicSemanticNetworks
 
 @testset "Full Pipeline Integration" begin

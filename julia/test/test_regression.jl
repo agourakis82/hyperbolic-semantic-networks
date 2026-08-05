@@ -11,7 +11,7 @@ using HyperbolicSemanticNetworks
 
 @testset "Regression Tests - Python Equivalence" begin
     # Tolerance for numerical comparisons
-    const TOL = 1e-4  # Relaxed for initial testing
+    TOL = 1e-4  # Relaxed for initial testing
     
     @testset "Curvature Computation" begin
         # Create test graph (same as Python baseline)
