@@ -19,7 +19,7 @@ export
     compute_curvature, compute_graph_curvature, build_probability_measure,
     
     # Analysis
-    generate_null_models, bootstrap_analysis, ricci_flow,
+    generate_null_models, bootstrap_analysis, ricci_flow, compare_with_nulls,
     
     # Visualization
     plot_phase_diagram, plot_curvature_distribution,
