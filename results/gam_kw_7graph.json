@@ -1,0 +1,42 @@
+{
+  "n_graphs": 7,
+  "set": "4 SWOW (ES/EN/ZH/NL) + 3 taxonomy (WordNet EN, BabelNet RU/AR); ConceptNet removed",
+  "kw_family": {
+    "H": 1.1143,
+    "p": 0.5728,
+    "sizes": {
+      "Indo-European": 5,
+      "Semitic": 1,
+      "Sino-Tibetan": 1
+    },
+    "conclusion": "no significant effect of language family on mean curvature (p>0.05)",
+    "caveat": "network-level KW; group sizes 5/1/1 -> very low power. Original manuscript H=1.83 not exactly reproducible (this method gives H=2.08 on the 8-graph set); the qualitative 'no family effect' holds but the statistic is fragile at this N."
+  },
+  "kw_category": {
+    "H": 4.5,
+    "p": 0.0339,
+    "note": "Association vs Taxonomy is the structurally meaningful contrast; reported as the robust alternative."
+  },
+  "gam": {
+    "model": "LinearGAM s(clustering,n_splines=5), lam via gridsearch",
+    "n": 7,
+    "explained_deviance": 0.795,
+    "kappa_min_at_C": 0.0242,
+    "sweet_spot_Cfit_lt_-0.05": [
+      0.0018,
+      0.0456
+    ],
+    "caveat": "N=7 data points -> the smooth is descriptive, not inferential; treat the sweet-spot bounds as indicative. Weighted-C sweet spot is NARROWER than the manuscript's [0.023,0.147] (likely a different C scale / ConceptNet-extended lower bound).",
+    "best_lam": 0.026,
+    "explained_deviance_range_over_lam": [
+      0.18,
+      0.68
+    ],
+    "vs_manuscript": "Manuscript reported R2_adj=0.78 + sweet spot C in [0.023,0.147] on the 8-graph set. On 7 graphs (ConceptNet removed, weighted C) the fit WEAKENS to explained_deviance ~0.79 and is unstable (range 0.18-0.68 across lam). Removing ConceptNet (which sat at C=0.014-0.017 and filled the valley's lower wall) is the main cause. The clean [0.023,0.147] does NOT reproduce.",
+    "interpretation": "explained_deviance=0.795 is reached ONLY at the gridsearch best_lam=0.026 (near-interpolation of 7 points = overfitting). With meaningful smoothing (lam 0.1-30) it falls to 0.18-0.68. At N=7 the '0.78' is not a robust fit \u2014 it is an overfitting artifact. Sweet-spot upper bound 0.147 does NOT reproduce (no network has weighted C>0.046)."
+  },
+  "sigma_k_secondary_moderator": {
+    "status": "NOT re-fit",
+    "reason": "The manuscript's sigma_k interaction (p=0.004) was driven largely by ConceptNet (sigma_k 5.6-7.3). Without it, the 4 SWOW have sigma_k 1.7-2.6 while taxonomies are 2.6-4.1 (HIGHER) \u2014 the 'elevated sigma_k drives hyperbolicity' direction does not hold in the 7-graph set. An interaction test at N=7 is not defensible; this claim should be dropped or re-examined, not re-fit."
+  }
+}

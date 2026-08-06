@@ -22,7 +22,7 @@ training = [
     (id="swow_es",          η=0.017, C=0.136, κ=-0.068,  geom="Hyperbolic"),
     (id="swow_en",          η=0.020, C=0.128, κ=-0.137,  geom="Hyperbolic"),
     (id="swow_zh",          η=0.023, C=0.173, κ=-0.144,  geom="Hyperbolic"),
-    (id="swow_nl",          η=7.558, C=0.238, κ=+0.099,  geom="Spherical"),
+    (id="swow_nl",          η=0.028, C=0.136, κ=-0.196,  geom="Hyperbolic"),
     (id="conceptnet_en",    η=0.223, C=0.108, κ=-0.233,  geom="Hyperbolic"),
     (id="conceptnet_pt",    η=0.085, C=0.106, κ=-0.236,  geom="Hyperbolic"),
     (id="wordnet_en",       η=0.009, C=0.013, κ=-0.002,  geom="Euclidean"),

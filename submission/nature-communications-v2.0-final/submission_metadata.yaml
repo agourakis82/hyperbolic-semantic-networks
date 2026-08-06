@@ -23,16 +23,17 @@ abstract: |
   geometric boundary conditions that support negative curvature remain unclear.
   We analyzed four Small World of Words (SWOW) association networks (Spanish,
   English, Chinese, Dutch) and three taxonomy-based lexical graphs (English
-  WordNet, Spanish WordNet, Portuguese BabelNet) using Ollivier–Ricci curvature.
-  Association graphs occupy a moderate clustering regime (C ≈ 0.02–0.15) where
-  mean curvature is strongly negative (κ̄ = -0.17 to -0.24), whereas taxonomies
+  WordNet, Russian BabelNet, Arabic BabelNet) using Ollivier–Ricci curvature.
+  Association graphs occupy a moderate clustering regime where
+  mean curvature is strongly negative (κ̄ = -0.16 to -0.27), whereas taxonomies
   with minimal clustering are near Euclidean (κ̄ ≈ 0). Configuration-model nulls
   (M = 1000) that destroy clustering become markedly more hyperbolic
   (Δκ = +0.17 to +0.22, pMC < 0.001), and triadic-rewire nulls preserving triangles
   eliminate this gap, confirming clustering as the causal moderator. Discrete
   Ricci flow reduces clustering by 79–86 % yet fails to fully flatten real
   semantic graphs, revealing functional resistance to geometric smoothing. These
-  results define a “hyperbolic sweet spot” for semantic cognition and generate
+  results define construction-dependent boundary conditions for hyperbolic
+  geometry in semantic cognition and generate
   falsifiable predictions for clinical speech networks that deviate toward
   spherical or Euclidean regimes.
 
@@ -79,7 +80,7 @@ ai_disclosure: |
   All scientific design decisions, analyses, and interpretations are original contributions of the author.
 
 word_count:
-  main_text: 4700
+  main_text: 3991
   abstract: 180
   references: 64
 

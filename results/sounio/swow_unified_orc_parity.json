@@ -1,0 +1,60 @@
+{
+  "experiment": "swow_unified_orc_sounio",
+  "solver": "sinkhorn_lse",
+  "alpha": 0.5,
+  "epsilon": 0.01,
+  "max_iter": 1000,
+  "graph": "largest_connected_component",
+  "parity_tol": 0.0005,
+  "reference_dir": "results/unified",
+  "networks": {
+    "swow_en": {
+      "N": 438,
+      "E": 640,
+      "kappa_mean_sounio": -0.137147,
+      "kappa_mean_ref_lp": -0.137147,
+      "delta": 0.0,
+      "ref_N": 438,
+      "ref_E": 640,
+      "N_match": true,
+      "E_match": true,
+      "parity_ok": true
+    },
+    "swow_es": {
+      "N": 422,
+      "E": 571,
+      "kappa_mean_sounio": -0.068341,
+      "kappa_mean_ref_lp": -0.068341,
+      "delta": 0.0,
+      "ref_N": 422,
+      "ref_E": 571,
+      "N_match": true,
+      "E_match": true,
+      "parity_ok": true
+    },
+    "swow_zh": {
+      "N": 465,
+      "E": 762,
+      "kappa_mean_sounio": -0.143997,
+      "kappa_mean_ref_lp": -0.143997,
+      "delta": 0.0,
+      "ref_N": 465,
+      "ref_E": 762,
+      "N_match": true,
+      "E_match": true,
+      "parity_ok": true
+    },
+    "swow_nl": {
+      "N": 465,
+      "E": 835,
+      "kappa_mean_sounio": -0.196019,
+      "kappa_mean_ref_lp": -0.196029,
+      "delta": 9e-06,
+      "ref_N": 465,
+      "ref_E": 835,
+      "N_match": true,
+      "E_match": true,
+      "parity_ok": true
+    }
+  }
+}

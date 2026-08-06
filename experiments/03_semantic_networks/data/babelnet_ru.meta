@@ -1,5 +1,10 @@
 N=493
 E=522
 max_deg=11
+full_N=493
+full_E=522
+graph=lcc
 kappa_ref=-0.029929
 geometry=EUCLIDEAN/TRANSITION
+ref_N=493
+ref_E=522

@@ -9,21 +9,21 @@
 
 Dear Editors of *Nature Communications*,
 
-I am pleased to submit the manuscript entitled **"Boundary Conditions for Hyperbolic Geometry in Semantic Networks: Clustering-Curvature Trade-offs Revealed by Ollivier-Ricci Analysis"**, which identifies the quantitative balance of clustering and degree heterogeneity that gives rise to hyperbolic geometry in semantic association networks across eight semantic graphs spanning three language families.
+I am pleased to submit the manuscript entitled **"Boundary Conditions for Hyperbolic Geometry in Semantic Networks: Construction-Dependent Curvature Revealed by Ollivier-Ricci Analysis"**, which identifies the quantitative balance of clustering and degree heterogeneity that gives rise to hyperbolic geometry in semantic association networks across seven semantic graphs spanning three language families.
 
 ## **Why This Work Matters**
 
-Semantic networks—cognitive structures representing word associations—are frequently assumed to be hyperbolic, yet the geometric boundary conditions that support negative curvature have remained unclear. Using **Ollivier–Ricci curvature** on directed weighted graphs (SWOW, ConceptNet, and taxonomy data) and matching **configuration and triadic-rewire null models**, we demonstrate that hyperbolicity is **not universal** but confined to a **moderate-clustering regime (C ≈ 0.02–0.15)**. This "hyperbolic sweet spot" unites linguistic, cognitive, and clinical evidence: association networks of healthy cognition occupy this region, whereas pathological language (schizophrenia, depression, mania) deviates toward Euclidean or spherical extremes.
+Semantic networks—cognitive structures representing word associations—are frequently assumed to be hyperbolic, yet the geometric boundary conditions that support negative curvature have remained unclear. Using **Ollivier–Ricci curvature** on directed weighted graphs (SWOW and taxonomy data) and matching **configuration and triadic-rewire null models**, we demonstrate that hyperbolicity is **not universal** but confined to a **moderate-clustering regime**. This construction-dependent hyperbolicity connects linguistic and cognitive evidence—association networks of healthy cognition occupy this region—and motivates a testable clinical hypothesis: that pathological language (schizophrenia, depression, mania) may deviate toward Euclidean or spherical extremes—a prediction we do not evaluate here.
 
 ## **Novel Contributions**
 
-**First, boundary conditions for hyperbolic geometry.** We show that semantic networks exhibit negative curvature only when topology satisfies specific balance conditions: moderate clustering (C ≈ 0.02–0.15), heavy-tailed degree distributions (broad-scale rather than strictly scale-free), and a mixture of primary and context-driven associations. This structural balance yields an operational criterion for future analyses.
+**First, boundary conditions for hyperbolic geometry.** We show that semantic networks exhibit negative curvature only when topology satisfies specific balance conditions: moderate clustering, heavy-tailed degree distributions (broad-scale rather than strictly scale-free), and a mixture of primary and context-driven associations. This structural balance yields an operational criterion for future analyses.
 
 **Second, causal inference via structural null models.** Configuration model nulls (M = 1000 replicates) that preserved degree distributions but destroyed clustering proved significantly more hyperbolic than real networks (Δκ = +0.17 to +0.22, p_MC < 0.001), confirming that local clustering moderates underlying geometry. Triadic-rewire nulls (M = 1000, Spanish and English) preserved triangle counts and eliminated the curvature shift, isolating clustering as the causal moderator.
 
 **Third, functional resistance to geometric smoothing.** Discrete Ricci flow experiments demonstrated that forcing semantic graphs toward curvature equilibrium reduces clustering by 79–86% and removes negative curvature, yet real networks resist full flattening. This "resistance to Ricci flow" suggests functional optimization (efficient navigation, inferential cost) versus geometric smoothing.
 
-**Fourth, cross-linguistic and cross-domain replication.** Our results establish consistency across eight semantic graphs (three SWOW association networks, two ConceptNet knowledge graphs, and three taxonomy-based lexicons) spanning Indo-European, Sino-Tibetan, and Semitic language families. This cross-linguistic scope strengthens generalizability while highlighting important structural variation.
+**Fourth, cross-linguistic and cross-domain replication.** Our results establish consistency across seven semantic graphs (four SWOW association networks and three taxonomy-based lexicons) spanning Indo-European, Sino-Tibetan, and Semitic language families. This cross-linguistic scope strengthens generalizability while highlighting important structural variation.
 
 ## **Fit with Nature Communications**
 
@@ -31,7 +31,7 @@ This manuscript aligns perfectly with *Nature Communications*' scope, combining 
 
 ## **Transparency and Reproducibility**
 
-All data come from publicly available sources (SWOW at https://smallworldofwords.org, ConceptNet, WordNet, BabelNet), and complete analysis code is available on GitHub with DOI (10.5281/zenodo.17531773). We provide comprehensive sensitivity analyses, bootstrap confidence intervals, and detailed methodological transparency throughout. The manuscript includes explicit computational limitations (triadic-rewire nulls completed for 2/8 networks due to computational cost) and power analysis recommendations.
+All data come from publicly available sources (SWOW at https://smallworldofwords.org, WordNet, BabelNet), and complete analysis code is available on GitHub with DOI (10.5281/zenodo.17531773). We provide comprehensive sensitivity analyses, bootstrap confidence intervals, and detailed methodological transparency throughout. The manuscript includes explicit computational limitations (triadic-rewire nulls completed for 2/7 networks due to computational cost) and power analysis recommendations.
 
 ## **Significance**
 
@@ -72,7 +72,7 @@ I declare no competing interests. This research received no specific funding.
 
 ## **Word Count**
 
-Main text: ~4,224 words (within journal guidelines of 3,000–4,000 words)  
+Main text: 3991 words (within Nature Communications' 3,000–4,000 guideline)  
 Abstract: ~180 words (within 200-word limit)
 
 ---

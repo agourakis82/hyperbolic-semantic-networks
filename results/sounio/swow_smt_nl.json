@@ -1,0 +1,183 @@
+{
+  "language": "nl",
+  "network_id": "swow_nl",
+  "theory": "QF_LRA",
+  "solver": "z3",
+  "timeout_ms_per_edge": 5000,
+  "E": 835,
+  "edges_attempted": 835,
+  "UNSAT": 595,
+  "SAT": 240,
+  "UNKNOWN": 0,
+  "coverage_note": "Certified 595 of 835 edges with kappa<0 (Z3 min-cost > d_uv). 240 edges have kappa>=0 (SAT). 0 UNKNOWN \u2014 not folded into certified.",
+  "representative_edge_encoding": {
+    "verdict": "UNSAT",
+    "constraints": {
+      "theory": "QF_LRA (exact rationals via RealVal p/q)",
+      "solver": "z3 Optimize (minimize transport cost)",
+      "edge": {
+        "u": 0,
+        "v": 1,
+        "d_uv": 1
+      },
+      "support_nodes": [
+        0,
+        1,
+        2,
+        59,
+        92,
+        93,
+        158,
+        328,
+        376,
+        406,
+        443
+      ],
+      "mu": {
+        "0": "1/2",
+        "1": "1/4",
+        "2": "1/4"
+      },
+      "nu": {
+        "1": "1/2",
+        "0": "1/20",
+        "2": "1/20",
+        "59": "1/20",
+        "92": "1/20",
+        "93": "1/20",
+        "158": "1/20",
+        "328": "1/20",
+        "376": "1/20",
+        "406": "1/20",
+        "443": "1/20"
+      },
+      "marginal_constraints": "sum_j gamma_ij = mu_i; sum_i gamma_ij = nu_j; gamma_ij >= 0",
+      "objective": "minimize sum gamma_ij * d(i,j)",
+      "hyperbolic_certificate": "min_cost > d_uv  <=>  kappa = 1 - min_cost/d_uv < 0",
+      "min_cost_observed": 1.05
+    }
+  },
+  "sample_edges": [
+    {
+      "u": 0,
+      "v": 1,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0195
+    },
+    {
+      "u": 0,
+      "v": 2,
+      "verdict": "SAT",
+      "wall_seconds": 0.0034
+    },
+    {
+      "u": 1,
+      "v": 2,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.023
+    },
+    {
+      "u": 1,
+      "v": 59,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0385
+    },
+    {
+      "u": 1,
+      "v": 92,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0331
+    },
+    {
+      "u": 1,
+      "v": 93,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0238
+    },
+    {
+      "u": 1,
+      "v": 158,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0277
+    },
+    {
+      "u": 1,
+      "v": 328,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0234
+    },
+    {
+      "u": 1,
+      "v": 376,
+      "verdict": "SAT",
+      "wall_seconds": 0.0194
+    },
+    {
+      "u": 1,
+      "v": 406,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0234
+    },
+    {
+      "u": 1,
+      "v": 443,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0321
+    },
+    {
+      "u": 2,
+      "v": 268,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0165
+    },
+    {
+      "u": 3,
+      "v": 4,
+      "verdict": "SAT",
+      "wall_seconds": 0.0048
+    },
+    {
+      "u": 3,
+      "v": 5,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0134
+    },
+    {
+      "u": 3,
+      "v": 6,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0088
+    },
+    {
+      "u": 3,
+      "v": 73,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0136
+    },
+    {
+      "u": 5,
+      "v": 42,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.02
+    },
+    {
+      "u": 5,
+      "v": 45,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0128
+    },
+    {
+      "u": 5,
+      "v": 160,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.013
+    },
+    {
+      "u": 5,
+      "v": 246,
+      "verdict": "UNSAT",
+      "wall_seconds": 0.0195
+    }
+  ],
+  "wall_clock_seconds": 20.705
+}

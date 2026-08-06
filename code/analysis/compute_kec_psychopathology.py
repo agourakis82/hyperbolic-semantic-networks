@@ -75,9 +75,10 @@ print("-"*70)
 networks = {}
 
 languages = {
-    'spanish': 'data/processed/spanish_edges.csv',
-    'english': 'data/processed/english_edges.csv',
-    'chinese': 'data/processed/chinese_edges.csv'
+    'spanish': 'data/processed/spanish_edges_FINAL.csv',
+    'english': 'data/processed/english_edges_FINAL.csv',
+    'chinese': 'data/processed/chinese_edges_FINAL.csv',
+    'dutch': 'data/processed/dutch_edges_FINAL.csv',
 }
 
 for lang, edge_file in languages.items():

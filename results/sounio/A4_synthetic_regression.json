@@ -1,0 +1,17 @@
+{
+  "N": 100,
+  "k": 3,
+  "seed": 42,
+  "kappa_sounio": 0.0,
+  "kappa_julia_ref": -0.303,
+  "error_percent": 100.0,
+  "target_error_percent": 0.8,
+  "pass": false,
+  "solver": "sinkhorn_primal",
+  "epsilon": 0.1,
+  "max_iter": 300,
+  "source": "experiments/08_epsilon_diagnostic/phase_transition_n100_fixed.sio",
+  "output_file": "results/sounio/synthetic_n100_k3.out",
+  "wall_clock_seconds": 0.23,
+  "note": "Historical A3_VALIDATION_REPORT.md reports kappa=-0.3005 (0.8% error). Current souc run must be checked against that baseline."
+}

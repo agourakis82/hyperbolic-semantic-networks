@@ -10,8 +10,8 @@ Key predictions:
     κ̄(t) rises from negative toward 0, clustering collapses
   - Euclidean networks (WordNet, BabelNet):
     κ̄(t) stays near 0, minimal structural change
-  - Spherical network (SWOW Dutch):
-    κ̄(t) falls from positive toward 0, moderate restructuring
+  - Hyperbolic association networks include SWOW Dutch (R1-only):
+    κ̄(t) amplifies negative curvature like other SWOW languages
 
 Usage:
     julia --project=julia -t8 julia/scripts/ricci_flow_semantic.jl
@@ -56,7 +56,7 @@ const NETWORKS = [
     NetworkSpec("swow_es", "spanish_edges_FINAL.csv", "association", "Spanish", false),
     NetworkSpec("swow_en", "english_edges_FINAL.csv", "association", "English", false),
     NetworkSpec("swow_zh", "chinese_edges_FINAL.csv", "association", "Chinese", false),
-    NetworkSpec("swow_nl", "dutch_edges.csv", "association", "Dutch", false),
+    NetworkSpec("swow_nl", "dutch_edges_FINAL.csv", "association", "Dutch", false),
     NetworkSpec("conceptnet_en", "conceptnet_en_edges.csv", "knowledge", "English", true),
     NetworkSpec("conceptnet_pt", "conceptnet_pt_edges.csv", "knowledge", "Portuguese", true),
     NetworkSpec("wordnet_en", "wordnet_edges.csv", "taxonomy", "English", true),

@@ -1,0 +1,53 @@
+{
+  "artifact": "strength.SWOW-NL.R1.csv",
+  "purpose": "Canonical R1-only Dutch SWOW strength table (cue,response,R1.Strength), identical in structure to the EN/ES/ZH strength files used to build the *_edges_FINAL.csv graphs.",
+  "structure": {
+    "columns": ["cue", "response", "R1.Strength"],
+    "separator": ",",
+    "rows": 485481,
+    "unique_cues": 12571,
+    "md5": "dcdc3cf1ff6d4fce892cb72672e02963",
+    "size_bytes": 10587581
+  },
+  "source": {
+    "project": "Small World of Words (SWOW)",
+    "dataset": "SWOW-NL13 (Dutch word associations, R100 export)",
+    "url": "https://smallworldofwords.org/en/project/explore",
+    "license": "CC BY-NC-SA 4.0 (https://smallworldofwords.org/en/project/home)",
+    "citation": "De Deyne, Navarro, Storms (2013); De Deyne et al. (2019) Behavior Research Methods 51:987-1006",
+    "accessed_utc": "2026-06-03",
+    "raw_files_on_disk": {
+      "associationData.csv": {
+        "path": "data/raw/SWOW-NL13/associationData.csv",
+        "md5": "c50c0131a7d4bf98084e9a754e99427c",
+        "size_bytes": 70697846,
+        "schema": "ctr;recodedPP_ID;cue;asso1;asso2;asso3 (semicolon-separated, quoted)",
+        "rows": 1257100
+      },
+      "DutchWordAssociations_April2012.mat": {
+        "path": "data/raw/SWOW-NL13/DutchWordAssociations_April2012.mat",
+        "md5": "2ddfc716f0cb26868f8ff2d3a4dac46b"
+      }
+    }
+  },
+  "derivation": {
+    "response_set": "R1 only (asso1 = first response). asso2/asso3 are NOT used.",
+    "formula": "R1.Strength(cue -> response) = count(asso1 == response among that cue's participants) / N_responses(cue)",
+    "denominator": "N_responses(cue) = total asso1 rows for the cue = 100 for EVERY cue (SWOW-NL13 R100 design; verified min=median=max=100 across all 12571 cues).",
+    "missing_marker": "The token 'x' (no-response marker) is RETAINED as a response and counted in the denominator, exactly as in the published strength file (4622 'x'-response rows present in the file).",
+    "no_thresholding": "This file is the FULL strength table; NO count>=K threshold and NO reconstruction was applied. Thresholding (R1.Strength>=0.06, top-500) happens only downstream in complete_all_4_languages_FINAL.py to build dutch_edges_FINAL.csv."
+  },
+  "verification": {
+    "method": "Independently recomputed R1.Strength from data/raw/SWOW-NL13/associationData.csv (asso1) and compared row-by-row to the strength file.",
+    "result_verbatim_match": "484587 / 485481 = 99.816% of strength rows reproduce to |diff| < 1e-6 when matching cue/response VERBATIM (case-sensitive).",
+    "result_casefolded_match": "485481 / 485481 = 100.0000% reproduce to |diff| < 1e-6 when cue and response are LOWERCASED on both sides (zero residual, zero rows with diff >= 1e-6).",
+    "normalization_invariant": "Sum of R1.Strength over each cue's responses = 1.0000 exactly for all 12571 cues (1.0 == probability mass).",
+    "residual_explained": {
+      "unmatched_rows_verbatim": 891,
+      "cause": "CASE-FOLDING, not missing data. The published strength file LOWERCASES cues/responses; the raw associationData.csv stores them in ORIGINAL casing. The cues that fail a verbatim match (e.g. amerikaans, india, frans, spaans, engeland) ARE present in the raw snapshot, CAPITALIZED (e.g. 'Amerikaans' with exactly 100 presentations, zero lowercase occurrences). Lowercasing both sides yields EXACT 100% reproduction (485481/485481), which dissolves the 891 'unmatched' rows AND the 3 apparent off-by-one rows.",
+      "correction_note": "An earlier draft of this file wrongly attributed the residual to '21 cues absent from a marginally more complete export'. That mechanism is FALSE (verified: those cues are in the raw, capitalized). The correct mechanism is the documented SWOW lowercasing convention."
+    },
+    "conclusion": "strength.SWOW-NL.R1.csv is a GENUINE R1-derived SWOW strength table (asso1, normalized by 100 participants/cue, lowercased per SWOW convention): 100% byte-faithful to the raw asso1 column under case-folding. NOT a threshold reconstruction and NOT fabricated. The same construction underlies the EN/ES/ZH strength files."
+  },
+  "git_note": "strength.SWOW-NL.R1.csv and the raw SWOW exports are gitignored by repo policy (data/raw/*.csv); their md5s are recorded here. The committed downstream artifact is data/processed/dutch_edges_FINAL.csv."
+}

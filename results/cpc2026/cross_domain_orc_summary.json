@@ -33,12 +33,12 @@
     {
       "network": "SWOW-Dutch",
       "domain": "semantic",
-      "N": 500,
-      "kappa_mean": 0.098695,
-      "kappa_std": 0.046421,
-      "frac_spherical": 0.9818,
-      "geometry": "SPHERICAL",
-      "eta": 7.557613568000001
+      "N": 465,
+      "kappa_mean": -0.196029,
+      "kappa_std": 0.302079,
+      "frac_spherical": 0.2383,
+      "geometry": "HYPERBOLIC",
+      "eta": 0.027738
     },
     {
       "network": "SWOW-Arg. Spanish",

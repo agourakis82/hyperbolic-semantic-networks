@@ -137,10 +137,43 @@ def localClustering (v : V) : ℝ :=
   else
     (2 * triangleCount G v : ℝ) / (deg * (deg - 1) : ℝ)
 
-/-- Helper: triangle count is at most the number of neighbor pairs. -/
+/-- Helper: triangle count is at most the number of neighbor pairs.
+
+Proof: each counted pair `(p.1, p.2)` with `p.1 < p.2` injects into the
+2-element subsets `{p.1, p.2}` of the neighbor set, of which there are
+`card.choose 2 = card * (card - 1) / 2`. -/
 lemma triangleCount_le_neighbor_pairs (v : V) :
     triangleCount G v ≤ (G.neighbors v).card * ((G.neighbors v).card - 1) / 2 := by
-  sorry
+  classical
+  rw [← Nat.choose_two_right, ← Finset.card_powersetCard 2 (G.neighbors v)]
+  simp only [triangleCount]
+  apply Finset.card_le_card_of_injOn (fun p => ({p.1, p.2} : Finset V))
+  · intro p hp
+    simp only [Finset.mem_filter, Finset.mem_product] at hp
+    obtain ⟨-, h1, h2, hlt, -⟩ := hp
+    rw [Finset.mem_powersetCard]
+    exact ⟨Finset.insert_subset h1 (Finset.singleton_subset_iff.mpr h2),
+      Finset.card_pair (ne_of_lt hlt)⟩
+  · intro p hp q hq h_eq
+    simp only [Finset.coe_filter, Set.mem_setOf_eq, Finset.mem_product] at hp hq
+    obtain ⟨-, -, -, hplt, -⟩ := hp
+    obtain ⟨-, -, -, hqlt, -⟩ := hq
+    have h_eq' : ({p.1, p.2} : Finset V) = ({q.1, q.2} : Finset V) := h_eq
+    have h1 : p.1 ∈ ({q.1, q.2} : Finset V) := by
+      rw [← h_eq']; simp
+    have h2 : p.2 ∈ ({q.1, q.2} : Finset V) := by
+      rw [← h_eq']; simp
+    simp only [Finset.mem_insert, Finset.mem_singleton] at h1 h2
+    have h_comp : p.1 = q.1 ∧ p.2 = q.2 := by
+      rcases h1 with h1 | h1 <;> rcases h2 with h2 | h2
+      · rw [h1, h2] at hplt
+        exact absurd hplt (lt_irrefl _)
+      · exact ⟨h1, h2⟩
+      · rw [h1, h2] at hplt
+        exact absurd hqlt (lt_asymm hplt)
+      · rw [h1, h2] at hplt
+        exact absurd hplt (lt_irrefl _)
+    exact Prod.ext h_comp.1 h_comp.2
 
 /-- Local clustering is always in [0, 1]. -/
 theorem localClustering_bounds (v : V) :

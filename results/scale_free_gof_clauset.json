@@ -1,0 +1,34 @@
+{
+  "EN": {
+    "alpha": 2.549,
+    "xmin": 2.0,
+    "D": 0.1455,
+    "p": 0.0,
+    "n_boot": 500,
+    "plausible_powerlaw": false
+  },
+  "ES": {
+    "alpha": 2.727,
+    "xmin": 2.0,
+    "D": 0.1042,
+    "p": 0.002,
+    "n_boot": 500,
+    "plausible_powerlaw": false
+  },
+  "ZH": {
+    "alpha": 2.366,
+    "xmin": 2.0,
+    "D": 0.188,
+    "p": 0.0,
+    "n_boot": 500,
+    "plausible_powerlaw": false
+  },
+  "NL": {
+    "alpha": 2.882,
+    "xmin": 3.0,
+    "D": 0.1028,
+    "p": 0.044,
+    "n_boot": 500,
+    "plausible_powerlaw": false
+  }
+}

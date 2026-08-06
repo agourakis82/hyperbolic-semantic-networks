@@ -1,7 +1,7 @@
 # Makefile for Sounio-fMRI Hypercomplex Geometric Deep Learning
 # =============================================================
 
-.PHONY: all install test demo clean visualize validate docker cpc2026 cpc2026-smoke cpc2026-ossm cpc2026-poster
+.PHONY: all install test demo clean visualize validate docker cpc2026 cpc2026-smoke cpc2026-ossm cpc2026-poster cpc2026-network-geometry cpc2026-biomarker cpc2026-sounio-claim
 
 CPC2026_PYTHON ?= python3
 SOUNIO_REPO ?= /home/demetrios/work/sounio-lang
@@ -52,8 +52,21 @@ cpc2026-poster:
 	@echo "Running CPC 2026 poster upgrade pipeline..."
 	$(CPC2026_PYTHON) code/cpc2026/clinical_validation.py
 	$(CPC2026_PYTHON) code/cpc2026/cross_validation_summary.py
+	$(CPC2026_PYTHON) code/cpc2026/network_geometry_claim_gate.py
 	$(CPC2026_PYTHON) code/cpc2026/generate_poster_figures.py
 	@echo "CPC 2026 poster figures complete."
+
+cpc2026-network-geometry:
+	@echo "Running CPC 2026 depression ORC network-geometry claim gate..."
+	$(CPC2026_PYTHON) code/cpc2026/network_geometry_claim_gate.py
+	@echo "CPC 2026 network-geometry claim gate complete."
+
+cpc2026-biomarker: cpc2026-network-geometry
+
+cpc2026-sounio-claim:
+	@echo "Running CPC 2026 Sounio claim spine..."
+	$(CPC2026_PYTHON) code/cpc2026/sounio_claim_gate.py
+	@echo "CPC 2026 Sounio claim spine complete."
 
 # Default target
 all: demo visualize

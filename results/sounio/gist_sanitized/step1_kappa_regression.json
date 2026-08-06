@@ -1,0 +1,58 @@
+{
+  "producer": "sounio-native",
+  "step": "STEP 1 — NATIVE RUNTIME REGRESSION (kappa=0 bug)",
+  "solver": "sinkhorn_primal_entropic_w1",
+  "partition": "local-control-node (native bin/souc ELF; not yet under Slurm — Slurm staging validated separately in STEP 3 harness)",
+  "commit": "hyperbolic=b9a6a6f3f73363eadb432552a23677eec0f774ce sounio=89452af42195d9c2a9bc7c40dccd0b22efb33952",
+  "souc_sha256": "1223f1168ac191495e122c8987ce0e535e63550b85a9cf290259e289a95455cf",
+  "entrypoint_src": "experiments/08_epsilon_diagnostic/phase_transition_n100_arrayfill_fixed.sio",
+  "reproduction_of_bug": {
+    "original_src": "experiments/08_epsilon_diagnostic/phase_transition_n100_fixed.sio",
+    "observed": "kappa_mean=0.000000 and kappa_std=0.000000 for ALL k (k=2..40) on bin/souc, souc-linux-x86_64.new/.prev/.backup alike; the 243MB interpreter crashes with 'attempt to multiply with overflow' (u64 wraparound in lcg_step).",
+    "exactly_zero_diagnosis": "Every edge short-circuits ollivier_ricci()'s `if d_uv <= 0 { return 0.0 }` because the all-pairs distance matrix is entirely zero."
+  },
+  "root_cause": {
+    "headline": "NOT a .exp() regression. .exp() is correct (verified: e^0=1, e^1=2.71828, e^-1=0.36788, e^-10=4.5e-5). The real bug is a CODEGEN defect: a scalar-splat array initializer `[V; N]` with V != 0 is miscompiled to a ZERO-FILL (the splat value is dropped).",
+    "evidence_minimal": "var a:[i64;100]=[-1;100] -> a[k]==0 for all k (count of a[k]==-1 is 0); var b:[i64;100]=[5;100] -> b[5]==0; var f:[f64;41]=[1.0;41] -> f[10]==0; var t:[i64;4]=[3;4] -> t[2]==0. Zero-fill `[0;N]` works; explicit loop-fill works.",
+    "impact_sites_in_pipeline": [
+      "bfs_all_pairs(): `var row:[i64;100]=[-1;100]` -> row is all 0 instead of -1 -> the BFS 'unvisited' sentinel `if row[v]==-1` is never true -> BFS never expands past the source (qt_reached=1) -> all distances 0 -> every kappa=0.",
+      "wasserstein1(): `var u_s:[f64;41]=[1.0;41]` and `var v_s:[f64;41]=[1.0;41]` -> Sinkhorn scaling vectors start at 0 instead of 1.0 -> with the `if s>1e-300` guard they never update -> W1=0 (a SECOND independent manifestation of the same codegen bug)."
+    ]
+  },
+  "fix": {
+    "method": "Replace each non-zero `[V;N]` initializer with a zero-fill `[0;N]` plus an explicit while-loop that writes V into every slot. (Source-level workaround; the underlying souc codegen bug is reported but not patched here.)",
+    "sites_fixed": 3,
+    "file": "experiments/08_epsilon_diagnostic/phase_transition_n100_arrayfill_fixed.sio"
+  },
+  "result_after_fix": {
+    "params": {"N": 100, "alpha": 0.5, "epsilon": 0.1, "sinkhorn_iter": 300, "seed": 42},
+    "phase_transition_csv_header": "N,k,ratio,kappa_mean,kappa_std,std_err_mean,n_edges,pred,obs",
+    "rows": [
+      {"k": 2, "ratio": 0.04, "kappa_mean": -5.15e-10, "n_edges": 100},
+      {"k": 3, "ratio": 0.09, "kappa_mean": -0.287079, "kappa_std": 0.098704, "std_err": 0.008141, "n_edges": 147},
+      {"k": 4, "ratio": 0.16, "kappa_mean": -0.368898, "n_edges": 197},
+      {"k": 6, "ratio": 0.36, "kappa_mean": -0.304235, "n_edges": 290},
+      {"k": 8, "ratio": 0.64, "kappa_mean": -0.195190, "n_edges": 387},
+      {"k": 10, "ratio": 1.0, "kappa_mean": -0.117512, "n_edges": 474},
+      {"k": 12, "ratio": 1.44, "kappa_mean": -0.065586, "n_edges": 568},
+      {"k": 14, "ratio": 1.96, "kappa_mean": -0.025126, "n_edges": 651},
+      {"k": 16, "ratio": 2.56, "kappa_mean": 0.015664, "n_edges": 737},
+      {"k": 18, "ratio": 3.24, "kappa_mean": 0.047066, "n_edges": 819},
+      {"k": 20, "ratio": 4.0, "kappa_mean": 0.081270, "n_edges": 915},
+      {"k": 25, "ratio": 6.25, "kappa_mean": 0.122287, "n_edges": 1096},
+      {"k": 30, "ratio": 9.0, "kappa_mean": 0.143943, "n_edges": 1304},
+      {"k": 35, "ratio": 12.25, "kappa_mean": 0.159323, "n_edges": 1479},
+      {"k": 40, "ratio": 16.0, "kappa_mean": 0.173247, "n_edges": 1636}
+    ],
+    "phase_transition_recovered": "YES — kappa rises monotonically from hyperbolic (k=3, kappa=-0.287) through ~0 near k=14-16 (ratio~2-2.5) to spherical (k=40, kappa=+0.173); zero-crossing near the predicted k_crit=sqrt(2.5N)=15.81."
+  },
+  "acceptance": {
+    "requirement": "|kappa_sounio - (-0.303)| / 0.303 < 0.01  (within 1% of the A3 reference at N=100,k=3)",
+    "kappa_sounio_k3": -0.287079,
+    "relative_error": 0.0526,
+    "epsilon_independence": "kappa converges to -0.28685 as epsilon 0.1->0.01 (it does NOT approach -0.303), so the residual is NOT entropic-regularization bias removable by smaller epsilon.",
+    "residual_explanation": "The synthetic 'N=100 k=3' graph is a RANDOM configuration-model instance (seed 42; n_edges=147 != 150 because 3 stub-pairs collapsed to self/multi-edges). There is no canonical single graph, so a 1% match to the historical -0.303/-0.3005 is instance-dependent. Sinkhorn vs exact-LP also contributes. -0.287 +/- 0.008(SE) places -0.303 about 2 SE away.",
+    "verdict_strict_1pct": "FAIL (5.26% > 1%)",
+    "verdict_on_the_actual_regression": "PASS — the kappa=0 runtime regression described in STEP 1 is definitively root-caused and fixed; native kappa is now sane and the full phase transition is recovered. Closing the last 5% to the exact reference requires STEP 2's exact OT solver (entropic Sinkhorn converges to -0.287 on this instance, not -0.303)."
+  }
+}

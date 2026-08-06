@@ -1,0 +1,218 @@
+{
+  "protocol": "docs/research/PPCR_protocol_depression_curvature.md",
+  "construction": {
+    "n_per_class": 250,
+    "window": 5,
+    "min_word": 3,
+    "n_node": 1000,
+    "alpha": 0.5,
+    "n_bins": 10,
+    "k_seeds": 5
+  },
+  "seeds": [
+    {
+      "seed": 20260527,
+      "raw_mean_kappa": {
+        "minimum": -0.06718353065029758,
+        "mild": -0.04957305266217051,
+        "moderate": -0.053898632647223506,
+        "severe": -0.08591834717316896
+      },
+      "matched_mean_kappa": {
+        "minimum": -0.06548757630307034,
+        "mild": -0.03524619530685753,
+        "moderate": -0.030667917510504298,
+        "severe": -0.08081101363529995
+      },
+      "matched_min_vs_clinical_p": 8.10259492619168e-24,
+      "rank_biserial": 0.11426259531131444,
+      "min_is_most_hyperbolic": false,
+      "sizes": {
+        "minimum": [
+          975,
+          5900
+        ],
+        "mild": [
+          933,
+          4727
+        ],
+        "moderate": [
+          979,
+          5732
+        ],
+        "severe": [
+          917,
+          4110
+        ]
+      }
+    },
+    {
+      "seed": 20260528,
+      "raw_mean_kappa": {
+        "minimum": -0.10107081136054204,
+        "mild": -0.10712776866832371,
+        "moderate": -0.0686680434577362,
+        "severe": -0.05571307916923598
+      },
+      "matched_mean_kappa": {
+        "minimum": -0.08966616491353538,
+        "mild": -0.11000177825890098,
+        "moderate": -0.022887442751414914,
+        "severe": -0.024837719195257634
+      },
+      "matched_min_vs_clinical_p": 5.85942557466245e-70,
+      "rank_biserial": 0.21999935053178543,
+      "min_is_most_hyperbolic": false,
+      "sizes": {
+        "minimum": [
+          971,
+          4370
+        ],
+        "mild": [
+          855,
+          3203
+        ],
+        "moderate": [
+          983,
+          5772
+        ],
+        "severe": [
+          953,
+          5242
+        ]
+      }
+    },
+    {
+      "seed": 20260529,
+      "raw_mean_kappa": {
+        "minimum": -0.08034042670141252,
+        "mild": -0.06846104356553159,
+        "moderate": -0.058641714038834454,
+        "severe": -0.0902805271006175
+      },
+      "matched_mean_kappa": {
+        "minimum": -0.073362993194352,
+        "mild": -0.06072925883883385,
+        "moderate": -0.047118990342290536,
+        "severe": -0.08647715829901738
+      },
+      "matched_min_vs_clinical_p": 1.0058968889995751e-14,
+      "rank_biserial": 0.08564214721823726,
+      "min_is_most_hyperbolic": false,
+      "sizes": {
+        "minimum": [
+          987,
+          5198
+        ],
+        "mild": [
+          929,
+          4409
+        ],
+        "moderate": [
+          958,
+          5543
+        ],
+        "severe": [
+          932,
+          3994
+        ]
+      }
+    },
+    {
+      "seed": 20260530,
+      "raw_mean_kappa": {
+        "minimum": -0.11262568064482562,
+        "mild": -0.05627807791134905,
+        "moderate": -0.08664757019807715,
+        "severe": -0.04602421803321612
+      },
+      "matched_mean_kappa": {
+        "minimum": -0.13233937749610455,
+        "mild": -0.012536478526505069,
+        "moderate": -0.08378882408511952,
+        "severe": -0.008073326528060382
+      },
+      "matched_min_vs_clinical_p": 0.0,
+      "rank_biserial": 0.48792075717258276,
+      "min_is_most_hyperbolic": true,
+      "sizes": {
+        "minimum": [
+          967,
+          4229
+        ],
+        "mild": [
+          965,
+          4903
+        ],
+        "moderate": [
+          932,
+          4219
+        ],
+        "severe": [
+          967,
+          5356
+        ]
+      }
+    },
+    {
+      "seed": 20260531,
+      "raw_mean_kappa": {
+        "minimum": -0.11799447247476146,
+        "mild": -0.05923034287181537,
+        "moderate": -0.05234420267803969,
+        "severe": -0.04024214639384656
+      },
+      "matched_mean_kappa": {
+        "minimum": -0.1385478246218659,
+        "mild": -0.03712266196670967,
+        "moderate": -0.03055695019681207,
+        "severe": -0.018772446734925424
+      },
+      "matched_min_vs_clinical_p": 0.0,
+      "rank_biserial": 0.5177359846364069,
+      "min_is_most_hyperbolic": true,
+      "sizes": {
+        "minimum": [
+          967,
+          4119
+        ],
+        "mild": [
+          934,
+          4546
+        ],
+        "moderate": [
+          976,
+          6157
+        ],
+        "severe": [
+          938,
+          4838
+        ]
+      }
+    }
+  ],
+  "primary": {
+    "n_min_most": 2,
+    "k_seeds": 5,
+    "worst_p": 1.0058968889995751e-14,
+    "matched_kappa_mean_sd": {
+      "minimum": [
+        -0.09988078730578562,
+        0.030130133521696027
+      ],
+      "mild": [
+        -0.05112727457956142,
+        0.03315416317301471
+      ],
+      "moderate": [
+        -0.043004024977228265,
+        0.02187290047842057
+      ],
+      "severe": [
+        -0.04379433287851216,
+        0.03302573700414589
+      ]
+    },
+    "decision": "NULL"
+  }
+}

@@ -878,7 +878,7 @@ function figure10_ricci_flow()
 
     # Color scheme by geometric regime (plain hex strings, no Colors.jl needed)
     regime_colors = Dict(
-        "swow_nl"          => "#d62728",   # red — spherical
+        "swow_nl"          => "#1f77b4",   # blue — hyperbolic (R1-only)
         "swow_es"          => "#1f77b4",   # blue — hyperbolic assoc
         "swow_en"          => "#4393c3",   # blue lighter
         "swow_zh"          => "#74c7e8",   # blue lightest
@@ -890,7 +890,7 @@ function figure10_ricci_flow()
         "babelnet_ar"      => "#c7c7c7",   # light gray
     )
     regime_labels = Dict(
-        "swow_nl"       => "SWOW-NL (Spherical)",
+        "swow_nl"       => "SWOW-NL",
         "swow_en"       => "SWOW-EN (Sparse hyp.)",
         "swow_es"       => "SWOW-ES",
         "swow_zh"       => "SWOW-ZH",

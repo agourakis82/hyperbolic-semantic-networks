@@ -1,0 +1,35 @@
+{
+  "network_id": "swow_zh",
+  "input_file": "data/processed/chinese_edges_FINAL.csv",
+  "graph": "lcc_undirected_simple",
+  "N": 465,
+  "E": 762,
+  "full_N": 476,
+  "full_E": 768,
+  "orc": {
+    "alpha": 0.5,
+    "cost": "integer_hop_distance",
+    "w1_solver": "scipy.linprog(method=highs)_exact_LP"
+  },
+  "kappa_real": -0.14399724382499973,
+  "kappa_ref_exact_lp": -0.143997,
+  "gate_abs_diff_vs_ref": 2.4382499971831173e-07,
+  "null_model": "connected_double_edge_swap_degree_preserving(networkx)",
+  "swaps_per_null": "10x|E|",
+  "connected_nulls_only": true,
+  "M": 1000,
+  "kappa_null_mean": -0.34806563201307295,
+  "kappa_null_std": 0.004884530498278873,
+  "kappa_null_CI95": [
+    -0.3570808419762653,
+    -0.33739418396837195
+  ],
+  "delta_kappa_directional": 0.2040683881880732,
+  "p_MC_lower_tail": 1.0,
+  "p_MC_upper_tail": 0.000999000999000999,
+  "p_MC_two_sided": 0.001998001998001998,
+  "cliffs_delta": 1.0,
+  "z_score": 41.77850629860523,
+  "seed_base": 62000,
+  "runtime_s": 104.1
+}

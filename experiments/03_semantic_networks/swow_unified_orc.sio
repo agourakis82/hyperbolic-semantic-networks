@@ -1,0 +1,624 @@
+// swow_unified_orc.sio — Exact-parity Ollivier–Ricci for SWOW (EN/ES/ZH/NL)
+//
+// Computes κ̄ on the largest connected component (LCC) with the same
+// definition as julia/scripts/unified_semantic_orc.jl:
+//   α=0.5 lazy random walk, hop-distance APSP, unweighted edges,
+//   κ(u,v) = 1 − W₁(μ_u, μ_v) / d(u,v)
+//
+// W₁ via log-domain Sinkhorn (NOT primal exp-domain — avoids .exp() breakage).
+// Reference (immutable): results/unified/swow_{en,es,zh,nl}_exact_lp.json
+//
+// Run from repo root:
+//   SOUC=/workspace/sounio/scripts/ci/souc-native-wrapper.sh
+//   "$SOUC" run experiments/03_semantic_networks/swow_unified_orc.sio
+
+let MAX_N:       usize = 512
+let MAX_EDGES:   usize = 1024
+let MAX_DEG:     usize = 32
+let MAX_SUP:     usize = 33
+let MAX_BUF:     usize = 65536
+let ALPHA:       f64   = 0.5
+let EPSILON:     f64   = 0.01
+let MAX_ITER:    usize = 1000
+let PARITY_TOL:  f64   = 0.0005
+let DATA_DIR:    string = "experiments/03_semantic_networks/data/"
+
+// ── math ─────────────────────────────────────────────────────────────────────
+
+fn sw_abs(x: f64) -> f64 { if x < 0.0 { 0.0 - x } else { x } }
+
+fn sw_exp(x: f64) -> f64 with Mut, Div, Panic {
+    let ln2 = 0.6931471805599453
+    let inv_ln2 = 1.4426950408889634
+    if x > 700.0 { return 1.0e308 }
+    if x < -700.0 { return 0.0 }
+    var k_f = x * inv_ln2
+    var k: i64 = 0
+    if k_f >= 0.0 { k = (k_f + 0.5) as i64 } else { k = (k_f - 0.5) as i64 }
+    let r = x - (k as f64) * ln2
+    var sum = 1.0
+    var term = 1.0
+    var n: i64 = 1
+    while n <= 20 {
+        term = term * r / (n as f64)
+        sum = sum + term
+        n = n + 1
+    }
+    var result = sum
+    if k > 0 {
+        var j: i64 = 0
+        while j < k { result = result * 2.0; j = j + 1 }
+    } else if k < 0 {
+        var j: i64 = 0
+        while j < (0 - k) { result = result / 2.0; j = j + 1 }
+    }
+    result
+}
+
+fn sw_ln(x: f64) -> f64 with Mut, Div, Panic {
+    if x <= 0.0 { return -1000000.0 }
+    let ln2 = 0.6931471805599453
+    var v = x
+    var k: i64 = 0
+    while v > 2.0 { v = v / 2.0; k = k + 1 }
+    while v < 1.0 { v = v * 2.0; k = k - 1 }
+    let y = (v - 1.0) / (v + 1.0)
+    let yy = y * y
+    var result = 0.0
+    var power = y
+    var i: i64 = 1
+    while i <= 29 {
+        result = result + power / (i as f64)
+        power = power * yy
+        i = i + 2
+    }
+    2.0 * result + (k as f64) * ln2
+}
+
+fn lse_vals(vals: [f64; 33], len: usize) -> f64 with Mut, Div, Panic {
+    if len == 0 { return 0.0 }
+    var m = vals[0]
+    var j: usize = 1
+    while j < len {
+        if vals[j] > m { m = vals[j] }
+        j = j + 1
+    }
+    var s = 0.0
+    j = 0
+    while j < len {
+        s = s + sw_exp(vals[j] - m)
+        j = j + 1
+    }
+    m + sw_ln(s)
+}
+
+// ── raw edge list (load phase — no degree cap) ───────────────────────────────
+
+struct RawEdges {
+    u: [usize; 1024],
+    v: [usize; 1024],
+    n: usize,
+    max_node: usize,
+}
+
+fn raw_load(path: string) -> RawEdges with IO, Mut, Div, Panic {
+    var eu: [usize; 1024] = [0; 1024]
+    var ev: [usize; 1024] = [0; 1024]
+    var n_e: usize = 0
+    var max_n: usize = 0
+
+    let sz = file_size(path)
+    if sz < 0 {
+        return RawEdges { u: eu, v: ev, n: 0, max_node: 0 }
+    }
+    if sz > MAX_BUF as i64 {
+        return RawEdges { u: eu, v: ev, n: 0, max_node: 0 }
+    }
+
+    let raw = read_file(path)
+    var buf: [i64; 65536] = [0; 65536]
+    var i: i64 = 0
+    while i < sz && i < MAX_BUF as i64 {
+        buf[i as usize] = raw[i as usize] as i64
+        i = i + 1
+    }
+    let loaded = i
+
+    i = 0
+    while i < loaded && n_e < MAX_EDGES {
+        while i < loaded && (buf[i as usize] < 48 || buf[i as usize] > 57) {
+            i = i + 1
+        }
+        if i >= loaded { break }
+
+        var u_val: i64 = 0
+        while i < loaded && buf[i as usize] >= 48 && buf[i as usize] <= 57 {
+            u_val = u_val * 10 + (buf[i as usize] - 48)
+            i = i + 1
+        }
+        while i < loaded && buf[i as usize] == 32 { i = i + 1 }
+
+        var v_val: i64 = 0
+        while i < loaded && buf[i as usize] >= 48 && buf[i as usize] <= 57 {
+            v_val = v_val * 10 + (buf[i as usize] - 48)
+            i = i + 1
+        }
+
+        if u_val >= 0 && v_val >= 0 && u_val != v_val {
+            let uu = u_val as usize
+            let vv = v_val as usize
+            if uu < MAX_N && vv < MAX_N {
+                eu[n_e] = uu
+                ev[n_e] = vv
+                n_e = n_e + 1
+                if uu > max_n { max_n = uu }
+                if vv > max_n { max_n = vv }
+            }
+        }
+    }
+
+    RawEdges { u: eu, v: ev, n: n_e, max_node: max_n }
+}
+
+// ── LCC extraction via edge-scan BFS (no MAX_DEG needed) ───────────────────
+
+struct LccGraph {
+    adj: [usize; 16384],
+    deg: [usize; 512],
+    n:   usize,
+    e:   usize,
+}
+
+fn lcc_extract(raw: &RawEdges) -> LccGraph with Mut, Div, Panic {
+    var empty = LccGraph {
+        adj: [0; 16384],
+        deg: [0; 512],
+        n: 0,
+        e: 0,
+    }
+    if raw.n == 0 { return empty }
+
+    let n_old = raw.max_node + 1
+    if n_old > MAX_N { return empty }
+
+    var visited: [bool; 512] = [false; 512]
+    var comp: [usize; 512] = [512; 512]
+    var comp_size: [usize; 512] = [0; 512]
+    var n_comp: usize = 0
+
+    var q: [usize; 512] = [0; 512]
+    var src: usize = 0
+    while src < n_old {
+        if visited[src] {
+            src = src + 1
+            continue
+        }
+        let cid = n_comp
+        n_comp = n_comp + 1
+        var qh: usize = 0
+        var qt: usize = 0
+        visited[src] = true
+        comp[src] = cid
+        comp_size[cid] = 1
+        q[qt] = src
+        qt = qt + 1
+        while qh < qt {
+            let u = q[qh]
+            qh = qh + 1
+            var ei: usize = 0
+            while ei < raw.n {
+                var w: usize = MAX_N
+                if raw.u[ei] == u { w = raw.v[ei] }
+                else if raw.v[ei] == u { w = raw.u[ei] }
+                if w < MAX_N && !visited[w] {
+                    visited[w] = true
+                    comp[w] = cid
+                    comp_size[cid] = comp_size[cid] + 1
+                    q[qt] = w
+                    qt = qt + 1
+                }
+                ei = ei + 1
+            }
+        }
+        src = src + 1
+    }
+
+    var best_c: usize = 0
+    var ci: usize = 1
+    while ci < n_comp {
+        if comp_size[ci] > comp_size[best_c] { best_c = ci }
+        ci = ci + 1
+    }
+
+    var new_id: [usize; 512] = [512; 512]
+    var n_new: usize = 0
+    var u: usize = 0
+    while u < n_old {
+        if comp[u] == best_c {
+            new_id[u] = n_new
+            n_new = n_new + 1
+        }
+        u = u + 1
+    }
+
+    var g = LccGraph {
+        adj: [0; 16384],
+        deg: [0; 512],
+        n: n_new,
+        e: 0,
+    }
+
+    var ei: usize = 0
+    while ei < raw.n {
+        let ou = raw.u[ei]
+        let ov = raw.v[ei]
+        if comp[ou] == best_c && comp[ov] == best_c {
+            let a = new_id[ou]
+            let b = new_id[ov]
+            if a < MAX_N && b < MAX_N && a != b {
+                let da = g.deg[a]
+                let db = g.deg[b]
+                var dup = false
+                var k: usize = 0
+                while k < da {
+                    if g.adj[a * MAX_DEG + k] == b { dup = true }
+                    k = k + 1
+                }
+                if !dup && da < MAX_DEG && db < MAX_DEG {
+                    g.adj[a * MAX_DEG + da] = b
+                    g.deg[a] = da + 1
+                    g.adj[b * MAX_DEG + db] = a
+                    g.deg[b] = db + 1
+                    g.e = g.e + 1
+                }
+            }
+        }
+        ei = ei + 1
+    }
+
+    g
+}
+
+// ── APSP (BFS) ───────────────────────────────────────────────────────────────
+
+struct DistCache {
+    d: [i64; 262144],
+    n: usize,
+}
+
+fn build_dist_cache(g: &LccGraph) -> DistCache with Mut, Div, Panic {
+    var d: [i64; 262144] = [0; 262144]
+    var i_init: usize = 0
+    while i_init < 262144 {
+        d[i_init] = -1
+        i_init = i_init + 1
+    }
+    let n = g.n
+    var src: usize = 0
+    while src < n {
+        var dist: [i64; 512] = [0; 512]
+        var seen: [bool; 512] = [false; 512]
+        var q: [usize; 512] = [0; 512]
+        dist[src] = 0
+        seen[src] = true
+        var qh: usize = 0
+        var qt: usize = 1
+        q[0] = src
+        while qh < qt {
+            let u = q[qh]
+            qh = qh + 1
+            let du = g.deg[u]
+            var i: usize = 0
+            while i < du {
+                let v = g.adj[u * MAX_DEG + i]
+                if !seen[v] {
+                    seen[v] = true
+                    dist[v] = dist[u] + 1
+                    q[qt] = v
+                    qt = qt + 1
+                }
+                i = i + 1
+            }
+        }
+        var j: usize = 0
+        while j < n {
+            if seen[j] {
+                d[src * n + j] = dist[j]
+            } else {
+                d[src * n + j] = -1
+            }
+            j = j + 1
+        }
+        src = src + 1
+    }
+    DistCache { d: d, n: n }
+}
+
+fn cached_dist(cache: &DistCache, u: usize, v: usize) -> i64 {
+    cache.d[u * cache.n + v]
+}
+
+// ── lazy measure + Sinkhorn-LSE W₁ ───────────────────────────────────────────
+
+struct Measure {
+    nodes: [usize; 33],
+    probs: [f64; 33],
+    len:   usize,
+}
+
+fn lazy_measure(g: &LccGraph, node: usize, alpha: f64) -> Measure
+    with Mut, Div, Panic
+{
+    var nodes: [usize; 33] = [0; 33]
+    var probs: [f64; 33] = [0.0; 33]
+    var len: usize = 0
+    let d = g.deg[node]
+    if d == 0 {
+        nodes[0] = node
+        probs[0] = 1.0
+        return Measure { nodes: nodes, probs: probs, len: 1 }
+    }
+    let w = (1.0 - alpha) / (d as f64)
+    if alpha > 0.0 {
+        nodes[0] = node
+        probs[0] = alpha
+        len = 1
+    }
+    var i: usize = 0
+    while i < d {
+        nodes[len] = g.adj[node * MAX_DEG + i]
+        probs[len] = w
+        len = len + 1
+        i = i + 1
+    }
+    Measure { nodes: nodes, probs: probs, len: len }
+}
+
+fn sinkhorn_lse_w1(
+    mu: &Measure,
+    nu: &Measure,
+    cache: &DistCache,
+    epsilon: f64,
+    max_iter: usize,
+) -> f64 with Mut, Div, Panic {
+    let nm = mu.len
+    let nn = nu.len
+    if nm == 0 || nn == 0 { return 0.0 }
+
+    var cost: [f64; 1089] = [0.0; 1089]
+    var logk: [f64; 1089] = [0.0; 1089]
+    var la: [f64; 33] = [0.0; 33]
+    var lb: [f64; 33] = [0.0; 33]
+    var u: [f64; 33] = [0.0; 33]
+    var v: [f64; 33] = [0.0; 33]
+
+    var i: usize = 0
+    while i < nm {
+        la[i] = sw_ln(mu.probs[i])
+        var j: usize = 0
+        while j < nn {
+            let ui = mu.nodes[i]
+            let vj = nu.nodes[j]
+            let dv = cached_dist(cache, ui, vj)
+            let c = if dv >= 0 { dv as f64 } else { 100.0 }
+            cost[i * MAX_SUP + j] = c
+            logk[i * MAX_SUP + j] = (0.0 - c) / epsilon
+            j = j + 1
+        }
+        i = i + 1
+    }
+    j = 0
+    while j < nn {
+        lb[j] = sw_ln(nu.probs[j])
+        j = j + 1
+    }
+
+    var it: usize = 0
+    while it < max_iter {
+        i = 0
+        while i < nm {
+            var vals: [f64; 33] = [0.0; 33]
+            var jj: usize = 0
+            while jj < nn {
+                vals[jj] = logk[i * MAX_SUP + jj] + v[jj]
+                jj = jj + 1
+            }
+            u[i] = la[i] - lse_vals(vals, nn)
+            i = i + 1
+        }
+        j = 0
+        while j < nn {
+            var vals: [f64; 33] = [0.0; 33]
+            i = 0
+            while i < nm {
+                vals[i] = logk[i * MAX_SUP + j] + u[i]
+                i = i + 1
+            }
+            v[j] = lb[j] - lse_vals(vals, nm)
+            j = j + 1
+        }
+        it = it + 1
+    }
+
+    var w1: f64 = 0.0
+    i = 0
+    while i < nm {
+        j = 0
+        while j < nn {
+            let p = sw_exp(u[i] + logk[i * MAX_SUP + j] + v[j])
+            w1 = w1 + p * cost[i * MAX_SUP + j]
+            j = j + 1
+        }
+        i = i + 1
+    }
+    w1
+}
+
+fn edge_kappa(
+    g: &LccGraph,
+    cache: &DistCache,
+    u: usize,
+    v: usize,
+    alpha: f64,
+    epsilon: f64,
+    max_iter: usize,
+) -> f64 with Mut, Div, Panic {
+    let d_uv = cached_dist(cache, u, v)
+    if d_uv <= 0 { return 0.0 }
+    let mu = lazy_measure(g, u, alpha)
+    let nu = lazy_measure(g, v, alpha)
+    let w1 = sinkhorn_lse_w1(&mu, &nu, cache, epsilon, max_iter)
+    1.0 - w1 / (d_uv as f64)
+}
+
+fn mean_orc(
+    g: &LccGraph,
+    cache: &DistCache,
+    alpha: f64,
+    epsilon: f64,
+    max_iter: usize,
+) -> f64 with Mut, Div, Panic {
+    let n = g.n
+    var ksum: f64 = 0.0
+    var ne: usize = 0
+    var u: usize = 0
+    while u < n {
+        let du = g.deg[u]
+        var i: usize = 0
+        while i < du {
+            let v = g.adj[u * MAX_DEG + i]
+            if v > u {
+                ksum = ksum + edge_kappa(g, cache, u, v, alpha, epsilon, max_iter)
+                ne = ne + 1
+            }
+            i = i + 1
+        }
+        u = u + 1
+    }
+    if ne == 0 { return 0.0 }
+    ksum / (ne as f64)
+}
+
+// ── per-network processor ────────────────────────────────────────────────────
+
+struct NetResult {
+    kappa_mean: f64,
+    n: usize,
+    e: usize,
+    ok: bool,
+}
+
+fn process_swow(name: string, path: string, ref_kappa: f64) -> NetResult
+    with IO, Mut, Div, Panic
+{
+    print(name)
+    print(": load ")
+    let raw = raw_load(path)
+    if raw.n == 0 {
+        println(" FAIL (load)")
+        return NetResult { kappa_mean: 0.0, n: 0, e: 0, ok: false }
+    }
+
+    let g = lcc_extract(&raw)
+    if g.n == 0 || g.e == 0 {
+        println(" FAIL (lcc)")
+        return NetResult { kappa_mean: 0.0, n: 0, e: 0, ok: false }
+    }
+
+    print("N=")
+    print(g.n)
+    print(" E=")
+    print(g.e)
+    print(" orc... ")
+
+    let cache = build_dist_cache(&g)
+    let kappa = mean_orc(&g, &cache, ALPHA, EPSILON, MAX_ITER)
+    let delta = kappa - ref_kappa
+    let ad = sw_abs(delta)
+    let ok = ad <= PARITY_TOL
+
+    let kappa_u = if kappa >= 0.0 {
+        (kappa * 1000000.0) as i64
+    } else {
+        0 - ((-kappa) * 1000000.0) as i64
+    }
+    let ref_u = if ref_kappa >= 0.0 {
+        (ref_kappa * 1000000.0) as i64
+    } else {
+        0 - ((-ref_kappa) * 1000000.0) as i64
+    }
+    let delta_u = if delta >= 0.0 {
+        (delta * 1000000.0) as i64
+    } else {
+        0 - ((-delta) * 1000000.0) as i64
+    }
+    print("kappa_u6=")
+    print(kappa_u)
+    print(" ref_u6=")
+    print(ref_u)
+    print(" delta_u6=")
+    print(delta_u)
+    if ok { println(" PASS") } else { println(" FAIL") }
+
+    NetResult { kappa_mean: kappa, n: g.n, e: g.e, ok: ok }
+}
+
+// ── main parity gate ─────────────────────────────────────────────────────────
+
+fn main() -> i64 with IO, Mut, Div, Panic {
+    println("swow_unified_orc.sio — SWOW ORC parity gate (Sinkhorn-LSE)")
+    println("alpha=0.5  epsilon=0.01  sinkhorn_lse_iter=1000  lcc=inline")
+    println("reference=results/unified/swow_*_exact_lp.json (HiGHS LP)")
+    println("")
+
+    let ref_en: f64 = 0.0 - 0.137147
+    let ref_es: f64 = 0.0 - 0.068341
+    let ref_zh: f64 = 0.0 - 0.143997
+    let ref_nl: f64 = 0.0 - 0.196029
+
+    let r_en = process_swow(
+        "swow_en",
+        "experiments/03_semantic_networks/data/swow_en.edgelist",
+        ref_en,
+    )
+    let r_es = process_swow(
+        "swow_es",
+        "experiments/03_semantic_networks/data/swow_es.edgelist",
+        ref_es,
+    )
+    let r_zh = process_swow(
+        "swow_zh",
+        "experiments/03_semantic_networks/data/swow_zh.edgelist",
+        ref_zh,
+    )
+    let r_nl = process_swow(
+        "swow_nl",
+        "experiments/03_semantic_networks/data/swow_nl.edgelist",
+        ref_nl,
+    )
+
+    println("")
+    var passed: i64 = 0
+    if r_en.ok { passed = passed + 1 }
+    if r_es.ok { passed = passed + 1 }
+    if r_zh.ok { passed = passed + 1 }
+    if r_nl.ok { passed = passed + 1 }
+
+    print("parity_gate: ")
+    print(passed)
+    print("/4  tol=")
+    print(PARITY_TOL)
+    println("")
+
+    if passed == 4 {
+        println("SWOW_UNIFIED_ORC_PASS")
+        println("claim_level=computed_in_sounio_swow_orc_lcc_sinkhorn_lse")
+        println("solver=sinkhorn_lse")
+        println("graph=largest_connected_component")
+        println("languages=en,es,zh,nl")
+        0
+    } else {
+        println("SWOW_UNIFIED_ORC_FAIL")
+        1
+    }
+}

@@ -1,0 +1,117 @@
+// depression_orc_claim.sio
+//
+// Sounio-native claim object for the CPC 2026 depression ORC package.
+// This is a governance spine over the Python/Julia/Rust evidence artifacts:
+// it permits exploratory network-geometry scope-gate language and blocks
+// biomarker-candidate, diagnostic, and clinical-utility escalation until
+// context-of-use and external validation artifacts exist.
+
+let CLAIM_EXPLORATORY_DESCRIPTOR: i64 = 0
+let CLAIM_EXPLORATORY_NETWORK_GEOMETRY_SCOPE_GATE: i64 = 1
+let CLAIM_BIOMARKER_CANDIDATE: i64 = 2
+let CLAIM_DIAGNOSTIC_BIOMARKER: i64 = 3
+let CLAIM_VALIDATED_CLINICAL_BIOMARKER: i64 = 4
+
+struct DepressionOrcEvidence {
+    severity_levels: i64,
+    negative_ci_count: i64,
+    cross_domain_depression_count: i64,
+    max_abs_pairwise_cent_d: f64,
+    kappa_monotonic: bool,
+    cent_monotonic: bool,
+    external_validation: bool,
+    patient_level_performance: bool,
+    preregistered_endpoint: bool,
+}
+
+struct NetworkGeometryClaim {
+    claim_level: i64,
+    allow_conference_hypothesis: bool,
+    allow_biomarker_candidate_language: bool,
+    allow_diagnostic_language: bool,
+    allow_clinical_utility: bool,
+    allow_patient_level_prediction: bool,
+    requires_external_validation: bool,
+}
+
+fn abs_f64(x: f64) -> f64 {
+    if x < 0.0 { 0.0 - x } else { x }
+}
+
+fn evidence_ready_for_exploratory_summary(e: &DepressionOrcEvidence) -> bool {
+    e.severity_levels == 4 &&
+    e.negative_ci_count == 4 &&
+    e.cross_domain_depression_count == 4 &&
+    abs_f64(e.max_abs_pairwise_cent_d) < 0.25 &&
+    !e.kappa_monotonic &&
+    !e.cent_monotonic
+}
+
+fn evidence_ready_for_diagnostic(e: &DepressionOrcEvidence) -> bool {
+    e.external_validation &&
+    e.patient_level_performance &&
+    e.preregistered_endpoint
+}
+
+fn classify_claim(e: &DepressionOrcEvidence) -> NetworkGeometryClaim {
+    let network_geometry = evidence_ready_for_exploratory_summary(e)
+    let diagnostic = evidence_ready_for_diagnostic(e)
+    let level = if diagnostic {
+        CLAIM_DIAGNOSTIC_BIOMARKER
+    } else if network_geometry {
+        CLAIM_EXPLORATORY_NETWORK_GEOMETRY_SCOPE_GATE
+    } else {
+        CLAIM_EXPLORATORY_DESCRIPTOR
+    }
+
+    NetworkGeometryClaim {
+        claim_level: level,
+        allow_conference_hypothesis: network_geometry,
+        allow_biomarker_candidate_language: diagnostic,
+        allow_diagnostic_language: diagnostic,
+        allow_clinical_utility: diagnostic,
+        allow_patient_level_prediction: diagnostic,
+        requires_external_validation: !diagnostic,
+    }
+}
+
+fn network_geometry_not_candidate_or_diagnostic_ok(c: &NetworkGeometryClaim) -> bool {
+    c.claim_level == CLAIM_EXPLORATORY_NETWORK_GEOMETRY_SCOPE_GATE &&
+    c.allow_conference_hypothesis &&
+    !c.allow_biomarker_candidate_language &&
+    !c.allow_diagnostic_language &&
+    !c.allow_clinical_utility &&
+    !c.allow_patient_level_prediction &&
+    c.requires_external_validation
+}
+
+fn main() with IO {
+    let evidence = DepressionOrcEvidence {
+        severity_levels: 4,
+        negative_ci_count: 4,
+        cross_domain_depression_count: 4,
+        max_abs_pairwise_cent_d: 0.1173886001993897,
+        kappa_monotonic: false,
+        cent_monotonic: false,
+        external_validation: false,
+        patient_level_performance: false,
+        preregistered_endpoint: false,
+    }
+    let claim = classify_claim(&evidence)
+    let ok = network_geometry_not_candidate_or_diagnostic_ok(&claim)
+
+    if !ok {
+        println("SOUNIO_CPC2026_NETWORK_GEOMETRY_CLAIM_FAIL")
+        return
+    }
+
+    println("SOUNIO_CPC2026_NETWORK_GEOMETRY_CLAIM_PASS")
+    println("claim_level=exploratory_network_geometry_scope_gate")
+    println("context_of_use=exploratory_research_only")
+    println("target_external_cohort=TBD")
+    println("biomarker_candidate_language=false")
+    println("diagnostic_language=false")
+    println("clinical_utility=false")
+    println("patient_level_prediction=false")
+    println("requires_external_validation=true")
+}

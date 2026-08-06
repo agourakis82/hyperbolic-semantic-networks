@@ -1,5 +1,10 @@
-N=500
-E=15368
-max_deg=458
-kappa_ref=0.098695
-geometry=SPHERICAL
+N=465
+E=835
+max_deg=24
+full_N=475
+full_E=840
+graph=lcc
+kappa_ref=-0.196029
+geometry=HYPERBOLIC
+ref_N=465
+ref_E=835

@@ -13,7 +13,7 @@ module HyperbolicSemanticNetworks
 # Export public API
 export
     # Preprocessing
-    load_swow, load_conceptnet, load_taxonomy,
+    load_swow, load_swow_network, load_conceptnet, load_taxonomy,
     
     # Curvature
     compute_curvature, compute_graph_curvature, build_probability_measure,
