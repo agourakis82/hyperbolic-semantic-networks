@@ -1,8 +1,7 @@
 # Lean 4 Formalization: Honest Status Report
 
-**Date**: 2026-02-26  
-**Commit**: a1cc054  
-**Verified by**: Live GitHub API check
+**Date**: 2026-08-05 (atualizado; relatório original de 2026-02-26, commit a1cc054)  
+**Verified by**: contagem direta na árvore atual (`grep -rc sorry lean --include="*.lean"`)
 
 ---
 
@@ -10,33 +9,44 @@
 
 The Lean 4 formalization is now publicly available at:
 - **URL**: https://github.com/agourakis82/hyperbolic-semantic-networks/tree/main/lean
-- **Files**: 29 .lean files (including lakefile and dependencies)
-- **Core modules**: 25 modules in `HyperbolicSemanticNetworks/HyperbolicSemanticNetworks/`
+- **Files**: 33 .lean files (including lakefile and dependencies)
+- **Core modules**: modules in `HyperbolicSemanticNetworks/HyperbolicSemanticNetworks/`
 
 ---
 
 ## Build Status
 
+The Lake project lives one level below `lean/` — build from the project root:
+
 ```bash
+$ cd lean/HyperbolicSemanticNetworks
 $ lake build
 ✔ [2735/2735] Built HyperbolicSemanticNetworks.HyperbolicSemanticNetworks
 Build completed successfully.
 ```
 
-**Warnings**: 86 `sorry` declarations, 3 core axioms
+(Note: there is no `lakefile`/`lean-toolchain` directly under `lean/`; running
+`lake build` from `lean/` fails. The toolchain is pinned in
+`lean/HyperbolicSemanticNetworks/lean-toolchain`.)
 
-**Sorry breakdown by module** (86 total):
+**Warnings**: 95 `sorry` declarations, 3 core axioms
+
+**Sorry breakdown by module** (95 total):
 | Module | sorry count |
 |--------|-------------|
 | RandomGraph.lean | 21 |
 | SpectralGeometry.lean | 20 |
 | RicciFlow.lean | 17 |
 | CliffordFMRI.lean | 14 |
+| Curvature.lean | 4 |
 | RandomGeometric.lean | 4 |
 | HehlFormula.lean | 4 |
+| SounioVerification.lean | 3 |
 | HypercomplexPhase.lean | 3 |
 | Visualization.lean | 2 |
-| WassersteinProven.lean | 1 |
+| DepressionNetworks.lean | 1 |
+| Basic.lean | 1 |
+| HyperbolicSemanticNetworks.lean (root) | 1 |
 
 ---
 

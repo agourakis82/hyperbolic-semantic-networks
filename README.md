@@ -50,7 +50,6 @@ This repository contains research on **network geometry** using Ollivier-Ricci c
 hyperbolic-semantic-networks/
 ├── README.md                    # This file
 ├── CHANGELOG.md                 # Version history
-├── CLEANUP_PLAN.md              # Organization and experiment plan
 │
 ├── julia/                       # Julia implementation
 │   ├── src/                     # Core modules
@@ -75,11 +74,7 @@ hyperbolic-semantic-networks/
 │   ├── curvature/               # Curvature metrics
 │   └── swow_clustering_coefficients.json
 │
-├── docs/                        # Organized documentation
-│   ├── sounio/                  # Sounio implementation docs
-│   ├── validation/              # Scientific validation reports
-│   ├── INDEX.md                 # Master index
-│   └── [various guides]
+├── archive/                     # Historical docs and session artifacts
 │
 ├── manuscript/                  # Main manuscript
 │   ├── main.md                  # Complete manuscript
@@ -314,22 +309,16 @@ bash experiments/07_scale_n500/run.sh
 ## Documentation
 
 ### Main Docs
-- [CLEANUP_PLAN.md](CLEANUP_PLAN.md) - Organization and experiment roadmap
 - [CHANGELOG.md](CHANGELOG.md) - Version history
 - [DEVELOPMENT.md](DEVELOPMENT.md) - Development guide
 
 ### Scientific Reports
-- [docs/validation/PHASE_TRANSITION_DISCOVERY.md](docs/validation/PHASE_TRANSITION_DISCOVERY.md) - Phase transition discovery
-- [docs/validation/FINAL_VALIDATION_SUMMARY.md](docs/validation/FINAL_VALIDATION_SUMMARY.md) - Validation summary
-- [docs/validation/DEEP_SCIENCE_ANALYSIS.md](docs/validation/DEEP_SCIENCE_ANALYSIS.md) - Mathematical foundations
-
-### Sounio Implementation
-- [docs/sounio/SOUNIO_IMPLEMENTATION_STATUS.md](docs/sounio/SOUNIO_IMPLEMENTATION_STATUS.md) - Implementation status
-- [docs/sounio/SOUNIO_INTEGRATION_PLAN.md](docs/sounio/SOUNIO_INTEGRATION_PLAN.md) - Integration plan
-- [docs/sounio/SOUNIO_ROADMAP.md](docs/sounio/SOUNIO_ROADMAP.md) - Development roadmap
+- [lean/FORMALIZATION_STATUS.md](lean/FORMALIZATION_STATUS.md) - Lean 4 formalization status
+- [lean/HyperbolicSemanticNetworks/PREPRINT.md](lean/HyperbolicSemanticNetworks/PREPRINT.md) - Formalization preprint
+- [manuscript/main.md](manuscript/main.md) - Main manuscript
 
 ### Full Index
-- [docs/INDEX.md](docs/INDEX.md) - Complete documentation index
+- [experiments/](experiments/) - Sounio experiment lanes 01-07
 
 ---
 
@@ -362,7 +351,7 @@ bash experiments/07_scale_n500/run.sh
   year = {2025},
   doi = {10.5281/zenodo.17655231},
   url = {https://zenodo.org/records/17655231},
-  version = {0.2.0}
+  version = {2.0.0}
 }
 ```
 
@@ -439,6 +428,6 @@ GitHub: [@agourakis82](https://github.com/agourakis82)
 
 See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
-**Current Version**: v0.2.0 (Phase Transition + Sounio Implementation)
+**Current Version**: v2.0.0 (see [CHANGELOG.md](CHANGELOG.md))
 
-**Previous**: v0.1.0 (Initial Julia/Rust implementation)
+**Previous**: v0.2.0 (Phase Transition + Sounio Implementation), v0.1.0 (Initial Julia/Rust implementation)

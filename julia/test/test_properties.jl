@@ -25,7 +25,7 @@ using HyperbolicSemanticNetworks
             curvatures = compute_graph_curvature(G, alpha=0.5, parallel=false)
             
             for kappa in values(curvatures)
-                @test -1.0 <= kappa <= 1.0 "Curvature out of bounds: $kappa"
+                @test -1.0 <= kappa <= 1.0
             end
         end
     end
@@ -57,7 +57,7 @@ using HyperbolicSemanticNetworks
         
         for null in nulls
             null_degrees = [degree(null, v) for v in vertices(null)]
-            @test sum(null_degrees) == total_degree "Degree not preserved"
+            @test sum(null_degrees) == total_degree
         end
     end
     
@@ -90,9 +90,9 @@ using HyperbolicSemanticNetworks
         @test 0 <= result.iterations <= 10
         @test length(result.trajectory) > 0
         
-        # Trajectory should be monotonic in some sense (simplified check)
+        # Trajectory should be monotonic in time (records carry key "t")
         if length(result.trajectory) > 1
-            @test result.trajectory[1]["iteration"] < result.trajectory[end]["iteration"]
+            @test result.trajectory[1]["t"] < result.trajectory[end]["t"]
         end
     end
     
